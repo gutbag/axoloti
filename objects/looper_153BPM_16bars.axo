@@ -1,0 +1,175 @@
+<objdefs appVersion="1.0.12">
+   <obj.normal id="looper_153BPM_16bars" uuid="2b1b5053-dd45-47da-a182-c5d2ba8c08fd">
+      <author>Mark Lamb</author>
+      <license>BSD</license>
+      <inlets>
+         <frac32buffer name="in" description="wave input"/>
+         <bool32.risingfalling name="clear"/>
+         <bool32.risingfalling name="record"/>
+         <bool32.risingfalling name="stop"/>
+         <bool32.risingfalling name="play"/>
+      </inlets>
+      <outlets>
+         <frac32buffer name="out"/>
+         <bool32 name="enabled"/>
+      </outlets>
+      <displays/>
+      <params>
+         <bool32.tgl name="writeEnable" noLabel="true"/>
+      </params>
+      <attribs/>
+      <code.declaration><![CDATA[static const uint32_t BPM = 153;
+static const uint32_t BARS = 16;
+static const uint32_t BEATS_TO_BAR = 4;
+static const uint32_t BEATS = BARS * BEATS_TO_BAR;
+static constexpr double SAMPLE_PERIOD = 1.0 / 48000.0;
+static const uint32_t LENGTH = ((60.0 / BPM) * BEATS) / SAMPLE_PERIOD;
+
+int32_t* array;
+uint32_t writepos;
+uint32_t readpos;
+bool writeEnabled = true;
+uint32_t samplesStored;
+
+uint32_t clearCount;
+
+typedef enum {RESET, RECORDING, PLAYING, PAUSED} State;
+State state;
+
+typedef enum {CLEAR, RECORD, STOP, PLAY} Event;
+
+void clearData()
+{
+	for(int i=0;i<LENGTH;i++)
+		array[i] = 0;
+}
+
+void stateMachine()
+{
+	Event event;
+	
+	switch (state)
+	{
+		case RESET:
+			switch (event)
+			{
+				case CLEAR:
+				break;
+				case RECORD:
+				break;
+				case STOP:
+				break;
+				case PLAY:
+				break;
+			}
+		break;
+			switch (event)
+			{
+				case CLEAR:
+				break;
+				case RECORD:
+				break;
+				case STOP:
+				break;
+				case PLAY:
+				break;
+			}
+		case RECORDING:
+			switch (event)
+			{
+				case CLEAR:
+				break;
+				case RECORD:
+				break;
+				case STOP:
+				break;
+				case PLAY:
+				break;
+			}
+		break;
+		case PLAYING:
+			switch (event)
+			{
+				case CLEAR:
+				break;
+				case RECORD:
+				break;
+				case STOP:
+				break;
+				case PLAY:
+				break;
+			}
+		break;
+		case PAUSED:
+			switch (event)
+			{
+				case CLEAR:
+				break;
+				case RECORD:
+				break;
+				case STOP:
+				break;
+				case PLAY:
+				break;
+			}
+		break;
+	}
+}]]></code.declaration>
+      <code.init><![CDATA[static int32_t _array[LENGTH] __attribute__ ((section (".sdram")));
+array = &_array[0];
+
+writepos = 1;
+readpos = writepos + 1;
+
+clearData();
+
+writeEnabled = true;
+samplesStored = 0;
+clearCount = 0;
+
+//LogTextMessage("LENGTH=%u\n", LENGTH);
+
+state = RESET;]]></code.init>
+      <code.krate><![CDATA[/*
+if (param_writeEnable != writeEnabled)
+{
+	writepos = 1;
+	readpos = writepos + 1;
+}
+*/
+
+writeEnabled = param_writeEnable;
+outlet_enabled = writeEnabled;
+
+clearData();
+
+if (inlet_clear)
+{
+	++clearCount;
+	//if (clearCount > 10)
+	{
+		//outlet_enabled = writeEnabled;
+		//LogTextMessage("got clear\n");
+		clearCount = 0;
+	}
+}]]></code.krate>
+      <code.srate><![CDATA[if (writeEnabled)
+{
+  array[writepos] = inlet_in;
+  ++samplesStored;
+  if (samplesStored >= LENGTH)
+  {
+  	writeEnabled = false;
+  }
+}
+
+++writepos;
+if (writepos >= LENGTH)
+  writepos = 0;
+
+outlet_out = array[readpos];
+++readpos;
+if (readpos >= LENGTH)
+  readpos = 0;]]></code.srate>
+   </obj.normal>
+</objdefs>

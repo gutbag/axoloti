@@ -1,0 +1,261 @@
+<patch-1.0 appVersion="1.0.11">
+   <obj type="audio/in left" uuid="d40e60b7641fe75af4d7c91b45bb038aacafc52e" name="in_1" x="28" y="14">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="phi/switch/sw 2-1a" uuid="350b79179fa4cce3d231eaa45f23eefa9121cb3b" name="sw_2" x="1134" y="28">
+      <params>
+         <bool32.tgl name="s" MidiCC="2" value="0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="mymath/gainx4" uuid="62b1c1a6337c7c8f6eac96408a432477b113cfa1" name="dry gain___" x="1260" y="28">
+      <params>
+         <frac32.u.map name="amp" MidiCC="3" value="6.5"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="audio/out left" uuid="b11a3c09b2fdd575ea8212f2ce7743d5269253b1" name="out_1" x="1386" y="28">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="sss/dist/crusher" uuid="db6298ef-5a92-4390-a0f8-67791e4bb8c9" name="crusher_1" x="140" y="84">
+      <params>
+         <frac32.s.map name="max" value="15.0"/>
+         <frac32.s.map name="bias" value="-8.0"/>
+         <frac32.s.map name="min" value="-32.0"/>
+         <frac32.u.map name="diffmax" value="28.5"/>
+         <frac32.s.map name="LP" value="-21.0"/>
+         <frac32.s.map name="HP" value="-42.0"/>
+         <frac32.u.map name="feedback" value="17.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="fx/flanger" uuid="b9a09fbe-225d-41a6-a76a-a896cc9903ff" name="obj_1" x="504" y="98">
+      <params>
+         <frac32.u.map name="depth" value="8.0"/>
+         <frac32.u.map name="fdbk" value="35.5"/>
+         <frac32.s.map name="speed" value="-1.0">
+            <modulators>
+               <modulation sourceName="modsource_1" modName="" value="10.0"/>
+            </modulators>
+         </frac32.s.map>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="filter/bp m" uuid="f26437572c3a1f6be883bb219c773a9906ff8296" name="bp_1" x="700" y="98">
+      <params>
+         <frac32.s.map name="pitch" value="8.0"/>
+         <frac32.u.map name="reso" value="0.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="mymath/gainx4" uuid="62b1c1a6337c7c8f6eac96408a432477b113cfa1" name="dry gain" x="812" y="98">
+      <params>
+         <frac32.u.map name="amp" value="28.5"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="mymath/gainx4" uuid="62b1c1a6337c7c8f6eac96408a432477b113cfa1" name="dry gain__" x="266" y="112">
+      <params>
+         <frac32.u.map name="amp" value="5.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="mix/xfade" uuid="375dc91d218e96cdc9cbc7e92adb48f705ef701a" name="xfade_1" x="1106" y="182">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="audio/inconfig l" uuid="7007d026acb7c3586f60a7f0898718d1ca7e0607" name="inconfig_1" x="28" y="252">
+      <params/>
+      <attribs>
+         <combo attributeName="gain" selection="0dB"/>
+         <combo attributeName="boost" selection="0dB"/>
+      </attribs>
+   </obj>
+   <obj type="midi/in/cc i" uuid="614eb76edef2b43632fa1fcda25aab54f821daf6" name="cc_1" x="280" y="280">
+      <params/>
+      <attribs>
+         <spinner attributeName="cc" value="2"/>
+         <spinner attributeName="default" value="0"/>
+      </attribs>
+   </obj>
+   <obj type="timer/pulselength" uuid="ca68725237d8ba8407773340801660a9fd9b0dba" name="pulselength_1" x="406" y="294">
+      <params>
+         <frac32.s.map name="delay" value="-49.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="env/adsr" uuid="d1dbcc5fa6f87b98a6a91c87fd44acee5e690bac" name="adsr_2" x="532" y="294">
+      <params>
+         <frac32.s.map name="a" value="-44.0"/>
+         <frac32.s.map name="d" value="-24.0"/>
+         <frac32.u.map name="s" value="55.5"/>
+         <frac32.s.map name="r" value="26.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="disp/chart p" uuid="58f42040a894006a5f73ed8cb8d0bd45481b28cd" name="chart_3" x="658" y="294">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="audio/inconfig r" uuid="8468fe7907553f335959a7f69cbc5a1f7b5d4d1d" name="inconfig_2" x="28" y="322">
+      <params/>
+      <attribs>
+         <combo attributeName="gain" selection="0dB"/>
+         <combo attributeName="boost" selection="0dB"/>
+      </attribs>
+   </obj>
+   <obj type="sptnk/math/knee k" uuid="7d5ef61erb6d571ee6bbd8437ef3612125dfb225" name="knee_1" x="882" y="378">
+      <params>
+         <frac32.u.map name="amp" value="0.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="drj/lfo/sin_2_p" uuid="75f7330c2aab87332155ade3ba3b9008545c1daa9" name="sin_2_p_1" x="1330" y="434">
+      <params>
+         <frac32.s.map name="pitch" value="-4.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="math/smooth" uuid="6c5d08c282bb08bff24af85b4891447f99bcbc97" name="smooth_1" x="952" y="504">
+      <params>
+         <frac32.u.map name="time" value="1.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="disp/chart p" uuid="58f42040a894006a5f73ed8cb8d0bd45481b28cd" name="chart_2" x="1064" y="518">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="lfo/saw" uuid="ef2a162678b533c5e46c4e3c0decba17b1862d85" name="saw_1" x="1218" y="518">
+      <params>
+         <frac32.s.map name="pitch" value="-24.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="lfo/sine" uuid="75f7330c26a13953215dccc3b7b9008545c9daa9" name="sine_1" x="28" y="532">
+      <params>
+         <frac32.s.map name="pitch" value="-55.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="patch/modsource" uuid="c98f018a8d204ef6df1bf7008af6fd7d20f12fe4" name="modsource_1" x="140" y="532">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="drj/lfo/lfo_pwm_u" uuid="a194a5eb6271343f97d28f75811f4b3a41306813" name="lfo_pwm_u_1" x="672" y="574">
+      <params>
+         <frac32.s.map name="pitch" value="6.0"/>
+         <frac32.u.map name="pw" value="6.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="drj/lfo/tri_2_p" uuid="ef2a122298b699ce6469380c0decba11b1862d85" name="tri_2_p_1" x="1344" y="574">
+      <params>
+         <frac32.s.map name="pitch" value="12.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="logic/change" uuid="42071f8cb4cfe1f35956c0bd5a313a57e049bec4" name="change_1" x="140" y="588">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="disp/chart p" uuid="58f42040a894006a5f73ed8cb8d0bd45481b28cd" name="chart_1" x="854" y="588">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="lfo/square" uuid="de6909eb64db13af5b43f979a4c130024b3a4793" name="square_1" x="1218" y="630">
+      <params>
+         <frac32.s.map name="pitch" value="-19.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <nets>
+      <net>
+         <source obj="sine_1" outlet="wave"/>
+         <dest obj="modsource_1" inlet="v"/>
+         <dest obj="change_1" inlet="in"/>
+      </net>
+      <net>
+         <source obj="change_1" outlet="trig"/>
+         <dest obj="modsource_1" inlet="trig"/>
+      </net>
+      <net>
+         <source obj="in_1" outlet="wave"/>
+         <dest obj="sw_2" inlet="i1"/>
+         <dest obj="crusher_1" inlet="in"/>
+         <dest obj="xfade_1" inlet="i2"/>
+      </net>
+      <net>
+         <source obj="obj_1" outlet="out"/>
+         <dest obj="bp_1" inlet="in"/>
+      </net>
+      <net>
+         <source obj="bp_1" outlet="out"/>
+         <dest obj="dry gain" inlet="in"/>
+      </net>
+      <net>
+         <source obj="pulselength_1" outlet="pulse"/>
+         <dest obj="adsr_2" inlet="gate"/>
+      </net>
+      <net>
+         <source obj="adsr_2" outlet="env"/>
+         <dest obj="chart_3" inlet="in"/>
+         <dest obj="bp_1" inlet="pitch"/>
+      </net>
+      <net>
+         <source obj="cc_1" outlet="trig"/>
+         <dest obj="pulselength_1" inlet="trig"/>
+      </net>
+      <net>
+         <source obj="crusher_1" outlet="out"/>
+         <dest obj="dry gain__" inlet="in"/>
+      </net>
+      <net>
+         <source obj="dry gain__" outlet="out"/>
+         <dest obj="obj_1" inlet="in"/>
+      </net>
+      <net>
+         <source obj="sw_2" outlet="o"/>
+         <dest obj="dry gain___" inlet="in"/>
+      </net>
+      <net>
+         <source obj="dry gain___" outlet="out"/>
+         <dest obj="out_1" inlet="wave"/>
+      </net>
+      <net>
+         <source obj="dry gain" outlet="out"/>
+         <dest obj="xfade_1" inlet="i1"/>
+      </net>
+      <net>
+         <source obj="xfade_1" outlet="o"/>
+         <dest obj="sw_2" inlet="i2"/>
+      </net>
+      <net>
+         <source obj="lfo_pwm_u_1" outlet="pwm"/>
+         <dest obj="chart_1" inlet="in"/>
+         <dest obj="smooth_1" inlet="in"/>
+         <dest obj="xfade_1" inlet="c"/>
+      </net>
+      <net>
+         <source obj="smooth_1" outlet="out"/>
+         <dest obj="chart_2" inlet="in"/>
+      </net>
+   </nets>
+   <settings>
+      <subpatchmode>no</subpatchmode>
+      <MidiChannel>2</MidiChannel>
+      <NPresets>8</NPresets>
+      <NPresetEntries>32</NPresetEntries>
+      <NModulationSources>8</NModulationSources>
+      <NModulationTargetsPerSource>8</NModulationTargetsPerSource>
+   </settings>
+   <notes><![CDATA[]]></notes>
+   <windowPos>
+      <x>0</x>
+      <y>23</y>
+      <width>1276</width>
+      <height>777</height>
+   </windowPos>
+</patch-1.0>

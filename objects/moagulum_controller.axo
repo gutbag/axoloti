@@ -1,0 +1,52 @@
+<objdefs appVersion="1.0.12">
+   <obj.normal id="moagulum_controller" uuid="6b35f3b6-99ad-4b24-958e-0149f0325d31">
+      <sDescription>Receives MIDI trigger(s) and creates the looper triggers for various sections of Moagulum.</sDescription>
+      <author>Mark Lamb</author>
+      <license></license>
+      <inlets>
+         <bool32.rising name="trigger"/>
+      </inlets>
+      <outlets>
+         <bool32.pulse name="record"/>
+         <bool32.pulse name="play"/>
+         <bool32.pulse name="stop"/>
+      </outlets>
+      <displays/>
+      <params/>
+      <attribs/>
+      <code.declaration><![CDATA[typedef enum {IDLE, RECORDING, IDLE2, PLAYING} State;
+State state;]]></code.declaration>
+      <code.init><![CDATA[state = IDLE;
+
+LogTextMessage("Init \n");]]></code.init>
+      <code.krate><![CDATA[if (inlet_trigger)
+{
+	LogTextMessage("inlet_trigger\n");
+	switch (state)
+	{
+		case IDLE:
+			outlet_record = 1;
+			state = RECORDING;
+		break;
+		case RECORDING:
+			outlet_stop = 1;
+			state = IDLE2;
+		break;
+		case IDLE2:
+			outlet_play = 1;
+			state = PLAYING;
+		break;
+		case PLAYING:
+			outlet_stop = 1;
+			state = IDLE;
+		break;
+	}
+}
+else
+{
+	outlet_record = 0;
+	outlet_play = 0;
+	outlet_stop = 0;
+}]]></code.krate>
+   </obj.normal>
+</objdefs>

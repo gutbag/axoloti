@@ -1,0 +1,474 @@
+<patch-1.0 appVersion="1.0.12">
+   <obj type="string/c" uuid="4aa90a90c435a742ddfa152d232883fc5b2f1b3" name="sample file" x="14" y="14">
+      <params/>
+      <attribs>
+         <table attributeName="str" table="C2.raw"/>
+      </attribs>
+   </obj>
+   <obj type="const/i" uuid="e202f44b2df17ae0b3e663b98ea6b14c8ff00408" name="note_1" x="182" y="14">
+      <params/>
+      <attribs>
+         <spinner attributeName="value" value="48"/>
+      </attribs>
+   </obj>
+   <obj type="ctrl/toggle" uuid="42b8134fa729d54bfc8d62d6ef3fa99498c1de99" name="level trig 1" x="280" y="14">
+      <params>
+         <bool32.tgl name="b" value="1"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="./PlaySample" uuid="8d4422e8-ee88-436e-83a3-9707a65f41f2" name="PlaySample_1" x="364" y="14">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="audio/outconfig" uuid="eace67e3304afaa1bb695b444e9345f2d8adaf00" name="outconfig_1" x="1008" y="14">
+      <params/>
+      <attribs>
+         <combo attributeName="headphones" selection="0dB"/>
+         <combo attributeName="mode" selection="Stereo"/>
+      </attribs>
+   </obj>
+   <obj type="midi/in/monitor" uuid="b51863ca-6afa-4d29-acfd-c8c2fe06cb16" name="monitor_1" x="1134" y="14">
+      <params>
+         <bool32.tgl name="ControlChange" value="1"/>
+         <bool32.tgl name="Note" value="1"/>
+         <bool32.tgl name="ProgramChange" value="1"/>
+         <bool32.tgl name="Bend" value="1"/>
+         <bool32.tgl name="PolyPressure" value="1"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="mymix13st" uuid="26d7c6e0-ba1a-4a91-943a-20a33bcab5d3" name="mymix13st_1" x="882" y="70">
+      <params>
+         <frac32.u.map name="gain" value="32.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="audio/out stereo" uuid="a1ca7a567f535acc21055669829101d3ee7f0189" name="out_1" x="1008" y="70">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="string/c" uuid="4aa90a90c435a742ddfa152d232883fc5b2f1b3" name="sample file_" x="14" y="98">
+      <params/>
+      <attribs>
+         <table attributeName="str" table="C#2.raw"/>
+      </attribs>
+   </obj>
+   <obj type="const/i" uuid="e202f44b2df17ae0b3e663b98ea6b14c8ff00408" name="note_2" x="182" y="98">
+      <params/>
+      <attribs>
+         <spinner attributeName="value" value="49"/>
+      </attribs>
+   </obj>
+   <obj type="ctrl/toggle" uuid="42b8134fa729d54bfc8d62d6ef3fa99498c1de99" name="level trig 2" x="280" y="98">
+      <params>
+         <bool32.tgl name="b" value="1"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="./PlaySample" uuid="d44dda2a-a2cf-4324-b122-10f1641f1392" name="PlaySample_2" x="364" y="98">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="string/c" uuid="4aa90a90c435a742ddfa152d232883fc5b2f1b3" name="sample file__" x="14" y="182">
+      <params/>
+      <attribs>
+         <table attributeName="str" table="D2.raw"/>
+      </attribs>
+   </obj>
+   <obj type="const/i" uuid="e202f44b2df17ae0b3e663b98ea6b14c8ff00408" name="note_3" x="182" y="182">
+      <params/>
+      <attribs>
+         <spinner attributeName="value" value="50"/>
+      </attribs>
+   </obj>
+   <obj type="ctrl/toggle" uuid="42b8134fa729d54bfc8d62d6ef3fa99498c1de99" name="level trig 3" x="280" y="182">
+      <params>
+         <bool32.tgl name="b" value="1"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="./PlaySample" uuid="d44dda2a-a2cf-4324-b122-10f1641f1392" name="PlaySample_3" x="364" y="182">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="string/c" uuid="4aa90a90c435a742ddfa152d232883fc5b2f1b3" name="sample file___" x="14" y="266">
+      <params/>
+      <attribs>
+         <table attributeName="str" table="D#2.raw"/>
+      </attribs>
+   </obj>
+   <obj type="const/i" uuid="e202f44b2df17ae0b3e663b98ea6b14c8ff00408" name="note_4" x="182" y="266">
+      <params/>
+      <attribs>
+         <spinner attributeName="value" value="51"/>
+      </attribs>
+   </obj>
+   <obj type="ctrl/toggle" uuid="42b8134fa729d54bfc8d62d6ef3fa99498c1de99" name="level trig 4" x="280" y="266">
+      <params>
+         <bool32.tgl name="b" value="1"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="./PlaySample" uuid="d44dda2a-a2cf-4324-b122-10f1641f1392" name="PlaySample_4" x="364" y="266">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="string/c" uuid="4aa90a90c435a742ddfa152d232883fc5b2f1b3" name="sample file____" x="14" y="350">
+      <params/>
+      <attribs>
+         <table attributeName="str" table="E2.raw"/>
+      </attribs>
+   </obj>
+   <obj type="const/i" uuid="e202f44b2df17ae0b3e663b98ea6b14c8ff00408" name="note_5" x="182" y="350">
+      <params/>
+      <attribs>
+         <spinner attributeName="value" value="52"/>
+      </attribs>
+   </obj>
+   <obj type="ctrl/toggle" uuid="42b8134fa729d54bfc8d62d6ef3fa99498c1de99" name="level trig 5" x="280" y="350">
+      <params>
+         <bool32.tgl name="b" value="1"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="./PlaySample" uuid="d44dda2a-a2cf-4324-b122-10f1641f1392" name="PlaySample_5" x="364" y="350">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="string/c" uuid="4aa90a90c435a742ddfa152d232883fc5b2f1b3" name="sample file_____" x="14" y="434">
+      <params/>
+      <attribs>
+         <table attributeName="str" table="F2.raw"/>
+      </attribs>
+   </obj>
+   <obj type="const/i" uuid="e202f44b2df17ae0b3e663b98ea6b14c8ff00408" name="note_6" x="182" y="434">
+      <params/>
+      <attribs>
+         <spinner attributeName="value" value="53"/>
+      </attribs>
+   </obj>
+   <obj type="ctrl/toggle" uuid="42b8134fa729d54bfc8d62d6ef3fa99498c1de99" name="level trig 6" x="280" y="434">
+      <params>
+         <bool32.tgl name="b" value="1"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="./PlaySample" uuid="d44dda2a-a2cf-4324-b122-10f1641f1392" name="PlaySample_6" x="364" y="434">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="string/c" uuid="4aa90a90c435a742ddfa152d232883fc5b2f1b3" name="sample file______" x="14" y="518">
+      <params/>
+      <attribs>
+         <table attributeName="str" table="F#2.raw"/>
+      </attribs>
+   </obj>
+   <obj type="const/i" uuid="e202f44b2df17ae0b3e663b98ea6b14c8ff00408" name="note_7" x="182" y="518">
+      <params/>
+      <attribs>
+         <spinner attributeName="value" value="54"/>
+      </attribs>
+   </obj>
+   <obj type="ctrl/toggle" uuid="42b8134fa729d54bfc8d62d6ef3fa99498c1de99" name="level trig 7" x="280" y="518">
+      <params>
+         <bool32.tgl name="b" value="1"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="./PlaySample" uuid="d44dda2a-a2cf-4324-b122-10f1641f1392" name="PlaySample_7" x="364" y="518">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="string/c" uuid="4aa90a90c435a742ddfa152d232883fc5b2f1b3" name="sample file_______" x="14" y="602">
+      <params/>
+      <attribs>
+         <table attributeName="str" table="G2.raw"/>
+      </attribs>
+   </obj>
+   <obj type="const/i" uuid="e202f44b2df17ae0b3e663b98ea6b14c8ff00408" name="note_8" x="182" y="602">
+      <params/>
+      <attribs>
+         <spinner attributeName="value" value="55"/>
+      </attribs>
+   </obj>
+   <obj type="ctrl/toggle" uuid="42b8134fa729d54bfc8d62d6ef3fa99498c1de99" name="level trig 8" x="280" y="602">
+      <params>
+         <bool32.tgl name="b" value="1"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="./PlaySample" uuid="d44dda2a-a2cf-4324-b122-10f1641f1392" name="PlaySample_8" x="364" y="602">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="string/c" uuid="4aa90a90c435a742ddfa152d232883fc5b2f1b3" name="sample file_________" x="14" y="686">
+      <params/>
+      <attribs>
+         <table attributeName="str" table="G#2.raw"/>
+      </attribs>
+   </obj>
+   <obj type="const/i" uuid="e202f44b2df17ae0b3e663b98ea6b14c8ff00408" name="note_10" x="182" y="686">
+      <params/>
+      <attribs>
+         <spinner attributeName="value" value="56"/>
+      </attribs>
+   </obj>
+   <obj type="ctrl/toggle" uuid="42b8134fa729d54bfc8d62d6ef3fa99498c1de99" name="level trig 9" x="280" y="686">
+      <params>
+         <bool32.tgl name="b" value="1"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="./PlaySample" uuid="d44dda2a-a2cf-4324-b122-10f1641f1392" name="PlaySample_10" x="364" y="686">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="string/c" uuid="4aa90a90c435a742ddfa152d232883fc5b2f1b3" name="sample file__________" x="14" y="770">
+      <params/>
+      <attribs>
+         <table attributeName="str" table="A2.raw"/>
+      </attribs>
+   </obj>
+   <obj type="const/i" uuid="e202f44b2df17ae0b3e663b98ea6b14c8ff00408" name="note_11" x="182" y="770">
+      <params/>
+      <attribs>
+         <spinner attributeName="value" value="57"/>
+      </attribs>
+   </obj>
+   <obj type="ctrl/toggle" uuid="42b8134fa729d54bfc8d62d6ef3fa99498c1de99" name="level trig 10" x="280" y="770">
+      <params>
+         <bool32.tgl name="b" value="1"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="./PlaySample" uuid="d44dda2a-a2cf-4324-b122-10f1641f1392" name="PlaySample_11" x="364" y="770">
+      <params/>
+      <attribs/>
+   </obj>
+   <nets>
+      <net>
+         <source obj="level trig 1" outlet="o"/>
+         <dest obj="PlaySample_1" inlet="leveltrig"/>
+      </net>
+      <net>
+         <source obj="note_1" outlet="out"/>
+         <dest obj="PlaySample_1" inlet="midinote"/>
+      </net>
+      <net>
+         <source obj="sample file" outlet="out"/>
+         <dest obj="PlaySample_1" inlet="filename"/>
+      </net>
+      <net>
+         <source obj="level trig 2" outlet="o"/>
+         <dest obj="PlaySample_2" inlet="leveltrig"/>
+      </net>
+      <net>
+         <source obj="note_2" outlet="out"/>
+         <dest obj="PlaySample_2" inlet="midinote"/>
+      </net>
+      <net>
+         <source obj="sample file_" outlet="out"/>
+         <dest obj="PlaySample_2" inlet="filename"/>
+      </net>
+      <net>
+         <source obj="level trig 3" outlet="o"/>
+         <dest obj="PlaySample_3" inlet="leveltrig"/>
+      </net>
+      <net>
+         <source obj="note_3" outlet="out"/>
+         <dest obj="PlaySample_3" inlet="midinote"/>
+      </net>
+      <net>
+         <source obj="sample file__" outlet="out"/>
+         <dest obj="PlaySample_3" inlet="filename"/>
+      </net>
+      <net>
+         <source obj="level trig 4" outlet="o"/>
+         <dest obj="PlaySample_4" inlet="leveltrig"/>
+      </net>
+      <net>
+         <source obj="note_4" outlet="out"/>
+         <dest obj="PlaySample_4" inlet="midinote"/>
+      </net>
+      <net>
+         <source obj="sample file___" outlet="out"/>
+         <dest obj="PlaySample_4" inlet="filename"/>
+      </net>
+      <net>
+         <source obj="PlaySample_1" outlet="left"/>
+         <dest obj="mymix13st_1" inlet="in001l"/>
+      </net>
+      <net>
+         <source obj="mymix13st_1" outlet="left"/>
+         <dest obj="out_1" inlet="left"/>
+      </net>
+      <net>
+         <source obj="mymix13st_1" outlet="right"/>
+         <dest obj="out_1" inlet="right"/>
+      </net>
+      <net>
+         <source obj="PlaySample_1" outlet="right"/>
+         <dest obj="mymix13st_1" inlet="in001r"/>
+      </net>
+      <net>
+         <source obj="PlaySample_2" outlet="left"/>
+         <dest obj="mymix13st_1" inlet="in002l"/>
+      </net>
+      <net>
+         <source obj="PlaySample_2" outlet="right"/>
+         <dest obj="mymix13st_1" inlet="in002r"/>
+      </net>
+      <net>
+         <source obj="PlaySample_3" outlet="left"/>
+         <dest obj="mymix13st_1" inlet="in003l"/>
+      </net>
+      <net>
+         <source obj="PlaySample_3" outlet="right"/>
+         <dest obj="mymix13st_1" inlet="in003r"/>
+      </net>
+      <net>
+         <source obj="PlaySample_4" outlet="left"/>
+         <dest obj="mymix13st_1" inlet="in004l"/>
+      </net>
+      <net>
+         <source obj="PlaySample_4" outlet="right"/>
+         <dest obj="mymix13st_1" inlet="in004r"/>
+      </net>
+      <net>
+         <source obj="level trig 5" outlet="o"/>
+         <dest obj="PlaySample_5" inlet="leveltrig"/>
+      </net>
+      <net>
+         <source obj="note_5" outlet="out"/>
+         <dest obj="PlaySample_5" inlet="midinote"/>
+      </net>
+      <net>
+         <source obj="sample file____" outlet="out"/>
+         <dest obj="PlaySample_5" inlet="filename"/>
+      </net>
+      <net>
+         <source obj="level trig 6" outlet="o"/>
+         <dest obj="PlaySample_6" inlet="leveltrig"/>
+      </net>
+      <net>
+         <source obj="note_6" outlet="out"/>
+         <dest obj="PlaySample_6" inlet="midinote"/>
+      </net>
+      <net>
+         <source obj="sample file_____" outlet="out"/>
+         <dest obj="PlaySample_6" inlet="filename"/>
+      </net>
+      <net>
+         <source obj="level trig 9" outlet="o"/>
+         <dest obj="PlaySample_10" inlet="leveltrig"/>
+      </net>
+      <net>
+         <source obj="note_10" outlet="out"/>
+         <dest obj="PlaySample_10" inlet="midinote"/>
+      </net>
+      <net>
+         <source obj="sample file_________" outlet="out"/>
+         <dest obj="PlaySample_10" inlet="filename"/>
+      </net>
+      <net>
+         <source obj="level trig 10" outlet="o"/>
+         <dest obj="PlaySample_11" inlet="leveltrig"/>
+      </net>
+      <net>
+         <source obj="note_11" outlet="out"/>
+         <dest obj="PlaySample_11" inlet="midinote"/>
+      </net>
+      <net>
+         <source obj="sample file__________" outlet="out"/>
+         <dest obj="PlaySample_11" inlet="filename"/>
+      </net>
+      <net>
+         <source obj="PlaySample_5" outlet="left"/>
+         <dest obj="mymix13st_1" inlet="in005l"/>
+      </net>
+      <net>
+         <source obj="PlaySample_5" outlet="right"/>
+         <dest obj="mymix13st_1" inlet="in005r"/>
+      </net>
+      <net>
+         <source obj="PlaySample_6" outlet="left"/>
+         <dest obj="mymix13st_1" inlet="in006l"/>
+      </net>
+      <net>
+         <source obj="PlaySample_6" outlet="right"/>
+         <dest obj="mymix13st_1" inlet="in006r"/>
+      </net>
+      <net>
+         <source obj="level trig 7" outlet="o"/>
+         <dest obj="PlaySample_7" inlet="leveltrig"/>
+      </net>
+      <net>
+         <source obj="note_7" outlet="out"/>
+         <dest obj="PlaySample_7" inlet="midinote"/>
+      </net>
+      <net>
+         <source obj="sample file______" outlet="out"/>
+         <dest obj="PlaySample_7" inlet="filename"/>
+      </net>
+      <net>
+         <source obj="level trig 8" outlet="o"/>
+         <dest obj="PlaySample_8" inlet="leveltrig"/>
+      </net>
+      <net>
+         <source obj="note_8" outlet="out"/>
+         <dest obj="PlaySample_8" inlet="midinote"/>
+      </net>
+      <net>
+         <source obj="sample file_______" outlet="out"/>
+         <dest obj="PlaySample_8" inlet="filename"/>
+      </net>
+      <net>
+         <source obj="PlaySample_7" outlet="left"/>
+         <dest obj="mymix13st_1" inlet="in007l"/>
+      </net>
+      <net>
+         <source obj="PlaySample_7" outlet="right"/>
+         <dest obj="mymix13st_1" inlet="in007r"/>
+      </net>
+      <net>
+         <source obj="PlaySample_8" outlet="left"/>
+         <dest obj="mymix13st_1" inlet="in008l"/>
+      </net>
+      <net>
+         <source obj="PlaySample_8" outlet="right"/>
+         <dest obj="mymix13st_1" inlet="in008r"/>
+      </net>
+      <net>
+         <source obj="PlaySample_10" outlet="left"/>
+         <dest obj="mymix13st_1" inlet="in009l"/>
+      </net>
+      <net>
+         <source obj="PlaySample_10" outlet="right"/>
+         <dest obj="mymix13st_1" inlet="in009r"/>
+      </net>
+      <net>
+         <source obj="PlaySample_11" outlet="left"/>
+         <dest obj="mymix13st_1" inlet="in010l"/>
+      </net>
+      <net>
+         <source obj="PlaySample_11" outlet="right"/>
+         <dest obj="mymix13st_1" inlet="in010r"/>
+      </net>
+   </nets>
+   <settings>
+      <subpatchmode>no</subpatchmode>
+      <MidiChannel>1</MidiChannel>
+      <NPresets>0</NPresets>
+      <NPresetEntries>0</NPresetEntries>
+      <NModulationSources>0</NModulationSources>
+      <NModulationTargetsPerSource>0</NModulationTargetsPerSource>
+   </settings>
+   <notes><![CDATA[]]></notes>
+   <windowPos>
+      <x>-208</x>
+      <y>-1029</y>
+      <width>1587</width>
+      <height>1014</height>
+   </windowPos>
+</patch-1.0>

@@ -1,0 +1,62 @@
+<objdefs appVersion="1.0.12">
+   <obj.normal id="LoopTrigBarSynchroniser" uuid="c1954292-fedc-4ea9-9f28-1db47525d561">
+      <sDescription>Receives input triggers marking the start of a Moagulum bar and issues a pulse thereafter for each bar start. Receives loop arm trigger and waits until next bar start to issue trigger.</sDescription>
+      <author>Mark Lamb</author>
+      <license>BSD</license>
+      <inlets>
+         <bool32.rising name="barstart"/>
+         <bool32.rising name="armloop"/>
+      </inlets>
+      <outlets>
+         <bool32.pulse name="barstart" description="Start of bar pulse"/>
+         <bool32.pulse name="loopstart" description="Trigger loop"/>
+      </outlets>
+      <displays>
+         <bool32 name="loop_armed" description="Armed" noLabel="true"/>
+      </displays>
+      <params/>
+      <attribs/>
+      <code.declaration><![CDATA[static const uint32_t BPM = 153;
+static const uint32_t BEATS_TO_BAR = 4;
+static constexpr double K_PERIOD = 1.0 / 3000.0;
+static const uint32_t K_PERIODS_TO_BAR = ((60.0 / BPM) * BEATS_TO_BAR) / K_PERIOD;
+
+uint32_t kCount;
+bool loopArmed;]]></code.declaration>
+      <code.init><![CDATA[kCount = K_PERIODS_TO_BAR;
+loopArmed = 0;]]></code.init>
+      <code.krate><![CDATA[if (inlet_barstart) // reset count to full bar from now
+{
+	kCount = K_PERIODS_TO_BAR;
+}
+
+if (inlet_armloop)
+{
+	loopArmed = 1;
+}
+
+disp_loop_armed = loopArmed;
+
+if (kCount == 0) // signal bar start
+{
+	outlet_barstart = 1;
+	kCount = K_PERIODS_TO_BAR;
+
+	if (loopArmed)
+	{
+		outlet_loopstart = 1;
+		loopArmed = 0;
+	}
+	else
+	{
+		outlet_loopstart = 0;
+	}
+}
+else // keep counting down
+{
+	--kCount;
+	outlet_barstart = 0;
+	outlet_loopstart = 0;
+}]]></code.krate>
+   </obj.normal>
+</objdefs>

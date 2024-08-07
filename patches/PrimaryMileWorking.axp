@@ -1,0 +1,414 @@
+<patch-1.0 appVersion="1.0.12">
+   <obj type="midi/in/monitor" uuid="b51863ca-6afa-4d29-acfd-c8c2fe06cb16" name="monitor_1" x="0" y="0">
+      <params>
+         <bool32.tgl name="ControlChange" value="1"/>
+         <bool32.tgl name="Note" value="1"/>
+         <bool32.tgl name="ProgramChange" value="1"/>
+         <bool32.tgl name="Bend" value="1"/>
+         <bool32.tgl name="PolyPressure" value="1"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="string/c" uuid="4aa90a90c435a742ddfa152d232883fc5b2f1b3" name="sample file" x="154" y="14">
+      <params/>
+      <attribs>
+         <table attributeName="str" table="PMChord1.raw"/>
+      </attribs>
+   </obj>
+   <obj type="audio/outconfig" uuid="eace67e3304afaa1bb695b444e9345f2d8adaf00" name="outconfig_1" x="686" y="14">
+      <params/>
+      <attribs>
+         <combo attributeName="headphones" selection="0dB"/>
+         <combo attributeName="mode" selection="Mono(L)"/>
+      </attribs>
+   </obj>
+   <obj type="audio/out stereo" uuid="a1ca7a567f535acc21055669829101d3ee7f0189" name="out_1" x="1134" y="14">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="audio/in left" uuid="d40e60b7641fe75af4d7c91b45bb038aacafc52e" name="in_1" x="868" y="42">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="mix/mix 1 sq" uuid="cf790039775b62697a4b34e7a5389a5a8cc36e30" name="mix_6" x="980" y="42">
+      <params>
+         <frac32.u.map name="gain1" value="32.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="string/c" uuid="4aa90a90c435a742ddfa152d232883fc5b2f1b3" name="sample file_" x="154" y="84">
+      <params/>
+      <attribs>
+         <table attributeName="str" table="PMChord2.raw"/>
+      </attribs>
+   </obj>
+   <obj type="string/c" uuid="4aa90a90c435a742ddfa152d232883fc5b2f1b3" name="sample file__" x="154" y="154">
+      <params/>
+      <attribs>
+         <table attributeName="str" table="PMChord3.raw"/>
+      </attribs>
+   </obj>
+   <obj type="wave/play stereo" uuid="843bbc92c4a45c5ba551de32538934e186dc4a41" name="play_3" x="728" y="196">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="timer/delayedpulse" uuid="3f05ee534ca67755fb20c7437f9e4de3d4c2f73d" name="delayedpulse_1" x="420" y="210">
+      <params>
+         <frac32.s.map name="delay" value="-64.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="logic/and 2" uuid="c67031682f552aa0a80b23377495c51ea28a8c9c" name="and_1" x="644" y="210">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="string/c" uuid="4aa90a90c435a742ddfa152d232883fc5b2f1b3" name="sample file___" x="154" y="224">
+      <params/>
+      <attribs>
+         <table attributeName="str" table="PMChord4.raw"/>
+      </attribs>
+   </obj>
+   <obj type="phi/mix/mix 2 st2 sq" uuid="58ca1c18-45fa-449e-b0d2-01f7d5032d97" name="mix_1" x="868" y="238">
+      <params>
+         <frac32.u.map name="gain1" value="64.0"/>
+         <frac32.u.map name="gain2" value="64.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="wave/play stereo" uuid="843bbc92c4a45c5ba551de32538934e186dc4a41" name="play_4" x="728" y="280">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="midi/in/cc i" uuid="614eb76edef2b43632fa1fcda25aab54f821daf6" name="cc_1" x="14" y="294">
+      <params/>
+      <attribs>
+         <spinner attributeName="cc" value="4"/>
+         <spinner attributeName="default" value="0"/>
+      </attribs>
+   </obj>
+   <obj type="logic/and 2" uuid="c67031682f552aa0a80b23377495c51ea28a8c9c" name="and_2" x="644" y="294">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="phi/mix/mix 2 st2 sq" uuid="58ca1c18-45fa-449e-b0d2-01f7d5032d97" name="mix_3" x="1008" y="294">
+      <params>
+         <frac32.u.map name="gain1" value="64.0"/>
+         <frac32.u.map name="gain2" value="64.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="mix/mix 1 sq" uuid="cf790039775b62697a4b34e7a5389a5a8cc36e30" name="mix_5" x="1134" y="294">
+      <params>
+         <frac32.u.map name="gain1" value="40.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="logic/counter" uuid="7a141ba82230e54e5f5cd12da5dbe5a74ba854a5" name="counter_1" x="238" y="308">
+      <params>
+         <int32 name="maximum" value="4"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="const/i" uuid="e202f44b2df17ae0b3e663b98ea6b14c8ff00408" name="i_4" x="336" y="308">
+      <params/>
+      <attribs>
+         <spinner attributeName="value" value="0"/>
+      </attribs>
+   </obj>
+   <obj type="math/==" uuid="deaf0d36642c57876c4101e86f8a0b6a06021ab2" name="==_1" x="420" y="308">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="disp/i" uuid="5e35fd0c62d81e70017289250cf28edd26e19e4a" name="i_3" x="490" y="308">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="const/i" uuid="e202f44b2df17ae0b3e663b98ea6b14c8ff00408" name="i_5" x="336" y="364">
+      <params/>
+      <attribs>
+         <spinner attributeName="value" value="1"/>
+      </attribs>
+   </obj>
+   <obj type="math/==" uuid="deaf0d36642c57876c4101e86f8a0b6a06021ab2" name="==_2" x="420" y="364">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="disp/i" uuid="5e35fd0c62d81e70017289250cf28edd26e19e4a" name="i_6" x="490" y="364">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="wave/play stereo" uuid="843bbc92c4a45c5ba551de32538934e186dc4a41" name="play_5" x="728" y="364">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="logic/and 2" uuid="c67031682f552aa0a80b23377495c51ea28a8c9c" name="and_3" x="644" y="378">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="phi/mix/mix 2 st2 sq" uuid="58ca1c18-45fa-449e-b0d2-01f7d5032d97" name="mix_2" x="868" y="392">
+      <params>
+         <frac32.u.map name="gain1" value="64.0"/>
+         <frac32.u.map name="gain2" value="64.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="logic/and 2" uuid="c67031682f552aa0a80b23377495c51ea28a8c9c" name="and_5" x="140" y="406">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="const/i" uuid="e202f44b2df17ae0b3e663b98ea6b14c8ff00408" name="i_7" x="336" y="420">
+      <params/>
+      <attribs>
+         <spinner attributeName="value" value="2"/>
+      </attribs>
+   </obj>
+   <obj type="math/==" uuid="deaf0d36642c57876c4101e86f8a0b6a06021ab2" name="==_3" x="420" y="420">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="disp/i" uuid="5e35fd0c62d81e70017289250cf28edd26e19e4a" name="i_8" x="490" y="420">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="wave/play stereo" uuid="843bbc92c4a45c5ba551de32538934e186dc4a41" name="play_6" x="728" y="448">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="logic/and 2" uuid="c67031682f552aa0a80b23377495c51ea28a8c9c" name="and_4" x="644" y="462">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="const/i" uuid="e202f44b2df17ae0b3e663b98ea6b14c8ff00408" name="i_9" x="336" y="476">
+      <params/>
+      <attribs>
+         <spinner attributeName="value" value="3"/>
+      </attribs>
+   </obj>
+   <obj type="math/==" uuid="deaf0d36642c57876c4101e86f8a0b6a06021ab2" name="==_4" x="420" y="476">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="disp/i" uuid="5e35fd0c62d81e70017289250cf28edd26e19e4a" name="i_10" x="490" y="476">
+      <params/>
+      <attribs/>
+   </obj>
+   <comment type="patch/comment" x="14" y="560" text="Startup delay to lock out triggers on patch change. LED on until done."/>
+   <obj type="const/i" uuid="e202f44b2df17ae0b3e663b98ea6b14c8ff00408" name="i_1" x="14" y="574">
+      <params/>
+      <attribs>
+         <spinner attributeName="value" value="1"/>
+      </attribs>
+   </obj>
+   <obj type="timer/delayedpulse" uuid="3f05ee534ca67755fb20c7437f9e4de3d4c2f73d" name="delayedpulse_2" x="98" y="574">
+      <params>
+         <frac32.s.map name="delay" value="54.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="logic/flipflop" uuid="f9b15363f5ee203152e062c08a8846f0074b0ea5" name="flipflop_1" x="210" y="574">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="logic/inv" uuid="2bd44b865d3b63ff9b80862242bf5be779e3ad5" name="inv_1" x="294" y="574">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="gpio/out/led2" uuid="3d7a4c75d1f9901181a17ba5de752782de911803" name="led2_1" x="350" y="574">
+      <params/>
+      <attribs/>
+   </obj>
+   <nets>
+      <net>
+         <source obj="sample file" outlet="out"/>
+         <dest obj="play_3" inlet="filename"/>
+      </net>
+      <net>
+         <source obj="sample file_" outlet="out"/>
+         <dest obj="play_4" inlet="filename"/>
+      </net>
+      <net>
+         <source obj="sample file__" outlet="out"/>
+         <dest obj="play_5" inlet="filename"/>
+      </net>
+      <net>
+         <source obj="sample file___" outlet="out"/>
+         <dest obj="play_6" inlet="filename"/>
+      </net>
+      <net>
+         <source obj="play_3" outlet="outl"/>
+         <dest obj="mix_1" inlet="l1"/>
+      </net>
+      <net>
+         <source obj="play_3" outlet="outr"/>
+         <dest obj="mix_1" inlet="r1"/>
+      </net>
+      <net>
+         <source obj="play_4" outlet="outl"/>
+         <dest obj="mix_1" inlet="l2"/>
+      </net>
+      <net>
+         <source obj="play_4" outlet="outr"/>
+         <dest obj="mix_1" inlet="r2"/>
+      </net>
+      <net>
+         <source obj="play_5" outlet="outl"/>
+         <dest obj="mix_2" inlet="l1"/>
+      </net>
+      <net>
+         <source obj="play_5" outlet="outr"/>
+         <dest obj="mix_2" inlet="r1"/>
+      </net>
+      <net>
+         <source obj="play_6" outlet="outl"/>
+         <dest obj="mix_2" inlet="l2"/>
+      </net>
+      <net>
+         <source obj="play_6" outlet="outr"/>
+         <dest obj="mix_2" inlet="r2"/>
+      </net>
+      <net>
+         <source obj="mix_1" outlet="L"/>
+         <dest obj="mix_3" inlet="l1"/>
+      </net>
+      <net>
+         <source obj="mix_1" outlet="R"/>
+         <dest obj="mix_3" inlet="r1"/>
+      </net>
+      <net>
+         <source obj="mix_2" outlet="L"/>
+         <dest obj="mix_3" inlet="l2"/>
+      </net>
+      <net>
+         <source obj="mix_2" outlet="R"/>
+         <dest obj="mix_3" inlet="r2"/>
+      </net>
+      <net>
+         <source obj="cc_1" outlet="trig"/>
+         <dest obj="and_5" inlet="i1"/>
+      </net>
+      <net>
+         <source obj="counter_1" outlet="o"/>
+         <dest obj="==_1" inlet="in2"/>
+         <dest obj="==_2" inlet="in2"/>
+         <dest obj="==_3" inlet="in2"/>
+         <dest obj="==_4" inlet="in2"/>
+      </net>
+      <net>
+         <source obj="i_4" outlet="out"/>
+         <dest obj="==_1" inlet="in1"/>
+      </net>
+      <net>
+         <source obj="==_1" outlet="out"/>
+         <dest obj="i_3" inlet="in"/>
+         <dest obj="and_4" inlet="i2"/>
+      </net>
+      <net>
+         <source obj="i_5" outlet="out"/>
+         <dest obj="==_2" inlet="in1"/>
+      </net>
+      <net>
+         <source obj="==_2" outlet="out"/>
+         <dest obj="i_6" inlet="in"/>
+         <dest obj="and_1" inlet="i2"/>
+      </net>
+      <net>
+         <source obj="i_7" outlet="out"/>
+         <dest obj="==_3" inlet="in1"/>
+      </net>
+      <net>
+         <source obj="==_3" outlet="out"/>
+         <dest obj="i_8" inlet="in"/>
+         <dest obj="and_2" inlet="i2"/>
+      </net>
+      <net>
+         <source obj="i_9" outlet="out"/>
+         <dest obj="==_4" inlet="in1"/>
+      </net>
+      <net>
+         <source obj="==_4" outlet="out"/>
+         <dest obj="i_10" inlet="in"/>
+         <dest obj="and_3" inlet="i2"/>
+      </net>
+      <net>
+         <source obj="and_1" outlet="o"/>
+         <dest obj="play_3" inlet="start"/>
+      </net>
+      <net>
+         <source obj="and_2" outlet="o"/>
+         <dest obj="play_4" inlet="start"/>
+      </net>
+      <net>
+         <source obj="and_3" outlet="o"/>
+         <dest obj="play_5" inlet="start"/>
+      </net>
+      <net>
+         <source obj="and_4" outlet="o"/>
+         <dest obj="play_6" inlet="start"/>
+      </net>
+      <net>
+         <source obj="delayedpulse_1" outlet="pulse"/>
+         <dest obj="and_1" inlet="i1"/>
+         <dest obj="and_2" inlet="i1"/>
+         <dest obj="and_3" inlet="i1"/>
+         <dest obj="and_4" inlet="i1"/>
+      </net>
+      <net>
+         <source obj="mix_3" outlet="R"/>
+         <dest obj="mix_5" inlet="in1"/>
+      </net>
+      <net>
+         <source obj="mix_3" outlet="L"/>
+         <dest obj="mix_5" inlet="bus_in"/>
+      </net>
+      <net>
+         <source obj="in_1" outlet="wave"/>
+         <dest obj="mix_6" inlet="bus_in"/>
+      </net>
+      <net>
+         <source obj="mix_6" outlet="out"/>
+         <dest obj="out_1" inlet="left"/>
+      </net>
+      <net>
+         <source obj="mix_5" outlet="out"/>
+         <dest obj="mix_6" inlet="in1"/>
+      </net>
+      <net>
+         <source obj="i_1" outlet="out"/>
+         <dest obj="delayedpulse_2" inlet="trig"/>
+      </net>
+      <net>
+         <source obj="delayedpulse_2" outlet="pulse"/>
+         <dest obj="flipflop_1" inlet="set"/>
+      </net>
+      <net>
+         <source obj="flipflop_1" outlet="o"/>
+         <dest obj="and_5" inlet="i2"/>
+         <dest obj="inv_1" inlet="i"/>
+      </net>
+      <net>
+         <source obj="and_5" outlet="o"/>
+         <dest obj="counter_1" inlet="trig"/>
+         <dest obj="delayedpulse_1" inlet="trig"/>
+      </net>
+      <net>
+         <source obj="inv_1" outlet="o"/>
+         <dest obj="led2_1" inlet="in"/>
+      </net>
+   </nets>
+   <settings>
+      <subpatchmode>no</subpatchmode>
+      <MidiChannel>2</MidiChannel>
+      <NPresets>8</NPresets>
+      <NPresetEntries>32</NPresetEntries>
+      <NModulationSources>8</NModulationSources>
+      <NModulationTargetsPerSource>8</NModulationTargetsPerSource>
+      <Author></Author>
+   </settings>
+   <notes><![CDATA[]]></notes>
+   <windowPos>
+      <x>0</x>
+      <y>23</y>
+      <width>1280</width>
+      <height>777</height>
+   </windowPos>
+</patch-1.0>

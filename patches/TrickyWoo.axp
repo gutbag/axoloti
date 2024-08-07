@@ -1,0 +1,296 @@
+<patch-1.0 appVersion="1.0.12">
+   <obj type="audio/in left" uuid="d40e60b7641fe75af4d7c91b45bb038aacafc52e" name="in_1" x="14" y="14">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="audio/out left" uuid="b11a3c09b2fdd575ea8212f2ce7743d5269253b1" name="out_1" x="1288" y="14">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="mymath/gainx4" uuid="62b1c1a6337c7c8f6eac96408a432477b113cfa1" name="dry gain___" x="560" y="42">
+      <params>
+         <frac32.u.map name="amp" value="39.5"/>
+      </params>
+      <attribs/>
+   </obj>
+   <comment type="patch/comment" x="910" y="56" text="CC2"/>
+   <obj type="phi/switch/sw 2-1a" uuid="350b79179fa4cce3d231eaa45f23eefa9121cb3b" name="sw_1" x="910" y="70">
+      <params>
+         <bool32.tgl name="s" MidiCC="2" value="0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="mtyas/dist/StereoTriDistortion" uuid="d8055f2b-9be0-49bd-b64d-da5caff97e60" name="obj_1" x="14" y="84">
+      <params>
+         <frac32.u.map name="clean" value="9.5"/>
+         <frac32.u.map name="dist01in" value="60.5"/>
+         <frac32.u.map name="dist02in" value="48.5"/>
+         <frac32.u.map name="dist03in" value="47.0"/>
+         <frac32.u.map name="dist01out" value="39.0"/>
+         <frac32.u.map name="dist02out" value="44.0"/>
+         <frac32.u.map name="dist03out" value="54.0"/>
+         <frac32.u.map name="lp freq out" value="64.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="jho/stomp/phaser" uuid="d7e8c859-241e-46cb-a15e-3659a488cb9f" name="obj_2" x="168" y="84">
+      <params>
+         <frac32.s.map name="speed" value="-4.0"/>
+         <frac32.u.map name="waveform" value="31.0"/>
+         <frac32.u.map name="depth" value="52.0"/>
+         <frac32.u.map name="offset" value="30.0"/>
+         <frac32.u.map name="blend" value="32.0"/>
+         <bool32.tgl name="on" value="1"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="mymath/gainx4" uuid="62b1c1a6337c7c8f6eac96408a432477b113cfa1" name="dry gain_" x="266" y="84">
+      <params>
+         <frac32.u.map name="amp" value="16.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="mix/mix 2 g" uuid="221f038da51943034a75e442c90624fcebfe6112" name="mix_1" x="1218" y="126">
+      <params>
+         <frac32.u.map name="gain1" value="43.5"/>
+         <frac32.u.map name="gain2" MidiCC="1" value="28.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <comment type="patch/comment" x="756" y="140" text="CC3"/>
+   <obj type="phi/switch/sw 2-1a" uuid="350b79179fa4cce3d231eaa45f23eefa9121cb3b" name="sw_2" x="756" y="154">
+      <params>
+         <bool32.tgl name="s" MidiCC="3" value="0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="sss/dyn/comp1" uuid="6e3788f7-0fbd-47b4-b6ae-ecdc52b04686" name="comp1_1" x="308" y="210">
+      <params>
+         <frac32.u.map name="tresh" value="4.5"/>
+         <frac32.u.map name="ratio" value="0.0"/>
+         <frac32.u.map name="attack" value="0.0"/>
+         <frac32.u.map name="decay" value="41.0"/>
+         <frac32.u.map name="gain" value="16.0"/>
+         <bool32.tgl name="limit" value="0"/>
+         <int32 name="extendA" value="0"/>
+         <int32 name="extendD" value="0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="stomps/distortion1" uuid="787f41ee-bc80-4224-a5a5-92231817a883" name="obj_3" x="406" y="210">
+      <params>
+         <frac32.u.map name="gain_1" value="35.0"/>
+         <frac32.u.map name="*c_1" value="30.0"/>
+         <int32 name="eq:lowmid" value="0"/>
+         <int32 name="eq:mid" value="0"/>
+         <int32 name="eq:highmid" value="0"/>
+         <int32 name="eq:high" value="0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="delay/echo fdbk mix" uuid="15716b14ebe691010ccfd54af72ea23232a843c6" name="echo_1" x="518" y="210">
+      <params>
+         <frac32.u.map name="mix" value="29.0"/>
+         <frac32.u.map name="feedback" value="49.0"/>
+      </params>
+      <attribs>
+         <spinner attributeName="delaylength" value="5000"/>
+      </attribs>
+   </obj>
+   <obj type="mymath/gainx4" uuid="62b1c1a6337c7c8f6eac96408a432477b113cfa1" name="dry gain__" x="630" y="210">
+      <params>
+         <frac32.u.map name="amp" value="7.5"/>
+      </params>
+      <attribs/>
+   </obj>
+   <comment type="patch/comment" x="1316" y="224" text="CC1"/>
+   <obj type="TrickyWooChunker" uuid="9212c92a-4a75-45e2-8c83-ec2d2f760410" name="TrickyWooChunker_1" x="1036" y="434">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="const/i" uuid="e202f44b2df17ae0b3e663b98ea6b14c8ff00408" name="i_2" x="910" y="448">
+      <params/>
+      <attribs>
+         <spinner attributeName="value" value="7"/>
+      </attribs>
+   </obj>
+   <obj type="const/i" uuid="e202f44b2df17ae0b3e663b98ea6b14c8ff00408" name="i_1" x="910" y="504">
+      <params/>
+      <attribs>
+         <spinner attributeName="value" value="32"/>
+      </attribs>
+   </obj>
+   <comment type="patch/comment" x="14" y="574" text="Startup delay to lock out triggers on patch change. LED on until done."/>
+   <comment type="patch/comment" x="392" y="574" text="Red LED on during startup and when looping."/>
+   <obj type="const/i" uuid="e202f44b2df17ae0b3e663b98ea6b14c8ff00408" name="i_3" x="14" y="588">
+      <params/>
+      <attribs>
+         <spinner attributeName="value" value="1"/>
+      </attribs>
+   </obj>
+   <obj type="timer/delayedpulse" uuid="3f05ee534ca67755fb20c7437f9e4de3d4c2f73d" name="delayedpulse_2" x="98" y="588">
+      <params>
+         <frac32.s.map name="delay" value="54.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="logic/flipflop" uuid="f9b15363f5ee203152e062c08a8846f0074b0ea5" name="flipflop_1" x="210" y="588">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="logic/inv" uuid="2bd44b865d3b63ff9b80862242bf5be779e3ad5" name="inv_1" x="294" y="588">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="phi/logic/or 4" uuid="5dc5a7c1fb7809522171638f755fead71cbe14ea" name="or_2" x="392" y="588">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="gpio/out/led2" uuid="3d7a4c75d1f9901181a17ba5de752782de911803" name="led2_2" x="476" y="588">
+      <params/>
+      <attribs/>
+   </obj>
+   <comment type="patch/comment" x="798" y="672" text="CC4."/>
+   <obj type="midi/in/cc i" uuid="614eb76edef2b43632fa1fcda25aab54f821daf6" name="cc_4" x="798" y="686">
+      <params/>
+      <attribs>
+         <spinner attributeName="cc" value="4"/>
+         <spinner attributeName="default" value="0"/>
+      </attribs>
+   </obj>
+   <obj type="audio/inconfig r" uuid="8468fe7907553f335959a7f69cbc5a1f7b5d4d1d" name="inconfig_2" x="0" y="700">
+      <params/>
+      <attribs>
+         <combo attributeName="gain" selection="0dB"/>
+         <combo attributeName="boost" selection="0dB"/>
+      </attribs>
+   </obj>
+   <obj type="logic/and 2" uuid="c67031682f552aa0a80b23377495c51ea28a8c9c" name="and_7" x="910" y="700">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="audio/inconfig l" uuid="7007d026acb7c3586f60a7f0898718d1ca7e0607" name="inconfig_1" x="0" y="756">
+      <params/>
+      <attribs>
+         <combo attributeName="gain" selection="0dB"/>
+         <combo attributeName="boost" selection="0dB"/>
+      </attribs>
+   </obj>
+   <nets>
+      <net>
+         <source obj="dry gain_" outlet="out"/>
+         <dest obj="sw_2" inlet="i1"/>
+      </net>
+      <net>
+         <source obj="sw_2" outlet="o"/>
+         <dest obj="sw_1" inlet="i2"/>
+      </net>
+      <net>
+         <source obj="obj_3" outlet="out"/>
+         <dest obj="echo_1" inlet="in"/>
+      </net>
+      <net>
+         <source obj="echo_1" outlet="out"/>
+         <dest obj="dry gain__" inlet="in"/>
+      </net>
+      <net>
+         <source obj="dry gain__" outlet="out"/>
+         <dest obj="sw_2" inlet="i2"/>
+      </net>
+      <net>
+         <source obj="in_1" outlet="wave"/>
+         <dest obj="comp1_1" inlet="in"/>
+         <dest obj="obj_1" inlet="inLeft"/>
+         <dest obj="dry gain___" inlet="in"/>
+      </net>
+      <net>
+         <source obj="obj_1" outlet="outLeft"/>
+         <dest obj="obj_2" inlet="in"/>
+      </net>
+      <net>
+         <source obj="comp1_1" outlet="out"/>
+         <dest obj="obj_3" inlet="in"/>
+      </net>
+      <net>
+         <source obj="cc_4" outlet="trig"/>
+         <dest obj="and_7" inlet="i1"/>
+      </net>
+      <net>
+         <source obj="and_7" outlet="o"/>
+         <dest obj="TrickyWooChunker_1" inlet="trigger"/>
+      </net>
+      <net>
+         <source obj="i_2" outlet="out"/>
+         <dest obj="TrickyWooChunker_1" inlet="type"/>
+      </net>
+      <net>
+         <source obj="i_1" outlet="out"/>
+         <dest obj="TrickyWooChunker_1" inlet="numChunks"/>
+      </net>
+      <net>
+         <source obj="sw_1" outlet="o"/>
+         <dest obj="mix_1" inlet="in1"/>
+         <dest obj="TrickyWooChunker_1" inlet="in"/>
+      </net>
+      <net>
+         <source obj="mix_1" outlet="out"/>
+         <dest obj="out_1" inlet="wave"/>
+      </net>
+      <net>
+         <source obj="obj_2" outlet="out"/>
+         <dest obj="dry gain_" inlet="in"/>
+      </net>
+      <net>
+         <source obj="i_3" outlet="out"/>
+         <dest obj="delayedpulse_2" inlet="trig"/>
+      </net>
+      <net>
+         <source obj="delayedpulse_2" outlet="pulse"/>
+         <dest obj="flipflop_1" inlet="set"/>
+      </net>
+      <net>
+         <source obj="flipflop_1" outlet="o"/>
+         <dest obj="inv_1" inlet="i"/>
+         <dest obj="and_7" inlet="i2"/>
+      </net>
+      <net>
+         <source obj="inv_1" outlet="o"/>
+         <dest obj="or_2" inlet="i1"/>
+      </net>
+      <net>
+         <source obj="or_2" outlet="o"/>
+         <dest obj="led2_2" inlet="in"/>
+      </net>
+      <net>
+         <source obj="TrickyWooChunker_1" outlet="recording"/>
+         <dest obj="or_2" inlet="i2"/>
+      </net>
+      <net>
+         <source obj="TrickyWooChunker_1" outlet="playing"/>
+         <dest obj="or_2" inlet="i3"/>
+      </net>
+      <net>
+         <source obj="TrickyWooChunker_1" outlet="out"/>
+         <dest obj="mix_1" inlet="in2"/>
+      </net>
+      <net>
+         <source obj="dry gain___" outlet="out"/>
+         <dest obj="sw_1" inlet="i1"/>
+      </net>
+   </nets>
+   <settings>
+      <subpatchmode>no</subpatchmode>
+      <MidiChannel>2</MidiChannel>
+      <NPresets>8</NPresets>
+      <NPresetEntries>32</NPresetEntries>
+      <NModulationSources>8</NModulationSources>
+      <NModulationTargetsPerSource>8</NModulationTargetsPerSource>
+   </settings>
+   <notes><![CDATA[]]></notes>
+   <windowPos>
+      <x>60</x>
+      <y>76</y>
+      <width>1413</width>
+      <height>906</height>
+   </windowPos>
+</patch-1.0>

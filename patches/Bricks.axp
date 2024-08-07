@@ -1,0 +1,230 @@
+<patch-1.0 appVersion="1.0.12">
+   <obj type="audio/in left" uuid="d40e60b7641fe75af4d7c91b45bb038aacafc52e" name="in_1" x="14" y="14">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="mix/mix 2 g" uuid="221f038da51943034a75e442c90624fcebfe6112" name="mix_1" x="1050" y="28">
+      <params>
+         <frac32.u.map name="gain1" value="32.0"/>
+         <frac32.u.map name="gain2" value="32.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="math/gain" uuid="62b1c1a6337c7c8f6aec96408a432477b113cfa0" name="gain_2" x="1162" y="28">
+      <params>
+         <frac32.u.map name="amp" value="9.55"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="audio/out left" uuid="b11a3c09b2fdd575ea8212f2ce7743d5269253b1" name="out_1" x="1274" y="28">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="mix/mix 2 g" uuid="221f038da51943034a75e442c90624fcebfe6112" name="mix_2" x="448" y="126">
+      <params>
+         <frac32.u.map name="gain1" value="32.0"/>
+         <frac32.u.map name="gain2" value="32.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="stomps/distortion1" uuid="9d11f99f-c099-4bae-8196-8c3bd3ca8e4c" name="obj_3" x="560" y="126">
+      <params>
+         <frac32.u.map name="gain_1" value="54.5"/>
+         <frac32.u.map name="*c_1" value="18.5"/>
+         <int32 name="eq:lowmid" value="-1"/>
+         <int32 name="eq:mid" value="0"/>
+         <int32 name="eq:highmid" value="0"/>
+         <int32 name="eq:high" value="-2"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="phi/delay/ECHO1Y" uuid="1835649e-7b6a-406c-b012-25281037c35f" name="obj_2" x="686" y="126">
+      <params>
+         <frac32.u.map name="dry/wet" value="28.5"/>
+         <frac32.u.map name=":gain1" value="64.0"/>
+         <frac32.s.map name="HP IN:pitch" value="64.0"/>
+         <frac32.u.map name="Time" value="26.0"/>
+         <frac32.s.map name="FbLp :pitch" value="20.0"/>
+         <frac32.u.map name="fba" value="3.5"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="jho/stomp/flanger1 32b" uuid="754620c5-2f5c-4d1f-9ac0-bad6736289db" name="obj_4" x="798" y="126">
+      <params>
+         <bool32.tgl name="on" value="1"/>
+         <frac32.u.map name="fdbk" value="43.5"/>
+         <frac32.u.map name="depth" value="59.5"/>
+         <frac32.s.map name="speed" value="-13.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="mymath/gainx4" uuid="62b1c1a6337c7c8f6eac96408a432477b113cfa1" name="dry gain_" x="938" y="126">
+      <params>
+         <frac32.u.map name="amp" value="17.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="phi/switch/sw 2-1a" uuid="350b79179fa4cce3d231eaa45f23eefa9121cb3b" name="sw_1" x="294" y="196">
+      <params>
+         <bool32.tgl name="s" MidiCC="2" value="0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <comment type="patch/comment" x="14" y="266" text="CC4: trig looper."/>
+   <obj type="midi/in/cc i" uuid="614eb76edef2b43632fa1fcda25aab54f821daf6" name="cc_2" x="14" y="280">
+      <params/>
+      <attribs>
+         <spinner attributeName="cc" value="4"/>
+         <spinner attributeName="default" value="0"/>
+      </attribs>
+   </obj>
+   <obj type="logic/and 2" uuid="c67031682f552aa0a80b23377495c51ea28a8c9c" name="and_6" x="112" y="294">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="looper_bricks_122BPM" uuid="fa1fcd06-ecd6-43c1-82ac-ec62fe259d1f" name="looper_bricks_122BPM_1" x="196" y="294">
+      <params/>
+      <attribs/>
+   </obj>
+   <comment type="patch/comment" x="14" y="448" text="Startup delay to lock out triggers on patch change. LED on until done."/>
+   <comment type="patch/comment" x="392" y="448" text="Red LED on during startup and when looping."/>
+   <obj type="const/i" uuid="e202f44b2df17ae0b3e663b98ea6b14c8ff00408" name="i_1" x="14" y="462">
+      <params/>
+      <attribs>
+         <spinner attributeName="value" value="1"/>
+      </attribs>
+   </obj>
+   <obj type="timer/delayedpulse" uuid="3f05ee534ca67755fb20c7437f9e4de3d4c2f73d" name="delayedpulse_2" x="98" y="462">
+      <params>
+         <frac32.s.map name="delay" value="54.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="logic/flipflop" uuid="f9b15363f5ee203152e062c08a8846f0074b0ea5" name="flipflop_1" x="210" y="462">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="logic/inv" uuid="2bd44b865d3b63ff9b80862242bf5be779e3ad5" name="inv_1" x="294" y="462">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="phi/logic/or 4" uuid="5dc5a7c1fb7809522171638f755fead71cbe14ea" name="or_1" x="392" y="462">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="gpio/out/led2" uuid="3d7a4c75d1f9901181a17ba5de752782de911803" name="led2_2" x="476" y="462">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="audio/inconfig l" uuid="7007d026acb7c3586f60a7f0898718d1ca7e0607" name="inconfig_1" x="14" y="560">
+      <params/>
+      <attribs>
+         <combo attributeName="gain" selection="6dB"/>
+         <combo attributeName="boost" selection="0dB"/>
+      </attribs>
+   </obj>
+   <obj type="audio/inconfig r" uuid="8468fe7907553f335959a7f69cbc5a1f7b5d4d1d" name="inconfig_2" x="126" y="560">
+      <params/>
+      <attribs>
+         <combo attributeName="gain" selection="3dB"/>
+         <combo attributeName="boost" selection="0dB"/>
+      </attribs>
+   </obj>
+   <nets>
+      <net>
+         <source obj="in_1" outlet="wave"/>
+         <dest obj="mix_1" inlet="in1"/>
+         <dest obj="sw_1" inlet="i2"/>
+         <dest obj="looper_bricks_122BPM_1" inlet="in"/>
+      </net>
+      <net>
+         <source obj="obj_3" outlet="out"/>
+         <dest obj="obj_2" inlet="echo"/>
+      </net>
+      <net>
+         <source obj="obj_2" outlet="Echoout"/>
+         <dest obj="obj_4" inlet="in"/>
+      </net>
+      <net>
+         <source obj="obj_4" outlet="out"/>
+         <dest obj="dry gain_" inlet="in"/>
+      </net>
+      <net>
+         <source obj="i_1" outlet="out"/>
+         <dest obj="delayedpulse_2" inlet="trig"/>
+      </net>
+      <net>
+         <source obj="delayedpulse_2" outlet="pulse"/>
+         <dest obj="flipflop_1" inlet="set"/>
+      </net>
+      <net>
+         <source obj="flipflop_1" outlet="o"/>
+         <dest obj="inv_1" inlet="i"/>
+         <dest obj="and_6" inlet="i2"/>
+      </net>
+      <net>
+         <source obj="or_1" outlet="o"/>
+         <dest obj="led2_2" inlet="in"/>
+      </net>
+      <net>
+         <source obj="cc_2" outlet="trig"/>
+         <dest obj="and_6" inlet="i1"/>
+      </net>
+      <net>
+         <source obj="and_6" outlet="o"/>
+         <dest obj="looper_bricks_122BPM_1" inlet="trigger"/>
+      </net>
+      <net>
+         <source obj="inv_1" outlet="o"/>
+         <dest obj="or_1" inlet="i1"/>
+      </net>
+      <net>
+         <source obj="looper_bricks_122BPM_1" outlet="recording"/>
+         <dest obj="or_1" inlet="i2"/>
+      </net>
+      <net>
+         <source obj="looper_bricks_122BPM_1" outlet="playing"/>
+         <dest obj="or_1" inlet="i3"/>
+      </net>
+      <net>
+         <source obj="dry gain_" outlet="out"/>
+         <dest obj="mix_1" inlet="in2"/>
+      </net>
+      <net>
+         <source obj="sw_1" outlet="o"/>
+         <dest obj="mix_2" inlet="in1"/>
+      </net>
+      <net>
+         <source obj="mix_2" outlet="out"/>
+         <dest obj="obj_3" inlet="in"/>
+      </net>
+      <net>
+         <source obj="looper_bricks_122BPM_1" outlet="out"/>
+         <dest obj="mix_2" inlet="in2"/>
+      </net>
+      <net>
+         <source obj="mix_1" outlet="out"/>
+         <dest obj="gain_2" inlet="in"/>
+      </net>
+      <net>
+         <source obj="gain_2" outlet="out"/>
+         <dest obj="out_1" inlet="wave"/>
+      </net>
+   </nets>
+   <settings>
+      <subpatchmode>no</subpatchmode>
+      <MidiChannel>2</MidiChannel>
+      <NPresets>8</NPresets>
+      <NPresetEntries>32</NPresetEntries>
+      <NModulationSources>8</NModulationSources>
+      <NModulationTargetsPerSource>8</NModulationTargetsPerSource>
+      <Author></Author>
+   </settings>
+   <notes><![CDATA[]]></notes>
+   <windowPos>
+      <x>115</x>
+      <y>44</y>
+      <width>1397</width>
+      <height>938</height>
+   </windowPos>
+</patch-1.0>

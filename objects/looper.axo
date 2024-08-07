@@ -1,0 +1,65 @@
+<objdefs appVersion="1.0.12">
+   <obj.normal id="looper" uuid="1d87f01a-095c-4873-950f-f15efed4cae2">
+      <author>Mark Lamb</author>
+      <license>BSD</license>
+      <inlets>
+         <frac32buffer name="in" description="wave input"/>
+      </inlets>
+      <outlets>
+         <frac32buffer name="out"/>
+         <bool32 name="enabled"/>
+      </outlets>
+      <displays/>
+      <params>
+         <bool32.tgl name="writeEnable" noLabel="true"/>
+      </params>
+      <attribs/>
+      <code.declaration><![CDATA[//static const uint32_t LENGTH = 78904; // 4 beats at 146 BPM, 48kHz
+//static const uint32_t LENGTH = 76800; // 4 beats at 150 BPM, 48kHz
+
+static const uint32_t BPM = 153;
+static const uint32_t BEATS = 24; // 6 bars of 4
+static constexpr double SAMPLE_PERIOD = 1.0 / 48000.0;
+static const uint32_t LENGTH = ((60.0 / BPM) * BEATS) / SAMPLE_PERIOD;
+
+int32_t* array;
+uint32_t writepos;
+uint32_t readpos;
+bool writeEnabled = true;]]></code.declaration>
+      <code.init><![CDATA[static int32_t _array[LENGTH] __attribute__ ((section (".sdram")));
+array = &_array[0];
+
+writepos = 1;
+readpos = writepos + 1;
+
+for(int i=0;i<LENGTH;i++)
+  array[i] = 0;
+
+writeEnabled = true;
+
+//LogTextMessage("LENGTH=%u\n", LENGTH);]]></code.init>
+      <code.krate><![CDATA[/*
+if (param_writeEnable != writeEnabled)
+{
+	writepos = 1;
+	readpos = writepos + 1;
+}
+*/
+
+writeEnabled = param_writeEnable;
+outlet_enabled = writeEnabled;]]></code.krate>
+      <code.srate><![CDATA[if (writeEnabled)
+{
+  array[writepos] = inlet_in;
+}
+
+++writepos;
+if (writepos >= LENGTH)
+  writepos = 0;
+
+outlet_out = array[readpos];
+++readpos;
+if (readpos >= LENGTH)
+  readpos = 0;]]></code.srate>
+   </obj.normal>
+</objdefs>

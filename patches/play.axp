@@ -1,0 +1,66 @@
+<patch-1.0 appVersion="1.0.11">
+   <obj type="ctrl/dial p" uuid="cc5d2846c3d50e425f450c4b9851371b54f4d674" name="Position" x="14" y="14">
+      <params>
+         <frac32.u.map name="value" value="0.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="const/i" uuid="e202f44b2df17ae0b3e663b98ea6b14c8ff00408" name="i_1" x="14" y="98">
+      <params/>
+      <attribs>
+         <spinner attributeName="value" value="1"/>
+      </attribs>
+   </obj>
+   <obj type="wave/play stereo" uuid="843bbc92c4a45c5ba551de32538934e186dc4a41" name="play_1" x="182" y="98">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="audio/out stereo" uuid="a1ca7a567f535acc21055669829101d3ee7f0189" name="out_1" x="322" y="98">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="ctrl/button" uuid="ef3d13774349df85aa9bfecf30dbc91ab8488b3f" name="Stop" x="14" y="154">
+      <params>
+         <bool32.mom name="b" value="0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="string/c" uuid="4aa90a90c435a742ddfa152d232883fc5b2f1b3" name="Filename" x="14" y="210">
+      <params/>
+      <attribs>
+         <table attributeName="str" table="Bento1.wav"/>
+      </attribs>
+   </obj>
+   <nets>
+      <net>
+         <source obj="Filename" outlet="out"/>
+         <dest obj="play_1" inlet="filename"/>
+      </net>
+      <net>
+         <source obj="play_1" outlet="outl"/>
+         <dest obj="out_1" inlet="left"/>
+      </net>
+      <net>
+         <source obj="play_1" outlet="outr"/>
+         <dest obj="out_1" inlet="right"/>
+      </net>
+      <net>
+         <source obj="Stop" outlet="o"/>
+         <dest obj="play_1" inlet="stop"/>
+      </net>
+      <net>
+         <source obj="Position" outlet="out"/>
+         <dest obj="play_1" inlet="pos"/>
+      </net>
+   </nets>
+   <settings>
+      <subpatchmode>no</subpatchmode>
+   </settings>
+   <notes><![CDATA[]]></notes>
+   <windowPos>
+      <x>450</x>
+      <y>-720</y>
+      <width>915</width>
+      <height>607</height>
+   </windowPos>
+</patch-1.0>

@@ -1,0 +1,43 @@
+<objdefs appVersion="1.0.12">
+   <obj.normal id="BricksDelay" uuid="4605da45-e9d8-4501-97ea-32f4757367d2">
+      <author>Mark Lamb</author>
+      <license>BSD</license>
+      <inlets>
+         <frac32buffer name="in" description="wave input"/>
+      </inlets>
+      <outlets>
+         <frac32buffer name="out"/>
+      </outlets>
+      <displays/>
+      <params/>
+      <attribs/>
+      <code.declaration><![CDATA[//static const uint32_t LENGTH = 78904; // 4 beats at 146 BPM, 48kHz
+//static const uint32_t LENGTH = 76800; // 4 beats at 150 BPM, 48kHz
+
+static const uint32_t BPM = 122;
+static const uint32_t BEATS = 1;
+static constexpr double SAMPLE_PERIOD = 1.0 / 48000.0;
+static const uint32_t LENGTH = (((60.0 / BPM) * BEATS) / SAMPLE_PERIOD) / 3;
+
+int32_t* array;
+uint32_t writepos;
+uint32_t readpos;]]></code.declaration>
+      <code.init><![CDATA[static int32_t _array[LENGTH] __attribute__ ((section (".sdram")));
+array = &_array[0];
+
+writepos = 1;
+readpos = writepos + 1;
+
+for(int i=0;i<LENGTH;i++)
+  array[i] = 0;]]></code.init>
+      <code.srate><![CDATA[array[writepos] = inlet_in;
+++writepos;
+if (writepos >= LENGTH)
+  writepos = 0;
+
+outlet_out = array[readpos];
+++readpos;
+if (readpos >= LENGTH)
+  readpos = 0;]]></code.srate>
+   </obj.normal>
+</objdefs>

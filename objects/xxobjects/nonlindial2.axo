@@ -1,0 +1,40 @@
+<objdefs appVersion="1.0.11">
+   <obj.normal id="nonlindial2" uuid="28669b6c-24a6-4415-a9c5-931d7a87cf00">
+      <sDescription>positive constant value dial</sDescription>
+      <author>Mark Lamb</author>
+      <license>BSD</license>
+      <helpPatch>ctrl.axh</helpPatch>
+      <inlets/>
+      <outlets>
+         <frac32.positive name="out" description="output"/>
+      </outlets>
+      <displays/>
+      <params>
+         <frac32.u.map name="value" noLabel="true"/>
+      </params>
+      <attribs/>
+      <code.declaration><![CDATA[uint32_t previousValue = 0;]]></code.declaration>
+      <code.krate><![CDATA[//outlet_out= param_value;
+//if (param_value != previousValue)
+//if (1 && param_value != previousValue)
+if (1)
+{
+	//LogTextMessage("param_value: %u\n", (param_value/0x100000));
+	
+	double x = (double)(param_value/0x100000);
+	double y = pow(1.038945, x) - 1.0;
+	previousValue = param_value;
+	outlet_out = ((uint32_t)y) * 0x100000;
+	//LogTextMessage("y: %f, %x\n", y, outlet_out);
+}
+if ( 0 && param_value != previousValue)
+{
+	//LogTextMessage("param_value: %u\n", (param_value/0x100000));
+	
+	uint32_t y = (uint32_t)(pow(1.038945, (double)param_value) - 1.0);
+	outlet_out = (uint32_t)(pow(1.038945, (double)param_value) - 1.0);
+	LogTextMessage("y: %f, %x\n", y, outlet_out);
+	previousValue = param_value;
+}]]></code.krate>
+   </obj.normal>
+</objdefs>

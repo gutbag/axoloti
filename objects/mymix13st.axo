@@ -1,0 +1,75 @@
+<objdefs appVersion="1.0.11">
+   <obj.normal id="mymix13st" uuid="26d7c6e0-ba1a-4a91-943a-20a33bcab5d3">
+      <sDescription>6 input s-rate mixer, shows gain units</sDescription>
+      <author>Johannes Taelman</author>
+      <license>BSD</license>
+      <inlets>
+         <frac32buffer name="in001l" description="input 1 l"/>
+         <frac32buffer name="in001r" description="input 1 r"/>
+         <frac32buffer name="in002l" description="input 2 l"/>
+         <frac32buffer name="in002r" description="input 2 r"/>
+         <frac32buffer name="in003l" description="input 3 l"/>
+         <frac32buffer name="in003r" description="input 3 r"/>
+         <frac32buffer name="in004l" description="input 4 l"/>
+         <frac32buffer name="in004r" description="input 4 r"/>
+         <frac32buffer name="in005l" description="input 5 l"/>
+         <frac32buffer name="in005r" description="input 5 r"/>
+         <frac32buffer name="in006l" description="input 6 l"/>
+         <frac32buffer name="in006r" description="input 6 r"/>
+         <frac32buffer name="in007l" description="input 7 l"/>
+         <frac32buffer name="in007r" description="input 7 r"/>
+         <frac32buffer name="in008l" description="input 8 l"/>
+         <frac32buffer name="in008r" description="input 8 r"/>
+         <frac32buffer name="in009l" description="input 9 l"/>
+         <frac32buffer name="in009r" description="input 9 r"/>
+         <frac32buffer name="in010l" description="input 10 l"/>
+         <frac32buffer name="in010r" description="input 10 r"/>
+         <frac32buffer name="in011l" description="input 11 l"/>
+         <frac32buffer name="in011r" description="input 11 r"/>
+         <frac32buffer name="in012l" description="input 12 l"/>
+         <frac32buffer name="in012r" description="input 12 r"/>
+         <frac32buffer name="in013l" description="input 13 l"/>
+         <frac32buffer name="in013r" description="input 13 r"/>
+      </inlets>
+      <outlets>
+         <frac32buffer name="left" description="left out"/>
+         <frac32buffer name="right" description="right out"/>
+      </outlets>
+      <displays/>
+      <params>
+         <frac32.u.map.gain name="gain" noLabel="true">
+            <DefaultValue v="32.0"/>
+         </frac32.u.map.gain>
+      </params>
+      <attribs/>
+      <code.srate><![CDATA[int32_t accum = ___SMMUL(inlet_in001l,param_gain);
+accum = ___SMMLA(inlet_in002l,param_gain,accum);
+accum = ___SMMLA(inlet_in003l,param_gain,accum);
+accum = ___SMMLA(inlet_in004l,param_gain,accum);
+accum = ___SMMLA(inlet_in005l,param_gain,accum);
+accum = ___SMMLA(inlet_in006l,param_gain,accum);
+accum = ___SMMLA(inlet_in007l,param_gain,accum);
+accum = ___SMMLA(inlet_in008l,param_gain,accum);
+accum = ___SMMLA(inlet_in009l,param_gain,accum);
+accum = ___SMMLA(inlet_in010l,param_gain,accum);
+accum = ___SMMLA(inlet_in011l,param_gain,accum);
+accum = ___SMMLA(inlet_in012l,param_gain,accum);
+accum = ___SMMLA(inlet_in013l,param_gain,accum);
+outlet_left=  __SSAT((accum<<1),28);
+
+accum = ___SMMUL(inlet_in001r,param_gain);
+accum = ___SMMLA(inlet_in002r,param_gain,accum);
+accum = ___SMMLA(inlet_in003r,param_gain,accum);
+accum = ___SMMLA(inlet_in004r,param_gain,accum);
+accum = ___SMMLA(inlet_in005r,param_gain,accum);
+accum = ___SMMLA(inlet_in006r,param_gain,accum);
+accum = ___SMMLA(inlet_in007r,param_gain,accum);
+accum = ___SMMLA(inlet_in008r,param_gain,accum);
+accum = ___SMMLA(inlet_in009r,param_gain,accum);
+accum = ___SMMLA(inlet_in010r,param_gain,accum);
+accum = ___SMMLA(inlet_in011r,param_gain,accum);
+accum = ___SMMLA(inlet_in012r,param_gain,accum);
+accum = ___SMMLA(inlet_in013r,param_gain,accum);
+outlet_right=  __SSAT((accum<<1),28);]]></code.srate>
+   </obj.normal>
+</objdefs>

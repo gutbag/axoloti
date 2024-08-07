@@ -1,0 +1,40 @@
+<objdefs appVersion="1.0.12">
+   <obj.normal id="moagulum_c_section" uuid="a93e5e48-75ae-440e-9d50-7b756b626a71">
+      <sDescription>Receives trigger and creates the looper triggers for the C section of Moagulum.</sDescription>
+      <author>Mark Lamb</author>
+      <license>GPL</license>
+      <inlets>
+         <bool32.rising name="trigger"/>
+      </inlets>
+      <outlets>
+         <bool32.pulse name="record"/>
+         <bool32.pulse name="stop"/>
+      </outlets>
+      <displays/>
+      <params/>
+      <attribs/>
+      <code.declaration><![CDATA[bool recording;]]></code.declaration>
+      <code.init><![CDATA[recording = false;
+
+LogTextMessage("Init \n");]]></code.init>
+      <code.krate><![CDATA[if (inlet_trigger)
+{
+	LogTextMessage("inlet_trigger\n");
+	if ( ! recording)
+	{
+		recording = true;
+		outlet_record = 1;
+	}
+	else
+	{
+		recording = false;
+		outlet_stop = 1;
+	}
+}
+else
+{
+	outlet_record = 0;
+	outlet_stop = 0;
+}]]></code.krate>
+   </obj.normal>
+</objdefs>

@@ -1,0 +1,100 @@
+<patch-1.0 appVersion="1.0.12">
+   <obj type="audio/in left" uuid="d40e60b7641fe75af4d7c91b45bb038aacafc52e" name="in_1" x="28" y="14">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="phi/switch/sw 2-1a" uuid="350b79179fa4cce3d231eaa45f23eefa9121cb3b" name="sw_2" x="434" y="14">
+      <params>
+         <bool32.tgl name="s" MidiCC="2" value="1"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="mymath/gainx4" uuid="62b1c1a6337c7c8f6eac96408a432477b113cfa1" name="dry gain___" x="560" y="14">
+      <params>
+         <frac32.u.map name="amp" value="24.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="audio/out left" uuid="b11a3c09b2fdd575ea8212f2ce7743d5269253b1" name="out_1" x="686" y="14">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="math/*c" uuid="7a66f52a9594e7e9eb31328ea725cb3641a80b55" name="*c_1" x="154" y="112">
+      <params>
+         <frac32.u.map name="amp" value="0.6999993324279785"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="sss/dist/corruptor" uuid="71c22191-717c-4fd6-a5d9-74d4d09fe67c" name="corruptor_1" x="280" y="112">
+      <params>
+         <frac32.s.map name="dampPP" MidiCC="1" value="10.0"/>
+         <frac32.s.map name="dampPN" value="0.0"/>
+         <frac32.s.map name="dampNN" value="0.0"/>
+         <frac32.s.map name="dampNP" value="0.0"/>
+         <frac32.s.map name="treshPos" value="0.0"/>
+         <frac32.s.map name="treshNeg" value="0.0"/>
+         <frac32.s.map name="dampChange" value="0.0"/>
+         <bool32.tgl name="m1" value="0"/>
+         <bool32.tgl name="m2" value="0"/>
+         <bool32.tgl name="m3" value="0"/>
+         <bool32.tgl name="m4" value="0"/>
+         <frac32.u.map name="gain" value="0.0"/>
+         <bool32.tgl name="dir1" value="0"/>
+         <bool32.tgl name="dir2" value="0"/>
+         <frac32.s.map name="feed" value="0.10000085830688477"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="audio/inconfig l" uuid="7007d026acb7c3586f60a7f0898718d1ca7e0607" name="inconfig_1" x="28" y="252">
+      <params/>
+      <attribs>
+         <combo attributeName="gain" selection="0dB"/>
+         <combo attributeName="boost" selection="0dB"/>
+      </attribs>
+   </obj>
+   <obj type="audio/inconfig r" uuid="8468fe7907553f335959a7f69cbc5a1f7b5d4d1d" name="inconfig_2" x="28" y="322">
+      <params/>
+      <attribs>
+         <combo attributeName="gain" selection="0dB"/>
+         <combo attributeName="boost" selection="0dB"/>
+      </attribs>
+   </obj>
+   <nets>
+      <net>
+         <source obj="in_1" outlet="wave"/>
+         <dest obj="sw_2" inlet="i1"/>
+         <dest obj="*c_1" inlet="in"/>
+      </net>
+      <net>
+         <source obj="sw_2" outlet="o"/>
+         <dest obj="dry gain___" inlet="in"/>
+      </net>
+      <net>
+         <source obj="dry gain___" outlet="out"/>
+         <dest obj="out_1" inlet="wave"/>
+      </net>
+      <net>
+         <source obj="corruptor_1" outlet="o1"/>
+         <dest obj="sw_2" inlet="i2"/>
+      </net>
+      <net>
+         <source obj="*c_1" outlet="out"/>
+         <dest obj="corruptor_1" inlet="i1"/>
+      </net>
+   </nets>
+   <settings>
+      <subpatchmode>no</subpatchmode>
+      <MidiChannel>2</MidiChannel>
+      <NPresets>8</NPresets>
+      <NPresetEntries>32</NPresetEntries>
+      <NModulationSources>8</NModulationSources>
+      <NModulationTargetsPerSource>8</NModulationTargetsPerSource>
+   </settings>
+   <notes><![CDATA[]]></notes>
+   <windowPos>
+      <x>785</x>
+      <y>-823</y>
+      <width>884</width>
+      <height>759</height>
+   </windowPos>
+</patch-1.0>

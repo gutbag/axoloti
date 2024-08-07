@@ -1,0 +1,27 @@
+<objdefs appVersion="1.0.12">
+   <obj.normal id="myread" uuid="967a23ec-37f9-466d-b023-aec81ccd8a2d">
+      <sDescription>delay read, non-interpolated</sDescription>
+      <author>Johannes Taelman</author>
+      <license>BSD</license>
+      <helpPatch>delay.axh</helpPatch>
+      <inlets/>
+      <outlets>
+         <frac32buffer name="out" description="wave"/>
+      </outlets>
+      <displays/>
+      <params/>
+      <attribs/>
+      <code.declaration><![CDATA[static const uint32_t LENGTH = 157808;
+uint32_t index;]]></code.declaration>
+      <code.init><![CDATA[//index = LENGTH /8;
+index = LENGTH - 2;]]></code.init>
+      <code.srate><![CDATA[//uint32_t delay1 = attr_delayname.writepos - (__USAT(param_time + inlet_time,27)>>(27-attr_delayname.LENGTHPOW)) - BUFSIZE + buffer_index;
+//outlet_out= attr_delayname.array[delay1 & attr_delayname.LENGTHMASK]<<14;
+//outlet_out= attr_delayname.array[attr_delayname.writepos];
+//index = (index+1) & attr_delayname.LENGTHMASK;
+outlet_out= attr_delayname.array[index];
+++index;
+if (index >= LENGTH)
+  index = 0;]]></code.srate>
+   </obj.normal>
+</objdefs>

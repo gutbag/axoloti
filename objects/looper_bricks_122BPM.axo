@@ -1,0 +1,157 @@
+<objdefs appVersion="1.0.12">
+   <obj.normal id="looper_bricks_122BPM" uuid="fa1fcd06-ecd6-43c1-82ac-ec62fe259d1f">
+      <sDescription>Moagulum C section. Records 6 bars then plays it repeatedly. No overdubbing. Version 2 has direct triggers and the Moagulum state machine rather than a more generic looper&apos;s. Only allows recorded audio to be played once automatically immediately after recording.</sDescription>
+      <author>Mark Lamb</author>
+      <license>BSD</license>
+      <inlets>
+         <frac32buffer name="in" description="wave input"/>
+         <bool32.rising name="trigger"/>
+         <bool32.rising name="reset"/>
+      </inlets>
+      <outlets>
+         <frac32buffer name="out"/>
+         <bool32 name="recording"/>
+         <bool32 name="playing"/>
+      </outlets>
+      <displays>
+         <bool32 name="reset"/>
+         <bool32 name="recording"/>
+         <bool32 name="playing"/>
+      </displays>
+      <params/>
+      <attribs/>
+      <code.declaration><![CDATA[static const uint32_t BPM = 122;
+static const uint32_t BARS = 3; // 6 bars of 7/8
+static const uint32_t BEATS_TO_BAR = 7;
+static const uint32_t BEATS = BARS * BEATS_TO_BAR;
+static constexpr double SAMPLE_PERIOD = 1.0 / 48000.0;
+static const uint32_t LENGTH = ((60.0 / BPM) * BEATS) / SAMPLE_PERIOD;
+
+int32_t* array;
+uint32_t writepos;
+uint32_t readpos;
+
+typedef enum {INIT, RESET, RECORDING, PLAYING} State;
+State state;
+
+typedef enum {NONE, START_RECORDING, STOP, CLEAR} Event;
+Event event;
+
+void clearArray()
+{
+	for (int i=0; i<LENGTH; i++)
+		array[i] = 0;
+}]]></code.declaration>
+      <code.init><![CDATA[static int32_t _array[LENGTH] __attribute__ ((section (".sdram")));
+array = &_array[0];
+
+clearArray();
+
+writepos = 0;
+readpos = 0;
+
+state = INIT;
+event = NONE;
+
+LogTextMessage("Init 6\n");//]]></code.init>
+      <code.krate><![CDATA[if (inlet_reset && state != RESET)
+{
+	//LogTextMessage("RESET\n");
+	event = CLEAR;
+}
+else if (inlet_trigger && state == RESET)
+{
+	//LogTextMessage("START_RECORDING\n");
+	event = START_RECORDING;
+}
+else if (inlet_trigger && (state == RECORDING || state == PLAYING))
+{
+	//LogTextMessage("STOP\n");
+	event = STOP;
+}]]></code.krate>
+      <code.srate><![CDATA[switch (state)
+{
+	case INIT: // entered only once on startup
+		outlet_recording = 0;
+		disp_recording = 0;
+		outlet_playing = 0;
+		disp_playing = 0;
+		disp_reset = 1;
+		state = RESET;
+	break;
+	case RESET: // wait to start recording
+		switch (event)
+		{
+			case START_RECORDING:
+				state = RECORDING;
+				outlet_recording = 1;
+				disp_recording = 1;
+				disp_reset = 0;
+				writepos = 0;
+			break;
+			case STOP: // stop and clear handled together
+			case CLEAR:
+				// ignore
+			break;
+			case NONE:
+				outlet_out = 0; // no output
+			break;
+		}
+	break;
+	case RECORDING: // record until full then play
+		switch (event)
+		{
+			case START_RECORDING:
+				// ignore
+			break;
+			case STOP: // stop and clear handled together
+			case CLEAR:
+				state = RESET;
+				outlet_recording = 0;
+				disp_recording = 0;
+				disp_reset = 1;
+				//clearArray();
+			break;
+			case NONE:
+				array[writepos] = inlet_in;
+				outlet_out = 0; // no output
+				++writepos;
+				if (writepos >= LENGTH)
+				{
+					state = PLAYING; // go to this state directly
+					outlet_recording = 0;
+					disp_recording = 0;
+					outlet_playing = 1;
+					disp_playing = 1;
+					readpos = 0;
+				}
+			break;
+		}
+	break;
+	case PLAYING: // keep playing until stopped
+		switch (event)
+		{
+			case START_RECORDING:
+				// ignore
+			break;
+			case STOP: // stop and clear handled together
+			case CLEAR:
+				state = RESET;
+				outlet_playing = 0;
+				disp_playing = 0;
+				disp_reset = 1;
+			break;
+			case NONE:
+				outlet_out = array[readpos];
+				++readpos;
+				if (readpos >= LENGTH) // for now, repeat loop forever
+					readpos = 0;
+			break;
+		}
+	break;
+}
+
+// consume the event
+event = NONE;]]></code.srate>
+   </obj.normal>
+</objdefs>

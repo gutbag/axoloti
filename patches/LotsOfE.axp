@@ -1,0 +1,216 @@
+<patch-1.0 appVersion="1.0.11">
+   <obj type="audio/in left" uuid="d40e60b7641fe75af4d7c91b45bb038aacafc52e" name="in_1" x="14" y="14">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="mymath/gainx4" uuid="62b1c1a6337c7c8f6eac96408a432477b113cfa1" name="dry gain_" x="448" y="14">
+      <params>
+         <frac32.u.map name="amp" value="28.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="ctrl/dial p" uuid="cc5d2846c3d50e425f450c4b9851371b54f4d674" name="dial_2" x="630" y="14">
+      <params>
+         <frac32.u.map name="value" MidiCC="1" value="0.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="sss/math/expCurveK" uuid="bde45a1d-540b-4c33-b7b5-d733d42a1772" name="expCurveK_1" x="714" y="14">
+      <params>
+         <frac32.s.map name="exp" value="64.0"/>
+         <int32 name="stack" value="0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="audio/inconfig l" uuid="7007d026acb7c3586f60a7f0898718d1ca7e0607" name="inconfig_1" x="14" y="70">
+      <params/>
+      <attribs>
+         <combo attributeName="gain" selection="0dB"/>
+         <combo attributeName="boost" selection="0dB"/>
+      </attribs>
+   </obj>
+   <obj type="drj/ctrl/dial_pitch" uuid="86ae7d7f49093cb1c94aed72274d118a23d46692" name="dial_pitch_1" x="14" y="140">
+      <params>
+         <frac32.s.map name="pitch" value="0.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="cpwitz/osc/sine harmonics" uuid="cpwitz-osc-sine harmonics" name="sine_1" x="126" y="140">
+      <params>
+         <frac32.u.map name="sub" value="44.0"/>
+         <frac32.u.map name="fundamental" value="18.0"/>
+         <frac32.u.map name="2nd" value="15.0"/>
+         <frac32.u.map name="3rd" value="11.0"/>
+         <frac32.u.map name="4th" value="19.0"/>
+         <frac32.u.map name="5th" value="21.5"/>
+         <frac32.u.map name="6th" value="31.0"/>
+         <frac32.u.map name="7th" value="15.5"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="phi/switch/sw 2-1a" uuid="350b79179fa4cce3d231eaa45f23eefa9121cb3b" name="sw_2" x="434" y="140">
+      <params>
+         <bool32.tgl name="s" MidiCC="2" value="0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="mtyas/dist/StereoTriDistortion" uuid="233a2c52-91a7-4733-8e87-5eb993b81e26" name="obj_1" x="560" y="140">
+      <params>
+         <frac32.u.map name="clean" value="14.5"/>
+         <frac32.u.map name="dist01in" value="40.0"/>
+         <frac32.u.map name="dist02in" value="26.0"/>
+         <frac32.u.map name="dist03in" value="22.5"/>
+         <frac32.u.map name="dist01out" value="46.5"/>
+         <frac32.u.map name="dist02out" value="46.0"/>
+         <frac32.u.map name="dist03out" value="46.0"/>
+         <frac32.u.map name="lp freq out" value="45.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="jho/stomp/leslie" uuid="3ae4c4ac-dd3d-44af-804c-50c7e8f64ad6" name="obj_2" x="728" y="140">
+      <params>
+         <frac32.s.map name="speed" MidiCC="1" value="-64.0"/>
+         <frac32.u.map name="depth" value="46.5"/>
+         <frac32.s.map name="offset" value="26.0"/>
+         <frac32.u.map name="wobble" value="54.0"/>
+         <frac32.s.map name="xover1" value="55.0"/>
+         <frac32.s.map name="xover2" value="29.0"/>
+         <frac32.u.map name="blend" value="64.0"/>
+         <bool32.tgl name="on" value="1"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="mix/xfade" uuid="375dc91d218e96cdc9cbc7e92adb48f705ef701a" name="xfade_1" x="882" y="140">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="audio/out left" uuid="b11a3c09b2fdd575ea8212f2ce7743d5269253b1" name="out_1" x="966" y="140">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="mix/mix 3" uuid="8be16f2156012a4a8974804178cece51555f272b" name="mix_2" x="378" y="280">
+      <params>
+         <frac32.u.map name="gain1" value="17.5"/>
+         <frac32.u.map name="gain2" value="27.5"/>
+         <frac32.u.map name="gain3" value="36.5"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="drj/ctrl/dial_pitch" uuid="86ae7d7f49093cb1c94aed72274d118a23d46692" name="dial_pitch_2" x="14" y="602">
+      <params>
+         <frac32.s.map name="pitch" value="12.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="cpwitz/osc/sine harmonics" uuid="cpwitz-osc-sine harmonics" name="sine_2" x="126" y="602">
+      <params>
+         <frac32.u.map name="sub" value="47.0"/>
+         <frac32.u.map name="fundamental" value="25.0"/>
+         <frac32.u.map name="2nd" value="32.5"/>
+         <frac32.u.map name="3rd" value="27.0"/>
+         <frac32.u.map name="4th" value="43.5"/>
+         <frac32.u.map name="5th" value="43.5"/>
+         <frac32.u.map name="6th" value="31.0"/>
+         <frac32.u.map name="7th" value="15.5"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="drj/ctrl/dial_pitch" uuid="86ae7d7f49093cb1c94aed72274d118a23d46692" name="dial_pitch_3" x="294" y="602">
+      <params>
+         <frac32.s.map name="pitch" value="24.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="cpwitz/osc/sine harmonics" uuid="cpwitz-osc-sine harmonics" name="sine_3" x="406" y="602">
+      <params>
+         <frac32.u.map name="sub" value="47.0"/>
+         <frac32.u.map name="fundamental" value="25.0"/>
+         <frac32.u.map name="2nd" value="32.5"/>
+         <frac32.u.map name="3rd" value="27.0"/>
+         <frac32.u.map name="4th" value="43.5"/>
+         <frac32.u.map name="5th" value="43.5"/>
+         <frac32.u.map name="6th" value="31.0"/>
+         <frac32.u.map name="7th" value="15.5"/>
+      </params>
+      <attribs/>
+   </obj>
+   <nets>
+      <net>
+         <source obj="obj_1" outlet="outLeft"/>
+         <dest obj="obj_2" inlet="inlet_1"/>
+      </net>
+      <net>
+         <source obj="in_1" outlet="wave"/>
+         <dest obj="dry gain_" inlet="in"/>
+      </net>
+      <net>
+         <source obj="xfade_1" outlet="o"/>
+         <dest obj="out_1" inlet="wave"/>
+      </net>
+      <net>
+         <source obj="dry gain_" outlet="out"/>
+         <dest obj="xfade_1" inlet="i1"/>
+      </net>
+      <net>
+         <source obj="dial_2" outlet="out"/>
+         <dest obj="expCurveK_1" inlet="in"/>
+      </net>
+      <net>
+         <source obj="expCurveK_1" outlet="out"/>
+         <dest obj="xfade_1" inlet="c"/>
+      </net>
+      <net>
+         <source obj="dial_pitch_1" outlet="out"/>
+         <dest obj="sine_1" inlet="pitch"/>
+      </net>
+      <net>
+         <source obj="dial_pitch_2" outlet="out"/>
+         <dest obj="sine_2" inlet="pitch"/>
+      </net>
+      <net>
+         <source obj="obj_2" outlet="outlet_1"/>
+         <dest obj="xfade_1" inlet="i2"/>
+      </net>
+      <net>
+         <source obj="sw_2" outlet="o"/>
+         <dest obj="obj_1" inlet="inLeft"/>
+      </net>
+      <net>
+         <source obj="sine_1" outlet="out"/>
+         <dest obj="sw_2" inlet="i1"/>
+         <dest obj="mix_2" inlet="in1"/>
+      </net>
+      <net>
+         <source obj="dial_pitch_3" outlet="out"/>
+         <dest obj="sine_3" inlet="pitch"/>
+      </net>
+      <net>
+         <source obj="mix_2" outlet="out"/>
+         <dest obj="sw_2" inlet="i2"/>
+      </net>
+      <net>
+         <source obj="sine_2" outlet="out"/>
+         <dest obj="mix_2" inlet="in2"/>
+      </net>
+      <net>
+         <source obj="sine_3" outlet="out"/>
+         <dest obj="mix_2" inlet="in3"/>
+      </net>
+   </nets>
+   <settings>
+      <subpatchmode>no</subpatchmode>
+      <MidiChannel>2</MidiChannel>
+      <NPresets>8</NPresets>
+      <NPresetEntries>32</NPresetEntries>
+      <NModulationSources>8</NModulationSources>
+      <NModulationTargetsPerSource>8</NModulationTargetsPerSource>
+      <Author></Author>
+   </settings>
+   <notes><![CDATA[]]></notes>
+   <windowPos>
+      <x>-54</x>
+      <y>-1039</y>
+      <width>1434</width>
+      <height>906</height>
+   </windowPos>
+</patch-1.0>

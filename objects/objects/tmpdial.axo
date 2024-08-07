@@ -1,0 +1,27 @@
+<objdefs appVersion="1.0.11">
+   <obj.normal id="tmpdial" uuid="5046510f-c2b9-4b8b-81f0-0fd3235132ea">
+      <sDescription>positive constant value dial</sDescription>
+      <author>Johannes Taelman</author>
+      <license>BSD</license>
+      <helpPatch>ctrl.axh</helpPatch>
+      <inlets/>
+      <outlets>
+         <frac32.positive name="out" description="output"/>
+      </outlets>
+      <displays/>
+      <params>
+         <frac32.u.map name="value" noLabel="true"/>
+      </params>
+      <attribs/>
+      <code.declaration><![CDATA[uint32_t previousValue = 0;]]></code.declaration>
+      <code.krate><![CDATA[if (param_value != previousValue)
+{
+	uint32_t small = (param_value + 1) >> (5*4);
+	uint32_t big = __SSAT(small << (5*4), 28);
+	LogTextMessage("%08x -> %02x -> %08x\n", param_value, small, big);
+	previousValue = param_value;
+}
+
+outlet_out= param_value;]]></code.krate>
+   </obj.normal>
+</objdefs>

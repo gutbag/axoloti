@@ -1,0 +1,168 @@
+<patch-1.0 appVersion="1.0.12">
+   <obj type="audio/in left" uuid="d40e60b7641fe75af4d7c91b45bb038aacafc52e" name="in_1" x="42" y="14">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="phi/switch/sw 2-1a" uuid="350b79179fa4cce3d231eaa45f23eefa9121cb3b" name="sw_1" x="630" y="14">
+      <params>
+         <bool32.tgl name="s" MidiCC="2" value="0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="audio/out left" uuid="b11a3c09b2fdd575ea8212f2ce7743d5269253b1" name="out_1" x="756" y="14">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="audio/inconfig l" uuid="7007d026acb7c3586f60a7f0898718d1ca7e0607" name="inconfig_1" x="14" y="84">
+      <params/>
+      <attribs>
+         <combo attributeName="gain" selection="0dB"/>
+         <combo attributeName="boost" selection="0dB"/>
+      </attribs>
+   </obj>
+   <obj type="phi/switch/sw 2-1a" uuid="350b79179fa4cce3d231eaa45f23eefa9121cb3b" name="sw_2" x="504" y="84">
+      <params>
+         <bool32.tgl name="s" MidiCC="3" value="1"/>
+      </params>
+      <attribs/>
+   </obj>
+   <comment type="patch/comment" x="700" y="84" text="CC2"/>
+   <obj type="audio/inconfig r" uuid="8468fe7907553f335959a7f69cbc5a1f7b5d4d1d" name="inconfig_2" x="14" y="154">
+      <params/>
+      <attribs>
+         <combo attributeName="gain" selection="0dB"/>
+         <combo attributeName="boost" selection="0dB"/>
+      </attribs>
+   </obj>
+   <comment type="patch/comment" x="574" y="154" text="CC3"/>
+   <comment type="patch/comment" x="658" y="238" text="CC1"/>
+   <obj type="sss/delay/KarplusStrong2" uuid="e0ae375a-c621-4865-94d5-dd136330a55c" name="KarplusStrong2_1" x="14" y="252">
+      <params>
+         <frac32.s.map name="pitch" value="12.0"/>
+         <frac32.u.map name="position" value="41.0"/>
+         <frac32.u.map name="tailtime" value="1.0"/>
+         <frac32.s.map name="color" value="6.0"/>
+         <frac32.u.map name="mode" value="32.0"/>
+         <frac32.u.map name="strength" value="36.0"/>
+         <frac32.s.map name="influence" value="40.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="mtyas/dist/StereoTriDistortion" uuid="d8055f2b-9be0-49bd-b64d-da5caff97e60" name="obj_1" x="168" y="252">
+      <params>
+         <frac32.u.map name="clean" value="9.5"/>
+         <frac32.u.map name="dist01in" value="60.5"/>
+         <frac32.u.map name="dist02in" value="48.5"/>
+         <frac32.u.map name="dist03in" value="47.0"/>
+         <frac32.u.map name="dist01out" value="24.0"/>
+         <frac32.u.map name="dist02out" value="12.0"/>
+         <frac32.u.map name="dist03out" value="2.0"/>
+         <frac32.u.map name="lp freq out" value="64.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="mymath/gainx4" uuid="62b1c1a6337c7c8f6eac96408a432477b113cfa1" name="dry gain_" x="336" y="252">
+      <params>
+         <frac32.u.map name="amp" value="34.5"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="sss/dyn/comp1" uuid="6e3788f7-0fbd-47b4-b6ae-ecdc52b04686" name="comp1_1" x="476" y="252">
+      <params>
+         <frac32.u.map name="tresh" value="4.5"/>
+         <frac32.u.map name="ratio" value="0.0"/>
+         <frac32.u.map name="attack" value="0.0"/>
+         <frac32.u.map name="decay" value="64.0"/>
+         <frac32.u.map name="gain" value="40.0"/>
+         <bool32.tgl name="limit" value="0"/>
+         <int32 name="extendA" value="0"/>
+         <int32 name="extendD" value="0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="stomps/distortion1" uuid="787f41ee-bc80-4224-a5a5-92231817a883" name="obj_3" x="588" y="252">
+      <params>
+         <frac32.u.map name="gain_1" MidiCC="1" value="63.99999952316284"/>
+         <frac32.u.map name="*c_1" value="43.0"/>
+         <int32 name="eq:lowmid" value="0"/>
+         <int32 name="eq:mid" value="0"/>
+         <int32 name="eq:highmid" value="0"/>
+         <int32 name="eq:high" value="0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="delay/echo fdbk mix" uuid="15716b14ebe691010ccfd54af72ea23232a843c6" name="echo_1" x="714" y="252">
+      <params>
+         <frac32.u.map name="mix" value="60.0"/>
+         <frac32.u.map name="feedback" value="40.0"/>
+      </params>
+      <attribs>
+         <spinner attributeName="delaylength" value="5000"/>
+      </attribs>
+   </obj>
+   <obj type="mymath/gainx4" uuid="62b1c1a6337c7c8f6eac96408a432477b113cfa1" name="dry gain__" x="840" y="252">
+      <params>
+         <frac32.u.map name="amp" value="34.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <nets>
+      <net>
+         <source obj="in_1" outlet="wave"/>
+         <dest obj="sw_1" inlet="i1"/>
+         <dest obj="KarplusStrong2_1" inlet="in"/>
+         <dest obj="comp1_1" inlet="in"/>
+      </net>
+      <net>
+         <source obj="KarplusStrong2_1" outlet="out"/>
+         <dest obj="obj_1" inlet="inLeft"/>
+      </net>
+      <net>
+         <source obj="sw_1" outlet="o"/>
+         <dest obj="out_1" inlet="wave"/>
+      </net>
+      <net>
+         <source obj="obj_1" outlet="outLeft"/>
+         <dest obj="dry gain_" inlet="in"/>
+      </net>
+      <net>
+         <source obj="dry gain_" outlet="out"/>
+         <dest obj="sw_2" inlet="i1"/>
+      </net>
+      <net>
+         <source obj="sw_2" outlet="o"/>
+         <dest obj="sw_1" inlet="i2"/>
+      </net>
+      <net>
+         <source obj="comp1_1" outlet="out"/>
+         <dest obj="obj_3" inlet="in"/>
+      </net>
+      <net>
+         <source obj="obj_3" outlet="out"/>
+         <dest obj="echo_1" inlet="in"/>
+      </net>
+      <net>
+         <source obj="echo_1" outlet="out"/>
+         <dest obj="dry gain__" inlet="in"/>
+      </net>
+      <net>
+         <source obj="dry gain__" outlet="out"/>
+         <dest obj="sw_2" inlet="i2"/>
+      </net>
+   </nets>
+   <settings>
+      <subpatchmode>no</subpatchmode>
+      <MidiChannel>2</MidiChannel>
+      <NPresets>8</NPresets>
+      <NPresetEntries>32</NPresetEntries>
+      <NModulationSources>8</NModulationSources>
+      <NModulationTargetsPerSource>8</NModulationTargetsPerSource>
+   </settings>
+   <notes><![CDATA[]]></notes>
+   <windowPos>
+      <x>311</x>
+      <y>62</y>
+      <width>1044</width>
+      <height>745</height>
+   </windowPos>
+</patch-1.0>

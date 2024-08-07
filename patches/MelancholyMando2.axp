@@ -1,0 +1,759 @@
+<patch-1.0 appVersion="1.0.12">
+   <obj type="audio/in left" uuid="d40e60b7641fe75af4d7c91b45bb038aacafc52e" name="in_1" x="14" y="14">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="midi/in/cc" uuid="6096d217701cbdf251a9ab6ba029af78c5722a56" name="cc_1" x="168" y="14">
+      <params/>
+      <attribs>
+         <spinner attributeName="cc" value="1"/>
+         <spinner attributeName="default" value="0"/>
+      </attribs>
+   </obj>
+   <obj type="audio/out left" uuid="b11a3c09b2fdd575ea8212f2ce7743d5269253b1" name="out_1" x="1148" y="14">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="mix/xfade" uuid="375dc91d218e96cdc9cbc7e92adb48f705ef701a" name="xfade_1" x="308" y="28">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="mix/mix 3 g" uuid="efc0bdb8ca0ec2184330951eff5203ff487e35a9" name="mix_1" x="700" y="42">
+      <params>
+         <frac32.u.map name="gain1" value="32.0"/>
+         <frac32.u.map name="gain2" value="32.0"/>
+         <frac32.u.map name="gain3" value="32.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="const/i" uuid="e202f44b2df17ae0b3e663b98ea6b14c8ff00408" name="i_2" x="854" y="84">
+      <params/>
+      <attribs>
+         <spinner attributeName="value" value="7"/>
+      </attribs>
+   </obj>
+   <obj type="phi/switch/sw 1-2a" uuid="bfa6e308f048eeeaed619ff9eeeb5d98ef0485aa" name="sw_1" x="14" y="112">
+      <params>
+         <bool32.tgl name="s" MidiCC="3" value="1"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="fx/lmnts/reverb" uuid="8027561C-A0B5-4DF8-A10E-3ED1274F2980" name="reverb" x="154" y="112">
+      <params>
+         <frac32.u.map name="amount" value="13.5"/>
+         <frac32.u.map name="time" value="43.0"/>
+         <frac32.u.map name="diffusion" value="42.5"/>
+         <frac32.u.map name="gain" value="34.0"/>
+         <frac32.u.map name="lowpass" value="43.5"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="stomps/distortion1" uuid="ab744564-f2ee-4da4-9b41-35cb3acd2257" name="obj_1" x="308" y="112">
+      <params>
+         <frac32.u.map name="gain_1" value="2.5"/>
+         <frac32.u.map name="*c_1" value="64.0"/>
+         <int32 name="eq:lowmid" value="0"/>
+         <int32 name="eq:mid" value="0"/>
+         <int32 name="eq:highmid" value="0"/>
+         <int32 name="eq:high" value="0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <patchobj type="patch/object" uuid="8d5c7b15-c493-47b2-a89b-5115995cd009" name="hp_2" x="420" y="112">
+      <params>
+         <frac32.s.map name="pitch" value="17.0"/>
+         <frac32.u.map name="reso" value="27.0"/>
+      </params>
+      <attribs/>
+      <object id="patch/object" uuid="8d5c7b15-c493-47b2-a89b-5115995cd009">
+         <sDescription>Highpass filter, state-variable type. Modified here to allow control of pitch. The original pitch control is ignored.</sDescription>
+         <author>Johannes Taelman (modded by me)</author>
+         <license>BSD</license>
+         <helpPatch>filter.axh</helpPatch>
+         <inlets>
+            <frac32buffer name="in" description="filter input"/>
+            <frac32.positive name="pitch"/>
+         </inlets>
+         <outlets>
+            <frac32buffer name="out" description="filter output"/>
+         </outlets>
+         <displays/>
+         <params>
+            <frac32.s.map.pitch name="pitch"/>
+            <frac32.u.map.filterq name="reso"/>
+         </params>
+         <attribs/>
+         <includes/>
+         <code.declaration><![CDATA[int32_t low;
+int32_t band;
+]]></code.declaration>
+         <code.init><![CDATA[low = 0;
+band = 0;
+]]></code.init>
+         <code.krate><![CDATA[int32_t damp = (0x80<<24) - (param_reso<<4);
+damp = ___SMMUL(damp,damp);
+int32_t alpha;
+int32_t freq;
+//MTOFEXTENDED(param_pitch,alpha);
+MTOFEXTENDED(inlet_pitch,alpha);
+SINE2TINTERP(alpha,freq);]]></code.krate>
+         <code.srate><![CDATA[int32_t in1 = inlet_in;
+int32_t notch = inlet_in - (___SMMUL(damp,band)<<1);
+low = low + (___SMMUL(freq,band)<<1);
+int32_t high  = notch - low;
+band = (___SMMUL(freq,high)<<1) + band;// - drive*band*band*band;
+int32_t out1 = high;
+outlet_out = out1;
+]]></code.srate>
+      </object>
+   </patchobj>
+   <obj type="phi/switch/sw 1a" uuid="74dcf08b98e53dd77a1282e04d70256421da31c3" name="sw_2" x="518" y="112">
+      <params>
+         <bool32.tgl name="b" MidiCC="2" value="1"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="const/i" uuid="e202f44b2df17ae0b3e663b98ea6b14c8ff00408" name="i_1" x="854" y="140">
+      <params/>
+      <attribs>
+         <spinner attributeName="value" value="32"/>
+      </attribs>
+   </obj>
+   <comment type="patch/comment" x="14" y="210" text="CC1: Reverb blend"/>
+   <comment type="patch/comment" x="14" y="224" text="CC2: filter on/off"/>
+   <comment type="patch/comment" x="14" y="238" text="CC3: Looper"/>
+   <patchobj type="patch/object" uuid="a3bd34a0-a820-4ca4-a282-a3a59e12e58c" name="Chunker_1" x="686" y="294">
+      <params/>
+      <attribs/>
+      <object id="patch/object" uuid="a3bd34a0-a820-4ca4-a282-a3a59e12e58c">
+         <sDescription>Looper that records n bars then plays back subsections out of sequence.</sDescription>
+         <author>Mark Lamb</author>
+         <license>BSD</license>
+         <inlets>
+            <frac32buffer name="in" description="wave input"/>
+            <bool32.rising name="trigger"/>
+            <bool32.rising name="reset"/>
+            <int32.positive name="type"/>
+            <int32.positive name="numChunks"/>
+         </inlets>
+         <outlets>
+            <frac32buffer name="out"/>
+            <bool32 name="recording"/>
+            <bool32 name="playing"/>
+         </outlets>
+         <displays>
+            <bool32 name="reset"/>
+            <bool32 name="recording"/>
+            <bool32 name="playing"/>
+         </displays>
+         <params/>
+         <attribs/>
+         <includes/>
+         <code.declaration><![CDATA[static const uint32_t BPM = 140;
+static const uint32_t BARS = 16;
+static const uint32_t BEATS_TO_BAR = 4;
+static const uint32_t BEATS = BARS * BEATS_TO_BAR;
+static constexpr double SAMPLE_PERIOD = 1.0 / 48000.0;
+static const uint32_t SAMPLE_ARRAY_LENGTH = ((60.0 / BPM) * BEATS) / SAMPLE_PERIOD;
+
+int32_t* sampleArray;
+uint32_t sampleWriteIndex;
+
+typedef enum {INIT, RESET, RECORDING, PLAYING} State;
+State state;
+
+typedef enum {NONE, START_RECORDING, STOP, CLEAR} Event;
+Event event;
+
+struct Chunk
+{
+    uint32_t startIndex;
+    uint32_t endIndex; // inclusive, always higher than startIndex
+    bool forward; // false for reverse
+};
+
+static const uint32_t MAX_CHUNKS = 64;
+Chunk chunks[MAX_CHUNKS];
+uint32_t chunkIndexes[MAX_CHUNKS];
+
+// the actual chunk settings used
+uint32_t numChunksSelected;
+uint32_t chunkLengthSelected;
+
+// playback variables
+uint32_t currentChunkIndex;
+uint32_t currentSampleIndex;
+
+uint32_t reorderType;
+
+/**
+ * Sets all sample values to 0.
+ */
+void clearSampleArray()
+{
+	for (int i=0; i<SAMPLE_ARRAY_LENGTH; i++)
+		sampleArray[i] = 0;
+}
+
+/**
+ * Setup the chunks with their start and end indexes, given the chunk settings.
+ */
+void populateChunks(const uint32_t numChunks, const uint32_t chunkLength)
+{
+    uint32_t index = 0;
+
+    for (uint32_t chunkIndex=0; chunkIndex<numChunks; chunkIndex++)
+    {
+        chunks[chunkIndex].startIndex = index;
+        chunks[chunkIndex].endIndex = index + chunkLength - 1;
+        index += chunkLength;
+    }
+}
+
+/**
+ * Create the chunk index array depending on the type
+ */
+void reorderChunks(const uint32_t numChunks, const uint32_t type)
+{
+	switch (type)
+	{
+	case 1: // each chunk in order, every other one reversed.
+		for (uint32_t chunkIndex=0; chunkIndex<numChunks; chunkIndex++)
+		{
+		   chunkIndexes[chunkIndex] = chunkIndex;
+		   chunks[chunkIndex].forward = (chunkIndex % 2 == 0); // reverse every other chunk (TODO - depends on selected mode)
+		}
+	break;
+	case 2: // chunks in order but randomly reversed
+		for (uint32_t chunkIndex=0; chunkIndex<numChunks; chunkIndex++)
+		{
+		   chunkIndexes[chunkIndex] = chunkIndex;
+		   chunks[chunkIndex].forward = (rand() < RAND_MAX/2);
+		}
+	break;
+	case 3: // chunks in reverse order but played forward
+		for (uint32_t chunkIndex=0; chunkIndex<numChunks; chunkIndex++)
+		{
+		   chunkIndexes[chunkIndex] = (numChunks - chunkIndex) - 1;
+		   chunks[chunkIndex].forward = true;
+		}
+	break;
+	case 4: // chunks in reverse order but randomly reversed
+		for (uint32_t chunkIndex=0; chunkIndex<numChunks; chunkIndex++)
+		{
+		   chunkIndexes[chunkIndex] = (numChunks - chunkIndex) - 1;
+		   chunks[chunkIndex].forward = (rand() < RAND_MAX/2);
+		}
+	break;
+	case 5: // chunks in random order and randomly reversed
+	{
+		uint32_t tmpChunkIndexes[MAX_CHUNKS];
+		for (uint32_t chunkIndex=0; chunkIndex<numChunks; chunkIndex++)
+		   tmpChunkIndexes[chunkIndex] = chunkIndex;
+
+		uint32_t tmpChunksLeft = numChunks;
+		uint32_t chunkIndex = 0;
+		uint32_t forwardCount = 0;
+		uint32_t reverseCount = 0;
+		while (tmpChunksLeft > 0)
+		{
+			// choose an index from the ones left
+			uint32_t randChunkIndex = tmpChunksLeft > 1 ? rand() % (tmpChunksLeft - 1) : 0;
+			// store it
+			chunkIndexes[chunkIndex] = tmpChunkIndexes[randChunkIndex];
+			chunks[chunkIndex].forward = (rand() < RAND_MAX/2);
+			if (chunks[chunkIndex].forward)
+			{
+				reverseCount = 0;
+				forwardCount++;
+				if (forwardCount >= 2)
+				{
+					chunks[chunkIndex].forward = false;
+					forwardCount = 0;
+				}
+			}
+			else
+			{
+				forwardCount = 0;
+				reverseCount++;
+				if (reverseCount >= 2)
+				{
+					chunks[chunkIndex].forward = true;
+					reverseCount = 0;
+				}
+			}
+			// shuffle the indexes above down one
+			for (uint32_t i=randChunkIndex; i<tmpChunksLeft; i++)
+				tmpChunkIndexes[i] = tmpChunkIndexes[i+1]; // doesn't matter if we go off the end
+			tmpChunksLeft--;
+			chunkIndex++;
+		}
+	}
+	break;
+	case 6: // chunks in random order but all played forward
+	{
+		uint32_t tmpChunkIndexes[MAX_CHUNKS];
+		for (uint32_t chunkIndex=0; chunkIndex<numChunks; chunkIndex++)
+		   tmpChunkIndexes[chunkIndex] = chunkIndex;
+
+		uint32_t tmpChunksLeft = numChunks;
+		uint32_t chunkIndex = 0;
+		while (tmpChunksLeft > 0)
+		{
+			// choose an index from the ones left
+			uint32_t randChunkIndex = tmpChunksLeft > 1 ? rand() % (tmpChunksLeft - 1) : 0;
+			// store it
+			chunkIndexes[chunkIndex] = tmpChunkIndexes[randChunkIndex];
+			chunks[chunkIndex].forward = true;
+			// shuffle the indexes above down one
+			for (uint32_t i=randChunkIndex; i<tmpChunksLeft; i++)
+				tmpChunkIndexes[i] = tmpChunkIndexes[i+1]; // doesn't matter if we go off the end
+			tmpChunksLeft--;
+			chunkIndex++;
+		}
+	}
+	break;
+	case 7: // chunks in order but all reversed
+		for (uint32_t chunkIndex=0; chunkIndex<numChunks; chunkIndex++)
+		{
+		   chunkIndexes[chunkIndex] = chunkIndex;
+		   chunks[chunkIndex].forward = false;
+		}
+	break;
+	default:
+	break;
+	}
+}
+
+/**
+ * Calculates and returns the sample value to be used, given the index and its 
+ * position within min/max, applying the appropriate fade value if necessary.
+ */
+int32_t calcSampleValue(const int32_t rawValue, const uint32_t index, const uint32_t minIndex, const uint32_t maxIndex)
+{
+	// 2147483632 is a gain of 1
+	static const uint32_t NUM_FADE_VALUES = 192;
+	static const uint32_t FADE_VALUES[NUM_FADE_VALUES] = {
+	0, 11184811, 22369621, 33554432, 44739242, 55924053, 67108864, 78293674, 89478485, 100663295, 111848106, 123032916, 134217727, 145402538, 156587348, 167772159, 
+	178956969, 190141780, 201326591, 212511401, 223696212, 234881022, 246065833, 257250643, 268435454, 279620265, 290805075, 301989886, 313174696, 324359507, 335544318, 
+	346729128, 357913939, 369098749, 380283560, 391468370, 402653181, 413837992, 425022802, 436207613, 447392423, 458577234, 469762045, 480946855, 492131666, 503316476, 
+	514501287, 525686097, 536870908, 548055719, 559240529, 570425340, 581610150, 592794961, 603979772, 615164582, 626349393, 637534203, 648719014, 659903824, 671088635, 
+	682273446, 693458256, 704643067, 715827877, 727012688, 738197499, 749382309, 760567120, 771751930, 782936741, 794121551, 805306362, 816491173, 827675983, 838860794, 
+	850045604, 861230415, 872415226, 883600036, 894784847, 905969657, 917154468, 928339278, 939524089, 950708900, 961893710, 973078521, 984263331, 995448142, 1006632953, 
+	1017817763, 1029002574, 1040187384, 1051372195, 1062557005, 1073741816, 1084926627, 1096111437, 1107296248, 1118481058, 1129665869, 1140850680, 1152035490, 1163220301, 
+	1174405111, 1185589922, 1196774732, 1207959543, 1219144354, 1230329164, 1241513975, 1252698785, 1263883596, 1275068407, 1286253217, 1297438028, 1308622838, 1319807649, 
+	1330992459, 1342177270, 1353362081, 1364546891, 1375731702, 1386916512, 1398101323, 1409286134, 1420470944, 1431655755, 1442840565, 1454025376, 1465210186, 1476394997, 
+	1487579808, 1498764618, 1509949429, 1521134239, 1532319050, 1543503861, 1554688671, 1565873482, 1577058292, 1588243103, 1599427913, 1610612724, 1621797535, 1632982345, 
+	1644167156, 1655351966, 1666536777, 1677721588, 1688906398, 1700091209, 1711276019, 1722460830, 1733645640, 1744830451, 1756015262, 1767200072, 1778384883, 1789569693, 
+	1800754504, 1811939315, 1823124125, 1834308936, 1845493746, 1856678557, 1867863367, 1879048178, 1890232989, 1901417799, 1912602610, 1923787420, 1934972231, 1946157042, 
+	1957341852, 1968526663, 1979711473, 1990896284, 2002081094, 2013265905, 2024450716, 2035635526, 2046820337, 2058005147, 2069189958, 2080374769, 2091559579, 2102744390, 
+	2113929200, 2125114011, 2136298821 };
+
+	if (index < minIndex + NUM_FADE_VALUES)
+		return __SSAT(___SMMUL(FADE_VALUES[index-minIndex],__SSAT(rawValue,28))<<1,28);
+	else if (index > maxIndex - NUM_FADE_VALUES)
+		return __SSAT(___SMMUL(FADE_VALUES[maxIndex-index],__SSAT(rawValue,28))<<1,28);
+	else
+		return rawValue;
+}]]></code.declaration>
+         <code.init><![CDATA[static int32_t _array[SAMPLE_ARRAY_LENGTH] __attribute__ ((section (".sdram")));
+sampleArray = &_array[0];
+
+clearSampleArray();
+
+sampleWriteIndex = 0;
+currentChunkIndex = 0;
+currentSampleIndex = 0;
+
+numChunksSelected = MAX_CHUNKS; // all of them for now
+chunkLengthSelected = SAMPLE_ARRAY_LENGTH/numChunksSelected; // simple for now
+
+reorderType = 5;
+
+state = INIT;
+event = NONE;
+
+LogTextMessage("Init 6\n");
+
+srand(0);
+
+//LogTextMessage("rand %d\n", rand() % 2);]]></code.init>
+         <code.krate><![CDATA[if (inlet_reset && state != RESET)
+{
+	//LogTextMessage("RESET\n");
+	event = CLEAR;
+}
+else if (inlet_trigger && state == RESET)
+{
+	//LogTextMessage("START_RECORDING\n");
+	event = START_RECORDING;
+}
+else if (inlet_trigger && (state == RECORDING || state == PLAYING))
+{
+	//LogTextMessage("STOP\n");
+	event = STOP;
+}]]></code.krate>
+         <code.srate><![CDATA[switch (state)
+{
+	case INIT: // entered only once on startup
+		state = RESET;
+	break;
+	case RESET: // wait to start recording
+		switch (event)
+		{
+			case START_RECORDING:
+				state = RECORDING;
+				sampleWriteIndex = 0;
+			break;
+			case STOP: // stop and clear handled together
+			case CLEAR:
+				// ignore
+			break;
+			case NONE:
+				outlet_out = 0; // no output
+			break;
+		}
+	break;
+	case RECORDING: // record until full then play
+		switch (event)
+		{
+			case START_RECORDING:
+				// ignore
+			break;
+			case STOP: // stop and clear handled together
+			case CLEAR:
+				state = RESET;
+				//clearArray();
+			break;
+			case NONE:
+				sampleArray[sampleWriteIndex] = inlet_in;
+				outlet_out = 0; // no output
+				++sampleWriteIndex;
+				if (sampleWriteIndex >= SAMPLE_ARRAY_LENGTH)
+				{
+					state = PLAYING; // go to this state directly
+
+					// init sample and chunk indexes etc.
+//					numChunksSelected = 6; // TODO: get from an input setting
+					if (inlet_numChunks > 0 && inlet_numChunks <= MAX_CHUNKS)
+						numChunksSelected = inlet_numChunks; // TODO: get from an input setting
+					else
+						numChunksSelected = inlet_numChunks;
+					chunkLengthSelected = SAMPLE_ARRAY_LENGTH/numChunksSelected; // TODO: get from an input setting
+					populateChunks(numChunksSelected, chunkLengthSelected);
+					if (inlet_type > 0 && inlet_type < 8)
+						reorderType = inlet_type;
+					else
+						reorderType = 5;
+					reorderChunks(numChunksSelected, reorderType);
+					currentChunkIndex = 0;
+					currentSampleIndex = chunks[chunkIndexes[currentChunkIndex]].forward ? chunks[chunkIndexes[currentChunkIndex]].startIndex : chunks[chunkIndexes[currentChunkIndex]].endIndex;
+//					LogTextMessage("starting playback chunk %u fwd %d start %u end %u sample %u\n",
+//						chunkIndexes[currentChunkIndex],
+//						chunks[chunkIndexes[currentChunkIndex]].forward,
+//						chunks[chunkIndexes[currentChunkIndex]].startIndex,
+//						chunks[chunkIndexes[currentChunkIndex]].endIndex,
+//						currentSampleIndex);
+				}
+			break;
+		}
+	break;
+	case PLAYING: // keep playing until stopped
+		switch (event)
+		{
+			case START_RECORDING:
+				// ignore
+			break;
+			case STOP: // stop and clear handled together
+			case CLEAR:
+				state = RESET;
+				outlet_playing = 0;
+			break;
+			case NONE:
+
+				// get current sample value, move to next one, check for end and repeat
+
+				outlet_out = calcSampleValue(sampleArray[currentSampleIndex], 
+			            currentSampleIndex, 
+			            chunks[chunkIndexes[currentChunkIndex]].startIndex, 
+			            chunks[chunkIndexes[currentChunkIndex]].endIndex);
+			
+				if (chunks[chunkIndexes[currentChunkIndex]].forward)
+				{
+				  currentSampleIndex++;
+				  if (currentSampleIndex > chunks[chunkIndexes[currentChunkIndex]].endIndex) // finished this chunk
+				  {
+				      LogTextMessage("Finished forward chunk %u\n", chunkIndexes[currentChunkIndex]);
+				      currentChunkIndex++;
+				      if (currentChunkIndex >= numChunksSelected)
+				      {
+				      	reorderChunks(numChunksSelected, reorderType);
+				          currentChunkIndex = 0;
+				      }
+				      currentSampleIndex = chunks[chunkIndexes[currentChunkIndex]].forward ? chunks[chunkIndexes[currentChunkIndex]].startIndex : chunks[chunkIndexes[currentChunkIndex]].endIndex;
+				  }
+				}
+				else // reverse
+				{
+				  currentSampleIndex--;
+				  if (currentSampleIndex < chunks[chunkIndexes[currentChunkIndex]].startIndex  // finished this chunk
+				  	|| currentSampleIndex >= SAMPLE_ARRAY_LENGTH) // decremented from 0 in first chunk
+				  {
+				      LogTextMessage("Finished reverse chunk %u\n", chunkIndexes[currentChunkIndex]);
+				      currentChunkIndex++;
+				      if (currentChunkIndex >= numChunksSelected)
+				      {
+				      	reorderChunks(numChunksSelected, reorderType);
+				          currentChunkIndex = 0;
+				      }
+				      currentSampleIndex = chunks[chunkIndexes[currentChunkIndex]].forward ? chunks[chunkIndexes[currentChunkIndex]].startIndex : chunks[chunkIndexes[currentChunkIndex]].endIndex;
+				  }
+				}
+			break;
+		}
+	break;
+}
+
+// consume the event
+event = NONE;
+
+// update the displays and output flags
+switch (state)
+{
+	case INIT: // shouldn't happen, we go straight to reset
+		outlet_recording = 0;
+		disp_recording = 0;
+		outlet_playing = 0;
+		disp_playing = 0;
+		disp_reset = 1;
+	break;
+	case RESET:
+		outlet_recording = 0;
+		disp_recording = 0;
+		outlet_playing = 0;
+		disp_playing = 0;
+		disp_reset = 1;
+	break;
+	case RECORDING:
+		outlet_recording = 1;
+		disp_recording = 1;
+		outlet_playing = 0;
+		disp_playing = 0;
+		disp_reset = 0;
+	break;
+	case PLAYING:
+		outlet_recording = 0;
+		disp_recording = 0;
+		outlet_playing = 1;
+		disp_playing = 1;
+		disp_reset = 0;
+	break;
+}]]></code.srate>
+      </object>
+   </patchobj>
+   <comment type="patch/comment" x="280" y="322" text="Modulate HPF pitch"/>
+   <comment type="patch/comment" x="280" y="336" text="LFO"/>
+   <comment type="patch/comment" x="378" y="336" text="Attenuate"/>
+   <comment type="patch/comment" x="476" y="336" text="Offset"/>
+   <obj type="lfo/sine" uuid="75f7330c26a13953215dccc3b7b9008545c9daa9" name="sine_1" x="280" y="350">
+      <params>
+         <frac32.s.map name="pitch" value="-40.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="math/*c" uuid="7d5ef61c3bcd571ee6bbd8437ef3612125dfb225" name="*c_1" x="378" y="350">
+      <params>
+         <frac32.u.map name="amp" value="4.5"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="math/+" uuid="44553fdc8628c67ab535845ed1be304ad6c9553b" name="+_1" x="476" y="350">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="disp/chart p" uuid="58f42040a894006a5f73ed8cb8d0bd45481b28cd" name="chart_1" x="546" y="350">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="ctrl/dial b" uuid="862e7d7f29093cb1ce4aed72244d118ad4d46692" name="dial_1" x="406" y="434">
+      <params>
+         <frac32.s.map name="value" value="11.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <comment type="patch/comment" x="672" y="532" text="CC4."/>
+   <comment type="patch/comment" x="14" y="546" text="Startup delay to lock out triggers on patch change. LED on until done."/>
+   <comment type="patch/comment" x="392" y="546" text="Red LED on during startup and when looping."/>
+   <obj type="midi/in/cc i" uuid="614eb76edef2b43632fa1fcda25aab54f821daf6" name="cc_4" x="672" y="546">
+      <params/>
+      <attribs>
+         <spinner attributeName="cc" value="3"/>
+         <spinner attributeName="default" value="0"/>
+      </attribs>
+   </obj>
+   <obj type="const/i" uuid="e202f44b2df17ae0b3e663b98ea6b14c8ff00408" name="i_3" x="14" y="560">
+      <params/>
+      <attribs>
+         <spinner attributeName="value" value="1"/>
+      </attribs>
+   </obj>
+   <obj type="timer/delayedpulse" uuid="3f05ee534ca67755fb20c7437f9e4de3d4c2f73d" name="delayedpulse_2" x="98" y="560">
+      <params>
+         <frac32.s.map name="delay" value="54.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="logic/flipflop" uuid="f9b15363f5ee203152e062c08a8846f0074b0ea5" name="flipflop_1" x="210" y="560">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="logic/inv" uuid="2bd44b865d3b63ff9b80862242bf5be779e3ad5" name="inv_1" x="294" y="560">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="phi/logic/or 4" uuid="5dc5a7c1fb7809522171638f755fead71cbe14ea" name="or_2" x="392" y="560">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="gpio/out/led2" uuid="3d7a4c75d1f9901181a17ba5de752782de911803" name="led2_2" x="476" y="560">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="logic/and 2" uuid="c67031682f552aa0a80b23377495c51ea28a8c9c" name="and_7" x="784" y="560">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="audio/inconfig l" uuid="7007d026acb7c3586f60a7f0898718d1ca7e0607" name="inconfig_1" x="14" y="700">
+      <params/>
+      <attribs>
+         <combo attributeName="gain" selection="9dB"/>
+         <combo attributeName="boost" selection="0dB"/>
+      </attribs>
+   </obj>
+   <obj type="audio/inconfig r" uuid="8468fe7907553f335959a7f69cbc5a1f7b5d4d1d" name="inconfig_2" x="126" y="700">
+      <params/>
+      <attribs>
+         <combo attributeName="gain" selection="0dB"/>
+         <combo attributeName="boost" selection="0dB"/>
+      </attribs>
+   </obj>
+   <nets>
+      <net>
+         <source obj="obj_1" outlet="out"/>
+         <dest obj="hp_2" inlet="in"/>
+      </net>
+      <net>
+         <source obj="in_1" outlet="wave"/>
+         <dest obj="sw_1" inlet="i1"/>
+         <dest obj="obj_1" inlet="in"/>
+         <dest obj="xfade_1" inlet="i1"/>
+         <dest obj="reverb" inlet="l"/>
+      </net>
+      <net>
+         <source obj="hp_2" outlet="out"/>
+         <dest obj="sw_2" inlet="i1"/>
+      </net>
+      <net>
+         <source obj="sw_2" outlet="o"/>
+         <dest obj="mix_1" inlet="in3"/>
+         <dest obj="Chunker_1" inlet="in"/>
+      </net>
+      <net>
+         <source obj="sine_1" outlet="wave"/>
+         <dest obj="*c_1" inlet="in"/>
+      </net>
+      <net>
+         <source obj="+_1" outlet="out"/>
+         <dest obj="chart_1" inlet="in"/>
+         <dest obj="hp_2" inlet="pitch"/>
+      </net>
+      <net>
+         <source obj="dial_1" outlet="out"/>
+         <dest obj="+_1" inlet="in2"/>
+      </net>
+      <net>
+         <source obj="*c_1" outlet="out"/>
+         <dest obj="+_1" inlet="in1"/>
+      </net>
+      <net>
+         <source obj="i_3" outlet="out"/>
+         <dest obj="delayedpulse_2" inlet="trig"/>
+      </net>
+      <net>
+         <source obj="delayedpulse_2" outlet="pulse"/>
+         <dest obj="flipflop_1" inlet="set"/>
+      </net>
+      <net>
+         <source obj="flipflop_1" outlet="o"/>
+         <dest obj="inv_1" inlet="i"/>
+         <dest obj="and_7" inlet="i2"/>
+      </net>
+      <net>
+         <source obj="inv_1" outlet="o"/>
+         <dest obj="or_2" inlet="i1"/>
+      </net>
+      <net>
+         <source obj="or_2" outlet="o"/>
+         <dest obj="led2_2" inlet="in"/>
+      </net>
+      <net>
+         <source obj="cc_4" outlet="trig"/>
+         <dest obj="and_7" inlet="i1"/>
+      </net>
+      <net>
+         <source obj="and_7" outlet="o"/>
+         <dest obj="Chunker_1" inlet="trigger"/>
+      </net>
+      <net>
+         <source obj="Chunker_1" outlet="recording"/>
+         <dest obj="or_2" inlet="i2"/>
+      </net>
+      <net>
+         <source obj="Chunker_1" outlet="playing"/>
+         <dest obj="or_2" inlet="i3"/>
+      </net>
+      <net>
+         <source obj="i_2" outlet="out"/>
+         <dest obj="Chunker_1" inlet="type"/>
+      </net>
+      <net>
+         <source obj="i_1" outlet="out"/>
+         <dest obj="Chunker_1" inlet="numChunks"/>
+      </net>
+      <net>
+         <source obj="mix_1" outlet="out"/>
+         <dest obj="out_1" inlet="wave"/>
+      </net>
+      <net>
+         <source obj="reverb" outlet="l"/>
+         <dest obj="xfade_1" inlet="i2"/>
+      </net>
+      <net>
+         <source obj="xfade_1" outlet="o"/>
+         <dest obj="mix_1" inlet="in1"/>
+      </net>
+      <net>
+         <source obj="cc_1" outlet="midiCC"/>
+         <dest obj="xfade_1" inlet="c"/>
+      </net>
+      <net>
+         <source obj="Chunker_1" outlet="out"/>
+         <dest obj="mix_1" inlet="in2"/>
+      </net>
+   </nets>
+   <settings>
+      <subpatchmode>no</subpatchmode>
+      <MidiChannel>2</MidiChannel>
+      <NPresets>8</NPresets>
+      <NPresetEntries>32</NPresetEntries>
+      <NModulationSources>8</NModulationSources>
+      <NModulationTargetsPerSource>8</NModulationTargetsPerSource>
+   </settings>
+   <notes><![CDATA[]]></notes>
+   <windowPos>
+      <x>178</x>
+      <y>63</y>
+      <width>1280</width>
+      <height>918</height>
+   </windowPos>
+</patch-1.0>
