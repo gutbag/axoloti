@@ -10,9 +10,9 @@
       </params>
       <attribs/>
    </obj>
-   <obj type="mymath/gainx2" uuid="62b1c1a6337c7c8f6eac96408a432477b113cfa0" name="gainx2_1" x="602" y="14">
+   <obj type="mymath/gainx4" uuid="62b1c1a6337c7c8f6eac96408a432477b113cfa1" name="gainx4_1" x="602" y="14">
       <params>
-         <frac32.u.map name="amp" MidiCC="2" value="37.5"/>
+         <frac32.u.map name="amp" MidiCC="2" value="14.0"/>
       </params>
       <attribs/>
    </obj>
@@ -23,7 +23,7 @@
    <comment type="patch/comment" x="224" y="98" text="150 BPM 4-beat delay"/>
    <obj type="phi/switch/sw 1a" uuid="74dcf08b98e53dd77a1282e04d70256421da31c3" name="sw_1" x="98" y="112">
       <params>
-         <bool32.tgl name="b" MidiCC="4" value="1"/>
+         <bool32.tgl name="b" MidiCC="4" value="0"/>
       </params>
       <attribs/>
    </obj>
@@ -45,6 +45,12 @@
          <combo attributeName="boost" selection="0dB"/>
       </attribs>
    </obj>
+   <obj type="mymath/gainx2" uuid="62b1c1a6337c7c8f6eac96408a432477b113cfa0" name="gainx2_1" x="644" y="266">
+      <params>
+         <frac32.u.map name="amp" MidiCC="2" value="37.5"/>
+      </params>
+      <attribs/>
+   </obj>
    <obj type="audio/inconfig r" uuid="8468fe7907553f335959a7f69cbc5a1f7b5d4d1d" name="inconfig_2" x="14" y="280">
       <params/>
       <attribs>
@@ -63,7 +69,7 @@
    </obj>
    <obj type="phi/switch/sw 1b" uuid="503136152cb0180fdb535f96ca6d76ac58d7d080" name="sw_2" x="406" y="294">
       <params>
-         <bool32.tgl name="b" MidiCC="4" value="1"/>
+         <bool32.tgl name="b" MidiCC="4" value="0"/>
       </params>
       <attribs/>
    </obj>
@@ -78,10 +84,6 @@
          <source obj="in_1" outlet="wave"/>
          <dest obj="sw_1" inlet="i1"/>
          <dest obj="mix_1" inlet="in1"/>
-      </net>
-      <net>
-         <source obj="mix_1" outlet="out"/>
-         <dest obj="gainx2_1" inlet="in"/>
       </net>
       <net>
          <source obj="longdelay_1" outlet="out"/>
@@ -104,7 +106,11 @@
          <dest obj="longdelay_1" inlet="in"/>
       </net>
       <net>
-         <source obj="gainx2_1" outlet="out"/>
+         <source obj="mix_1" outlet="out"/>
+         <dest obj="gainx4_1" inlet="in"/>
+      </net>
+      <net>
+         <source obj="gainx4_1" outlet="out"/>
          <dest obj="out_1" inlet="wave"/>
       </net>
    </nets>
@@ -118,8 +124,8 @@
    </settings>
    <notes><![CDATA[]]></notes>
    <windowPos>
-      <x>262</x>
-      <y>101</y>
+      <x>358</x>
+      <y>111</y>
       <width>910</width>
       <height>461</height>
    </windowPos>
