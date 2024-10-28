@@ -1,0 +1,33 @@
+<objdefs appVersion="1.0.12">
+   <obj.normal id="1To2" uuid="83aba941-828a-4695-8ebb-ac8652dd2ab9">
+      <sDescription>Connects inlet_i1 to outlet o0 when sw is false, inlet inlet_i1 to outlet o1 when sw is true.</sDescription>
+      <author>Mark Lamb</author>
+      <license>BSD</license>
+      <helpPatch></helpPatch>
+      <inlets>
+         <frac32buffer name="i1" description="input 1"/>
+         <bool32 name="sw" description="low=o1, high=o2"/>
+      </inlets>
+      <outlets>
+         <frac32buffer name="o1" description="output 1"/>
+         <frac32buffer name="o2" description="output2"/>
+      </outlets>
+      <displays>
+         <bool32 name="sw" noLabel="true"/>
+      </displays>
+      <params/>
+      <attribs/>
+      <code.srate><![CDATA[if (inlet_sw) // output 2 enabled
+{
+	outlet_o1= 0;  
+	outlet_o2= inlet_i1;
+	disp_sw = 1;
+}
+else
+{
+	outlet_o1= inlet_i1;  
+	outlet_o2= 0;
+	disp_sw = 0;
+}]]></code.srate>
+   </obj.normal>
+</objdefs>

@@ -45,12 +45,6 @@
          <combo attributeName="boost" selection="0dB"/>
       </attribs>
    </obj>
-   <obj type="mymath/gainx2" uuid="62b1c1a6337c7c8f6eac96408a432477b113cfa0" name="gainx2_1" x="644" y="266">
-      <params>
-         <frac32.u.map name="amp" MidiCC="2" value="37.5"/>
-      </params>
-      <attribs/>
-   </obj>
    <obj type="audio/inconfig r" uuid="8468fe7907553f335959a7f69cbc5a1f7b5d4d1d" name="inconfig_2" x="14" y="280">
       <params/>
       <attribs>

@@ -1,0 +1,454 @@
+<patch-1.0 appVersion="1.0.12">
+   <obj type="audio/in left" uuid="d40e60b7641fe75af4d7c91b45bb038aacafc52e" name="in_1" x="14" y="14">
+      <params/>
+      <attribs/>
+   </obj>
+   <comment type="patch/comment" x="336" y="14" text="Route input to looper and delay while recording"/>
+   <comment type="patch/comment" x="616" y="14" text="CC4 enables fuzz/delay"/>
+   <obj type="mix/mix 3 g" uuid="efc0bdb8ca0ec2184330951eff5203ff487e35a9" name="mix_2" x="1036" y="14">
+      <params>
+         <frac32.u.map name="gain1" value="32.0"/>
+         <frac32.u.map name="gain2" value="32.0"/>
+         <frac32.u.map name="gain3" value="46.5"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="audio/out left" uuid="b11a3c09b2fdd575ea8212f2ce7743d5269253b1" name="out_1" x="1148" y="14">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="switches/1To2" uuid="83aba941-828a-4695-8ebb-ac8652dd2ab9" name="1To2_1" x="336" y="28">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="phi/switch/sw 1-2a" uuid="bfa6e308f048eeeaed619ff9eeeb5d98ef0485aa" name="sw_1" x="616" y="28">
+      <params>
+         <bool32.tgl name="s" MidiCC="4" value="1"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="mymath/gainx4" uuid="62b1c1a6337c7c8f6eac96408a432477b113cfa1" name="gainx4_1" x="1148" y="84">
+      <params>
+         <frac32.u.map name="amp" value="32.5"/>
+      </params>
+      <attribs/>
+   </obj>
+   <comment type="patch/comment" x="14" y="98" text="CC1 &gt; 70 resets loopers"/>
+   <obj type="midi/in/cc i" uuid="614eb76edef2b43632fa1fcda25aab54f821daf6" name="cc_3" x="14" y="112">
+      <params/>
+      <attribs>
+         <spinner attributeName="cc" value="1"/>
+         <spinner attributeName="default" value="0"/>
+      </attribs>
+   </obj>
+   <comment type="patch/comment" x="448" y="112" text="Fuzz with envelope"/>
+   <obj type="stomps/distortion1" uuid="e80272b1-355d-43f4-9e93-f62e2a0c9709" name="obj_1" x="448" y="126">
+      <params>
+         <frac32.u.map name="gain_1" value="64.0"/>
+         <frac32.u.map name="*c_1" value="64.0"/>
+         <int32 name="eq:lowmid" value="0"/>
+         <int32 name="eq:mid" value="0"/>
+         <int32 name="eq:highmid" value="0"/>
+         <int32 name="eq:high" value="0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="stomps/distortion1" uuid="e80272b1-355d-43f4-9e93-f62e2a0c9709" name="obj_2" x="560" y="126">
+      <params>
+         <frac32.u.map name="gain_1" value="64.0"/>
+         <frac32.u.map name="*c_1" value="64.0"/>
+         <int32 name="eq:lowmid" value="0"/>
+         <int32 name="eq:mid" value="0"/>
+         <int32 name="eq:highmid" value="0"/>
+         <int32 name="eq:high" value="0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="math/*c" uuid="7a66f52a9594e7e9eb31328ea725cb3641a80b55" name="*c_2" x="672" y="126">
+      <params>
+         <frac32.u.map name="amp" value="2.5"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="filter/lp m" uuid="1aa1bc51da479ed92429af700591f9d7b9f45f22" name="lp_1" x="770" y="126">
+      <params>
+         <frac32.s.map name="pitch" value="30.0"/>
+         <frac32.u.map name="reso" value="22.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="math/&gt;" uuid="a459588d6498caeb4daf3a07f9d5e9b4a657262f" name="&gt;_1" x="210" y="140">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="const/i" uuid="e202f44b2df17ae0b3e663b98ea6b14c8ff00408" name="i_2" x="112" y="154">
+      <params/>
+      <attribs>
+         <spinner attributeName="value" value="70"/>
+      </attribs>
+   </obj>
+   <comment type="patch/comment" x="14" y="224" text="MIDI triggers gated on after startup delay."/>
+   <comment type="patch/comment" x="14" y="238" text="CC3: set bar start."/>
+   <obj type="midi/in/cc i" uuid="614eb76edef2b43632fa1fcda25aab54f821daf6" name="cc_1" x="14" y="252">
+      <params/>
+      <attribs>
+         <spinner attributeName="cc" value="3"/>
+         <spinner attributeName="default" value="0"/>
+      </attribs>
+   </obj>
+   <obj type="logic/and 2" uuid="c67031682f552aa0a80b23377495c51ea28a8c9c" name="and_5" x="126" y="266">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="math/gain" uuid="62b1c1a6337c7c8f6aec96408a432477b113cfa0" name="gain_1" x="672" y="266">
+      <params>
+         <frac32.u.map name="amp" value="22.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="env/follower" uuid="356ce1d18ac6b51704833f94dac5dea823fb8223" name="follower_1" x="770" y="266">
+      <params/>
+      <attribs>
+         <combo attributeName="time" selection="42.6ms"/>
+      </attribs>
+   </obj>
+   <obj type="disp/chart p" uuid="58f42040a894006a5f73ed8cb8d0bd45481b28cd" name="chart_1" x="840" y="266">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="mix/xfade" uuid="375dc91d218e96cdc9cbc7e92adb48f705ef701a" name="xfade_1" x="1036" y="308">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="ctrl/dial p" uuid="cc5d2846c3d50e425f450c4b9851371b54f4d674" name="dial_1" x="966" y="336">
+      <params>
+         <frac32.u.map name="value" MidiCC="1" value="0.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <comment type="patch/comment" x="14" y="364" text="CC2: trig loop on bar start."/>
+   <obj type="midi/in/cc i" uuid="614eb76edef2b43632fa1fcda25aab54f821daf6" name="cc_4" x="14" y="378">
+      <params/>
+      <attribs>
+         <spinner attributeName="cc" value="2"/>
+         <spinner attributeName="default" value="0"/>
+      </attribs>
+   </obj>
+   <obj type="LoopTrigBarSynchroniser2" uuid="bdcdc843-3b08-4290-95ea-d2aa232ee77e" name="LoopTrigBarSynchroniser2_1" x="224" y="378">
+      <params/>
+      <attribs>
+         <spinner attributeName="BPM" value="119"/>
+         <spinner attributeName="BeatsToBar" value="5"/>
+         <combo attributeName="NoteValue" selection="8"/>
+      </attribs>
+   </obj>
+   <obj type="loopers/Basic" uuid="10d547b8-6155-4133-b4ff-400e59fd99e3" name="Basic_1" x="434" y="378">
+      <params/>
+      <attribs>
+         <spinner attributeName="BPM" value="119"/>
+         <spinner attributeName="BeatsToBar" value="5"/>
+         <combo attributeName="NoteValue" selection="8"/>
+         <spinner attributeName="Bars" value="8"/>
+      </attribs>
+   </obj>
+   <obj type="SRAMDelayMs" uuid="7652f21b-c075-4953-9046-03ad5518c200" name="SRAMDelayMs_1" x="574" y="378">
+      <params>
+         <frac32.u.map name="mix" value="17.0"/>
+         <frac32.u.map name="feedback" value="11.0"/>
+      </params>
+      <attribs>
+         <spinner attributeName="ms" value="2017"/>
+      </attribs>
+   </obj>
+   <obj type="logic/and 2" uuid="c67031682f552aa0a80b23377495c51ea28a8c9c" name="and_7" x="126" y="392">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="delay/echo fdbk mix" uuid="15716b14ebe691010ccfd54af72ea23232a843c6" name="echo_1" x="798" y="406">
+      <params>
+         <frac32.u.map name="mix" value="19.0"/>
+         <frac32.u.map name="feedback" value="24.5"/>
+      </params>
+      <attribs>
+         <spinner attributeName="delaylength" value="12754"/>
+      </attribs>
+   </obj>
+   <comment type="patch/comment" x="14" y="490" text="CC4: trig second loop."/>
+   <comment type="patch/comment" x="980" y="490" text="CC1: blends between direct/chorus chain and reverb/delay"/>
+   <obj type="midi/in/cc i" uuid="614eb76edef2b43632fa1fcda25aab54f821daf6" name="cc_2" x="14" y="504">
+      <params/>
+      <attribs>
+         <spinner attributeName="cc" value="4"/>
+         <spinner attributeName="default" value="0"/>
+      </attribs>
+   </obj>
+   <comment type="patch/comment" x="224" y="504" text="Flash green LED to indicate start of bar."/>
+   <obj type="logic/and 2" uuid="c67031682f552aa0a80b23377495c51ea28a8c9c" name="and_6" x="126" y="518">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="timer/pulselength" uuid="ca68725237d8ba8407773340801660a9fd9b0dba" name="pulselength_1" x="224" y="518">
+      <params>
+         <frac32.s.map name="delay" value="0.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="gpio/out/led1" uuid="c6679540460d64e2e71760e61cb82fac227e2764" name="led1_1" x="322" y="518">
+      <params/>
+      <attribs/>
+   </obj>
+   <comment type="patch/comment" x="14" y="658" text="Startup delay to lock out triggers on patch change. LED on until done."/>
+   <comment type="patch/comment" x="392" y="658" text="Red LED on during startup and when looping."/>
+   <obj type="const/i" uuid="e202f44b2df17ae0b3e663b98ea6b14c8ff00408" name="i_1" x="14" y="672">
+      <params/>
+      <attribs>
+         <spinner attributeName="value" value="1"/>
+      </attribs>
+   </obj>
+   <obj type="timer/delayedpulse" uuid="3f05ee534ca67755fb20c7437f9e4de3d4c2f73d" name="delayedpulse_1" x="98" y="672">
+      <params>
+         <frac32.s.map name="delay" value="54.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="logic/flipflop" uuid="f9b15363f5ee203152e062c08a8846f0074b0ea5" name="flipflop_1" x="210" y="672">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="logic/inv" uuid="2bd44b865d3b63ff9b80862242bf5be779e3ad5" name="inv_1" x="294" y="672">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="phi/logic/or 4" uuid="5dc5a7c1fb7809522171638f755fead71cbe14ea" name="or_2" x="392" y="672">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="phi/logic/or 4" uuid="5dc5a7c1fb7809522171638f755fead71cbe14ea" name="or_1" x="476" y="672">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="gpio/out/led2" uuid="3d7a4c75d1f9901181a17ba5de752782de911803" name="led2_2" x="560" y="672">
+      <params/>
+      <attribs/>
+   </obj>
+   <comment type="patch/comment" x="770" y="686" text="For testing"/>
+   <obj type="midi/out/cc" uuid="7ca9b2c1b4339022c491a8afd70353c17d765584" name="cc_5" x="854" y="700">
+      <params/>
+      <attribs>
+         <combo attributeName="device" selection="din"/>
+         <spinner attributeName="channel" value="2"/>
+         <spinner attributeName="cc" value="3"/>
+      </attribs>
+   </obj>
+   <obj type="midi/out/cc" uuid="7ca9b2c1b4339022c491a8afd70353c17d765584" name="cc_6" x="1078" y="700">
+      <params/>
+      <attribs>
+         <combo attributeName="device" selection="din"/>
+         <spinner attributeName="channel" value="2"/>
+         <spinner attributeName="cc" value="2"/>
+      </attribs>
+   </obj>
+   <obj type="button_pulse" uuid="41216e47-4fc5-40ab-af02-f07de5fbf547" name="button_pulse_2" x="770" y="714">
+      <params>
+         <bool32.mom name="b" value="0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="button_pulse" uuid="41216e47-4fc5-40ab-af02-f07de5fbf547" name="button_pulse_3" x="994" y="714">
+      <params>
+         <bool32.mom name="b" value="0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="audio/inconfig l" uuid="7007d026acb7c3586f60a7f0898718d1ca7e0607" name="inconfig_1" x="14" y="770">
+      <params/>
+      <attribs>
+         <combo attributeName="gain" selection="6dB"/>
+         <combo attributeName="boost" selection="0dB"/>
+      </attribs>
+   </obj>
+   <obj type="audio/inconfig r" uuid="8468fe7907553f335959a7f69cbc5a1f7b5d4d1d" name="inconfig_2" x="126" y="770">
+      <params/>
+      <attribs>
+         <combo attributeName="gain" selection="3dB"/>
+         <combo attributeName="boost" selection="0dB"/>
+      </attribs>
+   </obj>
+   <nets>
+      <net>
+         <source obj="cc_1" outlet="trig"/>
+         <dest obj="and_5" inlet="i1"/>
+      </net>
+      <net>
+         <source obj="i_1" outlet="out"/>
+         <dest obj="delayedpulse_1" inlet="trig"/>
+      </net>
+      <net>
+         <source obj="delayedpulse_1" outlet="pulse"/>
+         <dest obj="flipflop_1" inlet="set"/>
+      </net>
+      <net>
+         <source obj="flipflop_1" outlet="o"/>
+         <dest obj="inv_1" inlet="i"/>
+         <dest obj="and_6" inlet="i2"/>
+         <dest obj="and_5" inlet="i2"/>
+         <dest obj="and_7" inlet="i2"/>
+      </net>
+      <net>
+         <source obj="cc_2" outlet="trig"/>
+         <dest obj="and_6" inlet="i1"/>
+      </net>
+      <net>
+         <source obj="i_2" outlet="out"/>
+         <dest obj="&gt;_1" inlet="in2"/>
+      </net>
+      <net>
+         <source obj="cc_3" outlet="midiCC"/>
+         <dest obj="&gt;_1" inlet="in1"/>
+      </net>
+      <net>
+         <source obj="cc_4" outlet="trig"/>
+         <dest obj="and_7" inlet="i1"/>
+      </net>
+      <net>
+         <source obj="pulselength_1" outlet="pulse"/>
+         <dest obj="led1_1" inlet="in"/>
+      </net>
+      <net>
+         <source obj="button_pulse_2" outlet="o"/>
+         <dest obj="cc_5" inlet="trig"/>
+      </net>
+      <net>
+         <source obj="button_pulse_3" outlet="o"/>
+         <dest obj="cc_6" inlet="trig"/>
+      </net>
+      <net>
+         <source obj="or_1" outlet="o"/>
+         <dest obj="led2_2" inlet="in"/>
+      </net>
+      <net>
+         <source obj="or_2" outlet="o"/>
+         <dest obj="or_1" inlet="i1"/>
+      </net>
+      <net>
+         <source obj="inv_1" outlet="o"/>
+         <dest obj="or_2" inlet="i1"/>
+      </net>
+      <net>
+         <source obj="LoopTrigBarSynchroniser2_1" outlet="barstart"/>
+         <dest obj="pulselength_1" inlet="trig"/>
+      </net>
+      <net>
+         <source obj="and_5" outlet="o"/>
+         <dest obj="LoopTrigBarSynchroniser2_1" inlet="barstart"/>
+      </net>
+      <net>
+         <source obj="and_7" outlet="o"/>
+         <dest obj="LoopTrigBarSynchroniser2_1" inlet="armloop"/>
+      </net>
+      <net>
+         <source obj="LoopTrigBarSynchroniser2_1" outlet="loopstart"/>
+         <dest obj="Basic_1" inlet="trigger"/>
+      </net>
+      <net>
+         <source obj="Basic_1" outlet="recording"/>
+         <dest obj="or_2" inlet="i2"/>
+         <dest obj="1To2_1" inlet="sw"/>
+      </net>
+      <net>
+         <source obj="Basic_1" outlet="playing"/>
+         <dest obj="or_2" inlet="i3"/>
+      </net>
+      <net>
+         <source obj="Basic_1" outlet="out"/>
+         <dest obj="SRAMDelayMs_1" inlet="in"/>
+      </net>
+      <net>
+         <source obj="1To2_1" outlet="o2"/>
+         <dest obj="Basic_1" inlet="in"/>
+      </net>
+      <net>
+         <source obj="in_1" outlet="wave"/>
+         <dest obj="gain_1" inlet="in"/>
+         <dest obj="1To2_1" inlet="i1"/>
+      </net>
+      <net>
+         <source obj="follower_1" outlet="amp"/>
+         <dest obj="chart_1" inlet="in"/>
+         <dest obj="lp_1" inlet="reso"/>
+         <dest obj="lp_1" inlet="pitch"/>
+      </net>
+      <net>
+         <source obj="gain_1" outlet="out"/>
+         <dest obj="follower_1" inlet="in"/>
+      </net>
+      <net>
+         <source obj="obj_1" outlet="out"/>
+         <dest obj="obj_2" inlet="in"/>
+      </net>
+      <net>
+         <source obj="obj_2" outlet="out"/>
+         <dest obj="*c_2" inlet="in"/>
+      </net>
+      <net>
+         <source obj="*c_2" outlet="out"/>
+         <dest obj="lp_1" inlet="in"/>
+      </net>
+      <net>
+         <source obj="dial_1" outlet="out"/>
+         <dest obj="xfade_1" inlet="c"/>
+      </net>
+      <net>
+         <source obj="1To2_1" outlet="o1"/>
+         <dest obj="sw_1" inlet="i1"/>
+      </net>
+      <net>
+         <source obj="SRAMDelayMs_1" outlet="out"/>
+         <dest obj="mix_2" inlet="in2"/>
+      </net>
+      <net>
+         <source obj="xfade_1" outlet="o"/>
+         <dest obj="mix_2" inlet="in3"/>
+      </net>
+      <net>
+         <source obj="lp_1" outlet="out"/>
+         <dest obj="xfade_1" inlet="i1"/>
+      </net>
+      <net>
+         <source obj="echo_1" outlet="out"/>
+         <dest obj="xfade_1" inlet="i2"/>
+      </net>
+      <net>
+         <source obj="sw_1" outlet="o1"/>
+         <dest obj="obj_1" inlet="in"/>
+         <dest obj="echo_1" inlet="in"/>
+      </net>
+      <net>
+         <source obj="mix_2" outlet="out"/>
+         <dest obj="gainx4_1" inlet="in"/>
+      </net>
+      <net>
+         <source obj="gainx4_1" outlet="out"/>
+         <dest obj="out_1" inlet="wave"/>
+      </net>
+      <net>
+         <source obj="sw_1" outlet="o2"/>
+         <dest obj="mix_2" inlet="in1"/>
+      </net>
+   </nets>
+   <settings>
+      <subpatchmode>no</subpatchmode>
+      <MidiChannel>2</MidiChannel>
+      <NPresets>8</NPresets>
+      <NPresetEntries>32</NPresetEntries>
+      <NModulationSources>8</NModulationSources>
+      <NModulationTargetsPerSource>8</NModulationTargetsPerSource>
+   </settings>
+   <notes><![CDATA[]]></notes>
+   <windowPos>
+      <x>201</x>
+      <y>38</y>
+      <width>1280</width>
+      <height>932</height>
+   </windowPos>
+</patch-1.0>

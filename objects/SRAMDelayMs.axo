@@ -1,0 +1,52 @@
+<objdefs appVersion="1.0.12">
+   <obj.normal id="SRAMDelayMs" uuid="7652f21b-c075-4953-9046-03ad5518c200">
+      <sDescription>Audio delay with feedback and mix, fixed delay time specified in ms. Based on Johannes Taelman&apos;s original.</sDescription>
+      <author>Mark Lamb</author>
+      <license>BSD</license>
+      <inlets>
+         <frac32buffer name="in" description="input"/>
+         <frac32 name="mix" description="mix"/>
+         <frac32 name="feedback" description="feedback"/>
+      </inlets>
+      <outlets>
+         <frac32buffer name="out" description="output"/>
+      </outlets>
+      <displays/>
+      <params>
+         <frac32.u.map name="mix"/>
+         <frac32.u.map name="feedback"/>
+      </params>
+      <attribs>
+         <spinner name="ms" MinValue="1" MaxValue="20000" DefaultValue="500"/>
+      </attribs>
+      <code.declaration><![CDATA[uint32_t delaywindex;
+uint32_t delayrindex;
+
+static constexpr double S_PERIOD = 1.0 / 48000.0;
+
+static const uint32_t ARRAY_LENGTH = ((double)attr_ms/1000.0) / S_PERIOD;
+
+int32_t* delayline;]]></code.declaration>
+      <code.init><![CDATA[static int32_t _array[ARRAY_LENGTH] __attribute__ ((section (".sdram")));
+delayline = &_array[0];
+
+for(int i=0;i<ARRAY_LENGTH;i++)
+	delayline[i] = 0;
+	
+delaywindex = 0;
+delayrindex = 1;
+
+LogTextMessage("ARRAY_LENGTH=%u\n", ARRAY_LENGTH);]]></code.init>
+      <code.krate><![CDATA[int32_t _mix = param_mix + inlet_mix;
+int32_t _fdbk = param_feedback + inlet_feedback;]]></code.krate>
+      <code.srate><![CDATA[int32_t rd = delayline[delayrindex++];
+delayline[delaywindex++] = __SSAT((inlet_in>>15) + ___SMMUL(rd<<5,_fdbk),16);
+
+if (delayrindex == ARRAY_LENGTH)
+	delayrindex = 0;
+if (delaywindex == ARRAY_LENGTH)
+	delaywindex = 0;
+
+outlet_out = (inlet_in>>1) + (___SMMUL(rd<<16,_mix<<2));]]></code.srate>
+   </obj.normal>
+</objdefs>

@@ -1,0 +1,190 @@
+<objdefs appVersion="1.0.12">
+   <obj.normal id="Basic" uuid="10d547b8-6155-4133-b4ff-400e59fd99e3">
+      <sDescription>Records n bars then plays them repeatedly. No overdubbing.</sDescription>
+      <author>Mark Lamb</author>
+      <license>BSD</license>
+      <inlets>
+         <frac32buffer name="in" description="wave input"/>
+         <bool32.rising name="trigger"/>
+         <bool32.rising name="reset"/>
+      </inlets>
+      <outlets>
+         <frac32buffer name="out"/>
+         <bool32 name="recording"/>
+         <bool32 name="playing"/>
+      </outlets>
+      <displays>
+         <bool32 name="reset"/>
+         <bool32 name="recording"/>
+         <bool32 name="playing"/>
+      </displays>
+      <params/>
+      <attribs>
+         <spinner name="BPM" MinValue="30" MaxValue="120" DefaultValue="300"/>
+         <spinner name="BeatsToBar" MinValue="2" MaxValue="20" DefaultValue="4"/>
+         <combo name="NoteValue">
+            <MenuEntries>
+               <string>4</string>
+               <string>8</string>
+            </MenuEntries>
+            <CEntries>
+               <string>4</string>
+               <string>8</string>
+            </CEntries>
+         </combo>
+         <spinner name="Bars" MinValue="1" MaxValue="32" DefaultValue="8"/>
+      </attribs>
+      <code.declaration><![CDATA[static const uint32_t BPM = attr_BPM;
+static const uint32_t BEATS_TO_BAR = attr_BeatsToBar;
+static const uint32_t BARS = attr_Bars;
+static const uint32_t BEATS = BARS * BEATS_TO_BAR;
+static const uint32_t NOTE_VALUE = attr_NoteValue;
+static constexpr double S_PERIOD = 1.0 / 48000.0;
+
+static const uint32_t LENGTH = ((60.0 / BPM) * BEATS * (4.0/NOTE_VALUE)) / S_PERIOD;
+
+
+int32_t* array;
+uint32_t writepos;
+uint32_t readpos;
+
+typedef enum {INIT, RESET, RECORDING, PLAYING} State;
+State state;
+
+typedef enum {NONE, START_RECORDING, STOP, CLEAR} Event;
+Event event;
+
+void clearArray()
+{
+	for (int i=0; i<LENGTH; i++)
+		array[i] = 0;
+}]]></code.declaration>
+      <code.init><![CDATA[static int32_t _array[LENGTH] __attribute__ ((section (".sdram")));
+array = &_array[0];
+
+clearArray();
+
+writepos = 0;
+readpos = 0;
+
+state = INIT;
+event = NONE;
+
+LogTextMessage("Init BPM %u BEATS_TO_BAR %u BARS %u BEATS %u NOTE_VALUE %u LENGTH %u\n", 
+	BPM, BEATS_TO_BAR, BARS, BEATS, NOTE_VALUE, LENGTH);]]></code.init>
+      <code.krate><![CDATA[if (inlet_reset && state != RESET)
+{
+	//LogTextMessage("RESET\n");
+	event = CLEAR;
+}
+else if (inlet_trigger && state == RESET)
+{
+	//LogTextMessage("START_RECORDING\n");
+	event = START_RECORDING;
+}
+else if (inlet_trigger && (state == RECORDING || state == PLAYING))
+{
+	//LogTextMessage("STOP\n");
+	event = STOP;
+}]]></code.krate>
+      <code.srate><![CDATA[switch (state)
+{
+	case INIT: // entered only once on startup
+		state = RESET;
+	break;
+	case RESET: // wait to start recording. No output.
+		switch (event)
+		{
+			case START_RECORDING:
+				state = RECORDING;
+				writepos = 0;
+			break;
+			case STOP: // stop and clear handled together
+			case CLEAR:
+				// ignore
+			break;
+			case NONE:
+				outlet_out = 0; // no output
+			break;
+		}
+	break;
+	case RECORDING: // record until full then play. Input copied to output while recording.
+		switch (event)
+		{
+			case START_RECORDING:
+				// ignore
+			break;
+			case STOP: // stop and clear handled together
+			case CLEAR:
+				state = RESET;
+				//clearArray();
+			break;
+			case NONE:
+				array[writepos] = inlet_in;
+				outlet_out = inlet_in;
+				++writepos;
+				if (writepos >= LENGTH)
+				{
+					state = PLAYING; // go to this state directly
+					readpos = 0;
+				}
+			break;
+		}
+	break;
+	case PLAYING: // keep playing until stopped
+		switch (event)
+		{
+			case START_RECORDING:
+				// ignore
+			break;
+			case STOP: // stop and clear handled together
+			case CLEAR:
+				state = RESET;
+			break;
+			case NONE:
+				outlet_out = array[readpos];
+				++readpos;
+				if (readpos >= LENGTH) // for now, repeat loop forever
+					readpos = 0;
+			break;
+		}
+	break;
+}
+
+// consume the event
+event = NONE;
+
+// update the display and status outputs
+switch (state)
+{
+	case INIT:
+		outlet_recording = 0;
+		disp_recording = 0;
+		outlet_playing = 0;
+		disp_playing = 0;
+		disp_reset = 1;
+	break;
+	case RESET:
+		outlet_recording = 0;
+		disp_recording = 0;
+		outlet_playing = 0;
+		disp_playing = 0;
+		disp_reset = 1;
+	break;
+	case RECORDING:
+		outlet_recording = 1;
+		disp_recording = 1;
+		outlet_playing = 0;
+		disp_playing = 0;
+		disp_reset = 0;
+	break;
+	case PLAYING:
+		outlet_recording = 0;
+		disp_recording = 0;
+		outlet_playing = 1;
+		disp_playing = 1;
+		disp_reset = 0;
+	break;
+}]]></code.srate>
+   </obj.normal>
+</objdefs>

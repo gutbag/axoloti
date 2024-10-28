@@ -1,0 +1,79 @@
+<objdefs appVersion="1.0.12">
+   <obj.normal id="LoopTrigBarSynchroniser2" uuid="bdcdc843-3b08-4290-95ea-d2aa232ee77e">
+      <sDescription>Receives input triggers marking the start of a bar then issues a pulse for each bar start. Receives loop arm trigger and waits until next bar start to issue trigger. Based on the original fixed BPM Moagulum object made generic.</sDescription>
+      <author>Mark Lamb</author>
+      <license>BSD</license>
+      <inlets>
+         <bool32.rising name="barstart"/>
+         <bool32.rising name="armloop"/>
+      </inlets>
+      <outlets>
+         <bool32.pulse name="barstart" description="Start of bar pulse"/>
+         <bool32.pulse name="loopstart" description="Trigger loop"/>
+      </outlets>
+      <displays>
+         <bool32 name="loop_armed" description="Armed" noLabel="true"/>
+      </displays>
+      <params/>
+      <attribs>
+         <spinner name="BPM" MinValue="40" MaxValue="300" DefaultValue="120"/>
+         <spinner name="BeatsToBar" MinValue="2" MaxValue="20" DefaultValue="4"/>
+         <combo name="NoteValue">
+            <MenuEntries>
+               <string>4</string>
+               <string>8</string>
+            </MenuEntries>
+            <CEntries>
+               <string>4</string>
+               <string>8</string>
+            </CEntries>
+         </combo>
+      </attribs>
+      <code.declaration><![CDATA[static const uint32_t BPM = attr_BPM;
+static const uint32_t BEATS_TO_BAR = attr_BeatsToBar;
+static const uint32_t NOTE_VALUE = attr_NoteValue;
+static constexpr double NOTE_VALUE_DIVISOR = NOTE_VALUE / 4.0;
+static constexpr double K_PERIOD = 1.0 / 3000.0;
+static const uint32_t K_PERIODS_TO_BAR = (((((double)BEATS_TO_BAR/NOTE_VALUE_DIVISOR) * 60.0) / BPM)) / K_PERIOD;
+
+uint32_t kCount;
+bool loopArmed;]]></code.declaration>
+      <code.init><![CDATA[kCount = K_PERIODS_TO_BAR;
+loopArmed = 0;
+
+//LogTextMessage("BPM=%u, BeatsToBar=%u, NoteValue=%u, NOTE_VALUE_DIVISOR=%f\n", BPM, BEATS_TO_BAR, NOTE_VALUE, NOTE_VALUE_DIVISOR);]]></code.init>
+      <code.krate><![CDATA[if (inlet_barstart) // reset count to full bar from now
+{
+	kCount = K_PERIODS_TO_BAR;
+}
+
+if (inlet_armloop)
+{
+	loopArmed = 1;
+}
+
+disp_loop_armed = loopArmed;
+
+if (kCount == 0) // signal bar start
+{
+	outlet_barstart = 1;
+	kCount = K_PERIODS_TO_BAR;
+
+	if (loopArmed)
+	{
+		outlet_loopstart = 1;
+		loopArmed = 0;
+	}
+	else
+	{
+		outlet_loopstart = 0;
+	}
+}
+else // keep counting down
+{
+	--kCount;
+	outlet_barstart = 0;
+	outlet_loopstart = 0;
+}]]></code.krate>
+   </obj.normal>
+</objdefs>
