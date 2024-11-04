@@ -5,11 +5,12 @@
    </obj>
    <comment type="patch/comment" x="336" y="14" text="Route input to looper and delay while recording"/>
    <comment type="patch/comment" x="616" y="14" text="CC4 enables fuzz/delay"/>
-   <obj type="mix/mix 3 g" uuid="efc0bdb8ca0ec2184330951eff5203ff487e35a9" name="mix_1" x="1036" y="14">
+   <obj type="mix/mix 4 g" uuid="36f472cd81da2e17bd4b4ee11b53b4c82527220c" name="mix_2" x="1036" y="14">
       <params>
          <frac32.u.map name="gain1" value="32.0"/>
-         <frac32.u.map name="gain2" value="20.0"/>
-         <frac32.u.map name="gain3" value="48.0"/>
+         <frac32.u.map name="gain2" value="32.0"/>
+         <frac32.u.map name="gain3" value="21.0"/>
+         <frac32.u.map name="gain4" value="48.0"/>
       </params>
       <attribs/>
    </obj>
@@ -23,7 +24,7 @@
    </obj>
    <obj type="phi/switch/sw 1-2a" uuid="bfa6e308f048eeeaed619ff9eeeb5d98ef0485aa" name="sw_1" x="616" y="28">
       <params>
-         <bool32.tgl name="s" MidiCC="4" value="0"/>
+         <bool32.tgl name="s" MidiCC="4" value="1"/>
       </params>
       <attribs/>
    </obj>
@@ -33,7 +34,7 @@
       </params>
       <attribs/>
    </obj>
-   <comment type="patch/comment" x="14" y="98" text="CC1 &gt; 70 resets loopers"/>
+   <comment type="patch/comment" x="14" y="98" text="CC1 &gt; 70 resets looper"/>
    <obj type="midi/in/cc i" uuid="614eb76edef2b43632fa1fcda25aab54f821daf6" name="cc_3" x="14" y="112">
       <params/>
       <attribs>
@@ -122,7 +123,7 @@
    </obj>
    <obj type="ctrl/dial p" uuid="cc5d2846c3d50e425f450c4b9851371b54f4d674" name="dial_1" x="966" y="336">
       <params>
-         <frac32.u.map name="value" MidiCC="1" value="0.0"/>
+         <frac32.u.map name="value" MidiCC="1" value="63.0"/>
       </params>
       <attribs/>
    </obj>
@@ -153,18 +154,22 @@
    </obj>
    <obj type="SRAMDelayMs" uuid="7652f21b-c075-4953-9046-03ad5518c200" name="SRAMDelayMs_1" x="574" y="378">
       <params>
-         <frac32.u.map name="mix" value="19.0"/>
+         <frac32.u.map name="mix" value="18.0"/>
          <frac32.u.map name="feedback" value="11.0"/>
       </params>
       <attribs>
          <spinner attributeName="ms" value="2017"/>
       </attribs>
    </obj>
+   <obj type="switches/1To2" uuid="83aba941-828a-4695-8ebb-ac8652dd2ab9" name="1To2_2" x="672" y="378">
+      <params/>
+      <attribs/>
+   </obj>
    <obj type="logic/and 2" uuid="c67031682f552aa0a80b23377495c51ea28a8c9c" name="and_7" x="126" y="392">
       <params/>
       <attribs/>
    </obj>
-   <obj type="delay/echo fdbk mix" uuid="15716b14ebe691010ccfd54af72ea23232a843c6" name="echo_1" x="798" y="406">
+   <obj type="delay/echo fdbk mix" uuid="15716b14ebe691010ccfd54af72ea23232a843c6" name="echo_1" x="854" y="406">
       <params>
          <frac32.u.map name="mix" value="19.0"/>
          <frac32.u.map name="feedback" value="24.5"/>
@@ -173,8 +178,9 @@
          <spinner attributeName="delaylength" value="12754"/>
       </attribs>
    </obj>
+   <comment type="patch/comment" x="966" y="420" text="CC1: blends between fuzz and delay"/>
+   <comment type="patch/comment" x="672" y="448" text="Attenuate when playing"/>
    <comment type="patch/comment" x="14" y="490" text="CC4: trig second loop."/>
-   <comment type="patch/comment" x="980" y="490" text="CC1: blends between direct/chorus chain and reverb/delay"/>
    <obj type="midi/in/cc i" uuid="614eb76edef2b43632fa1fcda25aab54f821daf6" name="cc_2" x="14" y="504">
       <params/>
       <attribs>
@@ -358,10 +364,7 @@
       <net>
          <source obj="Basic_1" outlet="playing"/>
          <dest obj="or_2" inlet="i3"/>
-      </net>
-      <net>
-         <source obj="Basic_1" outlet="out"/>
-         <dest obj="SRAMDelayMs_1" inlet="in"/>
+         <dest obj="1To2_2" inlet="sw"/>
       </net>
       <net>
          <source obj="1To2_1" outlet="o2"/>
@@ -403,14 +406,6 @@
          <dest obj="sw_1" inlet="i1"/>
       </net>
       <net>
-         <source obj="SRAMDelayMs_1" outlet="out"/>
-         <dest obj="mix_1" inlet="in2"/>
-      </net>
-      <net>
-         <source obj="xfade_1" outlet="o"/>
-         <dest obj="mix_1" inlet="in3"/>
-      </net>
-      <net>
          <source obj="lp_1" outlet="out"/>
          <dest obj="xfade_1" inlet="i1"/>
       </net>
@@ -424,20 +419,40 @@
          <dest obj="echo_1" inlet="in"/>
       </net>
       <net>
-         <source obj="mix_1" outlet="out"/>
-         <dest obj="gainx4_1" inlet="in"/>
-      </net>
-      <net>
          <source obj="gainx4_1" outlet="out"/>
          <dest obj="out_1" inlet="wave"/>
       </net>
       <net>
-         <source obj="sw_1" outlet="o2"/>
-         <dest obj="mix_1" inlet="in1"/>
-      </net>
-      <net>
          <source obj="&gt;_1" outlet="out"/>
          <dest obj="Basic_1" inlet="reset"/>
+      </net>
+      <net>
+         <source obj="1To2_2" outlet="o1"/>
+         <dest obj="mix_2" inlet="in2"/>
+      </net>
+      <net>
+         <source obj="1To2_2" outlet="o2"/>
+         <dest obj="mix_2" inlet="in3"/>
+      </net>
+      <net>
+         <source obj="xfade_1" outlet="o"/>
+         <dest obj="mix_2" inlet="in4"/>
+      </net>
+      <net>
+         <source obj="sw_1" outlet="o2"/>
+         <dest obj="mix_2" inlet="in1"/>
+      </net>
+      <net>
+         <source obj="mix_2" outlet="out"/>
+         <dest obj="gainx4_1" inlet="in"/>
+      </net>
+      <net>
+         <source obj="Basic_1" outlet="out"/>
+         <dest obj="SRAMDelayMs_1" inlet="in"/>
+      </net>
+      <net>
+         <source obj="SRAMDelayMs_1" outlet="out"/>
+         <dest obj="1To2_2" inlet="i1"/>
       </net>
    </nets>
    <settings>
