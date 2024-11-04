@@ -47,6 +47,9 @@ if (delayrindex == ARRAY_LENGTH)
 if (delaywindex == ARRAY_LENGTH)
 	delaywindex = 0;
 
-outlet_out = (inlet_in>>1) + (___SMMUL(rd<<16,_mix<<2));]]></code.srate>
+// original attenuated the inlet_in value but don't want the drop in volume
+//outlet_out = (inlet_in>>1) + (___SMMUL(rd<<16,_mix<<2));
+
+outlet_out = inlet_in + (___SMMUL(rd<<16,_mix<<2));]]></code.srate>
    </obj.normal>
 </objdefs>
