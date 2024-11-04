@@ -356,8 +356,8 @@
       </net>
       <net>
          <source obj="&gt;_1" outlet="out"/>
-         <dest obj="looper_153BPM_6barsv2_1" inlet="reset"/>
          <dest obj="looper_153BPM_8bars_overdub_v2_1" inlet="reset"/>
+         <dest obj="looper_153BPM_6barsv2_1" inlet="reset"/>
       </net>
       <net>
          <source obj="cc_4" outlet="trig"/>
@@ -438,8 +438,8 @@
    </settings>
    <notes><![CDATA[]]></notes>
    <windowPos>
-      <x>201</x>
-      <y>38</y>
+      <x>200</x>
+      <y>39</y>
       <width>1280</width>
       <height>932</height>
    </windowPos>
