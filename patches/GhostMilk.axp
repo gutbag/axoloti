@@ -78,6 +78,12 @@
       </params>
       <attribs/>
    </obj>
+   <obj type="tiar/math/signed *c" uuid="7a77f52a9594e7e9eb31328ea725cb3641a81b55" name="signed_1" x="882" y="126">
+      <params>
+         <frac32.s.map name="amp" value="52.0"/>
+      </params>
+      <attribs/>
+   </obj>
    <obj type="math/&gt;" uuid="a459588d6498caeb4daf3a07f9d5e9b4a657262f" name="&gt;_1" x="210" y="140">
       <params/>
       <attribs/>
@@ -407,7 +413,7 @@
       </net>
       <net>
          <source obj="lp_1" outlet="out"/>
-         <dest obj="xfade_1" inlet="i1"/>
+         <dest obj="signed_1" inlet="in"/>
       </net>
       <net>
          <source obj="echo_1" outlet="out"/>
@@ -453,6 +459,10 @@
       <net>
          <source obj="SRAMDelayMs_1" outlet="out"/>
          <dest obj="1To2_2" inlet="i1"/>
+      </net>
+      <net>
+         <source obj="signed_1" outlet="out"/>
+         <dest obj="xfade_1" inlet="i1"/>
       </net>
    </nets>
    <settings>
