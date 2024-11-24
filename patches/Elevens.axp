@@ -1,0 +1,95 @@
+<patch-1.0 appVersion="1.0.12">
+   <obj type="audio/in left" uuid="d40e60b7641fe75af4d7c91b45bb038aacafc52e" name="in_1" x="14" y="14">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="audio/out left" uuid="b11a3c09b2fdd575ea8212f2ce7743d5269253b1" name="out_1" x="1148" y="14">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="SRAMDelayMs" uuid="7652f21b-c075-4953-9046-03ad5518c200" name="SRAMDelayMs_1" x="490" y="42">
+      <params>
+         <frac32.u.map name="mix" value="36.5"/>
+         <frac32.u.map name="feedback" value="11.0"/>
+      </params>
+      <attribs>
+         <spinner attributeName="ms" value="10390"/>
+      </attribs>
+   </obj>
+   <comment type="patch/comment" x="770" y="686" text="For testing"/>
+   <obj type="midi/out/cc" uuid="7ca9b2c1b4339022c491a8afd70353c17d765584" name="cc_5" x="854" y="700">
+      <params/>
+      <attribs>
+         <combo attributeName="device" selection="din"/>
+         <spinner attributeName="channel" value="2"/>
+         <spinner attributeName="cc" value="3"/>
+      </attribs>
+   </obj>
+   <obj type="midi/out/cc" uuid="7ca9b2c1b4339022c491a8afd70353c17d765584" name="cc_6" x="1078" y="700">
+      <params/>
+      <attribs>
+         <combo attributeName="device" selection="din"/>
+         <spinner attributeName="channel" value="2"/>
+         <spinner attributeName="cc" value="2"/>
+      </attribs>
+   </obj>
+   <obj type="button_pulse" uuid="41216e47-4fc5-40ab-af02-f07de5fbf547" name="button_pulse_2" x="770" y="714">
+      <params>
+         <bool32.mom name="b" value="0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="button_pulse" uuid="41216e47-4fc5-40ab-af02-f07de5fbf547" name="button_pulse_3" x="994" y="714">
+      <params>
+         <bool32.mom name="b" value="0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="audio/inconfig l" uuid="7007d026acb7c3586f60a7f0898718d1ca7e0607" name="inconfig_1" x="14" y="770">
+      <params/>
+      <attribs>
+         <combo attributeName="gain" selection="6dB"/>
+         <combo attributeName="boost" selection="0dB"/>
+      </attribs>
+   </obj>
+   <obj type="audio/inconfig r" uuid="8468fe7907553f335959a7f69cbc5a1f7b5d4d1d" name="inconfig_2" x="126" y="770">
+      <params/>
+      <attribs>
+         <combo attributeName="gain" selection="3dB"/>
+         <combo attributeName="boost" selection="0dB"/>
+      </attribs>
+   </obj>
+   <nets>
+      <net>
+         <source obj="button_pulse_2" outlet="o"/>
+         <dest obj="cc_5" inlet="trig"/>
+      </net>
+      <net>
+         <source obj="button_pulse_3" outlet="o"/>
+         <dest obj="cc_6" inlet="trig"/>
+      </net>
+      <net>
+         <source obj="in_1" outlet="wave"/>
+         <dest obj="SRAMDelayMs_1" inlet="in"/>
+      </net>
+      <net>
+         <source obj="SRAMDelayMs_1" outlet="out"/>
+         <dest obj="out_1" inlet="wave"/>
+      </net>
+   </nets>
+   <settings>
+      <subpatchmode>no</subpatchmode>
+      <MidiChannel>2</MidiChannel>
+      <NPresets>8</NPresets>
+      <NPresetEntries>32</NPresetEntries>
+      <NModulationSources>8</NModulationSources>
+      <NModulationTargetsPerSource>8</NModulationTargetsPerSource>
+   </settings>
+   <notes><![CDATA[]]></notes>
+   <windowPos>
+      <x>144</x>
+      <y>38</y>
+      <width>1280</width>
+      <height>932</height>
+   </windowPos>
+</patch-1.0>
