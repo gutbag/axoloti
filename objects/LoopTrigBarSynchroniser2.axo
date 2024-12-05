@@ -1,6 +1,6 @@
 <objdefs appVersion="1.0.12">
    <obj.normal id="LoopTrigBarSynchroniser2" uuid="bdcdc843-3b08-4290-95ea-d2aa232ee77e">
-      <sDescription>Receives input triggers marking the start of a bar then issues a pulse for each bar start. Receives loop arm trigger and waits until next bar start to issue trigger. Based on the original fixed BPM Moagulum object made generic.</sDescription>
+      <sDescription>Receives input triggers marking the start of a bar then issues a pulse for each bar start. Receives loop arm trigger and waits until next bar start to issue trigger. Based on the original fixed BPM Moagulum object made generic. Once the loop has been started, bar start triggers are ignored.</sDescription>
       <author>Mark Lamb</author>
       <license>BSD</license>
       <inlets>
@@ -12,7 +12,7 @@
          <bool32.pulse name="loopstart" description="Trigger loop"/>
       </outlets>
       <displays>
-         <bool32 name="loop_armed" description="Armed" noLabel="true"/>
+         <bool32 name="loop_armed" noLabel="true"/>
       </displays>
       <params/>
       <attribs>
@@ -37,19 +37,22 @@ static constexpr double K_PERIOD = 1.0 / 3000.0;
 static const uint32_t K_PERIODS_TO_BAR = (((((double)BEATS_TO_BAR/NOTE_VALUE_DIVISOR) * 60.0) / BPM)) / K_PERIOD;
 
 uint32_t kCount;
-bool loopArmed;]]></code.declaration>
+bool loopArmed;
+bool barStartTrigEnabled;]]></code.declaration>
       <code.init><![CDATA[kCount = K_PERIODS_TO_BAR;
-loopArmed = 0;
+loopArmed = false;
+barStartTrigEnabled = true;
 
 //LogTextMessage("BPM=%u, BeatsToBar=%u, NoteValue=%u, NOTE_VALUE_DIVISOR=%f\n", BPM, BEATS_TO_BAR, NOTE_VALUE, NOTE_VALUE_DIVISOR);]]></code.init>
-      <code.krate><![CDATA[if (inlet_barstart) // reset count to full bar from now
+      <code.krate><![CDATA[if (inlet_barstart && barStartTrigEnabled) // reset count to full bar from now
 {
 	kCount = K_PERIODS_TO_BAR;
 }
 
 if (inlet_armloop)
 {
-	loopArmed = 1;
+	loopArmed = true;
+	barStartTrigEnabled = false; // disable further bar start triggers
 }
 
 disp_loop_armed = loopArmed;
@@ -62,7 +65,7 @@ if (kCount == 0) // signal bar start
 	if (loopArmed)
 	{
 		outlet_loopstart = 1;
-		loopArmed = 0;
+		loopArmed = false;
 	}
 	else
 	{
