@@ -5,7 +5,8 @@
    </obj>
    <comment type="patch/comment" x="336" y="14" text="Route input to looper and delay while recording"/>
    <comment type="patch/comment" x="616" y="14" text="CC4 enables fuzz/delay"/>
-   <obj type="mix/mix 4 g" uuid="36f472cd81da2e17bd4b4ee11b53b4c82527220c" name="mix_2" x="1036" y="14">
+   <comment type="patch/comment" x="854" y="14" text="CC3 enables direct fuzz once looper triggered"/>
+   <obj type="mix/mix 4 g" uuid="36f472cd81da2e17bd4b4ee11b53b4c82527220c" name="mix_1" x="1232" y="14">
       <params>
          <frac32.u.map name="gain1" value="32.0"/>
          <frac32.u.map name="gain2" value="32.0"/>
@@ -14,7 +15,7 @@
       </params>
       <attribs/>
    </obj>
-   <obj type="audio/out left" uuid="b11a3c09b2fdd575ea8212f2ce7743d5269253b1" name="out_1" x="1148" y="14">
+   <obj type="audio/out left" uuid="b11a3c09b2fdd575ea8212f2ce7743d5269253b1" name="out_1" x="1344" y="14">
       <params/>
       <attribs/>
    </obj>
@@ -28,7 +29,19 @@
       </params>
       <attribs/>
    </obj>
-   <obj type="mymath/gainx4" uuid="62b1c1a6337c7c8f6eac96408a432477b113cfa1" name="gainx4_1" x="1148" y="84">
+   <obj type="logic/flipflop" uuid="f9b15363f5ee203152e062c08a8846f0074b0ea5" name="flipflop_3" x="854" y="28">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="logic/and 2" uuid="c67031682f552aa0a80b23377495c51ea28a8c9c" name="and_8" x="938" y="28">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="logic/flipflop toggle" uuid="195e489e5fc3d275944b0de56c7a91c8641ea22a" name="flipflop_4" x="1008" y="28">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="mymath/gainx4" uuid="62b1c1a6337c7c8f6eac96408a432477b113cfa1" name="gainx4_1" x="1344" y="84">
       <params>
          <frac32.u.map name="amp" value="32.5"/>
       </params>
@@ -84,7 +97,12 @@
       </params>
       <attribs/>
    </obj>
+   <comment type="patch/comment" x="1036" y="126" text="Either fuzz/delay blend or direct fuzz"/>
    <obj type="math/&gt;" uuid="a459588d6498caeb4daf3a07f9d5e9b4a657262f" name="&gt;_1" x="210" y="140">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="mux/mux 2" uuid="539c246f4c360ac476e128cfbfa84348fb7f7e73" name="mux_1" x="1106" y="140">
       <params/>
       <attribs/>
    </obj>
@@ -94,8 +112,18 @@
          <spinner attributeName="value" value="70"/>
       </attribs>
    </obj>
+   <obj type="mix/xfade" uuid="375dc91d218e96cdc9cbc7e92adb48f705ef701a" name="xfade_1" x="1022" y="196">
+      <params/>
+      <attribs/>
+   </obj>
    <comment type="patch/comment" x="14" y="224" text="MIDI triggers gated on after startup delay."/>
    <comment type="patch/comment" x="14" y="238" text="CC3: set bar start."/>
+   <obj type="ctrl/dial p" uuid="cc5d2846c3d50e425f450c4b9851371b54f4d674" name="dial_1" x="938" y="238">
+      <params>
+         <frac32.u.map name="value" MidiCC="1" value="0.0"/>
+      </params>
+      <attribs/>
+   </obj>
    <obj type="midi/in/cc i" uuid="614eb76edef2b43632fa1fcda25aab54f821daf6" name="cc_1" x="14" y="252">
       <params/>
       <attribs>
@@ -123,16 +151,7 @@
       <params/>
       <attribs/>
    </obj>
-   <obj type="mix/xfade" uuid="375dc91d218e96cdc9cbc7e92adb48f705ef701a" name="xfade_1" x="1036" y="308">
-      <params/>
-      <attribs/>
-   </obj>
-   <obj type="ctrl/dial p" uuid="cc5d2846c3d50e425f450c4b9851371b54f4d674" name="dial_1" x="966" y="336">
-      <params>
-         <frac32.u.map name="value" MidiCC="1" value="0.0"/>
-      </params>
-      <attribs/>
-   </obj>
+   <comment type="patch/comment" x="938" y="322" text="CC1: blends between fuzz and delay"/>
    <comment type="patch/comment" x="14" y="364" text="CC2: trig loop on bar start."/>
    <obj type="midi/in/cc i" uuid="614eb76edef2b43632fa1fcda25aab54f821daf6" name="cc_4" x="14" y="378">
       <params/>
@@ -175,7 +194,7 @@
       <params/>
       <attribs/>
    </obj>
-   <obj type="delay/echo fdbk mix" uuid="15716b14ebe691010ccfd54af72ea23232a843c6" name="echo_1" x="854" y="406">
+   <obj type="delay/echo fdbk mix" uuid="15716b14ebe691010ccfd54af72ea23232a843c6" name="echo_1" x="854" y="392">
       <params>
          <frac32.u.map name="mix" value="19.0"/>
          <frac32.u.map name="feedback" value="24.5"/>
@@ -184,7 +203,6 @@
          <spinner attributeName="delaylength" value="12754"/>
       </attribs>
    </obj>
-   <comment type="patch/comment" x="966" y="420" text="CC1: blends between fuzz and delay"/>
    <comment type="patch/comment" x="672" y="448" text="Attenuate when playing"/>
    <comment type="patch/comment" x="14" y="490" text="CC4: trig second loop."/>
    <obj type="midi/in/cc i" uuid="614eb76edef2b43632fa1fcda25aab54f821daf6" name="cc_2" x="14" y="504">
@@ -351,16 +369,13 @@
          <dest obj="pulselength_1" inlet="trig"/>
       </net>
       <net>
-         <source obj="and_5" outlet="o"/>
-         <dest obj="LoopTrigBarSynchroniser2_1" inlet="barstart"/>
-      </net>
-      <net>
          <source obj="and_7" outlet="o"/>
          <dest obj="LoopTrigBarSynchroniser2_1" inlet="armloop"/>
       </net>
       <net>
          <source obj="LoopTrigBarSynchroniser2_1" outlet="loopstart"/>
          <dest obj="Basic_1" inlet="trigger"/>
+         <dest obj="flipflop_3" inlet="set"/>
       </net>
       <net>
          <source obj="Basic_1" outlet="recording"/>
@@ -404,20 +419,12 @@
          <dest obj="lp_1" inlet="in"/>
       </net>
       <net>
-         <source obj="dial_1" outlet="out"/>
-         <dest obj="xfade_1" inlet="c"/>
-      </net>
-      <net>
          <source obj="1To2_1" outlet="o1"/>
          <dest obj="sw_1" inlet="i1"/>
       </net>
       <net>
          <source obj="lp_1" outlet="out"/>
          <dest obj="signed_1" inlet="in"/>
-      </net>
-      <net>
-         <source obj="echo_1" outlet="out"/>
-         <dest obj="xfade_1" inlet="i2"/>
       </net>
       <net>
          <source obj="sw_1" outlet="o1"/>
@@ -434,22 +441,18 @@
       </net>
       <net>
          <source obj="1To2_2" outlet="o1"/>
-         <dest obj="mix_2" inlet="in2"/>
+         <dest obj="mix_1" inlet="in2"/>
       </net>
       <net>
          <source obj="1To2_2" outlet="o2"/>
-         <dest obj="mix_2" inlet="in3"/>
-      </net>
-      <net>
-         <source obj="xfade_1" outlet="o"/>
-         <dest obj="mix_2" inlet="in4"/>
+         <dest obj="mix_1" inlet="in3"/>
       </net>
       <net>
          <source obj="sw_1" outlet="o2"/>
-         <dest obj="mix_2" inlet="in1"/>
+         <dest obj="mix_1" inlet="in1"/>
       </net>
       <net>
-         <source obj="mix_2" outlet="out"/>
+         <source obj="mix_1" outlet="out"/>
          <dest obj="gainx4_1" inlet="in"/>
       </net>
       <net>
@@ -463,6 +466,40 @@
       <net>
          <source obj="signed_1" outlet="out"/>
          <dest obj="xfade_1" inlet="i1"/>
+         <dest obj="mux_1" inlet="i2"/>
+      </net>
+      <net>
+         <source obj="dial_1" outlet="out"/>
+         <dest obj="xfade_1" inlet="c"/>
+      </net>
+      <net>
+         <source obj="echo_1" outlet="out"/>
+         <dest obj="xfade_1" inlet="i2"/>
+      </net>
+      <net>
+         <source obj="mux_1" outlet="o"/>
+         <dest obj="mix_1" inlet="in4"/>
+      </net>
+      <net>
+         <source obj="flipflop_3" outlet="o"/>
+         <dest obj="and_8" inlet="i2"/>
+      </net>
+      <net>
+         <source obj="and_5" outlet="o"/>
+         <dest obj="and_8" inlet="i1"/>
+         <dest obj="LoopTrigBarSynchroniser2_1" inlet="barstart"/>
+      </net>
+      <net>
+         <source obj="flipflop_4" outlet="o"/>
+         <dest obj="mux_1" inlet="s"/>
+      </net>
+      <net>
+         <source obj="and_8" outlet="o"/>
+         <dest obj="flipflop_4" inlet="trig"/>
+      </net>
+      <net>
+         <source obj="xfade_1" outlet="o"/>
+         <dest obj="mux_1" inlet="i1"/>
       </net>
    </nets>
    <settings>
@@ -475,9 +512,9 @@
    </settings>
    <notes><![CDATA[]]></notes>
    <windowPos>
-      <x>201</x>
-      <y>38</y>
-      <width>1280</width>
+      <x>69</x>
+      <y>50</y>
+      <width>1443</width>
       <height>932</height>
    </windowPos>
 </patch-1.0>
