@@ -117,7 +117,7 @@
       <attribs/>
    </obj>
    <comment type="patch/comment" x="14" y="224" text="MIDI triggers gated on after startup delay."/>
-   <comment type="patch/comment" x="14" y="238" text="CC3: set bar start."/>
+   <comment type="patch/comment" x="14" y="238" text="CC3: set bar start then control direct fuzz"/>
    <obj type="ctrl/dial p" uuid="cc5d2846c3d50e425f450c4b9851371b54f4d674" name="dial_1" x="938" y="238">
       <params>
          <frac32.u.map name="value" MidiCC="1" value="0.0"/>
