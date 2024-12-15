@@ -21,13 +21,29 @@
          <bool32 name="playing"/>
       </displays>
       <params/>
-      <attribs/>
-      <code.declaration><![CDATA[static const uint32_t BPM = 153;
-static const uint32_t BARS = 6;
-static const uint32_t BEATS_TO_BAR = 4;
+      <attribs>
+         <spinner name="BPM" MinValue="30" MaxValue="300" DefaultValue="120"/>
+         <spinner name="BeatsToBar" MinValue="2" MaxValue="20" DefaultValue="4"/>
+         <combo name="NoteValue">
+            <MenuEntries>
+               <string>4</string>
+               <string>8</string>
+            </MenuEntries>
+            <CEntries>
+               <string>4</string>
+               <string>8</string>
+            </CEntries>
+         </combo>
+         <spinner name="Bars" MinValue="1" MaxValue="32" DefaultValue="8"/>
+      </attribs>
+      <code.declaration><![CDATA[static const uint32_t BPM = attr_BPM; // 153
+static const uint32_t BARS = attr_Bars; // 6
+static const uint32_t BEATS_TO_BAR = attr_BeatsToBar; // 4
 static const uint32_t BEATS = BARS * BEATS_TO_BAR;
+static const uint32_t NOTE_VALUE = attr_NoteValue;
 static constexpr double SAMPLE_PERIOD = 1.0 / 48000.0;
-static const uint32_t SAMPLE_ARRAY_LENGTH = ((60.0 / BPM) * BEATS) / SAMPLE_PERIOD;
+//static const uint32_t SAMPLE_ARRAY_LENGTH = ((60.0 / BPM) * BEATS) / SAMPLE_PERIOD;
+static const uint32_t SAMPLE_ARRAY_LENGTH = ((60.0 / BPM) * BEATS * (4.0/NOTE_VALUE)) / SAMPLE_PERIOD;
 
 int32_t* sampleArray;
 uint32_t sampleWriteIndex;
