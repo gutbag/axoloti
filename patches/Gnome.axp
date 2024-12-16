@@ -3,23 +3,43 @@
       <params/>
       <attribs/>
    </obj>
+   <obj type="delay/echo fdbk mix" uuid="15716b14ebe691010ccfd54af72ea23232a843c6" name="echo_1" x="126" y="14">
+      <params>
+         <frac32.u.map name="mix" value="22.0"/>
+         <frac32.u.map name="feedback" MidiCC="1" value="24.5"/>
+      </params>
+      <attribs>
+         <spinner attributeName="delaylength" value="10000"/>
+      </attribs>
+   </obj>
+   <obj type="math/gain" uuid="62b1c1a6337c7c8f6aec96408a432477b113cfa0" name="gain_1" x="252" y="14">
+      <params>
+         <frac32.u.map name="amp" value="9.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="phi/switch/sw 2-1a" uuid="350b79179fa4cce3d231eaa45f23eefa9121cb3b" name="sw_2" x="364" y="14">
+      <params>
+         <bool32.tgl name="s" MidiCC="4" value="0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="jho/stomp/phaser" uuid="59eb13ec-b7d4-42c4-b699-f0692753375e" name="obj_1" x="532" y="14">
+      <params>
+         <frac32.s.map name="speed" value="-13.319999694824219"/>
+         <frac32.u.map name="waveform" value="32.0"/>
+         <frac32.u.map name="depth" value="46.0"/>
+         <frac32.u.map name="offset" value="16.0"/>
+         <frac32.u.map name="blend" value="33.5"/>
+         <bool32.tgl name="on" MidiCC="3" value="0"/>
+      </params>
+      <attribs/>
+   </obj>
    <obj type="audio/out left" uuid="b11a3c09b2fdd575ea8212f2ce7743d5269253b1" name="out_1" x="1288" y="14">
       <params/>
       <attribs/>
    </obj>
-   <obj type="mymath/gainx4" uuid="62b1c1a6337c7c8f6eac96408a432477b113cfa1" name="dry gain___" x="560" y="42">
-      <params>
-         <frac32.u.map name="amp" value="39.5"/>
-      </params>
-      <attribs/>
-   </obj>
-   <comment type="patch/comment" x="910" y="56" text="CC2"/>
-   <obj type="phi/switch/sw 2-1a" uuid="350b79179fa4cce3d231eaa45f23eefa9121cb3b" name="sw_1" x="910" y="70">
-      <params>
-         <bool32.tgl name="s" MidiCC="2" value="0"/>
-      </params>
-      <attribs/>
-   </obj>
+   <comment type="patch/comment" x="378" y="84" text="CC4 echo on/off"/>
    <obj type="mix/mix 2 g" uuid="221f038da51943034a75e442c90624fcebfe6112" name="mix_1" x="1218" y="126">
       <params>
          <frac32.u.map name="gain1" value="32.0"/>
@@ -27,33 +47,74 @@
       </params>
       <attribs/>
    </obj>
-   <obj type="loopers/FlexChunker" uuid="d2c3bc98-d2c4-4b85-8134-97f2980117bf" name="FlexChunker_1" x="1008" y="182">
+   <obj type="TSG/fx/reverb" uuid="78793f5f-a0eb-4658-97eb-01abe59317cb" name="obj_2" x="336" y="154">
+      <params>
+         <frac32.u.map name="PreDelay" value="17.5"/>
+         <frac32.u.map name="decay" value="36.5"/>
+         <frac32.u.map name="LowDamp" value="0.0"/>
+         <frac32.u.map name="HighDamp" value="0.0"/>
+         <frac32.u.map name="size" value="64.0"/>
+         <frac32.s.map name="mod_:pitch" value="-16.0"/>
+         <frac32.u.map name="mod_:gain" value="7.5"/>
+         <frac32.u.map name="diffusion" value="64.0"/>
+         <frac32.u.map name="mix" value="30.5"/>
+      </params>
+      <attribs/>
+   </obj>
+   <comment type="patch/comment" x="126" y="182" text="CC1 echo feedback"/>
+   <comment type="patch/comment" x="14" y="224" text="CC1 echo feedback"/>
+   <comment type="patch/comment" x="14" y="238" text="CC2 starts and stops the chunker"/>
+   <comment type="patch/comment" x="14" y="252" text="CC3 phaser on/off"/>
+   <comment type="patch/comment" x="532" y="252" text="CC3 phaser on/off"/>
+   <comment type="patch/comment" x="14" y="266" text="CC4 echo on/off"/>
+   <comment type="patch/comment" x="658" y="266" text="CC2 starts and stops the chunker"/>
+   <comment type="patch/comment" x="14" y="280" text="CC5 sets the number of chunks"/>
+   <obj type="midi/in/cc i" uuid="614eb76edef2b43632fa1fcda25aab54f821daf6" name="cc_4" x="658" y="280">
+      <params/>
+      <attribs>
+         <spinner attributeName="cc" value="2"/>
+         <spinner attributeName="default" value="0"/>
+      </attribs>
+   </obj>
+   <comment type="patch/comment" x="14" y="294" text="CC6 sets chunk order and direction type"/>
+   <obj type="logic/and 2" uuid="c67031682f552aa0a80b23377495c51ea28a8c9c" name="and_7" x="770" y="294">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="loopers/FlexChunker" uuid="d2c3bc98-d2c4-4b85-8134-97f2980117bf" name="FlexChunker_1" x="980" y="364">
       <params/>
       <attribs>
          <spinner attributeName="MaxTimeSecs" value="32"/>
       </attribs>
    </obj>
-   <comment type="patch/comment" x="14" y="210" text="CC3"/>
-   <obj type="phi/switch/sw 2-1a" uuid="350b79179fa4cce3d231eaa45f23eefa9121cb3b" name="sw_2" x="112" y="210">
-      <params>
-         <bool32.tgl name="s" value="0"/>
-      </params>
+   <comment type="patch/comment" x="742" y="392" text="CC6 sets chunk order and direction type"/>
+   <obj type="midi/in/cc i" uuid="614eb76edef2b43632fa1fcda25aab54f821daf6" name="cc_6" x="742" y="406">
+      <params/>
+      <attribs>
+         <spinner attributeName="cc" value="6"/>
+         <spinner attributeName="default" value="7"/>
+      </attribs>
+   </obj>
+   <obj type="disp/i" uuid="5e35fd0c62d81e70017289250cf28edd26e19e4a" name="i_5" x="840" y="406">
+      <params/>
       <attribs/>
    </obj>
-   <obj type="const/i" uuid="e202f44b2df17ae0b3e663b98ea6b14c8ff00408" name="i_2" x="910" y="224">
+   <obj type="switches/1To2" uuid="83aba941-828a-4695-8ebb-ac8652dd2ab9" name="1To2_1" x="224" y="434">
+      <params/>
+      <attribs/>
+   </obj>
+   <comment type="patch/comment" x="742" y="504" text="CC5 sets the number of chunks"/>
+   <obj type="midi/in/cc i" uuid="614eb76edef2b43632fa1fcda25aab54f821daf6" name="cc_5" x="742" y="518">
       <params/>
       <attribs>
-         <spinner attributeName="value" value="7"/>
+         <spinner attributeName="cc" value="5"/>
+         <spinner attributeName="default" value="7"/>
       </attribs>
    </obj>
-   <comment type="patch/comment" x="1316" y="224" text="CC1"/>
-   <obj type="const/i" uuid="e202f44b2df17ae0b3e663b98ea6b14c8ff00408" name="i_1" x="910" y="280">
+   <obj type="disp/i" uuid="5e35fd0c62d81e70017289250cf28edd26e19e4a" name="i_4" x="840" y="518">
       <params/>
-      <attribs>
-         <spinner attributeName="value" value="8"/>
-      </attribs>
+      <attribs/>
    </obj>
-   <comment type="patch/comment" x="196" y="350" text="allow start and end of sample store to be controlled by triggers"/>
    <comment type="patch/comment" x="14" y="574" text="Startup delay to lock out triggers on patch change. LED on until done."/>
    <comment type="patch/comment" x="392" y="574" text="Red LED on during startup and when looping."/>
    <obj type="const/i" uuid="e202f44b2df17ae0b3e663b98ea6b14c8ff00408" name="i_3" x="14" y="588">
@@ -84,12 +145,16 @@
       <params/>
       <attribs/>
    </obj>
-   <comment type="patch/comment" x="798" y="672" text="CC4."/>
-   <obj type="midi/in/cc i" uuid="614eb76edef2b43632fa1fcda25aab54f821daf6" name="cc_4" x="798" y="686">
+   <obj type="const/i" uuid="e202f44b2df17ae0b3e663b98ea6b14c8ff00408" name="i_2" x="1246" y="616">
       <params/>
       <attribs>
-         <spinner attributeName="cc" value="4"/>
-         <spinner attributeName="default" value="0"/>
+         <spinner attributeName="value" value="7"/>
+      </attribs>
+   </obj>
+   <obj type="const/i" uuid="e202f44b2df17ae0b3e663b98ea6b14c8ff00408" name="i_1" x="1246" y="672">
+      <params/>
+      <attribs>
+         <spinner attributeName="value" value="8"/>
       </attribs>
    </obj>
    <obj type="audio/inconfig r" uuid="8468fe7907553f335959a7f69cbc5a1f7b5d4d1d" name="inconfig_2" x="0" y="700">
@@ -99,29 +164,17 @@
          <combo attributeName="boost" selection="0dB"/>
       </attribs>
    </obj>
-   <obj type="logic/and 2" uuid="c67031682f552aa0a80b23377495c51ea28a8c9c" name="and_7" x="910" y="700">
-      <params/>
-      <attribs/>
-   </obj>
    <obj type="audio/inconfig l" uuid="7007d026acb7c3586f60a7f0898718d1ca7e0607" name="inconfig_1" x="0" y="756">
       <params/>
       <attribs>
-         <combo attributeName="gain" selection="0dB"/>
+         <combo attributeName="gain" selection="6dB"/>
          <combo attributeName="boost" selection="0dB"/>
       </attribs>
    </obj>
    <nets>
       <net>
-         <source obj="in_1" outlet="wave"/>
-         <dest obj="dry gain___" inlet="in"/>
-      </net>
-      <net>
          <source obj="cc_4" outlet="trig"/>
          <dest obj="and_7" inlet="i1"/>
-      </net>
-      <net>
-         <source obj="sw_1" outlet="o"/>
-         <dest obj="mix_1" inlet="in1"/>
       </net>
       <net>
          <source obj="mix_1" outlet="out"/>
@@ -149,21 +202,8 @@
          <dest obj="led2_2" inlet="in"/>
       </net>
       <net>
-         <source obj="dry gain___" outlet="out"/>
-         <dest obj="sw_1" inlet="i1"/>
-         <dest obj="FlexChunker_1" inlet="in"/>
-      </net>
-      <net>
          <source obj="FlexChunker_1" outlet="out"/>
          <dest obj="mix_1" inlet="in2"/>
-      </net>
-      <net>
-         <source obj="i_2" outlet="out"/>
-         <dest obj="FlexChunker_1" inlet="type"/>
-      </net>
-      <net>
-         <source obj="i_1" outlet="out"/>
-         <dest obj="FlexChunker_1" inlet="numChunks"/>
       </net>
       <net>
          <source obj="FlexChunker_1" outlet="recording"/>
@@ -177,6 +217,38 @@
          <source obj="and_7" outlet="o"/>
          <dest obj="FlexChunker_1" inlet="trigger"/>
       </net>
+      <net>
+         <source obj="in_1" outlet="wave"/>
+         <dest obj="sw_2" inlet="i1"/>
+         <dest obj="echo_1" inlet="in"/>
+      </net>
+      <net>
+         <source obj="sw_2" outlet="o"/>
+         <dest obj="obj_1" inlet="in"/>
+      </net>
+      <net>
+         <source obj="echo_1" outlet="out"/>
+         <dest obj="gain_1" inlet="in"/>
+      </net>
+      <net>
+         <source obj="gain_1" outlet="out"/>
+         <dest obj="sw_2" inlet="i2"/>
+      </net>
+      <net>
+         <source obj="cc_5" outlet="midiCC"/>
+         <dest obj="i_4" inlet="in"/>
+         <dest obj="FlexChunker_1" inlet="numChunks"/>
+      </net>
+      <net>
+         <source obj="obj_1" outlet="out"/>
+         <dest obj="mix_1" inlet="in1"/>
+         <dest obj="FlexChunker_1" inlet="in"/>
+      </net>
+      <net>
+         <source obj="cc_6" outlet="midiCC"/>
+         <dest obj="i_5" inlet="in"/>
+         <dest obj="FlexChunker_1" inlet="type"/>
+      </net>
    </nets>
    <settings>
       <subpatchmode>no</subpatchmode>
@@ -188,7 +260,7 @@
    </settings>
    <notes><![CDATA[]]></notes>
    <windowPos>
-      <x>36</x>
+      <x>108</x>
       <y>38</y>
       <width>1404</width>
       <height>906</height>
