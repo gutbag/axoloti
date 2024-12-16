@@ -26,9 +26,10 @@
       </attribs>
       <code.declaration><![CDATA[static constexpr double SAMPLE_PERIOD = 1.0 / 48000.0;
 static const uint32_t MAX_SAMPLE_TIME_S = attr_MaxTimeSecs;
-static const uint32_t MIN_SAMPLE_TIME_S = 2;
+static const uint32_t MIN_SAMPLE_TIME_S = 1;
 static const uint32_t MIN_SAMPLES = MIN_SAMPLE_TIME_S / SAMPLE_PERIOD;
 static const uint32_t SAMPLE_ARRAY_LENGTH = MAX_SAMPLE_TIME_S / SAMPLE_PERIOD;
+static const uint32_t NUM_REORDER_TYPES = 8;
 
 int32_t* sampleArray;
 uint32_t sampleWriteIndex;
@@ -87,7 +88,8 @@ void populateChunks(const uint32_t numChunks, const uint32_t chunkLength)
 }
 
 /**
- * Create the chunk index array depending on the type
+ * Create the chunk index array depending on the type.
+ * When adding a new one, change NUM_REORDER_TYPES.
  */
 void reorderChunks(const uint32_t numChunks, const uint32_t type)
 {
@@ -167,6 +169,7 @@ void reorderChunks(const uint32_t numChunks, const uint32_t type)
 	}
 	break;
 	case 6: // chunks in random order but all played forward
+	case 8: // chunks in random order but all played reversed
 	{
 		uint32_t tmpChunkIndexes[MAX_CHUNKS];
 		for (uint32_t chunkIndex=0; chunkIndex<numChunks; chunkIndex++)
@@ -180,7 +183,7 @@ void reorderChunks(const uint32_t numChunks, const uint32_t type)
 			uint32_t randChunkIndex = tmpChunksLeft > 1 ? rand() % (tmpChunksLeft - 1) : 0;
 			// store it
 			chunkIndexes[chunkIndex] = tmpChunkIndexes[randChunkIndex];
-			chunks[chunkIndex].forward = true;
+			chunks[chunkIndex].forward = type == 6; // reverse if 8
 			// shuffle the indexes above down one
 			for (uint32_t i=randChunkIndex; i<tmpChunksLeft; i++)
 				tmpChunkIndexes[i] = tmpChunkIndexes[i+1]; // doesn't matter if we go off the end
@@ -196,6 +199,7 @@ void reorderChunks(const uint32_t numChunks, const uint32_t type)
 		   chunks[chunkIndex].forward = false;
 		}
 	break;
+	// !!!!!!!! don't forget to update NUM_REORDER_TYPES if adding a new type
 	default:
 	break;
 	}
@@ -344,7 +348,7 @@ else if (inlet_trigger && state == PLAYING)
 				numChunksSelected = inlet_numChunks;
 			chunkLengthSelected = sampleEndIndex/numChunksSelected;
 			populateChunks(numChunksSelected, chunkLengthSelected);
-			if (inlet_type > 0 && inlet_type < 8)
+			if (inlet_type > 0 && inlet_type <= NUM_REORDER_TYPES)
 				reorderType = inlet_type;
 			else
 				reorderType = 5;
