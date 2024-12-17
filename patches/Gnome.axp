@@ -77,6 +77,7 @@
    <comment type="patch/comment" x="14" y="280" text="CC5 sets the number of chunks"/>
    <comment type="patch/comment" x="14" y="294" text="CC6 sets chunk order and direction type"/>
    <comment type="patch/comment" x="14" y="308" text="CC7 reverb mix"/>
+   <comment type="patch/comment" x="308" y="308" text="if both echo and phaser are turned on, reverb is enabled instead"/>
    <comment type="patch/comment" x="14" y="336" text="phaser on/off"/>
    <obj type="midi/in/cc i" uuid="614eb76edef2b43632fa1fcda25aab54f821daf6" name="cc_9" x="14" y="350">
       <params/>
