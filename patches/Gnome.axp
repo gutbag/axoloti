@@ -1,4 +1,5 @@
 <patch-1.0 appVersion="1.0.12">
+   <comment type="patch/comment" x="868" y="0" text="after switch to get tail"/>
    <obj type="audio/in left" uuid="d40e60b7641fe75af4d7c91b45bb038aacafc52e" name="in_1" x="14" y="14">
       <params/>
       <attribs/>
@@ -29,7 +30,7 @@
          <frac32.u.map name="depth" value="46.0"/>
          <frac32.u.map name="offset" value="16.0"/>
          <frac32.u.map name="blend" value="33.5"/>
-         <bool32.tgl name="on" MidiCC="3" value="0"/>
+         <bool32.tgl name="on" value="1"/>
       </params>
       <attribs/>
    </obj>
@@ -37,47 +38,51 @@
       <params/>
       <attribs/>
    </obj>
-   <obj type="TSG/fx/reverb" uuid="78793f5f-a0eb-4658-97eb-01abe59317cb" name="obj_2" x="812" y="14">
+   <comment type="patch/comment" x="770" y="14" text="reverb on/off"/>
+   <obj type="TSG/fx/reverb" uuid="78793f5f-a0eb-4658-97eb-01abe59317cb" name="obj_2" x="868" y="14">
       <params>
          <frac32.u.map name="PreDelay" value="17.5"/>
-         <frac32.u.map name="decay" value="36.5"/>
+         <frac32.u.map name="decay" value="33.5"/>
          <frac32.u.map name="LowDamp" value="0.0"/>
          <frac32.u.map name="HighDamp" value="0.0"/>
-         <frac32.u.map name="size" value="64.0"/>
+         <frac32.u.map name="size" value="42.5"/>
          <frac32.s.map name="mod_:pitch" value="-16.0"/>
          <frac32.u.map name="mod_:gain" value="7.5"/>
-         <frac32.u.map name="diffusion" value="64.0"/>
-         <frac32.u.map name="mix" MidiCC="7" value="24.5"/>
+         <frac32.u.map name="diffusion" value="45.5"/>
+         <frac32.u.map name="mix" MidiCC="7" value="32.5"/>
       </params>
-      <attribs/>
-   </obj>
-   <obj type="mux/mux 2" uuid="539c246f4c360ac476e128cfbfa84348fb7f7e73" name="mux_3" x="924" y="14">
-      <params/>
       <attribs/>
    </obj>
    <obj type="audio/out left" uuid="b11a3c09b2fdd575ea8212f2ce7743d5269253b1" name="out_1" x="1288" y="14">
       <params/>
       <attribs/>
    </obj>
+   <obj type="mux/mux 2" uuid="539c246f4c360ac476e128cfbfa84348fb7f7e73" name="mux_3" x="770" y="28">
+      <params/>
+      <attribs/>
+   </obj>
    <comment type="patch/comment" x="364" y="84" text="echo on/off"/>
    <comment type="patch/comment" x="644" y="84" text="phaser on/off"/>
-   <comment type="patch/comment" x="924" y="84" text="reverb on/off"/>
-   <obj type="mix/mix 2 g" uuid="221f038da51943034a75e442c90624fcebfe6112" name="mix_1" x="1218" y="126">
+   <obj type="mix/mix 4 g" uuid="36f472cd81da2e17bd4b4ee11b53b4c82527220c" name="mix_3" x="1176" y="112">
       <params>
          <frac32.u.map name="gain1" value="32.0"/>
-         <frac32.u.map name="gain2" value="20.5"/>
+         <frac32.u.map name="gain2" value="32.0"/>
+         <frac32.u.map name="gain3" value="32.0"/>
+         <frac32.u.map name="gain4" MidiCC="8" value="9.5"/>
       </params>
       <attribs/>
    </obj>
    <comment type="patch/comment" x="126" y="182" text="CC1 echo feedback"/>
-   <comment type="patch/comment" x="14" y="224" text="CC1 echo feedback"/>
-   <comment type="patch/comment" x="14" y="238" text="CC2 starts and stops the chunker"/>
-   <comment type="patch/comment" x="14" y="252" text="CC3 phaser on/off"/>
-   <comment type="patch/comment" x="14" y="266" text="CC4 echo on/off"/>
-   <comment type="patch/comment" x="14" y="280" text="CC5 sets the number of chunks"/>
-   <comment type="patch/comment" x="14" y="294" text="CC6 sets chunk order and direction type"/>
-   <comment type="patch/comment" x="14" y="308" text="CC7 reverb mix"/>
+   <comment type="patch/comment" x="14" y="210" text="CC1 echo feedback"/>
+   <comment type="patch/comment" x="14" y="224" text="CC2 starts and stops the chunker"/>
+   <comment type="patch/comment" x="14" y="238" text="CC3 phaser on/off"/>
+   <comment type="patch/comment" x="14" y="252" text="CC4 echo on/off"/>
+   <comment type="patch/comment" x="14" y="266" text="CC5 sets the number of chunks"/>
+   <comment type="patch/comment" x="14" y="280" text="CC6 sets chunk order and direction type"/>
+   <comment type="patch/comment" x="14" y="294" text="CC7 reverb mix"/>
+   <comment type="patch/comment" x="14" y="308" text="CC8 chunker mix"/>
    <comment type="patch/comment" x="308" y="308" text="if both echo and phaser are turned on, reverb is enabled instead"/>
+   <comment type="patch/comment" x="1274" y="322" text="CC8 chunker mix"/>
    <comment type="patch/comment" x="14" y="336" text="phaser on/off"/>
    <obj type="midi/in/cc i" uuid="614eb76edef2b43632fa1fcda25aab54f821daf6" name="cc_9" x="14" y="350">
       <params/>
@@ -94,7 +99,7 @@
       <params/>
       <attribs/>
    </obj>
-   <comment type="patch/comment" x="910" y="364" text="CC7 reverb mix"/>
+   <comment type="patch/comment" x="966" y="364" text="CC7 reverb mix"/>
    <obj type="logic/and 2" uuid="c67031682f552aa0a80b23377495c51ea28a8c9c" name="and_2" x="406" y="378">
       <params/>
       <attribs/>
@@ -273,10 +278,6 @@
          <dest obj="and_7" inlet="i1"/>
       </net>
       <net>
-         <source obj="mix_1" outlet="out"/>
-         <dest obj="out_1" inlet="wave"/>
-      </net>
-      <net>
          <source obj="i_3" outlet="out"/>
          <dest obj="delayedpulse_2" inlet="trig"/>
       </net>
@@ -300,10 +301,6 @@
          <dest obj="led2_2" inlet="in"/>
       </net>
       <net>
-         <source obj="FlexChunker_1" outlet="out"/>
-         <dest obj="mix_1" inlet="in2"/>
-      </net>
-      <net>
          <source obj="FlexChunker_1" outlet="recording"/>
          <dest obj="or_2" inlet="i2"/>
       </net>
@@ -319,6 +316,7 @@
          <source obj="in_1" outlet="wave"/>
          <dest obj="echo_1" inlet="in"/>
          <dest obj="mux_1" inlet="i1"/>
+         <dest obj="FlexChunker_1" inlet="in"/>
       </net>
       <net>
          <source obj="echo_1" outlet="out"/>
@@ -401,15 +399,6 @@
          <dest obj="mux_2" inlet="i1"/>
       </net>
       <net>
-         <source obj="mux_3" outlet="o"/>
-         <dest obj="mix_1" inlet="in1"/>
-         <dest obj="FlexChunker_1" inlet="in"/>
-      </net>
-      <net>
-         <source obj="obj_2" outlet="l"/>
-         <dest obj="mux_3" inlet="i2"/>
-      </net>
-      <net>
          <source obj="obj_1" outlet="out"/>
          <dest obj="mux_2" inlet="i2"/>
       </net>
@@ -418,9 +407,30 @@
          <dest obj="mux_1" inlet="i2"/>
       </net>
       <net>
+         <source obj="FlexChunker_1" outlet="out"/>
+         <dest obj="mix_3" inlet="in4"/>
+      </net>
+      <net>
+         <source obj="mix_3" outlet="out"/>
+         <dest obj="out_1" inlet="wave"/>
+      </net>
+      <net>
          <source obj="mux_2" outlet="o"/>
-         <dest obj="mux_3" inlet="i1"/>
+         <dest obj="mix_3" inlet="in1"/>
+         <dest obj="mux_3" inlet="i2"/>
+      </net>
+      <net>
+         <source obj="mux_3" outlet="o"/>
          <dest obj="obj_2" inlet="InL"/>
+         <dest obj="obj_2" inlet="InR"/>
+      </net>
+      <net>
+         <source obj="obj_2" outlet="l"/>
+         <dest obj="mix_3" inlet="in2"/>
+      </net>
+      <net>
+         <source obj="obj_2" outlet="r"/>
+         <dest obj="mix_3" inlet="in3"/>
       </net>
    </nets>
    <settings>
