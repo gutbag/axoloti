@@ -1,11 +1,18 @@
 <patch-1.0 appVersion="1.0.12">
+   <comment type="patch/comment" x="812" y="0" text="CC5: enable direct fuzz (no blend)"/>
    <obj type="audio/in left" uuid="d40e60b7641fe75af4d7c91b45bb038aacafc52e" name="in_1" x="14" y="14">
       <params/>
       <attribs/>
    </obj>
    <comment type="patch/comment" x="336" y="14" text="Route input to looper and delay while recording"/>
    <comment type="patch/comment" x="616" y="14" text="CC4 enables fuzz/delay"/>
-   <comment type="patch/comment" x="854" y="14" text="CC3 enables direct fuzz once looper triggered"/>
+   <obj type="midi/in/cc i" uuid="614eb76edef2b43632fa1fcda25aab54f821daf6" name="cc_7" x="812" y="14">
+      <params/>
+      <attribs>
+         <spinner attributeName="cc" value="5"/>
+         <spinner attributeName="default" value="0"/>
+      </attribs>
+   </obj>
    <obj type="switches/1To2" uuid="83aba941-828a-4695-8ebb-ac8652dd2ab9" name="1To2_1" x="336" y="28">
       <params/>
       <attribs/>
@@ -16,11 +23,7 @@
       </params>
       <attribs/>
    </obj>
-   <obj type="logic/flipflop" uuid="f9b15363f5ee203152e062c08a8846f0074b0ea5" name="flipflop_3" x="854" y="28">
-      <params/>
-      <attribs/>
-   </obj>
-   <obj type="logic/and 2" uuid="c67031682f552aa0a80b23377495c51ea28a8c9c" name="and_8" x="938" y="28">
+   <obj type="logic/and 2" uuid="c67031682f552aa0a80b23377495c51ea28a8c9c" name="and_9" x="924" y="28">
       <params/>
       <attribs/>
    </obj>
@@ -204,19 +207,7 @@
       </attribs>
    </obj>
    <comment type="patch/comment" x="672" y="448" text="Attenuate when playing"/>
-   <comment type="patch/comment" x="14" y="490" text="CC4: trig second loop."/>
-   <obj type="midi/in/cc i" uuid="614eb76edef2b43632fa1fcda25aab54f821daf6" name="cc_2" x="14" y="504">
-      <params/>
-      <attribs>
-         <spinner attributeName="cc" value="4"/>
-         <spinner attributeName="default" value="0"/>
-      </attribs>
-   </obj>
    <comment type="patch/comment" x="224" y="504" text="Flash green LED to indicate start of bar."/>
-   <obj type="logic/and 2" uuid="c67031682f552aa0a80b23377495c51ea28a8c9c" name="and_6" x="126" y="518">
-      <params/>
-      <attribs/>
-   </obj>
    <obj type="timer/pulselength" uuid="ca68725237d8ba8407773340801660a9fd9b0dba" name="pulselength_1" x="224" y="518">
       <params>
          <frac32.s.map name="delay" value="0.0"/>
@@ -227,6 +218,11 @@
       <params/>
       <attribs/>
    </obj>
+   <comment type="patch/comment" x="644" y="574" text="CC1: &gt; 70 resets looper &amp; fuzz/delay blend"/>
+   <comment type="patch/comment" x="644" y="588" text="CC2: trig loop on bar start."/>
+   <comment type="patch/comment" x="644" y="602" text="CC3: set bar start"/>
+   <comment type="patch/comment" x="644" y="616" text="CC4: enables fuzz/delay"/>
+   <comment type="patch/comment" x="644" y="630" text="CC5: enable direct fuzz (no blend)"/>
    <comment type="patch/comment" x="14" y="658" text="Startup delay to lock out triggers on patch change. LED on until done."/>
    <comment type="patch/comment" x="392" y="658" text="Red LED on during startup and when looping."/>
    <obj type="const/i" uuid="e202f44b2df17ae0b3e663b98ea6b14c8ff00408" name="i_1" x="14" y="672">
@@ -320,13 +316,9 @@
       <net>
          <source obj="flipflop_1" outlet="o"/>
          <dest obj="inv_1" inlet="i"/>
-         <dest obj="and_6" inlet="i2"/>
          <dest obj="and_5" inlet="i2"/>
          <dest obj="and_7" inlet="i2"/>
-      </net>
-      <net>
-         <source obj="cc_2" outlet="trig"/>
-         <dest obj="and_6" inlet="i1"/>
+         <dest obj="and_9" inlet="i2"/>
       </net>
       <net>
          <source obj="i_2" outlet="out"/>
@@ -375,7 +367,6 @@
       <net>
          <source obj="LoopTrigBarSynchroniser2_1" outlet="loopstart"/>
          <dest obj="Basic_1" inlet="trigger"/>
-         <dest obj="flipflop_3" inlet="set"/>
       </net>
       <net>
          <source obj="Basic_1" outlet="recording"/>
@@ -481,12 +472,7 @@
          <dest obj="mix_1" inlet="in4"/>
       </net>
       <net>
-         <source obj="flipflop_3" outlet="o"/>
-         <dest obj="and_8" inlet="i2"/>
-      </net>
-      <net>
          <source obj="and_5" outlet="o"/>
-         <dest obj="and_8" inlet="i1"/>
          <dest obj="LoopTrigBarSynchroniser2_1" inlet="barstart"/>
       </net>
       <net>
@@ -494,12 +480,16 @@
          <dest obj="mux_1" inlet="s"/>
       </net>
       <net>
-         <source obj="and_8" outlet="o"/>
-         <dest obj="flipflop_4" inlet="trig"/>
-      </net>
-      <net>
          <source obj="xfade_1" outlet="o"/>
          <dest obj="mux_1" inlet="i1"/>
+      </net>
+      <net>
+         <source obj="cc_7" outlet="trig"/>
+         <dest obj="and_9" inlet="i1"/>
+      </net>
+      <net>
+         <source obj="and_9" outlet="o"/>
+         <dest obj="flipflop_4" inlet="trig"/>
       </net>
    </nets>
    <settings>
