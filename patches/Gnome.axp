@@ -1,5 +1,4 @@
 <patch-1.0 appVersion="1.0.12">
-   <comment type="patch/comment" x="868" y="0" text="after switch to get tail"/>
    <obj type="audio/in left" uuid="d40e60b7641fe75af4d7c91b45bb038aacafc52e" name="in_1" x="14" y="14">
       <params/>
       <attribs/>
@@ -39,20 +38,7 @@
       <attribs/>
    </obj>
    <comment type="patch/comment" x="770" y="14" text="reverb on/off"/>
-   <obj type="TSG/fx/reverb" uuid="78793f5f-a0eb-4658-97eb-01abe59317cb" name="obj_2" x="868" y="14">
-      <params>
-         <frac32.u.map name="PreDelay" value="17.5"/>
-         <frac32.u.map name="decay" value="33.5"/>
-         <frac32.u.map name="LowDamp" value="0.0"/>
-         <frac32.u.map name="HighDamp" value="0.0"/>
-         <frac32.u.map name="size" value="42.5"/>
-         <frac32.s.map name="mod_:pitch" value="-16.0"/>
-         <frac32.u.map name="mod_:gain" value="7.5"/>
-         <frac32.u.map name="diffusion" value="45.5"/>
-         <frac32.u.map name="mix" MidiCC="7" value="32.5"/>
-      </params>
-      <attribs/>
-   </obj>
+   <comment type="patch/comment" x="868" y="14" text="after on/off switch to get tail"/>
    <obj type="audio/out left" uuid="b11a3c09b2fdd575ea8212f2ce7743d5269253b1" name="out_1" x="1288" y="14">
       <params/>
       <attribs/>
@@ -61,8 +47,19 @@
       <params/>
       <attribs/>
    </obj>
+   <obj type="fx/rngs/reverb" uuid="bb0fb9e0-aafe-4501-ba83-897f2530751d" name="reverb_1" x="868" y="28">
+      <params>
+         <frac32.u.map name="amount" MidiCC="7" value="22.5"/>
+         <frac32.u.map name="time" value="46.5"/>
+         <frac32.u.map name="diffusion" value="39.5"/>
+         <frac32.u.map name="gain" value="34.5"/>
+         <frac32.u.map name="lowpass" value="64.0"/>
+      </params>
+      <attribs/>
+   </obj>
    <comment type="patch/comment" x="364" y="84" text="echo on/off"/>
    <comment type="patch/comment" x="644" y="84" text="phaser on/off"/>
+   <comment type="patch/comment" x="966" y="84" text="CC7 reverb amount"/>
    <obj type="disp/bool" uuid="a0ee71d48208b71752cbb8c05e55145106ef3946" name="bool_8" x="364" y="98">
       <params/>
       <attribs/>
@@ -75,29 +72,31 @@
       <params/>
       <attribs/>
    </obj>
-   <obj type="mix/mix 4 g" uuid="36f472cd81da2e17bd4b4ee11b53b4c82527220c" name="mix_3" x="1232" y="112">
+   <obj type="mix/mix 4 g" uuid="36f472cd81da2e17bd4b4ee11b53b4c82527220c" name="mix_3" x="1190" y="112">
       <params>
          <frac32.u.map name="gain1" value="32.0"/>
-         <frac32.u.map name="gain2" value="32.0"/>
-         <frac32.u.map name="gain3" value="32.0"/>
+         <frac32.u.map name="gain2" MidiCC="11" value="13.0"/>
+         <frac32.u.map name="gain3" MidiCC="11" value="13.0"/>
          <frac32.u.map name="gain4" MidiCC="8" value="9.5"/>
       </params>
       <attribs/>
    </obj>
-   <obj type="mux/mux 2" uuid="539c246f4c360ac476e128cfbfa84348fb7f7e73" name="mux_4" x="1120" y="126">
+   <obj type="mux/mux 2" uuid="539c246f4c360ac476e128cfbfa84348fb7f7e73" name="mux_4" x="1078" y="126">
       <params/>
       <attribs/>
    </obj>
    <comment type="patch/comment" x="126" y="182" text="CC1 echo feedback"/>
-   <obj type="mux/mux 2" uuid="539c246f4c360ac476e128cfbfa84348fb7f7e73" name="mux_5" x="1120" y="196">
+   <obj type="mux/mux 2" uuid="539c246f4c360ac476e128cfbfa84348fb7f7e73" name="mux_5" x="1078" y="196">
       <params/>
       <attribs/>
    </obj>
-   <obj type="disp/bool" uuid="a0ee71d48208b71752cbb8c05e55145106ef3946" name="bool_6" x="1120" y="266">
+   <comment type="patch/comment" x="1288" y="238" text="CC11 reverb gain"/>
+   <obj type="disp/bool" uuid="a0ee71d48208b71752cbb8c05e55145106ef3946" name="bool_6" x="1078" y="266">
       <params/>
       <attribs/>
    </obj>
-   <comment type="patch/comment" x="1274" y="322" text="CC8 chunker mix"/>
+   <comment type="patch/comment" x="1288" y="280" text="CC11 reverb gain"/>
+   <comment type="patch/comment" x="1288" y="322" text="CC8 chunker mix"/>
    <comment type="patch/comment" x="14" y="336" text="phaser on/off"/>
    <obj type="midi/in/cc i" uuid="614eb76edef2b43632fa1fcda25aab54f821daf6" name="cc_9" x="14" y="350">
       <params/>
@@ -115,7 +114,6 @@
       <attribs/>
    </obj>
    <comment type="patch/comment" x="336" y="364" text="CC9 reverb on /off"/>
-   <comment type="patch/comment" x="966" y="364" text="CC7 reverb mix"/>
    <obj type="midi/in/cc i" uuid="614eb76edef2b43632fa1fcda25aab54f821daf6" name="cc_11" x="336" y="378">
       <params/>
       <attribs>
@@ -131,7 +129,7 @@
       <params/>
       <attribs/>
    </obj>
-   <comment type="patch/comment" x="686" y="406" text="CC2 starts and stops the chunker if reverb is off"/>
+   <comment type="patch/comment" x="686" y="406" text="CC2 starts and stops the chunker"/>
    <obj type="midi/in/cc i" uuid="614eb76edef2b43632fa1fcda25aab54f821daf6" name="cc_4" x="686" y="420">
       <params/>
       <attribs>
@@ -139,7 +137,7 @@
          <spinner attributeName="default" value="0"/>
       </attribs>
    </obj>
-   <obj type="loopers/FlexChunker" uuid="d2c3bc98-d2c4-4b85-8134-97f2980117bf" name="FlexChunker_1" x="1008" y="420">
+   <obj type="loopers/FlexChunker" uuid="d2c3bc98-d2c4-4b85-8134-97f2980117bf" name="FlexChunker_1" x="938" y="420">
       <params/>
       <attribs>
          <spinner attributeName="MaxTimeSecs" value="32"/>
@@ -151,6 +149,7 @@
    </obj>
    <comment type="patch/comment" x="14" y="476" text="echo on/off"/>
    <comment type="patch/comment" x="336" y="476" text="CC10 reverb tail cutoff"/>
+   <comment type="patch/comment" x="1148" y="476" text="CC1 echo feedback"/>
    <obj type="midi/in/cc i" uuid="614eb76edef2b43632fa1fcda25aab54f821daf6" name="cc_10" x="14" y="490">
       <params/>
       <attribs>
@@ -165,7 +164,7 @@
          <spinner attributeName="default" value="0"/>
       </attribs>
    </obj>
-   <comment type="patch/comment" x="1204" y="490" text="CC1 echo feedback"/>
+   <comment type="patch/comment" x="1148" y="490" text="CC2 starts and stops the chunker"/>
    <obj type="logic/and 2" uuid="c67031682f552aa0a80b23377495c51ea28a8c9c" name="and_9" x="98" y="504">
       <params/>
       <attribs/>
@@ -182,9 +181,9 @@
       <params/>
       <attribs/>
    </obj>
-   <comment type="patch/comment" x="1204" y="504" text="CC2 starts and stops the chunker"/>
+   <comment type="patch/comment" x="1148" y="504" text="CC3 phaser on/off"/>
    <comment type="patch/comment" x="686" y="518" text="CC6 sets chunk order and direction type"/>
-   <comment type="patch/comment" x="1204" y="518" text="CC3 phaser on/off"/>
+   <comment type="patch/comment" x="1148" y="518" text="CC4 echo on/off"/>
    <obj type="midi/in/cc i" uuid="614eb76edef2b43632fa1fcda25aab54f821daf6" name="cc_6" x="686" y="532">
       <params/>
       <attribs>
@@ -196,13 +195,13 @@
       <params/>
       <attribs/>
    </obj>
-   <comment type="patch/comment" x="1204" y="532" text="CC4 echo on/off"/>
-   <comment type="patch/comment" x="1204" y="546" text="CC5 sets the number of chunks"/>
-   <comment type="patch/comment" x="1204" y="560" text="CC6 sets chunk order and direction type"/>
-   <comment type="patch/comment" x="1204" y="574" text="CC7 reverb mix"/>
-   <comment type="patch/comment" x="1204" y="588" text="CC8 chunker mix"/>
-   <comment type="patch/comment" x="1204" y="602" text="CC9 reverb on /off"/>
-   <comment type="patch/comment" x="1204" y="616" text="CC10 reverb tail cutoff"/>
+   <comment type="patch/comment" x="1148" y="532" text="CC5 sets the number of chunks"/>
+   <comment type="patch/comment" x="1148" y="546" text="CC6 sets chunk order and direction type"/>
+   <comment type="patch/comment" x="1148" y="560" text="CC7 reverb mix"/>
+   <comment type="patch/comment" x="1148" y="574" text="CC8 chunker mix"/>
+   <comment type="patch/comment" x="1148" y="588" text="CC9 reverb on /off"/>
+   <comment type="patch/comment" x="1148" y="602" text="CC10 reverb tail cutoff"/>
+   <comment type="patch/comment" x="1148" y="616" text="CC11 reverb gain"/>
    <comment type="patch/comment" x="686" y="630" text="CC5 sets the number of chunks"/>
    <comment type="patch/comment" x="14" y="644" text="Startup delay to lock out triggers on patch change. LED on until done."/>
    <comment type="patch/comment" x="392" y="644" text="Red LED on during startup and when looping."/>
@@ -329,8 +328,8 @@
       <net>
          <source obj="in_1" outlet="wave"/>
          <dest obj="echo_1" inlet="in"/>
-         <dest obj="mux_1" inlet="i1"/>
          <dest obj="FlexChunker_1" inlet="in"/>
+         <dest obj="mux_1" inlet="i1"/>
       </net>
       <net>
          <source obj="echo_1" outlet="out"/>
@@ -356,8 +355,8 @@
       </net>
       <net>
          <source obj="flipflop_3" outlet="o"/>
-         <dest obj="mux_2" inlet="s"/>
          <dest obj="bool_9" inlet="in"/>
+         <dest obj="mux_2" inlet="s"/>
       </net>
       <net>
          <source obj="cc_9" outlet="trig"/>
@@ -369,8 +368,8 @@
       </net>
       <net>
          <source obj="flipflop_4" outlet="o"/>
-         <dest obj="mux_1" inlet="s"/>
          <dest obj="bool_8" inlet="in"/>
+         <dest obj="mux_1" inlet="s"/>
       </net>
       <net>
          <source obj="cc_10" outlet="trig"/>
@@ -407,11 +406,6 @@
          <dest obj="mux_3" inlet="i2"/>
       </net>
       <net>
-         <source obj="mux_3" outlet="o"/>
-         <dest obj="obj_2" inlet="InL"/>
-         <dest obj="obj_2" inlet="InR"/>
-      </net>
-      <net>
          <source obj="mux_4" outlet="o"/>
          <dest obj="mix_3" inlet="in2"/>
       </net>
@@ -421,17 +415,9 @@
       </net>
       <net>
          <source obj="flipflop_5" outlet="o"/>
+         <dest obj="bool_6" inlet="in"/>
          <dest obj="mux_4" inlet="s"/>
          <dest obj="mux_5" inlet="s"/>
-         <dest obj="bool_6" inlet="in"/>
-      </net>
-      <net>
-         <source obj="obj_2" outlet="l"/>
-         <dest obj="mux_4" inlet="i1"/>
-      </net>
-      <net>
-         <source obj="obj_2" outlet="r"/>
-         <dest obj="mux_5" inlet="i1"/>
       </net>
       <net>
          <source obj="cc_11" outlet="trig"/>
@@ -455,8 +441,21 @@
       </net>
       <net>
          <source obj="flipflop_6" outlet="o"/>
-         <dest obj="mux_3" inlet="s"/>
          <dest obj="bool_7" inlet="in"/>
+         <dest obj="mux_3" inlet="s"/>
+      </net>
+      <net>
+         <source obj="mux_3" outlet="o"/>
+         <dest obj="reverb_1" inlet="l"/>
+         <dest obj="reverb_1" inlet="r"/>
+      </net>
+      <net>
+         <source obj="reverb_1" outlet="l"/>
+         <dest obj="mux_4" inlet="i1"/>
+      </net>
+      <net>
+         <source obj="reverb_1" outlet="r"/>
+         <dest obj="mux_5" inlet="i1"/>
       </net>
    </nets>
    <settings>
