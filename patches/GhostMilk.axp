@@ -218,11 +218,11 @@
       <params/>
       <attribs/>
    </obj>
-   <comment type="patch/comment" x="644" y="574" text="CC1: &gt; 70 resets looper &amp; fuzz/delay blend"/>
-   <comment type="patch/comment" x="644" y="588" text="CC2: trig loop on bar start."/>
-   <comment type="patch/comment" x="644" y="602" text="CC3: set bar start"/>
-   <comment type="patch/comment" x="644" y="616" text="CC4: enables fuzz/delay"/>
-   <comment type="patch/comment" x="644" y="630" text="CC5: enable direct fuzz (no blend)"/>
+   <comment type="patch/comment" x="686" y="574" text="CC1: &gt; 70 resets looper &amp; fuzz/delay blend"/>
+   <comment type="patch/comment" x="686" y="588" text="CC2: trig loop on bar start."/>
+   <comment type="patch/comment" x="686" y="602" text="CC3: set bar start"/>
+   <comment type="patch/comment" x="686" y="616" text="CC4: enables fuzz/delay"/>
+   <comment type="patch/comment" x="686" y="630" text="CC5: enable direct fuzz (no blend)"/>
    <comment type="patch/comment" x="14" y="658" text="Startup delay to lock out triggers on patch change. LED on until done."/>
    <comment type="patch/comment" x="392" y="658" text="Red LED on during startup and when looping."/>
    <obj type="const/i" uuid="e202f44b2df17ae0b3e663b98ea6b14c8ff00408" name="i_1" x="14" y="672">
