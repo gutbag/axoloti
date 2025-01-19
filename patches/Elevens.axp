@@ -7,14 +7,115 @@
       <params/>
       <attribs/>
    </obj>
-   <obj type="SRAMDelayMs" uuid="7652f21b-c075-4953-9046-03ad5518c200" name="SRAMDelayMs_1" x="490" y="42">
+   <obj type="switches/SafeSwitch" uuid="9ecd8939-7299-438c-b3e5-e19d98fdc50d" name="SafeSwitch_1" x="182" y="28">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="ElevensDelay" uuid="543656a2-acaa-4370-80cc-6cadc84794bf" name="ElevensDelay_1" x="336" y="28">
+      <params/>
+      <attribs>
+         <spinner attributeName="BPM" value="123"/>
+         <spinner attributeName="BeatsToBar" value="11"/>
+         <combo attributeName="NoteValue" selection="8"/>
+         <spinner attributeName="Bars" value="4"/>
+      </attribs>
+   </obj>
+   <obj type="mix/mix 2 g" uuid="221f038da51943034a75e442c90624fcebfe6112" name="mix_1" x="798" y="28">
       <params>
-         <frac32.u.map name="mix" value="36.5"/>
-         <frac32.u.map name="feedback" value="11.0"/>
+         <frac32.u.map name="gain1" value="15.0"/>
+         <frac32.u.map name="gain2" value="32.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="delay/echo fdbk mix" uuid="15716b14ebe691010ccfd54af72ea23232a843c6" name="echo_1" x="196" y="154">
+      <params>
+         <frac32.u.map name="mix" value="21.5"/>
+         <frac32.u.map name="feedback" value="29.5"/>
       </params>
       <attribs>
-         <spinner attributeName="ms" value="10390"/>
+         <spinner attributeName="delaylength" value="11000"/>
       </attribs>
+   </obj>
+   <obj type="math/gain" uuid="62b1c1a6337c7c8f6aec96408a432477b113cfa0" name="gain_1" x="322" y="154">
+      <params>
+         <frac32.u.map name="amp" value="9.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="mux/mux 2" uuid="539c246f4c360ac476e128cfbfa84348fb7f7e73" name="mux_1" x="434" y="154">
+      <params/>
+      <attribs/>
+   </obj>
+   <comment type="patch/comment" x="434" y="224" text="echo on/off"/>
+   <obj type="disp/bool" uuid="a0ee71d48208b71752cbb8c05e55145106ef3946" name="bool_1" x="434" y="238">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="switches/1To2" uuid="83aba941-828a-4695-8ebb-ac8652dd2ab9" name="1To2_1" x="56" y="280">
+      <params/>
+      <attribs/>
+   </obj>
+   <comment type="patch/comment" x="14" y="392" text="long delay on/off"/>
+   <obj type="midi/in/cc i" uuid="614eb76edef2b43632fa1fcda25aab54f821daf6" name="cc_9" x="14" y="406">
+      <params/>
+      <attribs>
+         <spinner attributeName="cc" value="2"/>
+         <spinner attributeName="default" value="0"/>
+      </attribs>
+   </obj>
+   <obj type="logic/and 2" uuid="c67031682f552aa0a80b23377495c51ea28a8c9c" name="and_8" x="98" y="420">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="logic/flipflop toggle" uuid="195e489e5fc3d275944b0de56c7a91c8641ea22a" name="flipflop_3" x="168" y="420">
+      <params/>
+      <attribs/>
+   </obj>
+   <comment type="patch/comment" x="14" y="504" text="echo on/off"/>
+   <obj type="midi/in/cc i" uuid="614eb76edef2b43632fa1fcda25aab54f821daf6" name="cc_10" x="14" y="518">
+      <params/>
+      <attribs>
+         <spinner attributeName="cc" value="3"/>
+         <spinner attributeName="default" value="0"/>
+      </attribs>
+   </obj>
+   <obj type="logic/and 2" uuid="c67031682f552aa0a80b23377495c51ea28a8c9c" name="and_9" x="98" y="532">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="logic/flipflop toggle" uuid="195e489e5fc3d275944b0de56c7a91c8641ea22a" name="flipflop_4" x="168" y="532">
+      <params/>
+      <attribs/>
+   </obj>
+   <comment type="patch/comment" x="14" y="658" text="Startup delay to lock out triggers on patch change. LED on until done."/>
+   <comment type="patch/comment" x="392" y="658" text="Red LED on during startup and when delay is on."/>
+   <obj type="const/i" uuid="e202f44b2df17ae0b3e663b98ea6b14c8ff00408" name="i_3" x="14" y="672">
+      <params/>
+      <attribs>
+         <spinner attributeName="value" value="1"/>
+      </attribs>
+   </obj>
+   <obj type="timer/delayedpulse" uuid="3f05ee534ca67755fb20c7437f9e4de3d4c2f73d" name="delayedpulse_2" x="98" y="672">
+      <params>
+         <frac32.s.map name="delay" value="54.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="logic/flipflop" uuid="f9b15363f5ee203152e062c08a8846f0074b0ea5" name="flipflop_1" x="210" y="672">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="logic/inv" uuid="2bd44b865d3b63ff9b80862242bf5be779e3ad5" name="inv_1" x="294" y="672">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="phi/logic/or 4" uuid="5dc5a7c1fb7809522171638f755fead71cbe14ea" name="or_2" x="392" y="672">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="gpio/out/led2" uuid="3d7a4c75d1f9901181a17ba5de752782de911803" name="led2_2" x="476" y="672">
+      <params/>
+      <attribs/>
    </obj>
    <comment type="patch/comment" x="770" y="686" text="For testing"/>
    <obj type="midi/out/cc" uuid="7ca9b2c1b4339022c491a8afd70353c17d765584" name="cc_5" x="854" y="700">
@@ -70,11 +171,84 @@
       </net>
       <net>
          <source obj="in_1" outlet="wave"/>
-         <dest obj="SRAMDelayMs_1" inlet="in"/>
+         <dest obj="SafeSwitch_1" inlet="in"/>
+         <dest obj="echo_1" inlet="in"/>
+         <dest obj="mux_1" inlet="i1"/>
       </net>
       <net>
-         <source obj="SRAMDelayMs_1" outlet="out"/>
+         <source obj="cc_9" outlet="trig"/>
+         <dest obj="and_8" inlet="i1"/>
+      </net>
+      <net>
+         <source obj="and_8" outlet="o"/>
+         <dest obj="flipflop_3" inlet="trig"/>
+      </net>
+      <net>
+         <source obj="flipflop_3" outlet="o"/>
+         <dest obj="SafeSwitch_1" inlet="on"/>
+      </net>
+      <net>
+         <source obj="i_3" outlet="out"/>
+         <dest obj="delayedpulse_2" inlet="trig"/>
+      </net>
+      <net>
+         <source obj="delayedpulse_2" outlet="pulse"/>
+         <dest obj="flipflop_1" inlet="set"/>
+      </net>
+      <net>
+         <source obj="flipflop_1" outlet="o"/>
+         <dest obj="inv_1" inlet="i"/>
+         <dest obj="and_8" inlet="i2"/>
+         <dest obj="and_9" inlet="i2"/>
+      </net>
+      <net>
+         <source obj="inv_1" outlet="o"/>
+         <dest obj="or_2" inlet="i1"/>
+      </net>
+      <net>
+         <source obj="or_2" outlet="o"/>
+         <dest obj="led2_2" inlet="in"/>
+      </net>
+      <net>
+         <source obj="SafeSwitch_1" outlet="o"/>
+         <dest obj="ElevensDelay_1" inlet="in"/>
+      </net>
+      <net>
+         <source obj="mix_1" outlet="out"/>
          <dest obj="out_1" inlet="wave"/>
+      </net>
+      <net>
+         <source obj="ElevensDelay_1" outlet="out"/>
+         <dest obj="mix_1" inlet="in1"/>
+      </net>
+      <net>
+         <source obj="SafeSwitch_1" outlet="isOn"/>
+         <dest obj="or_2" inlet="i2"/>
+      </net>
+      <net>
+         <source obj="echo_1" outlet="out"/>
+         <dest obj="gain_1" inlet="in"/>
+      </net>
+      <net>
+         <source obj="gain_1" outlet="out"/>
+         <dest obj="mux_1" inlet="i2"/>
+      </net>
+      <net>
+         <source obj="mux_1" outlet="o"/>
+         <dest obj="mix_1" inlet="in2"/>
+      </net>
+      <net>
+         <source obj="flipflop_4" outlet="o"/>
+         <dest obj="mux_1" inlet="s"/>
+         <dest obj="bool_1" inlet="in"/>
+      </net>
+      <net>
+         <source obj="cc_10" outlet="trig"/>
+         <dest obj="and_9" inlet="i1"/>
+      </net>
+      <net>
+         <source obj="and_9" outlet="o"/>
+         <dest obj="flipflop_4" inlet="trig"/>
       </net>
    </nets>
    <settings>
