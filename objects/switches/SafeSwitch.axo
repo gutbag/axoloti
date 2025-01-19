@@ -2,14 +2,14 @@
    <obj.normal id="SafeSwitch" uuid="9ecd8939-7299-438c-b3e5-e19d98fdc50d">
       <sDescription>Connects the inlet to the outlet if on is true. Fades up and down to prevent clicks.</sDescription>
       <author>Mark Lamb</author>
-      <license></license>
-      <helpPatch></helpPatch>
+      <license>GPL</license>
       <inlets>
          <frac32buffer name="in" description="input 1"/>
          <bool32 name="on" description="select"/>
       </inlets>
       <outlets>
          <frac32buffer name="o" description="output"/>
+         <bool32 name="isOn"/>
       </outlets>
       <displays>
          <bool32 name="on" noLabel="true"/>
@@ -60,7 +60,7 @@ event = NO_EVENT;
 on = false;]]></code.init>
       <code.krate><![CDATA[if (inlet_on)
 {
-	if (on == false) // transition to on
+	if (not on) // transition to on
 	{
 		on = true;
 		
@@ -83,7 +83,7 @@ on = false;]]></code.init>
 }
 else
 {
-	if (on == true) // transition to off
+	if (on) // transition to off
 	{
 		on = false;
 		
@@ -184,6 +184,7 @@ event = NO_EVENT;
 
 // update the on state and display
 on = (state == ON || state == TURNING_ON);
-disp_on = on;]]></code.srate>
+disp_on = on;
+outlet_isOn = on;]]></code.srate>
    </obj.normal>
 </objdefs>
