@@ -1,0 +1,97 @@
+<patch-1.0 appVersion="1.0.12">
+   <obj type="audio/in left" uuid="d40e60b7641fe75af4d7c91b45bb038aacafc52e" name="in_1" x="70" y="28">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="audio/out left" uuid="b11a3c09b2fdd575ea8212f2ce7743d5269253b1" name="out_1" x="420" y="28">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="osc/sine" uuid="6e094045cca76a9dbf7ebfa72e44e4700d2b3ba" name="sine_1" x="70" y="98">
+      <params>
+         <frac32.s.map name="pitch" value="-4.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="osc/sine" uuid="6e094045cca76a9dbf7ebfa72e44e4700d2b3ba" name="sine_3" x="70" y="224">
+      <params>
+         <frac32.s.map name="pitch" value="-18.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="osc/sine" uuid="6e094045cca76a9dbf7ebfa72e44e4700d2b3ba" name="sine_2" x="182" y="224">
+      <params>
+         <frac32.s.map name="pitch" value="4.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="jho/stomp/phaser" uuid="c9da6487-ce12-400c-acf5-435fbeacf24c" name="obj_1" x="294" y="224">
+      <params>
+         <frac32.s.map name="speed" value="-14.319999694824219"/>
+         <frac32.u.map name="waveform" value="0.0"/>
+         <frac32.u.map name="depth" value="32.5"/>
+         <frac32.u.map name="offset" value="0.0"/>
+         <frac32.u.map name="blend" value="32.0"/>
+         <bool32.tgl name="on" value="1"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="mix/mix 2 g" uuid="221f038da51943034a75e442c90624fcebfe6112" name="mix_1" x="406" y="224">
+      <params>
+         <frac32.u.map name="gain1" value="0.0"/>
+         <frac32.u.map name="gain2" value="32.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="audio/inconfig l" uuid="7007d026acb7c3586f60a7f0898718d1ca7e0607" name="inconfig_1" x="28" y="700">
+      <params/>
+      <attribs>
+         <combo attributeName="gain" selection="6dB"/>
+         <combo attributeName="boost" selection="0dB"/>
+      </attribs>
+   </obj>
+   <obj type="audio/inconfig r" uuid="8468fe7907553f335959a7f69cbc5a1f7b5d4d1d" name="inconfig_2" x="140" y="700">
+      <params/>
+      <attribs>
+         <combo attributeName="gain" selection="3dB"/>
+         <combo attributeName="boost" selection="0dB"/>
+      </attribs>
+   </obj>
+   <nets>
+      <net>
+         <source obj="sine_1" outlet="wave"/>
+         <dest obj="mix_1" inlet="in1"/>
+      </net>
+      <net>
+         <source obj="mix_1" outlet="out"/>
+         <dest obj="out_1" inlet="wave"/>
+      </net>
+      <net>
+         <source obj="sine_3" outlet="wave"/>
+         <dest obj="sine_2" inlet="freq"/>
+      </net>
+      <net>
+         <source obj="sine_2" outlet="wave"/>
+         <dest obj="obj_1" inlet="in"/>
+      </net>
+      <net>
+         <source obj="obj_1" outlet="out"/>
+         <dest obj="mix_1" inlet="in2"/>
+      </net>
+   </nets>
+   <settings>
+      <subpatchmode>no</subpatchmode>
+      <MidiChannel>2</MidiChannel>
+      <NPresets>8</NPresets>
+      <NPresetEntries>32</NPresetEntries>
+      <NModulationSources>8</NModulationSources>
+      <NModulationTargetsPerSource>8</NModulationTargetsPerSource>
+   </settings>
+   <notes><![CDATA[]]></notes>
+   <windowPos>
+      <x>438</x>
+      <y>71</y>
+      <width>1041</width>
+      <height>891</height>
+   </windowPos>
+</patch-1.0>
