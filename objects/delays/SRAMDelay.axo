@@ -1,0 +1,58 @@
+<objdefs appVersion="1.0.12">
+   <obj.normal id="SRAMDelay" uuid="c47c5af7-cdd9-4f44-b70e-9bbe03eb6a1d">
+      <sDescription>Audio delay using SRAM. No feedback and 100% wet mix. Configured in musical terms rather than ms.</sDescription>
+      <author>Mark Lamb</author>
+      <license></license>
+      <inlets>
+         <frac32buffer name="in" description="input"/>
+      </inlets>
+      <outlets>
+         <frac32buffer name="out" description="output"/>
+      </outlets>
+      <displays/>
+      <params/>
+      <attribs>
+         <spinner name="BPM" MinValue="30" MaxValue="300" DefaultValue="123"/>
+         <spinner name="BeatsToBar" MinValue="2" MaxValue="20" DefaultValue="11"/>
+         <combo name="NoteValue">
+            <MenuEntries>
+               <string>4</string>
+               <string>8</string>
+            </MenuEntries>
+            <CEntries>
+               <string>4</string>
+               <string>8</string>
+            </CEntries>
+         </combo>
+         <spinner name="Bars" MinValue="1" MaxValue="32" DefaultValue="4"/>
+      </attribs>
+      <code.declaration><![CDATA[static const uint32_t BPM = attr_BPM;
+static const uint32_t BARS = attr_Bars;
+static const uint32_t BEATS_TO_BAR = attr_BeatsToBar;
+static const uint32_t BEATS = BARS * BEATS_TO_BAR;
+static const uint32_t NOTE_VALUE = attr_NoteValue;
+static constexpr double SAMPLE_PERIOD = 1.0 / 48000.0;
+static const uint32_t ARRAY_LENGTH = ((60.0 / BPM) * BEATS * (4.0/NOTE_VALUE)) / SAMPLE_PERIOD;
+
+uint32_t delaywindex;
+uint32_t delayrindex;
+int32_t* delayline;]]></code.declaration>
+      <code.init><![CDATA[static int32_t _array[ARRAY_LENGTH] __attribute__ ((section (".sdram")));
+delayline = &_array[0];
+
+for(int i=0;i<ARRAY_LENGTH;i++)
+	delayline[i] = 0;
+	
+delaywindex = 0;
+delayrindex = 1;]]></code.init>
+      <code.srate><![CDATA[int32_t rd = delayline[delayrindex++];
+delayline[delaywindex++] = inlet_in;
+
+if (delayrindex == ARRAY_LENGTH)
+	delayrindex = 0;
+if (delaywindex == ARRAY_LENGTH)
+	delaywindex = 0;
+
+outlet_out = rd;]]></code.srate>
+   </obj.normal>
+</objdefs>
