@@ -3,6 +3,15 @@
       <params/>
       <attribs/>
    </obj>
+   <obj type="mix/mix 4 g" uuid="36f472cd81da2e17bd4b4ee11b53b4c82527220c" name="mix_1" x="896" y="14">
+      <params>
+         <frac32.u.map name="gain1" value="15.0"/>
+         <frac32.u.map name="gain2" value="32.0"/>
+         <frac32.u.map name="gain3" value="32.0"/>
+         <frac32.u.map name="gain4" value="32.0"/>
+      </params>
+      <attribs/>
+   </obj>
    <obj type="audio/out left" uuid="b11a3c09b2fdd575ea8212f2ce7743d5269253b1" name="out_1" x="1148" y="14">
       <params/>
       <attribs/>
@@ -11,7 +20,7 @@
       <params/>
       <attribs/>
    </obj>
-   <obj type="ElevensDelay" uuid="543656a2-acaa-4370-80cc-6cadc84794bf" name="ElevensDelay_1" x="336" y="28">
+   <obj type="delays/SRAMDelay" uuid="c47c5af7-cdd9-4f44-b70e-9bbe03eb6a1d" name="SRAMDelay_1" x="322" y="28">
       <params/>
       <attribs>
          <spinner attributeName="BPM" value="123"/>
@@ -20,11 +29,8 @@
          <spinner attributeName="Bars" value="4"/>
       </attribs>
    </obj>
-   <obj type="mix/mix 2 g" uuid="221f038da51943034a75e442c90624fcebfe6112" name="mix_1" x="798" y="28">
-      <params>
-         <frac32.u.map name="gain1" value="15.0"/>
-         <frac32.u.map name="gain2" value="32.0"/>
-      </params>
+   <obj type="switches/1To2" uuid="83aba941-828a-4695-8ebb-ac8652dd2ab9" name="1To2_1" x="70" y="112">
+      <params/>
       <attribs/>
    </obj>
    <obj type="delay/echo fdbk mix" uuid="15716b14ebe691010ccfd54af72ea23232a843c6" name="echo_1" x="196" y="154">
@@ -42,16 +48,8 @@
       </params>
       <attribs/>
    </obj>
-   <obj type="mux/mux 2" uuid="539c246f4c360ac476e128cfbfa84348fb7f7e73" name="mux_1" x="434" y="154">
-      <params/>
-      <attribs/>
-   </obj>
-   <comment type="patch/comment" x="434" y="224" text="echo on/off"/>
-   <obj type="disp/bool" uuid="a0ee71d48208b71752cbb8c05e55145106ef3946" name="bool_1" x="434" y="238">
-      <params/>
-      <attribs/>
-   </obj>
-   <obj type="switches/1To2" uuid="83aba941-828a-4695-8ebb-ac8652dd2ab9" name="1To2_1" x="56" y="280">
+   <comment type="patch/comment" x="322" y="238" text="echo on/off"/>
+   <obj type="disp/bool" uuid="a0ee71d48208b71752cbb8c05e55145106ef3946" name="bool_1" x="322" y="252">
       <params/>
       <attribs/>
    </obj>
@@ -172,8 +170,7 @@
       <net>
          <source obj="in_1" outlet="wave"/>
          <dest obj="SafeSwitch_1" inlet="in"/>
-         <dest obj="echo_1" inlet="in"/>
-         <dest obj="mux_1" inlet="i1"/>
+         <dest obj="1To2_1" inlet="i1"/>
       </net>
       <net>
          <source obj="cc_9" outlet="trig"/>
@@ -210,18 +207,6 @@
          <dest obj="led2_2" inlet="in"/>
       </net>
       <net>
-         <source obj="SafeSwitch_1" outlet="o"/>
-         <dest obj="ElevensDelay_1" inlet="in"/>
-      </net>
-      <net>
-         <source obj="mix_1" outlet="out"/>
-         <dest obj="out_1" inlet="wave"/>
-      </net>
-      <net>
-         <source obj="ElevensDelay_1" outlet="out"/>
-         <dest obj="mix_1" inlet="in1"/>
-      </net>
-      <net>
          <source obj="SafeSwitch_1" outlet="isOn"/>
          <dest obj="or_2" inlet="i2"/>
       </net>
@@ -230,17 +215,9 @@
          <dest obj="gain_1" inlet="in"/>
       </net>
       <net>
-         <source obj="gain_1" outlet="out"/>
-         <dest obj="mux_1" inlet="i2"/>
-      </net>
-      <net>
-         <source obj="mux_1" outlet="o"/>
-         <dest obj="mix_1" inlet="in2"/>
-      </net>
-      <net>
          <source obj="flipflop_4" outlet="o"/>
-         <dest obj="mux_1" inlet="s"/>
          <dest obj="bool_1" inlet="in"/>
+         <dest obj="1To2_1" inlet="sw"/>
       </net>
       <net>
          <source obj="cc_10" outlet="trig"/>
@@ -249,6 +226,30 @@
       <net>
          <source obj="and_9" outlet="o"/>
          <dest obj="flipflop_4" inlet="trig"/>
+      </net>
+      <net>
+         <source obj="mix_1" outlet="out"/>
+         <dest obj="out_1" inlet="wave"/>
+      </net>
+      <net>
+         <source obj="1To2_1" outlet="o1"/>
+         <dest obj="mix_1" inlet="in2"/>
+      </net>
+      <net>
+         <source obj="gain_1" outlet="out"/>
+         <dest obj="mix_1" inlet="in3"/>
+      </net>
+      <net>
+         <source obj="1To2_1" outlet="o2"/>
+         <dest obj="echo_1" inlet="in"/>
+      </net>
+      <net>
+         <source obj="SafeSwitch_1" outlet="o"/>
+         <dest obj="SRAMDelay_1" inlet="in"/>
+      </net>
+      <net>
+         <source obj="SRAMDelay_1" outlet="out"/>
+         <dest obj="mix_1" inlet="in1"/>
       </net>
    </nets>
    <settings>
