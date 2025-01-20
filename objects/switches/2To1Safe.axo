@@ -1,0 +1,233 @@
+<objdefs appVersion="1.0.12">
+   <obj.normal id="2To1Safe" uuid="8cfbb7b5-4fc0-4d92-bd3f-506080e3b408">
+      <sDescription>Connects i1 to o when s is false, to i2 when s is true. Fades down and up to prevent clicks.</sDescription>
+      <author>Mark Lamb</author>
+      <license></license>
+      <helpPatch></helpPatch>
+      <inlets>
+         <frac32buffer name="i1" description="input 1"/>
+         <frac32buffer name="i2" description="input 2"/>
+         <bool32 name="s" description="select"/>
+      </inlets>
+      <outlets>
+         <frac32buffer name="o" description="output"/>
+         <bool32 name="i2"/>
+      </outlets>
+      <displays>
+         <bool32 name="i2" noLabel="true"/>
+      </displays>
+      <params/>
+      <attribs/>
+      <code.declaration><![CDATA[static const uint32_t NUM_FADE_VALUES = 192;
+
+typedef enum {I1, FADING_TO_I2, I2, FADING_TO_I1} State;
+State state;
+
+typedef enum {
+	NO_EVENT, 
+	ON_EVENT,  // o = i2
+	OFF_EVENT} // o = i1
+Event;
+Event event;
+
+bool on = false;
+uint32_t fadeUpIndex = 0;
+uint32_t fadeDownIndex = 0;
+
+/**
+ * Returns the rawValue modified by the fade value with the given index.
+ * If the index is out of range, rawValue is returned.
+ */
+int32_t fadeValue(const int32_t rawValue, const uint32_t fadeIndex)
+{
+	// 2147483632 is a gain of 1
+	static const uint32_t FADE_VALUES[NUM_FADE_VALUES] = {
+	0, 11184811, 22369621, 33554432, 44739242, 55924053, 67108864, 78293674, 89478485, 100663295, 111848106, 123032916, 134217727, 145402538, 156587348, 167772159, 
+	178956969, 190141780, 201326591, 212511401, 223696212, 234881022, 246065833, 257250643, 268435454, 279620265, 290805075, 301989886, 313174696, 324359507, 335544318, 
+	346729128, 357913939, 369098749, 380283560, 391468370, 402653181, 413837992, 425022802, 436207613, 447392423, 458577234, 469762045, 480946855, 492131666, 503316476, 
+	514501287, 525686097, 536870908, 548055719, 559240529, 570425340, 581610150, 592794961, 603979772, 615164582, 626349393, 637534203, 648719014, 659903824, 671088635, 
+	682273446, 693458256, 704643067, 715827877, 727012688, 738197499, 749382309, 760567120, 771751930, 782936741, 794121551, 805306362, 816491173, 827675983, 838860794, 
+	850045604, 861230415, 872415226, 883600036, 894784847, 905969657, 917154468, 928339278, 939524089, 950708900, 961893710, 973078521, 984263331, 995448142, 1006632953, 
+	1017817763, 1029002574, 1040187384, 1051372195, 1062557005, 1073741816, 1084926627, 1096111437, 1107296248, 1118481058, 1129665869, 1140850680, 1152035490, 1163220301, 
+	1174405111, 1185589922, 1196774732, 1207959543, 1219144354, 1230329164, 1241513975, 1252698785, 1263883596, 1275068407, 1286253217, 1297438028, 1308622838, 1319807649, 
+	1330992459, 1342177270, 1353362081, 1364546891, 1375731702, 1386916512, 1398101323, 1409286134, 1420470944, 1431655755, 1442840565, 1454025376, 1465210186, 1476394997, 
+	1487579808, 1498764618, 1509949429, 1521134239, 1532319050, 1543503861, 1554688671, 1565873482, 1577058292, 1588243103, 1599427913, 1610612724, 1621797535, 1632982345, 
+	1644167156, 1655351966, 1666536777, 1677721588, 1688906398, 1700091209, 1711276019, 1722460830, 1733645640, 1744830451, 1756015262, 1767200072, 1778384883, 1789569693, 
+	1800754504, 1811939315, 1823124125, 1834308936, 1845493746, 1856678557, 1867863367, 1879048178, 1890232989, 1901417799, 1912602610, 1923787420, 1934972231, 1946157042, 
+	1957341852, 1968526663, 1979711473, 1990896284, 2002081094, 2013265905, 2024450716, 2035635526, 2046820337, 2058005147, 2069189958, 2080374769, 2091559579, 2102744390, 
+	2113929200, 2125114011, 2136298821 };
+
+	if (fadeIndex < NUM_FADE_VALUES)
+		return __SSAT(___SMMUL(FADE_VALUES[fadeIndex],__SSAT(rawValue,28))<<1,28);
+	else
+		return rawValue;
+}]]></code.declaration>
+      <code.init><![CDATA[state = I1;
+event = NO_EVENT;
+on = false;]]></code.init>
+      <code.krate><![CDATA[if (inlet_s)
+{
+	if (not on) // transition to on
+	{
+		on = true;
+		
+		switch (state)
+		{
+			case I1:
+				event = ON_EVENT;
+			break;
+			case FADING_TO_I2:
+				// nothing to do
+			break;
+			case I2:
+				// nothing to do
+			break;
+			case FADING_TO_I1:
+				event = ON_EVENT;
+			break;
+		}
+	}
+}
+else
+{
+	if (on) // transition to off
+	{
+		on = false;
+		
+		switch (state)
+		{
+			case I1:
+				// nothing to do
+			break;
+			case FADING_TO_I2:
+				event = OFF_EVENT;
+			break;
+			case I2:
+				event = OFF_EVENT;
+			break;
+			case FADING_TO_I1:
+				// nothing to do
+			break;
+		}
+	}
+}]]></code.krate>
+      <code.srate><![CDATA[switch (state)
+{
+	case I1:
+		switch (event)
+		{
+			case NO_EVENT:
+				outlet_o = inlet_i1;
+			break;
+			case ON_EVENT:
+				outlet_o = inlet_i1;
+				state = FADING_TO_I2;
+				fadeUpIndex = 0;
+				fadeDownIndex = NUM_FADE_VALUES - 1;
+			break;
+			case OFF_EVENT:
+				outlet_o = inlet_i1;
+			break;
+		}
+	break;
+	case FADING_TO_I2: // fade i1 down, i2 up
+		switch (event)
+		{
+			case NO_EVENT:
+			case ON_EVENT:
+			{
+				int32_t i1 = fadeValue(inlet_i1, fadeDownIndex);
+				fadeDownIndex--;
+				int32_t i2 = fadeValue(inlet_i2, fadeUpIndex);
+				fadeUpIndex++;
+				if (fadeUpIndex >= NUM_FADE_VALUES)
+					state = I2;
+				outlet_o = i1 + i2;
+			}
+			break;
+			case OFF_EVENT:
+			{
+				int32_t i1 = fadeValue(inlet_i1, fadeDownIndex);
+				fadeDownIndex--;
+				int32_t i2 = fadeValue(inlet_i2, fadeUpIndex);
+				fadeUpIndex++;
+				outlet_o = i1 + i2;
+				if (fadeUpIndex >= NUM_FADE_VALUES) // reverse the increment/decrement
+				{
+					fadeDownIndex++;
+					fadeUpIndex--;
+				}
+				// swap fade indexes, we need to switch to i1
+				uint32_t tmpIndex = fadeDownIndex;
+				fadeDownIndex = fadeUpIndex;
+				fadeUpIndex = tmpIndex;
+				state = FADING_TO_I1;
+			}
+			break;
+		}
+	break;
+	case I2:
+		switch (event)
+		{
+			case NO_EVENT:
+				outlet_o = inlet_i2;
+			break;
+			case ON_EVENT:
+				outlet_o = inlet_i2;
+			break;
+			case OFF_EVENT:
+				outlet_o = inlet_i2;
+				state = FADING_TO_I1;
+				fadeUpIndex = 0;
+				fadeDownIndex = NUM_FADE_VALUES - 1;
+			break;
+		}
+	break;
+	case FADING_TO_I1:
+		switch (event)
+		{
+			case NO_EVENT:
+			case OFF_EVENT:
+			{
+				int32_t i1 = fadeValue(inlet_i1, fadeUpIndex);
+				fadeUpIndex++;
+				int32_t i2 = fadeValue(inlet_i2, fadeDownIndex);
+				fadeDownIndex--;
+				if (fadeUpIndex >= NUM_FADE_VALUES)
+					state = I1;
+				outlet_o = i1 + i2;
+			}
+			break;
+			case ON_EVENT:
+			{
+				int32_t i1 = fadeValue(inlet_i1, fadeUpIndex);
+				fadeUpIndex++;
+				int32_t i2 = fadeValue(inlet_i2, fadeDownIndex);
+				fadeDownIndex--;
+				outlet_o = i1 + i2;
+				if (fadeUpIndex >= NUM_FADE_VALUES) // reverse the increment/decrement
+				{
+					fadeDownIndex++;
+					fadeUpIndex--;
+				}
+				// swap fade indexes, we need to switch to i1
+				uint32_t tmpIndex = fadeDownIndex;
+				fadeDownIndex = fadeUpIndex;
+				fadeUpIndex = tmpIndex;
+				state = FADING_TO_I2;
+			}
+			break;
+		}
+	break;
+
+}
+
+// consume the event
+event = NO_EVENT;
+
+// update the on state and display
+on = (state == I2 || state == FADING_TO_I2);
+disp_i2 = on;
+outlet_i2 = on;]]></code.srate>
+   </obj.normal>
+</objdefs>
