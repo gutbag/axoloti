@@ -18,10 +18,7 @@
       </params>
       <attribs/>
    </obj>
-   <obj type="mux/mux 2" uuid="539c246f4c360ac476e128cfbfa84348fb7f7e73" name="mux_1" x="364" y="14">
-      <params/>
-      <attribs/>
-   </obj>
+   <comment type="patch/comment" x="364" y="14" text="echo on/off"/>
    <obj type="jho/stomp/phaser" uuid="59eb13ec-b7d4-42c4-b699-f0692753375e" name="obj_1" x="532" y="14">
       <params>
          <frac32.s.map name="speed" value="-13.319999694824219"/>
@@ -33,13 +30,18 @@
       </params>
       <attribs/>
    </obj>
-   <obj type="mux/mux 2" uuid="539c246f4c360ac476e128cfbfa84348fb7f7e73" name="mux_2" x="644" y="14">
+   <comment type="patch/comment" x="644" y="14" text="phaser on/off"/>
+   <comment type="patch/comment" x="756" y="14" text="reverb on/off"/>
+   <comment type="patch/comment" x="868" y="14" text="after on/off switch to get tail"/>
+   <obj type="audio/out left" uuid="b11a3c09b2fdd575ea8212f2ce7743d5269253b1" name="out_1" x="1288" y="14">
       <params/>
       <attribs/>
    </obj>
-   <comment type="patch/comment" x="770" y="14" text="reverb on/off"/>
-   <comment type="patch/comment" x="868" y="14" text="after on/off switch to get tail"/>
-   <obj type="audio/out left" uuid="b11a3c09b2fdd575ea8212f2ce7743d5269253b1" name="out_1" x="1288" y="14">
+   <obj type="switches/2To1Safe" uuid="8cfbb7b5-4fc0-4d92-bd3f-506080e3b408" name="2To1Safe_1" x="364" y="28">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="switches/2To1Safe" uuid="8cfbb7b5-4fc0-4d92-bd3f-506080e3b408" name="2To1Safe_2" x="644" y="28">
       <params/>
       <attribs/>
    </obj>
@@ -57,17 +59,7 @@
       </params>
       <attribs/>
    </obj>
-   <comment type="patch/comment" x="364" y="84" text="echo on/off"/>
-   <comment type="patch/comment" x="644" y="84" text="phaser on/off"/>
    <comment type="patch/comment" x="966" y="84" text="CC7 reverb amount"/>
-   <obj type="disp/bool" uuid="a0ee71d48208b71752cbb8c05e55145106ef3946" name="bool_8" x="364" y="98">
-      <params/>
-      <attribs/>
-   </obj>
-   <obj type="disp/bool" uuid="a0ee71d48208b71752cbb8c05e55145106ef3946" name="bool_9" x="644" y="98">
-      <params/>
-      <attribs/>
-   </obj>
    <comment type="patch/comment" x="994" y="112" text="CC10 reverb tail cutoff"/>
    <obj type="mix/mix 4 g" uuid="36f472cd81da2e17bd4b4ee11b53b4c82527220c" name="mix_1" x="1190" y="112">
       <params>
@@ -324,7 +316,7 @@
          <source obj="in_1" outlet="wave"/>
          <dest obj="echo_1" inlet="in"/>
          <dest obj="FlexChunker_1" inlet="in"/>
-         <dest obj="mux_1" inlet="i1"/>
+         <dest obj="2To1Safe_1" inlet="i1"/>
       </net>
       <net>
          <source obj="echo_1" outlet="out"/>
@@ -350,8 +342,7 @@
       </net>
       <net>
          <source obj="flipflop_3" outlet="o"/>
-         <dest obj="bool_9" inlet="in"/>
-         <dest obj="mux_2" inlet="s"/>
+         <dest obj="2To1Safe_2" inlet="s"/>
       </net>
       <net>
          <source obj="cc_9" outlet="trig"/>
@@ -363,8 +354,7 @@
       </net>
       <net>
          <source obj="flipflop_4" outlet="o"/>
-         <dest obj="bool_8" inlet="in"/>
-         <dest obj="mux_1" inlet="s"/>
+         <dest obj="2To1Safe_1" inlet="s"/>
       </net>
       <net>
          <source obj="cc_10" outlet="trig"/>
@@ -375,17 +365,8 @@
          <dest obj="flipflop_4" inlet="trig"/>
       </net>
       <net>
-         <source obj="mux_1" outlet="o"/>
-         <dest obj="obj_1" inlet="in"/>
-         <dest obj="mux_2" inlet="i1"/>
-      </net>
-      <net>
-         <source obj="obj_1" outlet="out"/>
-         <dest obj="mux_2" inlet="i2"/>
-      </net>
-      <net>
          <source obj="gain_1" outlet="out"/>
-         <dest obj="mux_1" inlet="i2"/>
+         <dest obj="2To1Safe_1" inlet="i2"/>
       </net>
       <net>
          <source obj="FlexChunker_1" outlet="out"/>
@@ -394,11 +375,6 @@
       <net>
          <source obj="mix_1" outlet="out"/>
          <dest obj="out_1" inlet="wave"/>
-      </net>
-      <net>
-         <source obj="mux_2" outlet="o"/>
-         <dest obj="SafeSwitch_3" inlet="in"/>
-         <dest obj="mix_1" inlet="in1"/>
       </net>
       <net>
          <source obj="flipflop_5" outlet="o"/>
@@ -449,6 +425,20 @@
          <source obj="SafeSwitch_3" outlet="o"/>
          <dest obj="reverb_1" inlet="l"/>
          <dest obj="reverb_1" inlet="r"/>
+      </net>
+      <net>
+         <source obj="2To1Safe_1" outlet="o"/>
+         <dest obj="obj_1" inlet="in"/>
+         <dest obj="2To1Safe_2" inlet="i1"/>
+      </net>
+      <net>
+         <source obj="obj_1" outlet="out"/>
+         <dest obj="2To1Safe_2" inlet="i2"/>
+      </net>
+      <net>
+         <source obj="2To1Safe_2" outlet="o"/>
+         <dest obj="SafeSwitch_3" inlet="in"/>
+         <dest obj="mix_1" inlet="in1"/>
       </net>
    </nets>
    <settings>
