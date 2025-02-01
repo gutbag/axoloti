@@ -1,0 +1,29 @@
+<objdefs appVersion="1.0.12">
+   <obj.normal id="ValueToString" uuid="f3be3d35-6996-4ea1-bc3d-072e00dcd19d">
+      <sDescription>Converts the input value to an output string every 1s.</sDescription>
+      <author>Mark Lamb</author>
+      <license></license>
+      <helpPatch></helpPatch>
+      <inlets>
+         <frac32 name="in"/>
+      </inlets>
+      <outlets>
+         <charptr32 name="out" description="string"/>
+      </outlets>
+      <displays/>
+      <params/>
+      <attribs/>
+      <code.declaration><![CDATA[char c[16];
+static const uint32_t NUM_K = 3000;
+uint32_t kCount = 0;]]></code.declaration>
+      <code.krate><![CDATA[kCount++;
+if (kCount >= NUM_K)
+{
+	kCount = 0;
+
+	sprintf(c, "%d", inlet_in/1000000);
+	LogTextMessage("c=%s\n", c);
+	outlet_out = c;
+}]]></code.krate>
+   </obj.normal>
+</objdefs>
