@@ -3,22 +3,13 @@
       <params/>
       <attribs/>
    </obj>
-   <obj type="mix/mix 4 g" uuid="36f472cd81da2e17bd4b4ee11b53b4c82527220c" name="mix_1" x="896" y="14">
-      <params>
-         <frac32.u.map name="gain1" value="15.0"/>
-         <frac32.u.map name="gain2" value="32.0"/>
-         <frac32.u.map name="gain3" value="32.0"/>
-         <frac32.u.map name="gain4" value="32.0"/>
-      </params>
-      <attribs/>
-   </obj>
-   <obj type="audio/out left" uuid="b11a3c09b2fdd575ea8212f2ce7743d5269253b1" name="out_1" x="1148" y="14">
-      <params/>
-      <attribs/>
-   </obj>
    <obj type="switches/SafeSwitch" uuid="9ecd8939-7299-438c-b3e5-e19d98fdc50d" name="SafeSwitch_1" x="182" y="28">
-      <params/>
-      <attribs/>
+      <params>
+         <bool32.tgl name="on" value="0"/>
+      </params>
+      <attribs>
+         <combo attributeName="use" selection="on inlet"/>
+      </attribs>
    </obj>
    <obj type="delays/SRAMDelay" uuid="c47c5af7-cdd9-4f44-b70e-9bbe03eb6a1d" name="SRAMDelay_1" x="322" y="28">
       <params/>
@@ -28,6 +19,25 @@
          <combo attributeName="NoteValue" selection="8"/>
          <spinner attributeName="Bars" value="4"/>
       </attribs>
+   </obj>
+   <obj type="mix/mix 4 g" uuid="36f472cd81da2e17bd4b4ee11b53b4c82527220c" name="mix_1" x="546" y="42">
+      <params>
+         <frac32.u.map name="gain1" value="15.0"/>
+         <frac32.u.map name="gain2" value="32.0"/>
+         <frac32.u.map name="gain3" value="32.000000000000014"/>
+         <frac32.u.map name="gain4" value="32.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="math/gain" uuid="62b1c1a6337c7c8f6aec96408a432477b113cfa0" name="gain_2" x="686" y="42">
+      <params>
+         <frac32.u.map name="amp" value="8.049999999999999"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="audio/out left" uuid="b11a3c09b2fdd575ea8212f2ce7743d5269253b1" name="out_1" x="812" y="42">
+      <params/>
+      <attribs/>
    </obj>
    <obj type="switches/1To2" uuid="83aba941-828a-4695-8ebb-ac8652dd2ab9" name="1To2_1" x="70" y="112">
       <params/>
@@ -69,6 +79,35 @@
       <params/>
       <attribs/>
    </obj>
+   <comment type="patch/comment" x="448" y="434" text="For testing"/>
+   <obj type="midi/out/cc" uuid="7ca9b2c1b4339022c491a8afd70353c17d765584" name="cc_5" x="532" y="448">
+      <params/>
+      <attribs>
+         <combo attributeName="device" selection="din"/>
+         <spinner attributeName="channel" value="2"/>
+         <spinner attributeName="cc" value="3"/>
+      </attribs>
+   </obj>
+   <obj type="midi/out/cc" uuid="7ca9b2c1b4339022c491a8afd70353c17d765584" name="cc_6" x="756" y="448">
+      <params/>
+      <attribs>
+         <combo attributeName="device" selection="din"/>
+         <spinner attributeName="channel" value="2"/>
+         <spinner attributeName="cc" value="2"/>
+      </attribs>
+   </obj>
+   <obj type="button_pulse" uuid="41216e47-4fc5-40ab-af02-f07de5fbf547" name="button_pulse_2" x="448" y="462">
+      <params>
+         <bool32.mom name="b" value="0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="button_pulse" uuid="41216e47-4fc5-40ab-af02-f07de5fbf547" name="button_pulse_3" x="672" y="462">
+      <params>
+         <bool32.mom name="b" value="0"/>
+      </params>
+      <attribs/>
+   </obj>
    <comment type="patch/comment" x="14" y="504" text="echo on/off"/>
    <obj type="midi/in/cc i" uuid="614eb76edef2b43632fa1fcda25aab54f821daf6" name="cc_10" x="14" y="518">
       <params/>
@@ -85,65 +124,37 @@
       <params/>
       <attribs/>
    </obj>
-   <comment type="patch/comment" x="14" y="658" text="Startup delay to lock out triggers on patch change. LED on until done."/>
-   <comment type="patch/comment" x="392" y="658" text="Red LED on during startup and when delay is on."/>
-   <obj type="const/i" uuid="e202f44b2df17ae0b3e663b98ea6b14c8ff00408" name="i_3" x="14" y="672">
+   <comment type="patch/comment" x="14" y="644" text="Startup delay to lock out triggers on patch change. LED on until done."/>
+   <comment type="patch/comment" x="392" y="644" text="Red LED on during startup and when delay is on."/>
+   <obj type="const/i" uuid="e202f44b2df17ae0b3e663b98ea6b14c8ff00408" name="i_3" x="14" y="658">
       <params/>
       <attribs>
          <spinner attributeName="value" value="1"/>
       </attribs>
    </obj>
-   <obj type="timer/delayedpulse" uuid="3f05ee534ca67755fb20c7437f9e4de3d4c2f73d" name="delayedpulse_2" x="98" y="672">
+   <obj type="timer/delayedpulse" uuid="3f05ee534ca67755fb20c7437f9e4de3d4c2f73d" name="delayedpulse_2" x="98" y="658">
       <params>
          <frac32.s.map name="delay" value="54.0"/>
       </params>
       <attribs/>
    </obj>
-   <obj type="logic/flipflop" uuid="f9b15363f5ee203152e062c08a8846f0074b0ea5" name="flipflop_1" x="210" y="672">
+   <obj type="logic/flipflop" uuid="f9b15363f5ee203152e062c08a8846f0074b0ea5" name="flipflop_1" x="210" y="658">
       <params/>
       <attribs/>
    </obj>
-   <obj type="logic/inv" uuid="2bd44b865d3b63ff9b80862242bf5be779e3ad5" name="inv_1" x="294" y="672">
+   <obj type="logic/inv" uuid="2bd44b865d3b63ff9b80862242bf5be779e3ad5" name="inv_1" x="294" y="658">
       <params/>
       <attribs/>
    </obj>
-   <obj type="phi/logic/or 4" uuid="5dc5a7c1fb7809522171638f755fead71cbe14ea" name="or_2" x="392" y="672">
+   <obj type="phi/logic/or 4" uuid="5dc5a7c1fb7809522171638f755fead71cbe14ea" name="or_2" x="392" y="658">
       <params/>
       <attribs/>
    </obj>
-   <obj type="gpio/out/led2" uuid="3d7a4c75d1f9901181a17ba5de752782de911803" name="led2_2" x="476" y="672">
+   <obj type="gpio/out/led2" uuid="3d7a4c75d1f9901181a17ba5de752782de911803" name="led2_2" x="476" y="658">
       <params/>
       <attribs/>
    </obj>
-   <comment type="patch/comment" x="770" y="686" text="For testing"/>
-   <obj type="midi/out/cc" uuid="7ca9b2c1b4339022c491a8afd70353c17d765584" name="cc_5" x="854" y="700">
-      <params/>
-      <attribs>
-         <combo attributeName="device" selection="din"/>
-         <spinner attributeName="channel" value="2"/>
-         <spinner attributeName="cc" value="3"/>
-      </attribs>
-   </obj>
-   <obj type="midi/out/cc" uuid="7ca9b2c1b4339022c491a8afd70353c17d765584" name="cc_6" x="1078" y="700">
-      <params/>
-      <attribs>
-         <combo attributeName="device" selection="din"/>
-         <spinner attributeName="channel" value="2"/>
-         <spinner attributeName="cc" value="2"/>
-      </attribs>
-   </obj>
-   <obj type="button_pulse" uuid="41216e47-4fc5-40ab-af02-f07de5fbf547" name="button_pulse_2" x="770" y="714">
-      <params>
-         <bool32.mom name="b" value="0"/>
-      </params>
-      <attribs/>
-   </obj>
-   <obj type="button_pulse" uuid="41216e47-4fc5-40ab-af02-f07de5fbf547" name="button_pulse_3" x="994" y="714">
-      <params>
-         <bool32.mom name="b" value="0"/>
-      </params>
-      <attribs/>
-   </obj>
+   <comment type="patch/comment" x="14" y="756" text="Seems to need more gain"/>
    <obj type="audio/inconfig l" uuid="7007d026acb7c3586f60a7f0898718d1ca7e0607" name="inconfig_1" x="14" y="770">
       <params/>
       <attribs>
@@ -154,7 +165,7 @@
    <obj type="audio/inconfig r" uuid="8468fe7907553f335959a7f69cbc5a1f7b5d4d1d" name="inconfig_2" x="126" y="770">
       <params/>
       <attribs>
-         <combo attributeName="gain" selection="3dB"/>
+         <combo attributeName="gain" selection="0dB"/>
          <combo attributeName="boost" selection="0dB"/>
       </attribs>
    </obj>
@@ -228,10 +239,6 @@
          <dest obj="flipflop_4" inlet="trig"/>
       </net>
       <net>
-         <source obj="mix_1" outlet="out"/>
-         <dest obj="out_1" inlet="wave"/>
-      </net>
-      <net>
          <source obj="1To2_1" outlet="o1"/>
          <dest obj="mix_1" inlet="in2"/>
       </net>
@@ -251,6 +258,14 @@
          <source obj="SRAMDelay_1" outlet="out"/>
          <dest obj="mix_1" inlet="in1"/>
       </net>
+      <net>
+         <source obj="mix_1" outlet="out"/>
+         <dest obj="gain_2" inlet="in"/>
+      </net>
+      <net>
+         <source obj="gain_2" outlet="out"/>
+         <dest obj="out_1" inlet="wave"/>
+      </net>
    </nets>
    <settings>
       <subpatchmode>no</subpatchmode>
@@ -262,9 +277,9 @@
    </settings>
    <notes><![CDATA[]]></notes>
    <windowPos>
-      <x>144</x>
+      <x>509</x>
       <y>38</y>
-      <width>1280</width>
-      <height>932</height>
+      <width>949</width>
+      <height>912</height>
    </windowPos>
 </patch-1.0>

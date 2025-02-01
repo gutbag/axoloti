@@ -6,24 +6,34 @@
       </params>
       <attribs/>
    </obj>
+   <obj type="switches/2To1Safe" uuid="8cfbb7b5-4fc0-4d92-bd3f-506080e3b408" name="2To1Safe_2" x="364" y="0">
+      <params>
+         <bool32.tgl name="i2" MidiCC="3" value="0"/>
+      </params>
+      <attribs>
+         <combo attributeName="use" selection="Manual/MIDI"/>
+      </attribs>
+   </obj>
    <obj type="audio/in left" uuid="d40e60b7641fe75af4d7c91b45bb038aacafc52e" name="in_1" x="28" y="14">
       <params/>
-      <attribs/>
-   </obj>
-   <obj type="phi/switch/sw 2-1a" uuid="350b79179fa4cce3d231eaa45f23eefa9121cb3b" name="sw_3" x="364" y="14">
-      <params>
-         <bool32.tgl name="s" MidiCC="3" value="0"/>
-      </params>
       <attribs/>
    </obj>
    <comment type="patch/comment" x="574" y="42" text="CC1: fuzz gain"/>
    <comment type="patch/comment" x="574" y="56" text="CC2: fuzz on"/>
    <comment type="patch/comment" x="574" y="70" text="CC3: chorus on"/>
-   <obj type="phi/switch/sw 2-1a" uuid="350b79179fa4cce3d231eaa45f23eefa9121cb3b" name="sw_2" x="588" y="196">
+   <obj type="phi/switch/sw 2-1a" uuid="350b79179fa4cce3d231eaa45f23eefa9121cb3b" name="sw_3" x="364" y="112">
       <params>
-         <bool32.tgl name="s" MidiCC="2" value="0"/>
+         <bool32.tgl name="s" MidiCC="3" value="0"/>
       </params>
       <attribs/>
+   </obj>
+   <obj type="switches/2To1Safe" uuid="8cfbb7b5-4fc0-4d92-bd3f-506080e3b408" name="2To1Safe_1" x="588" y="196">
+      <params>
+         <bool32.tgl name="i2" MidiCC="2" value="0"/>
+      </params>
+      <attribs>
+         <combo attributeName="use" selection="Manual/MIDI"/>
+      </attribs>
    </obj>
    <obj type="mymath/gainx4" uuid="62b1c1a6337c7c8f6eac96408a432477b113cfa1" name="gainx4_1" x="714" y="196">
       <params>
@@ -69,9 +79,15 @@
       </params>
       <attribs/>
    </obj>
-   <obj type="math/*c" uuid="7a66f52a9594e7e9eb31328ea725cb3641a80b55" name="*c_2" x="434" y="238">
+   <obj type="math/*c" uuid="7a66f52a9594e7e9eb31328ea725cb3641a80b55" name="*c_1" x="434" y="238">
       <params>
          <frac32.u.map name="amp" MidiCC="1" value="2.5"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="phi/switch/sw 2-1a" uuid="350b79179fa4cce3d231eaa45f23eefa9121cb3b" name="sw_2" x="588" y="308">
+      <params>
+         <bool32.tgl name="s" MidiCC="2" value="0"/>
       </params>
       <attribs/>
    </obj>
@@ -91,16 +107,12 @@
    </obj>
    <nets>
       <net>
-         <source obj="sw_2" outlet="o"/>
-         <dest obj="gainx4_1" inlet="in"/>
-      </net>
-      <net>
          <source obj="gainx4_1" outlet="out"/>
          <dest obj="out_1" inlet="wave"/>
       </net>
       <net>
-         <source obj="*c_2" outlet="out"/>
-         <dest obj="sw_2" inlet="i2"/>
+         <source obj="*c_1" outlet="out"/>
+         <dest obj="2To1Safe_1" inlet="i2"/>
       </net>
       <net>
          <source obj="obj_1" outlet="out"/>
@@ -112,21 +124,25 @@
       </net>
       <net>
          <source obj="obj_3" outlet="out"/>
-         <dest obj="*c_2" inlet="in"/>
+         <dest obj="*c_1" inlet="in"/>
       </net>
       <net>
          <source obj="in_1" outlet="wave"/>
-         <dest obj="sw_3" inlet="i1"/>
          <dest obj="obj_1" inlet="in"/>
          <dest obj="obj_4" inlet="in"/>
-      </net>
-      <net>
-         <source obj="sw_3" outlet="o"/>
-         <dest obj="sw_2" inlet="i1"/>
+         <dest obj="2To1Safe_2" inlet="i1"/>
       </net>
       <net>
          <source obj="obj_4" outlet="L"/>
-         <dest obj="sw_3" inlet="i2"/>
+         <dest obj="2To1Safe_2" inlet="i2"/>
+      </net>
+      <net>
+         <source obj="2To1Safe_1" outlet="o"/>
+         <dest obj="gainx4_1" inlet="in"/>
+      </net>
+      <net>
+         <source obj="2To1Safe_2" outlet="o"/>
+         <dest obj="2To1Safe_1" inlet="i1"/>
       </net>
    </nets>
    <settings>
@@ -136,12 +152,11 @@
       <NPresetEntries>32</NPresetEntries>
       <NModulationSources>8</NModulationSources>
       <NModulationTargetsPerSource>8</NModulationTargetsPerSource>
-      <Author></Author>
    </settings>
    <notes><![CDATA[]]></notes>
    <windowPos>
-      <x>-291</x>
-      <y>-915</y>
+      <x>40</x>
+      <y>241</y>
       <width>960</width>
       <height>658</height>
    </windowPos>
