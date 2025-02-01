@@ -38,16 +38,28 @@
       <attribs/>
    </obj>
    <obj type="switches/2To1Safe" uuid="8cfbb7b5-4fc0-4d92-bd3f-506080e3b408" name="2To1Safe_1" x="364" y="28">
-      <params/>
-      <attribs/>
+      <params>
+         <bool32.tgl name="i2" value="0"/>
+      </params>
+      <attribs>
+         <combo attributeName="use" selection="s inlet"/>
+      </attribs>
    </obj>
    <obj type="switches/2To1Safe" uuid="8cfbb7b5-4fc0-4d92-bd3f-506080e3b408" name="2To1Safe_2" x="644" y="28">
-      <params/>
-      <attribs/>
+      <params>
+         <bool32.tgl name="i2" value="0"/>
+      </params>
+      <attribs>
+         <combo attributeName="use" selection="s inlet"/>
+      </attribs>
    </obj>
    <obj type="switches/SafeSwitch" uuid="9ecd8939-7299-438c-b3e5-e19d98fdc50d" name="SafeSwitch_3" x="756" y="28">
-      <params/>
-      <attribs/>
+      <params>
+         <bool32.tgl name="on" value="0"/>
+      </params>
+      <attribs>
+         <combo attributeName="use" selection="on inlet"/>
+      </attribs>
    </obj>
    <obj type="fx/rngs/reverb" uuid="bb0fb9e0-aafe-4501-ba83-897f2530751d" name="reverb_1" x="868" y="28">
       <params>
@@ -71,16 +83,61 @@
       <attribs/>
    </obj>
    <obj type="switches/SafeSwitch" uuid="9ecd8939-7299-438c-b3e5-e19d98fdc50d" name="SafeSwitch_2" x="994" y="126">
-      <params/>
-      <attribs/>
+      <params>
+         <bool32.tgl name="on" value="0"/>
+      </params>
+      <attribs>
+         <combo attributeName="use" selection="on inlet"/>
+      </attribs>
    </obj>
    <comment type="patch/comment" x="126" y="182" text="CC1 echo feedback"/>
    <obj type="switches/SafeSwitch" uuid="9ecd8939-7299-438c-b3e5-e19d98fdc50d" name="SafeSwitch_1" x="994" y="196">
+      <params>
+         <bool32.tgl name="on" value="0"/>
+      </params>
+      <attribs>
+         <combo attributeName="use" selection="on inlet"/>
+      </attribs>
+   </obj>
+   <obj type="logic/inv" uuid="2bd44b865d3b63ff9b80862242bf5be779e3ad5" name="inv_3" x="322" y="210">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="logic/and3" uuid="41b7e553-e915-48ee-9643-be28950719cb" name="and3_1" x="378" y="210">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="logic/inv" uuid="2bd44b865d3b63ff9b80862242bf5be779e3ad5" name="inv_4" x="266" y="224">
       <params/>
       <attribs/>
    </obj>
    <comment type="patch/comment" x="1288" y="238" text="CC11 reverb gain"/>
+   <obj type="logic/inv" uuid="2bd44b865d3b63ff9b80862242bf5be779e3ad5" name="inv_2" x="322" y="280">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="logic/and3" uuid="41b7e553-e915-48ee-9643-be28950719cb" name="and3_2" x="378" y="280">
+      <params/>
+      <attribs/>
+   </obj>
+   <comment type="patch/comment" x="448" y="280" text="phaser, echo and reverb are mutually exclusive"/>
    <comment type="patch/comment" x="1288" y="280" text="CC11 reverb gain"/>
+   <obj type="logic/inv" uuid="2bd44b865d3b63ff9b80862242bf5be779e3ad5" name="inv_5" x="266" y="294">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="logic/inv" uuid="2bd44b865d3b63ff9b80862242bf5be779e3ad5" name="inv_6" x="560" y="294">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="logic/and3" uuid="41b7e553-e915-48ee-9643-be28950719cb" name="and3_3" x="616" y="294">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="logic/inv" uuid="2bd44b865d3b63ff9b80862242bf5be779e3ad5" name="inv_7" x="504" y="308">
+      <params/>
+      <attribs/>
+   </obj>
    <comment type="patch/comment" x="1288" y="322" text="CC8 chunker mix"/>
    <comment type="patch/comment" x="14" y="336" text="phaser on/off"/>
    <obj type="midi/in/cc i" uuid="614eb76edef2b43632fa1fcda25aab54f821daf6" name="cc_9" x="14" y="350">
@@ -90,7 +147,7 @@
          <spinner attributeName="default" value="0"/>
       </attribs>
    </obj>
-   <obj type="logic/and 2" uuid="c67031682f552aa0a80b23377495c51ea28a8c9c" name="and_8" x="98" y="364">
+   <obj type="logic/and 2" uuid="c67031682f552aa0a80b23377495c51ea28a8c9c" name="and_1" x="98" y="364">
       <params/>
       <attribs/>
    </obj>
@@ -106,7 +163,7 @@
          <spinner attributeName="default" value="0"/>
       </attribs>
    </obj>
-   <obj type="logic/and 2" uuid="c67031682f552aa0a80b23377495c51ea28a8c9c" name="and_11" x="420" y="392">
+   <obj type="logic/and 2" uuid="c67031682f552aa0a80b23377495c51ea28a8c9c" name="and_2" x="420" y="392">
       <params/>
       <attribs/>
    </obj>
@@ -128,12 +185,19 @@
          <spinner attributeName="MaxTimeSecs" value="32"/>
       </attribs>
    </obj>
-   <obj type="logic/and 2" uuid="c67031682f552aa0a80b23377495c51ea28a8c9c" name="and_7" x="798" y="434">
+   <obj type="logic/or 2" uuid="3805d3c84d30032a44fbdbe42d9a2988a1790a3e" name="or_1" x="168" y="434">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="logic/and 2" uuid="c67031682f552aa0a80b23377495c51ea28a8c9c" name="and_3" x="798" y="434">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="logic/or 2" uuid="3805d3c84d30032a44fbdbe42d9a2988a1790a3e" name="or_4" x="490" y="462">
       <params/>
       <attribs/>
    </obj>
    <comment type="patch/comment" x="14" y="476" text="echo on/off"/>
-   <comment type="patch/comment" x="336" y="476" text="CC10 reverb tail cutoff"/>
    <comment type="patch/comment" x="1148" y="476" text="CC1 echo feedback"/>
    <obj type="midi/in/cc i" uuid="614eb76edef2b43632fa1fcda25aab54f821daf6" name="cc_10" x="14" y="490">
       <params/>
@@ -142,16 +206,8 @@
          <spinner attributeName="default" value="0"/>
       </attribs>
    </obj>
-   <obj type="midi/in/cc i" uuid="614eb76edef2b43632fa1fcda25aab54f821daf6" name="cc_12" x="336" y="490">
-      <params/>
-      <attribs>
-         <spinner attributeName="cc" value="10"/>
-         <spinner attributeName="default" value="0"/>
-      </attribs>
-   </obj>
-   <comment type="patch/comment" x="490" y="490" text="Set on at startup"/>
    <comment type="patch/comment" x="1148" y="490" text="CC2 starts and stops the chunker"/>
-   <obj type="logic/and 2" uuid="c67031682f552aa0a80b23377495c51ea28a8c9c" name="and_9" x="98" y="504">
+   <obj type="logic/and 2" uuid="c67031682f552aa0a80b23377495c51ea28a8c9c" name="and_4" x="98" y="504">
       <params/>
       <attribs/>
    </obj>
@@ -159,17 +215,26 @@
       <params/>
       <attribs/>
    </obj>
-   <obj type="logic/and 2" uuid="c67031682f552aa0a80b23377495c51ea28a8c9c" name="and_12" x="420" y="504">
-      <params/>
-      <attribs/>
-   </obj>
-   <obj type="logic/flipflop toggle" uuid="195e489e5fc3d275944b0de56c7a91c8641ea22a" name="flipflop_5" x="490" y="504">
-      <params/>
-      <attribs/>
-   </obj>
+   <comment type="patch/comment" x="336" y="504" text="CC10 reverb tail cutoff"/>
    <comment type="patch/comment" x="1148" y="504" text="CC3 phaser on/off"/>
+   <obj type="midi/in/cc i" uuid="614eb76edef2b43632fa1fcda25aab54f821daf6" name="cc_12" x="336" y="518">
+      <params/>
+      <attribs>
+         <spinner attributeName="cc" value="10"/>
+         <spinner attributeName="default" value="0"/>
+      </attribs>
+   </obj>
+   <comment type="patch/comment" x="490" y="518" text="Set on at startup"/>
    <comment type="patch/comment" x="686" y="518" text="CC6 sets chunk order and direction type"/>
    <comment type="patch/comment" x="1148" y="518" text="CC4 echo on/off"/>
+   <obj type="logic/and 2" uuid="c67031682f552aa0a80b23377495c51ea28a8c9c" name="and_5" x="420" y="532">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="logic/flipflop toggle" uuid="195e489e5fc3d275944b0de56c7a91c8641ea22a" name="flipflop_5" x="490" y="532">
+      <params/>
+      <attribs/>
+   </obj>
    <obj type="midi/in/cc i" uuid="614eb76edef2b43632fa1fcda25aab54f821daf6" name="cc_6" x="686" y="532">
       <params/>
       <attribs>
@@ -184,6 +249,10 @@
    <comment type="patch/comment" x="1148" y="532" text="CC5 sets the number of chunks"/>
    <comment type="patch/comment" x="1148" y="546" text="CC6 sets chunk order and direction type"/>
    <comment type="patch/comment" x="1148" y="560" text="CC7 reverb mix"/>
+   <obj type="logic/or 2" uuid="3805d3c84d30032a44fbdbe42d9a2988a1790a3e" name="or_3" x="168" y="574">
+      <params/>
+      <attribs/>
+   </obj>
    <comment type="patch/comment" x="1148" y="574" text="CC8 chunker mix"/>
    <comment type="patch/comment" x="1148" y="588" text="CC9 reverb on /off"/>
    <comment type="patch/comment" x="1148" y="602" text="CC10 reverb tail cutoff"/>
@@ -276,7 +345,7 @@
    <nets>
       <net>
          <source obj="cc_4" outlet="trig"/>
-         <dest obj="and_7" inlet="i1"/>
+         <dest obj="and_3" inlet="i1"/>
       </net>
       <net>
          <source obj="i_3" outlet="out"/>
@@ -289,12 +358,12 @@
       <net>
          <source obj="flipflop_1" outlet="o"/>
          <dest obj="inv_1" inlet="i"/>
-         <dest obj="and_7" inlet="i2"/>
-         <dest obj="and_8" inlet="i2"/>
-         <dest obj="and_9" inlet="i2"/>
-         <dest obj="and_11" inlet="i2"/>
-         <dest obj="and_12" inlet="i2"/>
          <dest obj="flipflop_5" inlet="set"/>
+         <dest obj="and_1" inlet="i2"/>
+         <dest obj="and_2" inlet="i2"/>
+         <dest obj="and_3" inlet="i2"/>
+         <dest obj="and_4" inlet="i2"/>
+         <dest obj="and_5" inlet="i2"/>
       </net>
       <net>
          <source obj="inv_1" outlet="o"/>
@@ -342,26 +411,34 @@
       </net>
       <net>
          <source obj="flipflop_3" outlet="o"/>
-         <dest obj="2To1Safe_2" inlet="s"/>
+         <dest obj="inv_3" inlet="i"/>
+         <dest obj="or_3" inlet="i1"/>
+         <dest obj="and3_2" inlet="i2"/>
+         <dest obj="or_4" inlet="i1"/>
+         <dest obj="inv_7" inlet="i"/>
       </net>
       <net>
          <source obj="cc_9" outlet="trig"/>
-         <dest obj="and_8" inlet="i1"/>
+         <dest obj="and_1" inlet="i1"/>
       </net>
       <net>
-         <source obj="and_8" outlet="o"/>
+         <source obj="and_1" outlet="o"/>
          <dest obj="flipflop_3" inlet="trig"/>
       </net>
       <net>
          <source obj="flipflop_4" outlet="o"/>
-         <dest obj="2To1Safe_1" inlet="s"/>
+         <dest obj="inv_2" inlet="i"/>
+         <dest obj="or_1" inlet="i2"/>
+         <dest obj="and3_1" inlet="i2"/>
+         <dest obj="or_4" inlet="i2"/>
+         <dest obj="inv_6" inlet="i"/>
       </net>
       <net>
          <source obj="cc_10" outlet="trig"/>
-         <dest obj="and_9" inlet="i1"/>
+         <dest obj="and_4" inlet="i1"/>
       </net>
       <net>
-         <source obj="and_9" outlet="o"/>
+         <source obj="and_4" outlet="o"/>
          <dest obj="flipflop_4" inlet="trig"/>
       </net>
       <net>
@@ -383,27 +460,23 @@
       </net>
       <net>
          <source obj="cc_11" outlet="trig"/>
-         <dest obj="and_11" inlet="i1"/>
+         <dest obj="and_2" inlet="i1"/>
       </net>
       <net>
          <source obj="cc_12" outlet="trig"/>
-         <dest obj="and_12" inlet="i1"/>
+         <dest obj="and_5" inlet="i1"/>
       </net>
       <net>
-         <source obj="and_12" outlet="o"/>
+         <source obj="and_5" outlet="o"/>
          <dest obj="flipflop_5" inlet="trig"/>
       </net>
       <net>
-         <source obj="and_7" outlet="o"/>
+         <source obj="and_3" outlet="o"/>
          <dest obj="FlexChunker_1" inlet="trigger"/>
       </net>
       <net>
-         <source obj="and_11" outlet="o"/>
+         <source obj="and_2" outlet="o"/>
          <dest obj="flipflop_6" inlet="trig"/>
-      </net>
-      <net>
-         <source obj="flipflop_6" outlet="o"/>
-         <dest obj="SafeSwitch_3" inlet="on"/>
       </net>
       <net>
          <source obj="reverb_1" outlet="l"/>
@@ -439,6 +512,62 @@
          <source obj="2To1Safe_2" outlet="o"/>
          <dest obj="SafeSwitch_3" inlet="in"/>
          <dest obj="mix_1" inlet="in1"/>
+      </net>
+      <net>
+         <source obj="inv_2" outlet="o"/>
+         <dest obj="and3_2" inlet="i1"/>
+      </net>
+      <net>
+         <source obj="inv_3" outlet="o"/>
+         <dest obj="and3_1" inlet="i1"/>
+      </net>
+      <net>
+         <source obj="or_1" outlet="o"/>
+         <dest obj="flipflop_3" inlet="reset"/>
+      </net>
+      <net>
+         <source obj="or_3" outlet="o"/>
+         <dest obj="flipflop_4" inlet="reset"/>
+      </net>
+      <net>
+         <source obj="and3_1" outlet="o"/>
+         <dest obj="2To1Safe_1" inlet="s"/>
+      </net>
+      <net>
+         <source obj="and3_2" outlet="o"/>
+         <dest obj="2To1Safe_2" inlet="s"/>
+      </net>
+      <net>
+         <source obj="inv_4" outlet="o"/>
+         <dest obj="and3_1" inlet="i3"/>
+      </net>
+      <net>
+         <source obj="inv_5" outlet="o"/>
+         <dest obj="and3_2" inlet="i3"/>
+      </net>
+      <net>
+         <source obj="inv_6" outlet="o"/>
+         <dest obj="and3_3" inlet="i1"/>
+      </net>
+      <net>
+         <source obj="inv_7" outlet="o"/>
+         <dest obj="and3_3" inlet="i3"/>
+      </net>
+      <net>
+         <source obj="and3_3" outlet="o"/>
+         <dest obj="SafeSwitch_3" inlet="on"/>
+         <dest obj="inv_4" inlet="i"/>
+         <dest obj="inv_5" inlet="i"/>
+      </net>
+      <net>
+         <source obj="flipflop_6" outlet="o"/>
+         <dest obj="and3_3" inlet="i2"/>
+         <dest obj="or_1" inlet="i1"/>
+         <dest obj="or_3" inlet="i2"/>
+      </net>
+      <net>
+         <source obj="or_4" outlet="o"/>
+         <dest obj="flipflop_6" inlet="reset"/>
       </net>
    </nets>
    <settings>
