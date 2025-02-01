@@ -1,0 +1,151 @@
+<patch-1.0 appVersion="1.0.12">
+   <obj type="audio/outconfig" uuid="eace67e3304afaa1bb695b444e9345f2d8adaf00" name="outconfig_1" x="140" y="14">
+      <params/>
+      <attribs>
+         <combo attributeName="headphones" selection="0dB"/>
+         <combo attributeName="mode" selection="Mono(L)"/>
+      </attribs>
+   </obj>
+   <obj type="audio/inconfig l" uuid="7007d026acb7c3586f60a7f0898718d1ca7e0607" name="inconfig_1" x="252" y="14">
+      <params/>
+      <attribs>
+         <combo attributeName="gain" selection="0dB"/>
+         <combo attributeName="boost" selection="0dB"/>
+      </attribs>
+   </obj>
+   <obj type="audio/inconfig r" uuid="8468fe7907553f335959a7f69cbc5a1f7b5d4d1d" name="inconfig_2" x="364" y="14">
+      <params/>
+      <attribs>
+         <combo attributeName="gain" selection="0dB"/>
+         <combo attributeName="boost" selection="0dB"/>
+      </attribs>
+   </obj>
+   <obj type="gpio/i2c/config" uuid="b095a33e56de5fcd23740a7d983bc0bafb315d81" name="config_2" x="14" y="28">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="tiar/HW/OLED128x32_2lines" uuid="32de8c3d-fe37-40b3-848e-edb113767bc8" name="OLED128x32_2lines_1" x="784" y="70">
+      <params/>
+      <attribs>
+         <combo attributeName="type" selection="SSD1306"/>
+         <combo attributeName="I2CADDR" selection="0x3C"/>
+      </attribs>
+   </obj>
+   <obj type="audio/in left" uuid="d40e60b7641fe75af4d7c91b45bb038aacafc52e" name="in_1" x="420" y="112">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="tiar/env/rms meter" uuid="19a127f7-a7de-4c03-ad05-137f17497344" name="rms_1" x="518" y="112">
+      <params>
+         <frac32.s.map name="pitch" value="0.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="ValueToString" uuid="f3be3d35-6996-4ea1-bc3d-072e00dcd19d" name="ValueToString_1" x="644" y="112">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="disp/dial b" uuid="9ffed04e6a3052d9001eda83bae7024cb6d17037" name="dial_2" x="644" y="154">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="disp/chart b" uuid="d2bdf496f96ee521628490a038411210fbe29b15" name="chart_1" x="644" y="238">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="osc/sine" uuid="6e094045cca76a9dbf7ebfa72e44e4700d2b3ba" name="sine_1" x="462" y="420">
+      <params>
+         <frac32.s.map name="pitch" value="0.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="noise/pink oct" uuid="972351c4c2b2b4e358c64a64d119b5ddfa074f8e" name="pink_1" x="616" y="448">
+      <params/>
+      <attribs>
+         <combo attributeName="octaves" selection="4"/>
+      </attribs>
+   </obj>
+   <obj type="audio/out left" uuid="b11a3c09b2fdd575ea8212f2ce7743d5269253b1" name="out_1" x="756" y="448">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="string/c" uuid="4aa90a90c435a742ddfa152d232883fc5b2f1b3" name="c_1" x="42" y="490">
+      <params/>
+      <attribs>
+         <table attributeName="str" table="*"/>
+      </attribs>
+   </obj>
+   <comment type="patch/comment" x="252" y="518" text="alternate strings to show still alive"/>
+   <obj type="tiar/string/mux2" uuid="30532718-8506-494c-a058-054f0cb01027" name="mux2_1" x="252" y="532">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="osc/sine" uuid="6e094045cca76a9dbf7ebfa72e44e4700d2b3ba" name="sine_2" x="462" y="546">
+      <params>
+         <frac32.s.map name="pitch" value="22.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="string/c" uuid="4aa90a90c435a742ddfa152d232883fc5b2f1b3" name="c_2" x="42" y="560">
+      <params/>
+      <attribs>
+         <table attributeName="str" table=""/>
+      </attribs>
+   </obj>
+   <obj type="lfo/square" uuid="de6909eb64db13af5b43f979a4c130024b3a4793" name="square_1" x="98" y="630">
+      <params>
+         <frac32.s.map name="pitch" value="-28.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="noise/pink" uuid="72c03a2468ee865f248733fcf9b12d4cf42b5a61" name="pink_2" x="602" y="644">
+      <params/>
+      <attribs/>
+   </obj>
+   <nets>
+      <net>
+         <source obj="rms_1" outlet="rms"/>
+         <dest obj="chart_1" inlet="in"/>
+         <dest obj="dial_2" inlet="in"/>
+         <dest obj="ValueToString_1" inlet="in"/>
+      </net>
+      <net>
+         <source obj="in_1" outlet="wave"/>
+         <dest obj="rms_1" inlet="in"/>
+      </net>
+      <net>
+         <source obj="ValueToString_1" outlet="out"/>
+         <dest obj="OLED128x32_2lines_1" inlet="line1"/>
+      </net>
+      <net>
+         <source obj="mux2_1" outlet="out"/>
+         <dest obj="OLED128x32_2lines_1" inlet="line2"/>
+      </net>
+      <net>
+         <source obj="c_1" outlet="out"/>
+         <dest obj="mux2_1" inlet="i0"/>
+      </net>
+      <net>
+         <source obj="c_2" outlet="out"/>
+         <dest obj="mux2_1" inlet="i1"/>
+      </net>
+      <net>
+         <source obj="square_1" outlet="wave"/>
+         <dest obj="mux2_1" inlet="sel"/>
+      </net>
+      <net>
+         <source obj="pink_1" outlet="out"/>
+         <dest obj="out_1" inlet="wave"/>
+      </net>
+   </nets>
+   <settings>
+      <subpatchmode>no</subpatchmode>
+   </settings>
+   <notes><![CDATA[]]></notes>
+   <windowPos>
+      <x>443</x>
+      <y>71</y>
+      <width>1005</width>
+      <height>843</height>
+   </windowPos>
+</patch-1.0>
