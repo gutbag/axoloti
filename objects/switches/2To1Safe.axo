@@ -1,9 +1,8 @@
 <objdefs appVersion="1.0.12">
    <obj.normal id="2To1Safe" uuid="8cfbb7b5-4fc0-4d92-bd3f-506080e3b408">
-      <sDescription>Connects i1 to o when s is false, to i2 when s is true. Fades down and up to prevent clicks.</sDescription>
+      <sDescription>Connects i2 to o if either the s inlet is true or the manual/MIDI input is set, depending on which is selected through the drop-down. Fades down and up to prevent clicks.</sDescription>
       <author>Mark Lamb</author>
-      <license></license>
-      <helpPatch></helpPatch>
+      <license>GPL</license>
       <inlets>
          <frac32buffer name="i1" description="input 1"/>
          <frac32buffer name="i2" description="input 2"/>
@@ -16,8 +15,21 @@
       <displays>
          <bool32 name="i2" noLabel="true"/>
       </displays>
-      <params/>
-      <attribs/>
+      <params>
+         <bool32.tgl name="i2" noLabel="true"/>
+      </params>
+      <attribs>
+         <combo name="use">
+            <MenuEntries>
+               <string>s inlet</string>
+               <string>Manual/MIDI</string>
+            </MenuEntries>
+            <CEntries>
+               <string>s inlet</string>
+               <string>Manual/MIDI</string>
+            </CEntries>
+         </combo>
+      </attribs>
       <code.declaration><![CDATA[static const uint32_t NUM_FADE_VALUES = 192;
 
 typedef enum {I1, FADING_TO_I2, I2, FADING_TO_I1} State;
@@ -33,6 +45,8 @@ Event event;
 bool on = false;
 uint32_t fadeUpIndex = 0;
 uint32_t fadeDownIndex = 0;
+bool inputState = false; // the value of the selected input (inlet_on or param_on)
+bool useInlet = true;
 
 /**
  * Returns the rawValue modified by the fade value with the given index.
@@ -64,8 +78,20 @@ int32_t fadeValue(const int32_t rawValue, const uint32_t fadeIndex)
 }]]></code.declaration>
       <code.init><![CDATA[state = I1;
 event = NO_EVENT;
-on = false;]]></code.init>
-      <code.krate><![CDATA[if (inlet_s)
+on = false;
+fadeUpIndex = 0;
+fadeDownIndex = 0;
+inputState = false;
+
+const char* useString = "attr_use";
+//LogTextMessage("Use: %s\n", useString);
+
+useInlet = strncmp("attr_use", "s inlet", strlen("s inlet")) == 0;]]></code.init>
+      <code.krate><![CDATA[// get the state from the selected input
+inputState = useInlet ? inlet_s : param_i2;
+
+// work out if the state has changed and create the appropriate event
+if (inputState)
 {
 	if (not on) // transition to on
 	{

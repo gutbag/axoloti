@@ -1,6 +1,6 @@
 <objdefs appVersion="1.0.12">
    <obj.normal id="SafeSwitch" uuid="9ecd8939-7299-438c-b3e5-e19d98fdc50d">
-      <sDescription>Connects the inlet to the outlet if on is true. Fades up and down to prevent clicks.</sDescription>
+      <sDescription>Connects the inlet to the outlet if either the on inlet is true or the manual/MIDI input is set, depending on which is selected through the drop-down. Fades up and down to prevent clicks.</sDescription>
       <author>Mark Lamb</author>
       <license>GPL</license>
       <inlets>
@@ -14,8 +14,21 @@
       <displays>
          <bool32 name="on" noLabel="true"/>
       </displays>
-      <params/>
-      <attribs/>
+      <params>
+         <bool32.tgl name="on" noLabel="true"/>
+      </params>
+      <attribs>
+         <combo name="use">
+            <MenuEntries>
+               <string>on inlet</string>
+               <string>Manual/MIDI</string>
+            </MenuEntries>
+            <CEntries>
+               <string>on inlet</string>
+               <string>Manual/MIDI</string>
+            </CEntries>
+         </combo>
+      </attribs>
       <code.declaration><![CDATA[static const uint32_t NUM_FADE_VALUES = 192;
 
 typedef enum {OFF, TURNING_ON, ON, TURNING_OFF} State;
@@ -26,6 +39,8 @@ Event event;
 
 bool on = false;
 uint32_t fadeIndex = 0;
+bool inputState = false; // the value of the selected input (inlet_on or param_on)
+bool useInlet = true;
 
 /**
  * Returns the rawValue modified by the fade value with the given index.
@@ -57,8 +72,19 @@ int32_t fadeValue(const int32_t rawValue, const uint32_t fadeIndex)
 }]]></code.declaration>
       <code.init><![CDATA[state = OFF;
 event = NO_EVENT;
-on = false;]]></code.init>
-      <code.krate><![CDATA[if (inlet_on)
+on = false;
+fadeIndex = 0;
+inputState = false;
+
+const char* useString = "attr_use";
+//LogTextMessage("Use: %s\n", useString);
+
+useInlet = strncmp("attr_use", "on inlet", strlen("on inlet")) == 0;]]></code.init>
+      <code.krate><![CDATA[// get the state from the selected input
+inputState = useInlet ? inlet_on : param_on;
+
+// work out if the state has changed and create the appropriate event
+if (inputState)
 {
 	if (not on) // transition to on
 	{
