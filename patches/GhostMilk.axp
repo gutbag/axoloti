@@ -100,11 +100,10 @@
       <params/>
       <attribs/>
    </obj>
-   <comment type="patch/comment" x="14" y="224" text="MIDI triggers gated on after startup delay."/>
-   <comment type="patch/comment" x="14" y="238" text="CC3: set bar start then control direct fuzz"/>
+   <comment type="patch/comment" x="14" y="238" text="MIDI triggers gated on after startup delay."/>
    <obj type="ctrl/dial p" uuid="cc5d2846c3d50e425f450c4b9851371b54f4d674" name="dial_1" x="938" y="238">
       <params>
-         <frac32.u.map name="value" MidiCC="1" value="0.0"/>
+         <frac32.u.map name="value" MidiCC="1" value="11.0"/>
       </params>
       <attribs/>
    </obj>
@@ -136,6 +135,17 @@
       <attribs/>
    </obj>
    <comment type="patch/comment" x="938" y="322" text="CC1: blends between fuzz and delay"/>
+   <obj type="LoopTrigBarSynchroniser2" uuid="bdcdc843-3b08-4290-95ea-d2aa232ee77e" name="LoopTrigBarSynchroniser2_1" x="224" y="350">
+      <params>
+         <bool32.tgl name="retrig" value="1"/>
+      </params>
+      <attribs>
+         <spinner attributeName="BPM" value="119"/>
+         <spinner attributeName="BeatsToBar" value="5"/>
+         <combo attributeName="NoteValue" selection="8"/>
+         <spinner attributeName="msInitialDly" value="100"/>
+      </attribs>
+   </obj>
    <comment type="patch/comment" x="14" y="364" text="CC2: trig loop on bar start."/>
    <obj type="mix/mix 4 g" uuid="36f472cd81da2e17bd4b4ee11b53b4c82527220c" name="mix_1" x="1064" y="364">
       <params>
@@ -161,14 +171,6 @@
       <attribs>
          <spinner attributeName="cc" value="2"/>
          <spinner attributeName="default" value="0"/>
-      </attribs>
-   </obj>
-   <obj type="LoopTrigBarSynchroniser2" uuid="bdcdc843-3b08-4290-95ea-d2aa232ee77e" name="LoopTrigBarSynchroniser2_1" x="224" y="378">
-      <params/>
-      <attribs>
-         <spinner attributeName="BPM" value="119"/>
-         <spinner attributeName="BeatsToBar" value="5"/>
-         <combo attributeName="NoteValue" selection="8"/>
       </attribs>
    </obj>
    <obj type="loopers/Basic" uuid="10d547b8-6155-4133-b4ff-400e59fd99e3" name="Basic_1" x="434" y="378">
