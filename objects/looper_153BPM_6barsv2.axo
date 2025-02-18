@@ -27,11 +27,14 @@ static const uint32_t BEATS = BARS * BEATS_TO_BAR;
 static constexpr double SAMPLE_PERIOD = 1.0 / 48000.0;
 static const uint32_t LENGTH = ((60.0 / BPM) * BEATS) / SAMPLE_PERIOD;
 
+static const uint32_t NUM_FADE_VALUES = 192;
+
 int32_t* array;
 uint32_t writepos;
 uint32_t readpos;
+uint32_t fadeIndex;
 
-typedef enum {INIT, RESET, RECORDING, PLAYING} State;
+typedef enum {INIT, RESET, RECORDING, PLAYING, FADING_OUT} State;
 State state;
 
 typedef enum {NONE, START_RECORDING, STOP, CLEAR} Event;
@@ -50,7 +53,6 @@ void clearArray()
 int32_t calcSampleValue(const int32_t rawValue, const uint32_t index, const uint32_t minIndex, const uint32_t maxIndex)
 {
 	// 2147483632 is a gain of 1
-	static const uint32_t NUM_FADE_VALUES = 192;
 	static const uint32_t FADE_VALUES[NUM_FADE_VALUES] = {
 	0, 11184811, 22369621, 33554432, 44739242, 55924053, 67108864, 78293674, 89478485, 100663295, 111848106, 123032916, 134217727, 145402538, 156587348, 167772159, 
 	178956969, 190141780, 201326591, 212511401, 223696212, 234881022, 246065833, 257250643, 268435454, 279620265, 290805075, 301989886, 313174696, 324359507, 335544318, 
@@ -153,13 +155,38 @@ else if (inlet_trigger && (state == RECORDING || state == PLAYING))
 			break;
 			case STOP: // stop and clear handled together
 			case CLEAR:
-				state = RESET;
+				fadeIndex = NUM_FADE_VALUES - 1;
+				state = FADING_OUT;
 			break;
 			case NONE:
 				outlet_out = calcSampleValue(array[readpos], readpos, 0, LENGTH);
 				++readpos;
 				if (readpos >= LENGTH) // for now, repeat loop forever
 					readpos = 0;
+			break;
+		}
+	break;
+	case FADING_OUT:
+		switch (event)
+		{
+			case START_RECORDING:
+			case STOP:
+			case CLEAR:
+				// ignore
+			break;
+			case NONE:
+				outlet_out = calcSampleValue(array[readpos], fadeIndex, 0, LENGTH);
+				if (fadeIndex == 0) // done the last sample, finished fading
+				{
+					state = RESET;
+				}
+				else
+				{
+					--fadeIndex;
+					++readpos;
+					if (readpos >= LENGTH) // may need to wrap to start
+						readpos = 0;
+				}
 			break;
 		}
 	break;
@@ -193,6 +220,13 @@ switch (state)
 		disp_reset = 0;
 	break;
 	case PLAYING:
+		outlet_recording = 0;
+		disp_recording = 0;
+		outlet_playing = 1;
+		disp_playing = 1;
+		disp_reset = 0;
+	break;
+	case FADING_OUT: // still playing
 		outlet_recording = 0;
 		disp_recording = 0;
 		outlet_playing = 1;
