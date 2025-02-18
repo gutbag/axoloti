@@ -110,6 +110,7 @@
       </params>
       <attribs/>
    </obj>
+   <comment type="patch/comment" x="364" y="322" text="Flash green LED to indicate start of bar."/>
    <obj type="looper_153BPM_8bars_overdub_v2" uuid="010efc20-bbd5-4d66-bdbc-e73c64c6b0d0" name="looper_153BPM_8bars_overdub_v2_1" x="602" y="322">
       <params/>
       <attribs/>
@@ -121,18 +122,25 @@
       </params>
       <attribs/>
    </obj>
-   <comment type="patch/comment" x="364" y="336" text="Flash green LED to indicate start of bar."/>
-   <obj type="LoopTrigBarSynchroniser" uuid="c1954292-fedc-4ea9-9f28-1db47525d561" name="LoopTrigBarSynchroniser_1" x="224" y="350">
-      <params/>
-      <attribs/>
+   <obj type="LoopTrigBarSynchroniser2" uuid="bdcdc843-3b08-4290-95ea-d2aa232ee77e" name="LoopTrigBarSynchroniser2_1" x="224" y="336">
+      <params>
+         <bool32.tgl name="syncstop" value="0"/>
+         <bool32.tgl name="retrig" value="1"/>
+      </params>
+      <attribs>
+         <spinner attributeName="BPM" value="153"/>
+         <spinner attributeName="BeatsToBar" value="4"/>
+         <combo attributeName="NoteValue" selection="4"/>
+         <spinner attributeName="msInitialDly" value="0"/>
+      </attribs>
    </obj>
-   <obj type="timer/pulselength" uuid="ca68725237d8ba8407773340801660a9fd9b0dba" name="pulselength_1" x="364" y="350">
+   <obj type="timer/pulselength" uuid="ca68725237d8ba8407773340801660a9fd9b0dba" name="pulselength_1" x="364" y="336">
       <params>
          <frac32.s.map name="delay" value="0.0"/>
       </params>
       <attribs/>
    </obj>
-   <obj type="gpio/out/led1" uuid="c6679540460d64e2e71760e61cb82fac227e2764" name="led1_1" x="462" y="350">
+   <obj type="gpio/out/led1" uuid="c6679540460d64e2e71760e61cb82fac227e2764" name="led1_1" x="462" y="336">
       <params/>
       <attribs/>
    </obj>
@@ -356,8 +364,8 @@
       </net>
       <net>
          <source obj="&gt;_1" outlet="out"/>
-         <dest obj="looper_153BPM_8bars_overdub_v2_1" inlet="reset"/>
          <dest obj="looper_153BPM_6barsv2_1" inlet="reset"/>
+         <dest obj="looper_153BPM_8bars_overdub_v2_1" inlet="reset"/>
       </net>
       <net>
          <source obj="cc_4" outlet="trig"/>
@@ -365,7 +373,7 @@
       </net>
       <net>
          <source obj="and_5" outlet="o"/>
-         <dest obj="LoopTrigBarSynchroniser_1" inlet="barstart"/>
+         <dest obj="LoopTrigBarSynchroniser2_1" inlet="barstart"/>
       </net>
       <net>
          <source obj="pulselength_1" outlet="pulse"/>
@@ -384,18 +392,6 @@
          <dest obj="cc_6" inlet="trig"/>
       </net>
       <net>
-         <source obj="and_7" outlet="o"/>
-         <dest obj="LoopTrigBarSynchroniser_1" inlet="armloop"/>
-      </net>
-      <net>
-         <source obj="LoopTrigBarSynchroniser_1" outlet="barstart"/>
-         <dest obj="pulselength_1" inlet="trig"/>
-      </net>
-      <net>
-         <source obj="LoopTrigBarSynchroniser_1" outlet="loopstart"/>
-         <dest obj="looper_153BPM_8bars_overdub_v2_1" inlet="trigger"/>
-      </net>
-      <net>
          <source obj="or_1" outlet="o"/>
          <dest obj="led2_2" inlet="in"/>
       </net>
@@ -406,6 +402,7 @@
       <net>
          <source obj="looper_153BPM_8bars_overdub_v2_1" outlet="playing"/>
          <dest obj="or_1" inlet="i4"/>
+         <dest obj="LoopTrigBarSynchroniser2_1" inlet="isactive"/>
       </net>
       <net>
          <source obj="or_2" outlet="o"/>
@@ -427,6 +424,18 @@
          <source obj="inv_1" outlet="o"/>
          <dest obj="or_2" inlet="i1"/>
       </net>
+      <net>
+         <source obj="and_7" outlet="o"/>
+         <dest obj="LoopTrigBarSynchroniser2_1" inlet="trigin"/>
+      </net>
+      <net>
+         <source obj="LoopTrigBarSynchroniser2_1" outlet="barstart"/>
+         <dest obj="pulselength_1" inlet="trig"/>
+      </net>
+      <net>
+         <source obj="LoopTrigBarSynchroniser2_1" outlet="trigout"/>
+         <dest obj="looper_153BPM_8bars_overdub_v2_1" inlet="trigger"/>
+      </net>
    </nets>
    <settings>
       <subpatchmode>no</subpatchmode>
@@ -438,9 +447,9 @@
    </settings>
    <notes><![CDATA[]]></notes>
    <windowPos>
-      <x>200</x>
-      <y>39</y>
-      <width>1280</width>
-      <height>932</height>
+      <x>203</x>
+      <y>38</y>
+      <width>1277</width>
+      <height>933</height>
    </windowPos>
 </patch-1.0>

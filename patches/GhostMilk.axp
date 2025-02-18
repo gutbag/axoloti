@@ -103,7 +103,7 @@
    <comment type="patch/comment" x="14" y="238" text="MIDI triggers gated on after startup delay."/>
    <obj type="ctrl/dial p" uuid="cc5d2846c3d50e425f450c4b9851371b54f4d674" name="dial_1" x="938" y="238">
       <params>
-         <frac32.u.map name="value" MidiCC="1" value="11.0"/>
+         <frac32.u.map name="value" MidiCC="1" value="0.0"/>
       </params>
       <attribs/>
    </obj>
@@ -135,8 +135,9 @@
       <attribs/>
    </obj>
    <comment type="patch/comment" x="938" y="322" text="CC1: blends between fuzz and delay"/>
-   <obj type="LoopTrigBarSynchroniser2" uuid="bdcdc843-3b08-4290-95ea-d2aa232ee77e" name="LoopTrigBarSynchroniser2_1" x="224" y="350">
+   <obj type="LoopTrigBarSynchroniser2" uuid="bdcdc843-3b08-4290-95ea-d2aa232ee77e" name="LoopTrigBarSynchroniser2_1" x="224" y="336">
       <params>
+         <bool32.tgl name="syncstop" value="0"/>
          <bool32.tgl name="retrig" value="1"/>
       </params>
       <attribs>
@@ -209,14 +210,14 @@
       </attribs>
    </obj>
    <comment type="patch/comment" x="672" y="448" text="Attenuate when playing"/>
-   <comment type="patch/comment" x="224" y="504" text="Flash green LED to indicate start of bar."/>
-   <obj type="timer/pulselength" uuid="ca68725237d8ba8407773340801660a9fd9b0dba" name="pulselength_1" x="224" y="518">
+   <comment type="patch/comment" x="224" y="532" text="Flash green LED to indicate start of bar."/>
+   <obj type="timer/pulselength" uuid="ca68725237d8ba8407773340801660a9fd9b0dba" name="pulselength_1" x="224" y="546">
       <params>
          <frac32.s.map name="delay" value="0.0"/>
       </params>
       <attribs/>
    </obj>
-   <obj type="gpio/out/led1" uuid="c6679540460d64e2e71760e61cb82fac227e2764" name="led1_1" x="322" y="518">
+   <obj type="gpio/out/led1" uuid="c6679540460d64e2e71760e61cb82fac227e2764" name="led1_1" x="322" y="546">
       <params/>
       <attribs/>
    </obj>
@@ -363,14 +364,6 @@
          <dest obj="pulselength_1" inlet="trig"/>
       </net>
       <net>
-         <source obj="and_7" outlet="o"/>
-         <dest obj="LoopTrigBarSynchroniser2_1" inlet="armloop"/>
-      </net>
-      <net>
-         <source obj="LoopTrigBarSynchroniser2_1" outlet="loopstart"/>
-         <dest obj="Basic_1" inlet="trigger"/>
-      </net>
-      <net>
          <source obj="Basic_1" outlet="recording"/>
          <dest obj="or_2" inlet="i2"/>
          <dest obj="1To2_1" inlet="sw"/>
@@ -379,6 +372,7 @@
          <source obj="Basic_1" outlet="playing"/>
          <dest obj="or_2" inlet="i3"/>
          <dest obj="1To2_2" inlet="sw"/>
+         <dest obj="LoopTrigBarSynchroniser2_1" inlet="isactive"/>
       </net>
       <net>
          <source obj="1To2_1" outlet="o2"/>
@@ -458,8 +452,8 @@
       </net>
       <net>
          <source obj="signed_1" outlet="out"/>
-         <dest obj="xfade_1" inlet="i1"/>
          <dest obj="mux_1" inlet="i2"/>
+         <dest obj="xfade_1" inlet="i1"/>
       </net>
       <net>
          <source obj="dial_1" outlet="out"/>
@@ -492,6 +486,14 @@
       <net>
          <source obj="and_9" outlet="o"/>
          <dest obj="flipflop_4" inlet="trig"/>
+      </net>
+      <net>
+         <source obj="LoopTrigBarSynchroniser2_1" outlet="trigout"/>
+         <dest obj="Basic_1" inlet="trigger"/>
+      </net>
+      <net>
+         <source obj="and_7" outlet="o"/>
+         <dest obj="LoopTrigBarSynchroniser2_1" inlet="trigin"/>
       </net>
    </nets>
    <settings>
