@@ -31,11 +31,17 @@ static const uint32_t BEATS = BARS * BEATS_TO_BAR;
 static constexpr double SAMPLE_PERIOD = 1.0 / 48000.0;
 static const uint32_t LENGTH = ((60.0 / BPM) * BEATS) / SAMPLE_PERIOD;
 
+// use each fade value n times to slow down the fade
+static const uint32_t SAMPLES_PER_FADE = 50;
+static const uint32_t NUM_FADE_VALUES = 192;
+
 int32_t* array;
 uint32_t writepos;
 uint32_t readpos;
+uint32_t fadeIndex;
+uint32_t samplesPerFadeCounter;
 
-typedef enum {INIT, RESET, RECORDING, OVERDUBBING, PLAYING, READY_TO_PLAY} State;
+typedef enum {INIT, RESET, RECORDING, OVERDUBBING, PLAYING, FADE_BEFORE_READY, READY_TO_PLAY} State;
 State state;
 
 typedef enum {NONE, START_RECORDING, PLAY, STOP, CLEAR} Event;
@@ -54,7 +60,6 @@ void clearArray()
 int32_t calcSampleValue(const int32_t rawValue, const uint32_t index, const uint32_t minIndex, const uint32_t maxIndex)
 {
 	// 2147483632 is a gain of 1
-	static const uint32_t NUM_FADE_VALUES = 192;
 	static const uint32_t FADE_VALUES[NUM_FADE_VALUES] = {
 	0, 11184811, 22369621, 33554432, 44739242, 55924053, 67108864, 78293674, 89478485, 100663295, 111848106, 123032916, 134217727, 145402538, 156587348, 167772159, 
 	178956969, 190141780, 201326591, 212511401, 223696212, 234881022, 246065833, 257250643, 268435454, 279620265, 290805075, 301989886, 313174696, 324359507, 335544318, 
@@ -85,6 +90,8 @@ clearArray();
 
 writepos = 0;
 readpos = 0;
+fadeIndex = 0;
+samplesPerFadeCounter = SAMPLES_PER_FADE;
 
 state = INIT;
 event = NONE;
@@ -196,7 +203,9 @@ else if (inlet_trigger && state == READY_TO_PLAY)
 				// ignore
 			break;
 			case STOP:
-				state = READY_TO_PLAY;
+				fadeIndex = NUM_FADE_VALUES - 1;
+				samplesPerFadeCounter = SAMPLES_PER_FADE;
+				state = FADE_BEFORE_READY;
 			break;
 			case CLEAR:
 				state = RESET;
@@ -207,6 +216,41 @@ else if (inlet_trigger && state == READY_TO_PLAY)
 				if (readpos >= LENGTH) // for now, repeat loop forever
 					readpos = 0;
 			break;
+		}
+	break;
+	case FADE_BEFORE_READY: // fade down
+		switch (event)
+		{
+			case START_RECORDING:
+				// ignore
+			break;
+			case PLAY:
+				// ignore
+			break;
+			case STOP:
+				// ignore
+			break;
+			case CLEAR:
+				state = RESET;
+			break;
+			case NONE:
+				outlet_out = calcSampleValue(array[readpos], fadeIndex, 0, LENGTH);
+				if (fadeIndex == 0) // done the last sample, finished fading
+				{
+					state = READY_TO_PLAY;
+				}
+				else
+				{
+					--samplesPerFadeCounter;
+					if (samplesPerFadeCounter == 0) // move to the next fade index
+					{
+						--fadeIndex;
+						samplesPerFadeCounter = SAMPLES_PER_FADE;
+					}
+					++readpos;
+					if (readpos >= LENGTH) // may need to wrap to start
+						readpos = 0;
+				}			break;
 		}
 	break;
 	case READY_TO_PLAY: // already got audio
