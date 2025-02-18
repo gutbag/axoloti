@@ -1,20 +1,22 @@
 <objdefs appVersion="1.0.12">
    <obj.normal id="LoopTrigBarSynchroniser2" uuid="bdcdc843-3b08-4290-95ea-d2aa232ee77e">
-      <sDescription>Receives input triggers marking the start of a bar then issues a pulse for each bar start. Receives loop arm trigger and waits until next bar start to issue trigger. Based on the original fixed BPM Moagulum object made generic. Once the loop has been started, bar start triggers are ignored, unless retrig is true.</sDescription>
+      <sDescription>Receives input triggers marking the start of a bar then issues a pulse for each bar start. Receives loop arm trigger and waits until next bar start to issue trigger unless syncstop is false and we&apos;re already active, in which case, the trigger to stop is immediate. Based on the original fixed BPM Moagulum object made generic. Once the loop has been started, bar start triggers are ignored, unless retrig is true.</sDescription>
       <author>Mark Lamb</author>
       <license>BSD</license>
       <inlets>
-         <bool32.rising name="barstart"/>
-         <bool32.rising name="armloop"/>
+         <bool32.rising name="barstart" description="Marks the start of the bar"/>
+         <bool32.rising name="trigin" description="Trigger input"/>
+         <bool32 name="isactive" description="The looper active state"/>
       </inlets>
       <outlets>
          <bool32.pulse name="barstart" description="Start of bar pulse"/>
-         <bool32.pulse name="loopstart" description="Trigger loop"/>
+         <bool32.pulse name="trigout" description="Trigger loop"/>
       </outlets>
       <displays>
          <bool32 name="loop_armed" noLabel="true"/>
       </displays>
       <params>
+         <bool32.tgl name="syncstop" description="Wait until bar start to trigger stop i.e. when active is true"/>
          <bool32.tgl name="retrig" description="Allow bar start to be reset even after a loop has started" noLabel="true"/>
       </params>
       <attribs>
@@ -42,10 +44,12 @@ static const uint32_t K_PERIODS_TO_BAR = (((((double)BEATS_TO_BAR/NOTE_VALUE_DIV
 uint32_t kCount;
 uint32_t kCountInitialDelay;
 bool loopArmed;
-bool barStartTrigEnabled;]]></code.declaration>
+bool barStartTrigEnabled;
+bool trigNow;]]></code.declaration>
       <code.init><![CDATA[kCount = K_PERIODS_TO_BAR;
 loopArmed = false;
 barStartTrigEnabled = true;
+trigNow = false;
 kCountInitialDelay = ((double)attr_msInitialDly/1000.0)/K_PERIOD;
 
 //LogTextMessage("kCountInitialDelay=%u\n", kCountInitialDelay);
@@ -56,9 +60,18 @@ kCountInitialDelay = ((double)attr_msInitialDly/1000.0)/K_PERIOD;
 	kCount = K_PERIODS_TO_BAR - kCountInitialDelay;
 }
 
-if (inlet_armloop)
+trigNow = false;
+
+if (inlet_trigin)
 {
-	loopArmed = true;
+	if (not inlet_isactive || (inlet_isactive && param_syncstop)) // arm trigger for next bar start
+	{
+		loopArmed = true;
+	}
+	else // trigger immediately
+	{
+		trigNow = true;
+	}
 
 	if (not param_retrig)
 		barStartTrigEnabled = false; // disable further bar start triggers
@@ -73,19 +86,22 @@ if (kCount == 0) // signal bar start
 
 	if (loopArmed)
 	{
-		outlet_loopstart = 1;
+		outlet_trigout = 1;
 		loopArmed = false;
 	}
 	else
 	{
-		outlet_loopstart = 0;
+		outlet_trigout = 0;
 	}
 }
 else // keep counting down
 {
 	--kCount;
 	outlet_barstart = 0;
-	outlet_loopstart = 0;
+	if (trigNow)
+		outlet_trigout = 1;
+	else
+		outlet_trigout = 0;
 }]]></code.krate>
    </obj.normal>
 </objdefs>
