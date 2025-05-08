@@ -40,6 +40,12 @@
       </attribs>
    </obj>
    <comment type="patch/comment" x="448" y="112" text="Fuzz with envelope"/>
+   <obj type="tiar/math/signed *c" uuid="7a77f52a9594e7e9eb31328ea725cb3641a81b55" name="signed_1" x="952" y="112">
+      <params>
+         <frac32.s.map name="amp" value="52.0"/>
+      </params>
+      <attribs/>
+   </obj>
    <obj type="stomps/distortion1" uuid="e80272b1-355d-43f4-9e93-f62e2a0c9709" name="obj_1" x="448" y="126">
       <params>
          <frac32.u.map name="gain_1" value="64.0"/>
@@ -72,12 +78,6 @@
       <params>
          <frac32.s.map name="pitch" value="30.0"/>
          <frac32.u.map name="reso" value="22.0"/>
-      </params>
-      <attribs/>
-   </obj>
-   <obj type="tiar/math/signed *c" uuid="7a77f52a9594e7e9eb31328ea725cb3641a81b55" name="signed_1" x="882" y="126">
-      <params>
-         <frac32.s.map name="amp" value="52.0"/>
       </params>
       <attribs/>
    </obj>
@@ -143,7 +143,7 @@
       <attribs>
          <spinner attributeName="BPM" value="119"/>
          <spinner attributeName="BeatsToBar" value="5"/>
-         <combo attributeName="NoteValue" selection="8"/>
+         <combo attributeName="NoteValue" selection="4"/>
          <spinner attributeName="msInitialDly" value="100"/>
       </attribs>
    </obj>
@@ -179,8 +179,8 @@
       <attribs>
          <spinner attributeName="BPM" value="119"/>
          <spinner attributeName="BeatsToBar" value="5"/>
-         <combo attributeName="NoteValue" selection="8"/>
-         <spinner attributeName="Bars" value="8"/>
+         <combo attributeName="NoteValue" selection="4"/>
+         <spinner attributeName="Bars" value="4"/>
       </attribs>
    </obj>
    <obj type="SRAMDelayMs" uuid="7652f21b-c075-4953-9046-03ad5518c200" name="SRAMDelayMs_1" x="574" y="378">
@@ -410,10 +410,6 @@
          <dest obj="sw_1" inlet="i1"/>
       </net>
       <net>
-         <source obj="lp_1" outlet="out"/>
-         <dest obj="signed_1" inlet="in"/>
-      </net>
-      <net>
          <source obj="sw_1" outlet="o1"/>
          <dest obj="obj_1" inlet="in"/>
          <dest obj="echo_1" inlet="in"/>
@@ -494,6 +490,10 @@
       <net>
          <source obj="and_7" outlet="o"/>
          <dest obj="LoopTrigBarSynchroniser2_1" inlet="trigin"/>
+      </net>
+      <net>
+         <source obj="lp_1" outlet="out"/>
+         <dest obj="signed_1" inlet="in"/>
       </net>
    </nets>
    <settings>
