@@ -1,0 +1,341 @@
+<patch-1.0 appVersion="1.0.12">
+   <obj type="audio/in left" uuid="d40e60b7641fe75af4d7c91b45bb038aacafc52e" name="in_1" x="14" y="14">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="delay/echo" uuid="b7e4de60a644f6b30fdee9648ea62f446ecce38d" name="echo_1" x="98" y="14">
+      <params/>
+      <attribs>
+         <spinner attributeName="delaylength" value="112"/>
+      </attribs>
+   </obj>
+   <obj type="mymath/gainx4" uuid="62b1c1a6337c7c8f6eac96408a432477b113cfa1" name="dry gain" x="224" y="14">
+      <params>
+         <frac32.u.map name="amp" value="28.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="mix/xfade" uuid="375dc91d218e96cdc9cbc7e92adb48f705ef701a" name="xfade_1" x="448" y="14">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="mix/mix 3 g" uuid="efc0bdb8ca0ec2184330951eff5203ff487e35a9" name="mix_2" x="630" y="14">
+      <params>
+         <frac32.u.map name="gain1" value="32.0"/>
+         <frac32.u.map name="gain2" MidiCC="1" value="32.0"/>
+         <frac32.u.map name="gain3" value="15.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="audio/out left" uuid="b11a3c09b2fdd575ea8212f2ce7743d5269253b1" name="out_1" x="742" y="14">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="ctrl/dial p" uuid="cc5d2846c3d50e425f450c4b9851371b54f4d674" name="dial_1" x="448" y="84">
+      <params>
+         <frac32.u.map name="value" value="42.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="mymath/gainx4" uuid="62b1c1a6337c7c8f6eac96408a432477b113cfa1" name="send gain" x="14" y="112">
+      <params>
+         <frac32.u.map name="amp" value="27.5"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="audio/out right" uuid="e58a4cbbb087052c5480366e3f5d3a04aa319777" name="out_2" x="112" y="112">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="audio/in right" uuid="5f35c9f87b3f291a8120a10db71935bebd186469" name="in_2" x="210" y="112">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="mymath/gainx4" uuid="62b1c1a6337c7c8f6eac96408a432477b113cfa1" name="ret gain" x="294" y="112">
+      <params>
+         <frac32.u.map name="amp" value="28.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <comment type="patch/comment" x="140" y="182" text="Geiger Counter via loop"/>
+   <comment type="patch/comment" x="14" y="238" text="CC2: delay on/off"/>
+   <obj type="midi/in/cc i" uuid="614eb76edef2b43632fa1fcda25aab54f821daf6" name="cc_7" x="14" y="252">
+      <params/>
+      <attribs>
+         <spinner attributeName="cc" value="2"/>
+         <spinner attributeName="default" value="0"/>
+      </attribs>
+   </obj>
+   <obj type="logic/flipflop toggle" uuid="195e489e5fc3d275944b0de56c7a91c8641ea22a" name="flipflop_3" x="112" y="252">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="logic/and 2" uuid="c67031682f552aa0a80b23377495c51ea28a8c9c" name="and_4" x="238" y="252">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="switches/SafeSwitch" uuid="9ecd8939-7299-438c-b3e5-e19d98fdc50d" name="SafeSwitch_3" x="322" y="252">
+      <params>
+         <bool32.tgl name="on" value="0"/>
+      </params>
+      <attribs>
+         <combo attributeName="use" selection="on inlet"/>
+      </attribs>
+   </obj>
+   <obj type="phi/delay/ECHO1Y" uuid="896e7c35-f21b-4922-afca-07141b4ae75d" name="obj_1" x="434" y="252">
+      <params>
+         <frac32.u.map name="dry/wet" value="64.0"/>
+         <frac32.u.map name=":gain1" value="64.0"/>
+         <frac32.s.map name="HP IN:pitch" value="64.0"/>
+         <frac32.u.map name="Time" value="0.0"/>
+         <frac32.s.map name="FbLp :pitch" value="50.0"/>
+         <frac32.u.map name="fba" value="0.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <comment type="patch/comment" x="602" y="252" text="CC5 starts and stops the chunker"/>
+   <obj type="midi/in/cc i" uuid="614eb76edef2b43632fa1fcda25aab54f821daf6" name="cc_4" x="602" y="266">
+      <params/>
+      <attribs>
+         <spinner attributeName="cc" value="5"/>
+         <spinner attributeName="default" value="0"/>
+      </attribs>
+   </obj>
+   <obj type="logic/and 2" uuid="c67031682f552aa0a80b23377495c51ea28a8c9c" name="and_3" x="714" y="280">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="loopers/FlexChunker" uuid="d2c3bc98-d2c4-4b85-8134-97f2980117bf" name="FlexChunker_1" x="812" y="280">
+      <params/>
+      <attribs>
+         <spinner attributeName="MaxTimeSecs" value="32"/>
+      </attribs>
+   </obj>
+   <comment type="patch/comment" x="602" y="364" text="CC6 sets chunk order and direction type"/>
+   <obj type="ctrl/dial p" uuid="cc5d2846c3d50e425f450c4b9851371b54f4d674" name="delay time" x="364" y="378">
+      <params>
+         <frac32.u.map name="value" MidiCC="3" value="16.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="midi/in/cc i" uuid="614eb76edef2b43632fa1fcda25aab54f821daf6" name="cc_6" x="602" y="378">
+      <params/>
+      <attribs>
+         <spinner attributeName="cc" value="6"/>
+         <spinner attributeName="default" value="7"/>
+      </attribs>
+   </obj>
+   <obj type="disp/i" uuid="5e35fd0c62d81e70017289250cf28edd26e19e4a" name="i_5" x="700" y="378">
+      <params/>
+      <attribs/>
+   </obj>
+   <comment type="patch/comment" x="14" y="420" text="CC1: wet/dry mix"/>
+   <comment type="patch/comment" x="14" y="434" text="CC2: delay on/off"/>
+   <comment type="patch/comment" x="14" y="448" text="CC3: delay time"/>
+   <comment type="patch/comment" x="14" y="462" text="CC4: delay feedback"/>
+   <obj type="ctrl/dial p" uuid="cc5d2846c3d50e425f450c4b9851371b54f4d674" name="delay feedback" x="364" y="462">
+      <params>
+         <frac32.u.map name="value" MidiCC="4" value="53.5"/>
+      </params>
+      <attribs/>
+   </obj>
+   <comment type="patch/comment" x="14" y="476" text="CC5 starts and stops the chunker"/>
+   <comment type="patch/comment" x="602" y="476" text="CC7 sets the number of chunks"/>
+   <comment type="patch/comment" x="14" y="490" text="CC6 sets chunk order and direction type"/>
+   <obj type="midi/in/cc i" uuid="614eb76edef2b43632fa1fcda25aab54f821daf6" name="cc_5" x="602" y="490">
+      <params/>
+      <attribs>
+         <spinner attributeName="cc" value="7"/>
+         <spinner attributeName="default" value="7"/>
+      </attribs>
+   </obj>
+   <obj type="disp/i" uuid="5e35fd0c62d81e70017289250cf28edd26e19e4a" name="i_4" x="700" y="490">
+      <params/>
+      <attribs/>
+   </obj>
+   <comment type="patch/comment" x="14" y="504" text="CC7 sets the number of chunks"/>
+   <comment type="patch/comment" x="14" y="602" text="Startup delay to lock out triggers on patch change. LED on until done."/>
+   <comment type="patch/comment" x="392" y="602" text="Red LED on during startup and when looping or delay on"/>
+   <obj type="const/i" uuid="e202f44b2df17ae0b3e663b98ea6b14c8ff00408" name="i_3" x="14" y="616">
+      <params/>
+      <attribs>
+         <spinner attributeName="value" value="1"/>
+      </attribs>
+   </obj>
+   <obj type="timer/delayedpulse" uuid="3f05ee534ca67755fb20c7437f9e4de3d4c2f73d" name="delayedpulse_2" x="98" y="616">
+      <params>
+         <frac32.s.map name="delay" value="54.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="logic/flipflop" uuid="f9b15363f5ee203152e062c08a8846f0074b0ea5" name="flipflop_1" x="210" y="616">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="logic/inv" uuid="2bd44b865d3b63ff9b80862242bf5be779e3ad5" name="inv_1" x="294" y="616">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="phi/logic/or 4" uuid="5dc5a7c1fb7809522171638f755fead71cbe14ea" name="or_2" x="392" y="616">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="gpio/out/led2" uuid="3d7a4c75d1f9901181a17ba5de752782de911803" name="led2_2" x="476" y="616">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="audio/inconfig l" uuid="7007d026acb7c3586f60a7f0898718d1ca7e0607" name="inconfig_1" x="14" y="812">
+      <params/>
+      <attribs>
+         <combo attributeName="gain" selection="0dB"/>
+         <combo attributeName="boost" selection="0dB"/>
+      </attribs>
+   </obj>
+   <obj type="audio/inconfig r" uuid="8468fe7907553f335959a7f69cbc5a1f7b5d4d1d" name="inconfig_2" x="112" y="812">
+      <params/>
+      <attribs>
+         <combo attributeName="gain" selection="0dB"/>
+         <combo attributeName="boost" selection="0dB"/>
+      </attribs>
+   </obj>
+   <nets>
+      <net>
+         <source obj="dial_1" outlet="out"/>
+         <dest obj="xfade_1" inlet="c"/>
+      </net>
+      <net>
+         <source obj="send gain" outlet="out"/>
+         <dest obj="out_2" inlet="wave"/>
+      </net>
+      <net>
+         <source obj="in_1" outlet="wave"/>
+         <dest obj="send gain" inlet="in"/>
+         <dest obj="echo_1" inlet="in"/>
+      </net>
+      <net>
+         <source obj="in_2" outlet="wave"/>
+         <dest obj="ret gain" inlet="in"/>
+      </net>
+      <net>
+         <source obj="ret gain" outlet="out"/>
+         <dest obj="xfade_1" inlet="i2"/>
+      </net>
+      <net>
+         <source obj="echo_1" outlet="out"/>
+         <dest obj="dry gain" inlet="in"/>
+      </net>
+      <net>
+         <source obj="dry gain" outlet="out"/>
+         <dest obj="xfade_1" inlet="i1"/>
+         <dest obj="FlexChunker_1" inlet="in"/>
+      </net>
+      <net>
+         <source obj="xfade_1" outlet="o"/>
+         <dest obj="SafeSwitch_3" inlet="in"/>
+         <dest obj="mix_2" inlet="in1"/>
+      </net>
+      <net>
+         <source obj="obj_1" outlet="Echoout"/>
+         <dest obj="mix_2" inlet="in2"/>
+      </net>
+      <net>
+         <source obj="delay time" outlet="out"/>
+         <dest obj="obj_1" inlet="time"/>
+      </net>
+      <net>
+         <source obj="delay feedback" outlet="out"/>
+         <dest obj="obj_1" inlet="FB"/>
+      </net>
+      <net>
+         <source obj="i_3" outlet="out"/>
+         <dest obj="delayedpulse_2" inlet="trig"/>
+      </net>
+      <net>
+         <source obj="delayedpulse_2" outlet="pulse"/>
+         <dest obj="flipflop_1" inlet="set"/>
+      </net>
+      <net>
+         <source obj="flipflop_1" outlet="o"/>
+         <dest obj="inv_1" inlet="i"/>
+         <dest obj="and_3" inlet="i2"/>
+         <dest obj="and_4" inlet="i2"/>
+      </net>
+      <net>
+         <source obj="inv_1" outlet="o"/>
+         <dest obj="or_2" inlet="i1"/>
+      </net>
+      <net>
+         <source obj="or_2" outlet="o"/>
+         <dest obj="led2_2" inlet="in"/>
+      </net>
+      <net>
+         <source obj="cc_4" outlet="trig"/>
+         <dest obj="and_3" inlet="i1"/>
+      </net>
+      <net>
+         <source obj="cc_5" outlet="midiCC"/>
+         <dest obj="i_4" inlet="in"/>
+         <dest obj="FlexChunker_1" inlet="numChunks"/>
+      </net>
+      <net>
+         <source obj="cc_6" outlet="midiCC"/>
+         <dest obj="i_5" inlet="in"/>
+         <dest obj="FlexChunker_1" inlet="type"/>
+      </net>
+      <net>
+         <source obj="and_3" outlet="o"/>
+         <dest obj="FlexChunker_1" inlet="trigger"/>
+      </net>
+      <net>
+         <source obj="SafeSwitch_3" outlet="o"/>
+         <dest obj="obj_1" inlet="echo"/>
+      </net>
+      <net>
+         <source obj="and_4" outlet="o"/>
+         <dest obj="SafeSwitch_3" inlet="on"/>
+      </net>
+      <net>
+         <source obj="SafeSwitch_3" outlet="isOn"/>
+         <dest obj="or_2" inlet="i2"/>
+      </net>
+      <net>
+         <source obj="FlexChunker_1" outlet="recording"/>
+         <dest obj="or_2" inlet="i3"/>
+      </net>
+      <net>
+         <source obj="FlexChunker_1" outlet="playing"/>
+         <dest obj="or_2" inlet="i4"/>
+      </net>
+      <net>
+         <source obj="FlexChunker_1" outlet="out"/>
+         <dest obj="mix_2" inlet="in3"/>
+      </net>
+      <net>
+         <source obj="mix_2" outlet="out"/>
+         <dest obj="out_1" inlet="wave"/>
+      </net>
+      <net>
+         <source obj="cc_7" outlet="trig"/>
+         <dest obj="flipflop_3" inlet="trig"/>
+      </net>
+      <net>
+         <source obj="flipflop_3" outlet="o"/>
+         <dest obj="and_4" inlet="i1"/>
+      </net>
+   </nets>
+   <settings>
+      <subpatchmode>no</subpatchmode>
+      <MidiChannel>2</MidiChannel>
+      <NPresets>1</NPresets>
+      <NPresetEntries>1</NPresetEntries>
+      <NModulationSources>1</NModulationSources>
+      <NModulationTargetsPerSource>1</NModulationTargetsPerSource>
+   </settings>
+   <notes><![CDATA[]]></notes>
+   <windowPos>
+      <x>313</x>
+      <y>50</y>
+      <width>1188</width>
+      <height>885</height>
+   </windowPos>
+</patch-1.0>
