@@ -1,4 +1,17 @@
 <patch-1.0 appVersion="1.0.12">
+   <obj type="mix/mix 4 g" uuid="36f472cd81da2e17bd4b4ee11b53b4c82527220c" name="mix_2" x="644" y="0">
+      <params>
+         <frac32.u.map name="gain1" value="32.0"/>
+         <frac32.u.map name="gain2" MidiCC="1" value="32.0"/>
+         <frac32.u.map name="gain3" MidiCC="8" value="32.0"/>
+         <frac32.u.map name="gain4" value="32.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="audio/out left" uuid="b11a3c09b2fdd575ea8212f2ce7743d5269253b1" name="out_1" x="742" y="0">
+      <params/>
+      <attribs/>
+   </obj>
    <obj type="audio/in left" uuid="d40e60b7641fe75af4d7c91b45bb038aacafc52e" name="in_1" x="14" y="14">
       <params/>
       <attribs/>
@@ -19,24 +32,19 @@
       <params/>
       <attribs/>
    </obj>
-   <obj type="mix/mix 3 g" uuid="efc0bdb8ca0ec2184330951eff5203ff487e35a9" name="mix_2" x="630" y="14">
-      <params>
-         <frac32.u.map name="gain1" value="32.0"/>
-         <frac32.u.map name="gain2" MidiCC="1" value="32.0"/>
-         <frac32.u.map name="gain3" value="15.0"/>
-      </params>
-      <attribs/>
-   </obj>
-   <obj type="audio/out left" uuid="b11a3c09b2fdd575ea8212f2ce7743d5269253b1" name="out_1" x="742" y="14">
-      <params/>
-      <attribs/>
-   </obj>
+   <comment type="patch/comment" x="868" y="14" text="CC1: wet/dry mix"/>
+   <comment type="patch/comment" x="868" y="28" text="CC2: delay on/off"/>
+   <comment type="patch/comment" x="868" y="42" text="CC3: delay time"/>
+   <comment type="patch/comment" x="868" y="56" text="CC4: delay feedback"/>
+   <comment type="patch/comment" x="868" y="70" text="CC5 starts and stops the chunker"/>
    <obj type="ctrl/dial p" uuid="cc5d2846c3d50e425f450c4b9851371b54f4d674" name="dial_1" x="448" y="84">
       <params>
          <frac32.u.map name="value" value="42.0"/>
       </params>
       <attribs/>
    </obj>
+   <comment type="patch/comment" x="868" y="84" text="CC6 sets chunk order and direction type"/>
+   <comment type="patch/comment" x="868" y="98" text="CC7 sets the number of chunks"/>
    <obj type="mymath/gainx4" uuid="62b1c1a6337c7c8f6eac96408a432477b113cfa1" name="send gain" x="14" y="112">
       <params>
          <frac32.u.map name="amp" value="27.5"/>
@@ -57,6 +65,8 @@
       </params>
       <attribs/>
    </obj>
+   <comment type="patch/comment" x="868" y="112" text="CC8 looper mix"/>
+   <comment type="patch/comment" x="868" y="126" text="CC9 sample trigger"/>
    <comment type="patch/comment" x="140" y="182" text="Geiger Counter via loop"/>
    <comment type="patch/comment" x="14" y="238" text="CC2: delay on/off"/>
    <obj type="midi/in/cc i" uuid="614eb76edef2b43632fa1fcda25aab54f821daf6" name="cc_7" x="14" y="252">
@@ -111,7 +121,15 @@
          <spinner attributeName="MaxTimeSecs" value="32"/>
       </attribs>
    </obj>
+   <comment type="patch/comment" x="14" y="364" text="CC2: delay on/off"/>
    <comment type="patch/comment" x="602" y="364" text="CC6 sets chunk order and direction type"/>
+   <obj type="midi/in/cc i" uuid="614eb76edef2b43632fa1fcda25aab54f821daf6" name="cc_8" x="14" y="378">
+      <params/>
+      <attribs>
+         <spinner attributeName="cc" value="9"/>
+         <spinner attributeName="default" value="0"/>
+      </attribs>
+   </obj>
    <obj type="ctrl/dial p" uuid="cc5d2846c3d50e425f450c4b9851371b54f4d674" name="delay time" x="364" y="378">
       <params>
          <frac32.u.map name="value" MidiCC="3" value="16.0"/>
@@ -129,19 +147,13 @@
       <params/>
       <attribs/>
    </obj>
-   <comment type="patch/comment" x="14" y="420" text="CC1: wet/dry mix"/>
-   <comment type="patch/comment" x="14" y="434" text="CC2: delay on/off"/>
-   <comment type="patch/comment" x="14" y="448" text="CC3: delay time"/>
-   <comment type="patch/comment" x="14" y="462" text="CC4: delay feedback"/>
    <obj type="ctrl/dial p" uuid="cc5d2846c3d50e425f450c4b9851371b54f4d674" name="delay feedback" x="364" y="462">
       <params>
          <frac32.u.map name="value" MidiCC="4" value="53.5"/>
       </params>
       <attribs/>
    </obj>
-   <comment type="patch/comment" x="14" y="476" text="CC5 starts and stops the chunker"/>
    <comment type="patch/comment" x="602" y="476" text="CC7 sets the number of chunks"/>
-   <comment type="patch/comment" x="14" y="490" text="CC6 sets chunk order and direction type"/>
    <obj type="midi/in/cc i" uuid="614eb76edef2b43632fa1fcda25aab54f821daf6" name="cc_5" x="602" y="490">
       <params/>
       <attribs>
@@ -153,7 +165,6 @@
       <params/>
       <attribs/>
    </obj>
-   <comment type="patch/comment" x="14" y="504" text="CC7 sets the number of chunks"/>
    <comment type="patch/comment" x="14" y="602" text="Startup delay to lock out triggers on patch change. LED on until done."/>
    <comment type="patch/comment" x="392" y="602" text="Red LED on during startup and when looping or delay on"/>
    <obj type="const/i" uuid="e202f44b2df17ae0b3e663b98ea6b14c8ff00408" name="i_3" x="14" y="616">
@@ -184,6 +195,92 @@
       <params/>
       <attribs/>
    </obj>
+   <obj type="mix/mix 2 g" uuid="221f038da51943034a75e442c90624fcebfe6112" name="mix_1" x="742" y="658">
+      <params>
+         <frac32.u.map name="gain1" value="32.0"/>
+         <frac32.u.map name="gain2" value="32.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="wave/play stereo" uuid="843bbc92c4a45c5ba551de32538934e186dc4a41" name="play_1" x="616" y="672">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="logic/and 2" uuid="c67031682f552aa0a80b23377495c51ea28a8c9c" name="and_1" x="546" y="686">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="midi/in/monitor" uuid="b51863ca-6afa-4d29-acfd-c8c2fe06cb16" name="monitor_1" x="14" y="714">
+      <params>
+         <bool32.tgl name="ControlChange" value="1"/>
+         <bool32.tgl name="Note" value="0"/>
+         <bool32.tgl name="ProgramChange" value="1"/>
+         <bool32.tgl name="Bend" value="0"/>
+         <bool32.tgl name="PolyPressure" value="0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="phi/prob/%rand i" uuid="03fd92b7-8321-4175-a198-14ab3r3fe273" name="%rand_1" x="294" y="742">
+      <params>
+         <frac32.s.map name="prob" value="64.0"/>
+         <int32 name="value" value="13"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="disp/i" uuid="5e35fd0c62d81e70017289250cf28edd26e19e4a" name="i_6" x="392" y="742">
+      <params/>
+      <attribs/>
+   </obj>
+   <patchobj type="patch/object" uuid="a02e42a0-16a7-47a2-9489-1c6f61f56cb8" name="indexed_1" x="448" y="742">
+      <params/>
+      <attribs>
+         <table attributeName="prefix" table="sound"/>
+         <table attributeName="suffix" table=".raw"/>
+      </attribs>
+      <object id="patch/object" uuid="a02e42a0-16a7-47a2-9489-1c6f61f56cb8">
+         <sDescription>generates string: prefix000suffix</sDescription>
+         <author>Johannes Taelman</author>
+         <license>BSD</license>
+         <inlets>
+            <int32 name="index" description="index"/>
+         </inlets>
+         <outlets>
+            <charptr32 name="out" description="string"/>
+         </outlets>
+         <displays/>
+         <params/>
+         <attribs>
+            <table name="prefix"/>
+            <table name="suffix"/>
+         </attribs>
+         <includes/>
+         <code.declaration><![CDATA[char c[64];
+int offset;
+int pval;
+int kCount;]]></code.declaration>
+         <code.init><![CDATA[strcpy(&c[0],"attr_prefix000attr_suffix");
+offset = strlen("attr_prefix");
+pval = 0;
+kCount = 0;]]></code.init>
+         <code.krate><![CDATA[if (inlet_index != pval){   pval = inlet_index;
+   int i = inlet_index;   int i0 = i/10;
+   c[offset+2] = '0'+i-10*i0;
+   i = i0; i0 = i/10;
+   c[offset+1] = '0'+i-10*i0;
+   i = i0; i0 = i/10;
+   c[offset+0] = '0'+i-10*i0;
+}
+outlet_out = &c[0];
+
+++kCount;
+if (kCount >=3000)
+{
+	kCount = 0;
+	LogTextMessage("filename: %s\n", c);
+
+}]]></code.krate>
+      </object>
+   </patchobj>
    <obj type="audio/inconfig l" uuid="7007d026acb7c3586f60a7f0898718d1ca7e0607" name="inconfig_1" x="14" y="812">
       <params/>
       <attribs>
@@ -226,8 +323,8 @@
       </net>
       <net>
          <source obj="dry gain" outlet="out"/>
-         <dest obj="xfade_1" inlet="i1"/>
          <dest obj="FlexChunker_1" inlet="in"/>
+         <dest obj="xfade_1" inlet="i1"/>
       </net>
       <net>
          <source obj="xfade_1" outlet="o"/>
@@ -259,6 +356,7 @@
          <dest obj="inv_1" inlet="i"/>
          <dest obj="and_3" inlet="i2"/>
          <dest obj="and_4" inlet="i2"/>
+         <dest obj="and_1" inlet="i2"/>
       </net>
       <net>
          <source obj="inv_1" outlet="o"/>
@@ -311,16 +409,46 @@
          <dest obj="mix_2" inlet="in3"/>
       </net>
       <net>
-         <source obj="mix_2" outlet="out"/>
-         <dest obj="out_1" inlet="wave"/>
-      </net>
-      <net>
          <source obj="cc_7" outlet="trig"/>
          <dest obj="flipflop_3" inlet="trig"/>
       </net>
       <net>
          <source obj="flipflop_3" outlet="o"/>
          <dest obj="and_4" inlet="i1"/>
+      </net>
+      <net>
+         <source obj="and_1" outlet="o"/>
+         <dest obj="play_1" inlet="start"/>
+      </net>
+      <net>
+         <source obj="cc_8" outlet="trig"/>
+         <dest obj="and_1" inlet="i1"/>
+         <dest obj="%rand_1" inlet="trig"/>
+      </net>
+      <net>
+         <source obj="play_1" outlet="outl"/>
+         <dest obj="mix_1" inlet="in1"/>
+      </net>
+      <net>
+         <source obj="play_1" outlet="outr"/>
+         <dest obj="mix_1" inlet="in2"/>
+      </net>
+      <net>
+         <source obj="mix_1" outlet="out"/>
+         <dest obj="mix_2" inlet="in4"/>
+      </net>
+      <net>
+         <source obj="mix_2" outlet="out"/>
+         <dest obj="out_1" inlet="wave"/>
+      </net>
+      <net>
+         <source obj="%rand_1" outlet="o"/>
+         <dest obj="i_6" inlet="in"/>
+         <dest obj="indexed_1" inlet="index"/>
+      </net>
+      <net>
+         <source obj="indexed_1" outlet="out"/>
+         <dest obj="play_1" inlet="filename"/>
       </net>
    </nets>
    <settings>
@@ -333,7 +461,7 @@
    </settings>
    <notes><![CDATA[]]></notes>
    <windowPos>
-      <x>313</x>
+      <x>312</x>
       <y>50</y>
       <width>1188</width>
       <height>885</height>
