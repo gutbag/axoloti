@@ -66,7 +66,7 @@
       <attribs/>
    </obj>
    <comment type="patch/comment" x="868" y="112" text="CC8 looper mix"/>
-   <comment type="patch/comment" x="868" y="126" text="CC9 sample trigger"/>
+   <comment type="patch/comment" x="868" y="126" text="CC9 trigger random sample"/>
    <comment type="patch/comment" x="140" y="182" text="Geiger Counter via loop"/>
    <comment type="patch/comment" x="14" y="238" text="CC2: delay on/off"/>
    <obj type="midi/in/cc i" uuid="614eb76edef2b43632fa1fcda25aab54f821daf6" name="cc_7" x="14" y="252">
