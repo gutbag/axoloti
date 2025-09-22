@@ -220,13 +220,59 @@
       </params>
       <attribs/>
    </obj>
-   <obj type="phi/prob/%rand i" uuid="03fd92b7-8321-4175-a198-14ab3r3fe273" name="%rand_1" x="294" y="742">
+   <patchobj type="patch/object" uuid="32684f00-eca3-4f41-ba4e-f3b9f7478197" name="%rand_1" x="294" y="742">
       <params>
          <frac32.s.map name="prob" value="64.0"/>
-         <int32 name="value" value="13"/>
+         <int32 name="value" value="20"/>
       </params>
       <attribs/>
-   </obj>
+      <object id="patch/object" uuid="32684f00-eca3-4f41-ba4e-f3b9f7478197">
+         <sDescription>probabiltiy random i</sDescription>
+         <author>Philoop</author>
+         <license>GPL</license>
+         <helpPatch>prob.axh</helpPatch>
+         <inlets>
+            <bool32 name="trig"/>
+         </inlets>
+         <outlets>
+            <int32 name="o"/>
+         </outlets>
+         <displays/>
+         <params>
+            <frac32.s.map name="prob" noLabel="true"/>
+            <int32 name="value" noLabel="true">
+               <MinValue i="0"/>
+               <MaxValue i="65536"/>
+            </int32>
+         </params>
+         <attribs/>
+         <includes/>
+         <code.declaration><![CDATA[int32_t val;
+int32_t val1;
+int ntrig;
+int rtrig;]]></code.declaration>
+         <code.init><![CDATA[val = (int32_t)(GenerateRandomNumber())>>4;
+
+// changed MCL 14/9/25 to init output to 0 (previously got huge random value)
+//val1 = (int32_t)(GenerateRandomNumber())>>4;
+val1 = 0;
+
+      ntrig = 0;
+      rtrig = 0;]]></code.init>
+         <code.krate><![CDATA[if ((inlet_trig>0) && !ntrig) { val = (int32_t)(GenerateRandomNumber())>>4; ntrig=1;}
+      else if (!(inlet_trig>0)) ntrig=0;
+      
+     
+     if (((param_prob>val)&&(inlet_trig)>0) && !rtrig) {
+      if (param_value) 
+         val1 = (int32_t)(GenerateRandomNumber()% (param_value));
+      else val1 = 0;
+      rtrig=1;
+   }
+   else if (!(inlet_trig>0)) rtrig=0;
+   outlet_o = val1;]]></code.krate>
+      </object>
+   </patchobj>
    <obj type="disp/i" uuid="5e35fd0c62d81e70017289250cf28edd26e19e4a" name="i_6" x="392" y="742">
       <params/>
       <attribs/>
@@ -276,7 +322,8 @@ outlet_out = &c[0];
 if (kCount >=3000)
 {
 	kCount = 0;
-	LogTextMessage("filename: %s\n", c);
+	// enable to log filename
+	//LogTextMessage("filename: %s\n", c);
 
 }]]></code.krate>
       </object>
