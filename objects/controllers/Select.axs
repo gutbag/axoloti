@@ -1,4 +1,4 @@
-<patch-1.0 appVersion="1.0.11">
+<patch-1.0 appVersion="1.0.12">
    <obj type="midi/in/pgm" uuid="6165409901fee4a0781b41bac3513f51c2120d67" name="pgm_1" x="14" y="14">
       <params/>
       <attribs/>
@@ -17,6 +17,8 @@
       </params>
       <attribs/>
    </obj>
+   <comment type="patch/comment" x="126" y="84" text="In Preferences, set Controller Object to the path to this subpatch i.e."/>
+   <comment type="patch/comment" x="126" y="98" text="../../../../../Users/marklamb/Documents/axoloti/objects/controllers/Select"/>
    <nets>
       <net>
          <source obj="pgm_1" outlet="o"/>
@@ -38,8 +40,8 @@
    </settings>
    <notes><![CDATA[Some notes]]></notes>
    <windowPos>
-      <x>-306</x>
-      <y>-678</y>
+      <x>639</x>
+      <y>469</y>
       <width>669</width>
       <height>339</height>
    </windowPos>

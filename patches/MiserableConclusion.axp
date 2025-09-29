@@ -2,7 +2,7 @@
    <obj type="mix/mix 4 g" uuid="36f472cd81da2e17bd4b4ee11b53b4c82527220c" name="mix_2" x="644" y="0">
       <params>
          <frac32.u.map name="gain1" value="32.0"/>
-         <frac32.u.map name="gain2" MidiCC="1" value="32.0"/>
+         <frac32.u.map name="gain2" MidiCC="1" value="17.5"/>
          <frac32.u.map name="gain3" MidiCC="8" value="32.0"/>
          <frac32.u.map name="gain4" value="32.0"/>
       </params>
@@ -147,6 +147,10 @@
       <params/>
       <attribs/>
    </obj>
+   <obj type="logic/and 2" uuid="c67031682f552aa0a80b23377495c51ea28a8c9c" name="and_1" x="140" y="392">
+      <params/>
+      <attribs/>
+   </obj>
    <obj type="ctrl/dial p" uuid="cc5d2846c3d50e425f450c4b9851371b54f4d674" name="delay feedback" x="364" y="462">
       <params>
          <frac32.u.map name="value" MidiCC="4" value="53.5"/>
@@ -206,20 +210,18 @@
       <params/>
       <attribs/>
    </obj>
-   <obj type="logic/and 2" uuid="c67031682f552aa0a80b23377495c51ea28a8c9c" name="and_1" x="546" y="686">
-      <params/>
-      <attribs/>
-   </obj>
    <obj type="midi/in/monitor" uuid="b51863ca-6afa-4d29-acfd-c8c2fe06cb16" name="monitor_1" x="14" y="714">
       <params>
-         <bool32.tgl name="ControlChange" value="1"/>
+         <bool32.tgl name="ControlChange" value="0"/>
          <bool32.tgl name="Note" value="0"/>
-         <bool32.tgl name="ProgramChange" value="1"/>
+         <bool32.tgl name="ProgramChange" value="0"/>
          <bool32.tgl name="Bend" value="0"/>
          <bool32.tgl name="PolyPressure" value="0"/>
       </params>
       <attribs/>
    </obj>
+   <comment type="patch/comment" x="126" y="728" text="Enable monitors for debugging"/>
+   <comment type="patch/comment" x="126" y="742" text="Controller usually enables these"/>
    <patchobj type="patch/object" uuid="32684f00-eca3-4f41-ba4e-f3b9f7478197" name="%rand_1" x="294" y="742">
       <params>
          <frac32.s.map name="prob" value="64.0"/>
@@ -466,11 +468,11 @@ if (kCount >=3000)
       <net>
          <source obj="and_1" outlet="o"/>
          <dest obj="play_1" inlet="start"/>
+         <dest obj="%rand_1" inlet="trig"/>
       </net>
       <net>
          <source obj="cc_8" outlet="trig"/>
          <dest obj="and_1" inlet="i1"/>
-         <dest obj="%rand_1" inlet="trig"/>
       </net>
       <net>
          <source obj="play_1" outlet="outl"/>
@@ -505,11 +507,12 @@ if (kCount >=3000)
       <NPresetEntries>1</NPresetEntries>
       <NModulationSources>1</NModulationSources>
       <NModulationTargetsPerSource>1</NModulationTargetsPerSource>
+      <Author></Author>
    </settings>
    <notes><![CDATA[]]></notes>
    <windowPos>
-      <x>312</x>
-      <y>50</y>
+      <x>208</x>
+      <y>45</y>
       <width>1188</width>
       <height>885</height>
    </windowPos>

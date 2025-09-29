@@ -90,27 +90,39 @@
          <combo attributeName="boost" selection="0dB"/>
       </attribs>
    </obj>
+   <comment type="patch/comment" x="224" y="350" text="Delay on LED"/>
    <obj type="ctrl/dial p" uuid="cc5d2846c3d50e425f450c4b9851371b54f4d674" name="delay time" x="532" y="350">
       <params>
          <frac32.u.map name="value" MidiCC="3" value="16.0"/>
       </params>
       <attribs/>
    </obj>
-   <comment type="patch/comment" x="168" y="406" text="Delay on LED"/>
-   <obj type="const/i" uuid="e202f44b2df17ae0b3e663b98ea6b14c8ff00408" name="i_1" x="168" y="420">
+   <obj type="const/i" uuid="e202f44b2df17ae0b3e663b98ea6b14c8ff00408" name="i_1" x="224" y="364">
       <params/>
       <attribs>
          <spinner attributeName="value" value="1"/>
       </attribs>
    </obj>
-   <obj type="phi/switch/sw 1b" uuid="503136152cb0180fdb535f96ca6d76ac58d7d080" name="sw_2" x="252" y="420">
+   <obj type="phi/switch/sw 1b" uuid="503136152cb0180fdb535f96ca6d76ac58d7d080" name="sw_2" x="308" y="364">
       <params>
          <bool32.tgl name="b" MidiCC="2" value="0"/>
       </params>
       <attribs/>
    </obj>
-   <obj type="gpio/out/led2" uuid="3d7a4c75d1f9901181a17ba5de752782de911803" name="led2_1" x="350" y="420">
+   <obj type="gpio/out/led2" uuid="3d7a4c75d1f9901181a17ba5de752782de911803" name="led2_1" x="406" y="364">
       <params/>
+      <attribs/>
+   </obj>
+   <comment type="patch/comment" x="28" y="406" text="Enable monitors for debugging"/>
+   <comment type="patch/comment" x="28" y="420" text="Controller usually enables these"/>
+   <obj type="midi/in/monitor" uuid="b51863ca-6afa-4d29-acfd-c8c2fe06cb16" name="monitor_1" x="28" y="434">
+      <params>
+         <bool32.tgl name="ControlChange" value="0"/>
+         <bool32.tgl name="Note" value="0"/>
+         <bool32.tgl name="ProgramChange" value="0"/>
+         <bool32.tgl name="Bend" value="0"/>
+         <bool32.tgl name="PolyPressure" value="0"/>
+      </params>
       <attribs/>
    </obj>
    <obj type="ctrl/dial p" uuid="cc5d2846c3d50e425f450c4b9851371b54f4d674" name="delay feedback" x="532" y="434">
