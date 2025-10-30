@@ -225,7 +225,7 @@
    <patchobj type="patch/object" uuid="32684f00-eca3-4f41-ba4e-f3b9f7478197" name="%rand_1" x="294" y="742">
       <params>
          <frac32.s.map name="prob" value="64.0"/>
-         <int32 name="value" value="20"/>
+         <int32 name="value" value="16"/>
       </params>
       <attribs/>
       <object id="patch/object" uuid="32684f00-eca3-4f41-ba4e-f3b9f7478197">
@@ -507,7 +507,6 @@ if (kCount >=3000)
       <NPresetEntries>1</NPresetEntries>
       <NModulationSources>1</NModulationSources>
       <NModulationTargetsPerSource>1</NModulationTargetsPerSource>
-      <Author></Author>
    </settings>
    <notes><![CDATA[]]></notes>
    <windowPos>
