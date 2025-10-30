@@ -38,8 +38,6 @@ static const uint32_t NUM_FADE_VALUES = 192;
 int32_t* array;
 uint32_t writepos;
 uint32_t readpos;
-uint32_t fadeIndex;
-uint32_t samplesPerFadeCounter;
 
 typedef enum {INIT, RESET, RECORDING, OVERDUBBING, PLAYING, FADE_BEFORE_READY, READY_TO_PLAY} State;
 State state;
@@ -52,6 +50,61 @@ void clearArray()
 	for (int i=0; i<LENGTH; i++)
 		array[i] = 0;
 }
+
+//#include "../objects/Fader.h"
+
+///**
+// * Handles fading down when playing is stopped. Allows multiple samples
+// * for each fade index.
+// */
+//class Fader
+//{
+//public:
+//	Fader(const uint32_t aNumFadeSamples, const uint32_t aSamplesPerFadeIndex)
+//	: numFadeSamples(aNumFadeSamples), samplesPerFadeIndex(aSamplesPerFadeIndex)
+//	{
+//		init();
+//	}
+//	~Fader() {}
+//
+//	void init()
+//	{
+//		fadeIndex = numFadeSamples - 1;
+//		samplesPerFadeCounter = samplesPerFadeIndex;
+//
+//		LogTextMessage("Fader::init\n");
+//	}
+//
+//	uint32_t getFadeIndex() const
+//	{
+//		return fadeIndex;
+//	}
+//
+//	void next()
+//	{
+//		--samplesPerFadeCounter;
+//		if (samplesPerFadeCounter == 0) // move to the next fade index
+//		{
+//			--fadeIndex;
+//			samplesPerFadeCounter = samplesPerFadeIndex;
+//		}
+//
+//		if (finished())
+//			LogTextMessage("Fader finished\n");
+//	}
+//
+//	bool finished() const
+//	{
+//		return fadeIndex == 0;
+//	}
+//
+//private:
+//	uint32_t numFadeSamples;
+//	uint32_t samplesPerFadeIndex;
+//	uint32_t fadeIndex;
+//	uint32_t samplesPerFadeCounter;
+//};
+
 
 /**
  * Calculates and returns the sample value to be used, given the index and its 
@@ -90,11 +143,10 @@ clearArray();
 
 writepos = 0;
 readpos = 0;
-fadeIndex = 0;
-samplesPerFadeCounter = SAMPLES_PER_FADE;
 
 state = INIT;
 event = NONE;
+
 
 //LogTextMessage("Init looper_153BPM_8bars_overdub_v2\n");]]></code.init>
       <code.krate><![CDATA[if (inlet_reset && state != RESET)
@@ -117,7 +169,10 @@ else if (inlet_trigger && state == READY_TO_PLAY)
 	//LogTextMessage("PLAY\n");
 	event = PLAY;
 }]]></code.krate>
-      <code.srate><![CDATA[switch (state)
+      <code.srate><![CDATA[#include "../objects/Fader.h"
+static Fader fader(NUM_FADE_VALUES, SAMPLES_PER_FADE);
+
+switch (state)
 {
 	case INIT: // entered only once on startup
 		state = RESET;
@@ -203,8 +258,7 @@ else if (inlet_trigger && state == READY_TO_PLAY)
 				// ignore
 			break;
 			case STOP:
-				fadeIndex = NUM_FADE_VALUES - 1;
-				samplesPerFadeCounter = SAMPLES_PER_FADE;
+				fader.init();
 				state = FADE_BEFORE_READY;
 			break;
 			case CLEAR:
@@ -234,23 +288,19 @@ else if (inlet_trigger && state == READY_TO_PLAY)
 				state = RESET;
 			break;
 			case NONE:
-				outlet_out = calcSampleValue(array[readpos], fadeIndex, 0, LENGTH);
-				if (fadeIndex == 0) // done the last sample, finished fading
+				outlet_out = calcSampleValue(array[readpos], fader.getFadeIndex(), 0, LENGTH);
+				if (fader.finished()) // done the last sample, finished fading
 				{
 					state = READY_TO_PLAY;
 				}
 				else
 				{
-					--samplesPerFadeCounter;
-					if (samplesPerFadeCounter == 0) // move to the next fade index
-					{
-						--fadeIndex;
-						samplesPerFadeCounter = SAMPLES_PER_FADE;
-					}
+					fader.next();
 					++readpos;
 					if (readpos >= LENGTH) // may need to wrap to start
 						readpos = 0;
-				}			break;
+				}
+			break;
 		}
 	break;
 	case READY_TO_PLAY: // already got audio
