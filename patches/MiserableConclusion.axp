@@ -121,7 +121,7 @@
          <spinner attributeName="MaxTimeSecs" value="32"/>
       </attribs>
    </obj>
-   <comment type="patch/comment" x="14" y="364" text="CC2: delay on/off"/>
+   <comment type="patch/comment" x="14" y="364" text="CC9 trigger random sample"/>
    <comment type="patch/comment" x="602" y="364" text="CC6 sets chunk order and direction type"/>
    <obj type="midi/in/cc i" uuid="614eb76edef2b43632fa1fcda25aab54f821daf6" name="cc_8" x="14" y="378">
       <params/>
