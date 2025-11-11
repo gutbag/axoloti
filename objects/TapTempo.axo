@@ -1,0 +1,64 @@
+<objdefs appVersion="1.0.12">
+   <obj.normal id="TapTempo" uuid="623eb61e-59ba-4b39-92cf-9165c1dd97ea">
+      <sDescription>Receives tap trigger inputs and adjusts the timing of an output trigger to match. An enable input controls whether any output triggers are delivered.</sDescription>
+      <author>Mark Lamb</author>
+      <license>GPL</license>
+      <inlets>
+         <bool32.rising name="tap" description="the tap input"/>
+         <bool32 name="enable"/>
+      </inlets>
+      <outlets>
+         <bool32.pulse name="trigger"/>
+      </outlets>
+      <displays/>
+      <params/>
+      <attribs/>
+      <code.declaration><![CDATA[static const uint32_t MAX_K_PER_TAP = 2 * 3000; // 2s tap timeout
+
+uint32_t kPerTrigger = 3000; // default
+uint32_t currentKCount = kPerTrigger;
+
+bool tapping = false;
+uint32_t kCountSinceTap = 0;]]></code.declaration>
+      <code.krate><![CDATA[outlet_trigger = 0;
+
+if (currentKCount == 0)
+{
+	if (inlet_enable)
+	{
+		outlet_trigger = 1;
+		//LogTextMessage("trig enabled\n");
+	}
+	currentKCount = kPerTrigger; // restart count
+}
+
+currentKCount--;
+
+if (tapping)
+{
+	kCountSinceTap++;
+
+	if (kCountSinceTap > MAX_K_PER_TAP) // timeout
+	{
+		tapping = false;
+	}
+}
+
+if (inlet_tap > 0) // got a tap
+{
+	if (tapping)
+	{
+		// store the k count as the new tap delay
+		kPerTrigger = kCountSinceTap;
+		//LogTextMessage("kPerTrigger %u/%ums\n", kPerTrigger, kPerTrigger/3);
+	}
+	else // the first tap
+	{
+		tapping = true;
+	}
+
+	// restart the counter
+	kCountSinceTap = 0;
+}]]></code.krate>
+   </obj.normal>
+</objdefs>

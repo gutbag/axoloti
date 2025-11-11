@@ -1,0 +1,356 @@
+<patch-1.0 appVersion="1.0.12">
+   <comment type="patch/comment" x="14" y="28" text="Tap input"/>
+   <obj type="midi/out/cc" uuid="7ca9b2c1b4339022c491a8afd70353c17d765584" name="cc_2" x="98" y="28">
+      <params/>
+      <attribs>
+         <combo attributeName="device" selection="din"/>
+         <spinner attributeName="channel" value="2"/>
+         <spinner attributeName="cc" value="9"/>
+      </attribs>
+   </obj>
+   <obj type="button_pulse" uuid="41216e47-4fc5-40ab-af02-f07de5fbf547" name="button_pulse_2" x="14" y="42">
+      <params>
+         <bool32.mom name="b" value="0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <comment type="patch/comment" x="14" y="154" text="Enable"/>
+   <obj type="midi/out/cc" uuid="7ca9b2c1b4339022c491a8afd70353c17d765584" name="cc_4" x="98" y="154">
+      <params/>
+      <attribs>
+         <combo attributeName="device" selection="din"/>
+         <spinner attributeName="channel" value="2"/>
+         <spinner attributeName="cc" value="8"/>
+      </attribs>
+   </obj>
+   <obj type="button_pulse" uuid="41216e47-4fc5-40ab-af02-f07de5fbf547" name="button_pulse_3" x="14" y="168">
+      <params>
+         <bool32.mom name="b" value="0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="disp/i" uuid="5e35fd0c62d81e70017289250cf28edd26e19e4a" name="i_6" x="602" y="308">
+      <params/>
+      <attribs/>
+   </obj>
+   <comment type="patch/comment" x="14" y="336" text="Tap input"/>
+   <obj type="midi/in/cc i" uuid="614eb76edef2b43632fa1fcda25aab54f821daf6" name="cc_1" x="14" y="350">
+      <params/>
+      <attribs>
+         <spinner attributeName="cc" value="9"/>
+         <spinner attributeName="default" value="0"/>
+      </attribs>
+   </obj>
+   <obj type="disp/i" uuid="5e35fd0c62d81e70017289250cf28edd26e19e4a" name="i_1" x="434" y="350">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="mix/mix 2 g" uuid="221f038da51943034a75e442c90624fcebfe6112" name="mix_1" x="924" y="350">
+      <params>
+         <frac32.u.map name="gain1" value="32.0"/>
+         <frac32.u.map name="gain2" value="32.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="audio/out left" uuid="b11a3c09b2fdd575ea8212f2ce7743d5269253b1" name="out_1" x="1036" y="350">
+      <params/>
+      <attribs/>
+   </obj>
+   <patchobj type="patch/object" uuid="32684f00-eca3-4f41-ba4e-f3b9f7478197" name="%rand_1" x="546" y="364">
+      <params>
+         <frac32.s.map name="prob" value="64.0"/>
+         <int32 name="value" value="16"/>
+      </params>
+      <attribs/>
+      <object id="patch/object" uuid="32684f00-eca3-4f41-ba4e-f3b9f7478197">
+         <sDescription>probabiltiy random i</sDescription>
+         <author>Philoop</author>
+         <license>GPL</license>
+         <helpPatch>prob.axh</helpPatch>
+         <inlets>
+            <bool32 name="trig"/>
+         </inlets>
+         <outlets>
+            <int32 name="o"/>
+         </outlets>
+         <displays/>
+         <params>
+            <frac32.s.map name="prob" noLabel="true"/>
+            <int32 name="value" noLabel="true">
+               <MinValue i="0"/>
+               <MaxValue i="65536"/>
+            </int32>
+         </params>
+         <attribs/>
+         <includes/>
+         <code.declaration><![CDATA[int32_t val;
+int32_t val1;
+int ntrig;
+int rtrig;]]></code.declaration>
+         <code.init><![CDATA[val = (int32_t)(GenerateRandomNumber())>>4;
+
+// changed MCL 14/9/25 to init output to 0 (previously got huge random value)
+//val1 = (int32_t)(GenerateRandomNumber())>>4;
+val1 = 0;
+
+      ntrig = 0;
+      rtrig = 0;]]></code.init>
+         <code.krate><![CDATA[if ((inlet_trig>0) && !ntrig) { val = (int32_t)(GenerateRandomNumber())>>4; ntrig=1;}
+      else if (!(inlet_trig>0)) ntrig=0;
+      
+     
+     if (((param_prob>val)&&(inlet_trig)>0) && !rtrig) {
+      if (param_value) 
+         val1 = (int32_t)(GenerateRandomNumber()% (param_value));
+      else val1 = 0;
+      rtrig=1;
+   }
+   else if (!(inlet_trig>0)) rtrig=0;
+   outlet_o = val1;]]></code.krate>
+      </object>
+   </patchobj>
+   <patchobj type="patch/object" uuid="a02e42a0-16a7-47a2-9489-1c6f61f56cb8" name="indexed_1" x="616" y="364">
+      <params/>
+      <attribs>
+         <table attributeName="prefix" table="sound"/>
+         <table attributeName="suffix" table=".raw"/>
+      </attribs>
+      <object id="patch/object" uuid="a02e42a0-16a7-47a2-9489-1c6f61f56cb8">
+         <sDescription>generates string: prefix000suffix</sDescription>
+         <author>Johannes Taelman</author>
+         <license>BSD</license>
+         <inlets>
+            <int32 name="index" description="index"/>
+         </inlets>
+         <outlets>
+            <charptr32 name="out" description="string"/>
+         </outlets>
+         <displays/>
+         <params/>
+         <attribs>
+            <table name="prefix"/>
+            <table name="suffix"/>
+         </attribs>
+         <includes/>
+         <code.declaration><![CDATA[char c[64];
+int offset;
+int pval;
+int kCount;]]></code.declaration>
+         <code.init><![CDATA[strcpy(&c[0],"attr_prefix000attr_suffix");
+offset = strlen("attr_prefix");
+pval = 0;
+kCount = 0;]]></code.init>
+         <code.krate><![CDATA[if (inlet_index != pval){   pval = inlet_index;
+   int i = inlet_index;   int i0 = i/10;
+   c[offset+2] = '0'+i-10*i0;
+   i = i0; i0 = i/10;
+   c[offset+1] = '0'+i-10*i0;
+   i = i0; i0 = i/10;
+   c[offset+0] = '0'+i-10*i0;
+}
+outlet_out = &c[0];
+
+++kCount;
+if (kCount >=3000)
+{
+	kCount = 0;
+	// enable to log filename
+	//LogTextMessage("filename: %s\n", c);
+
+}]]></code.krate>
+      </object>
+   </patchobj>
+   <obj type="wave/play stereo" uuid="843bbc92c4a45c5ba551de32538934e186dc4a41" name="play_1" x="798" y="364">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="logic/and 2" uuid="c67031682f552aa0a80b23377495c51ea28a8c9c" name="and_1" x="126" y="378">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="TapTempo" uuid="623eb61e-59ba-4b39-92cf-9165c1dd97ea" name="TapTempo_1" x="308" y="420">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="logic/counter" uuid="7a141ba82230e54e5f5cd12da5dbe5a74ba854a5" name="counter_1" x="406" y="420">
+      <params>
+         <int32 name="maximum" value="7"/>
+      </params>
+      <attribs/>
+   </obj>
+   <comment type="patch/comment" x="14" y="462" text="Enable"/>
+   <obj type="midi/in/cc i" uuid="614eb76edef2b43632fa1fcda25aab54f821daf6" name="cc_3" x="14" y="476">
+      <params/>
+      <attribs>
+         <spinner attributeName="cc" value="8"/>
+         <spinner attributeName="default" value="0"/>
+      </attribs>
+   </obj>
+   <obj type="logic/and 2" uuid="c67031682f552aa0a80b23377495c51ea28a8c9c" name="and_2" x="126" y="490">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="logic/flipflop" uuid="f9b15363f5ee203152e062c08a8846f0074b0ea5" name="flipflop_2" x="210" y="490">
+      <params/>
+      <attribs/>
+   </obj>
+   <comment type="patch/comment" x="14" y="602" text="Startup delay to lock out triggers on patch change. LED on until done."/>
+   <comment type="patch/comment" x="392" y="602" text="Red LED on during startup and when looping or delay on"/>
+   <obj type="const/i" uuid="e202f44b2df17ae0b3e663b98ea6b14c8ff00408" name="i_3" x="14" y="616">
+      <params/>
+      <attribs>
+         <spinner attributeName="value" value="1"/>
+      </attribs>
+   </obj>
+   <obj type="timer/delayedpulse" uuid="3f05ee534ca67755fb20c7437f9e4de3d4c2f73d" name="delayedpulse_1" x="98" y="616">
+      <params>
+         <frac32.s.map name="delay" value="54.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="logic/flipflop" uuid="f9b15363f5ee203152e062c08a8846f0074b0ea5" name="flipflop_1" x="210" y="616">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="logic/inv" uuid="2bd44b865d3b63ff9b80862242bf5be779e3ad5" name="inv_1" x="294" y="616">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="phi/logic/or 4" uuid="5dc5a7c1fb7809522171638f755fead71cbe14ea" name="or_2" x="392" y="616">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="gpio/out/led2" uuid="3d7a4c75d1f9901181a17ba5de752782de911803" name="led2_2" x="476" y="616">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="midi/in/monitor" uuid="b51863ca-6afa-4d29-acfd-c8c2fe06cb16" name="monitor_1" x="14" y="714">
+      <params>
+         <bool32.tgl name="ControlChange" value="0"/>
+         <bool32.tgl name="Note" value="0"/>
+         <bool32.tgl name="ProgramChange" value="0"/>
+         <bool32.tgl name="Bend" value="0"/>
+         <bool32.tgl name="PolyPressure" value="0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <comment type="patch/comment" x="126" y="728" text="Enable monitors for debugging"/>
+   <comment type="patch/comment" x="126" y="742" text="Controller usually enables these"/>
+   <obj type="audio/inconfig l" uuid="7007d026acb7c3586f60a7f0898718d1ca7e0607" name="inconfig_1" x="14" y="812">
+      <params/>
+      <attribs>
+         <combo attributeName="gain" selection="0dB"/>
+         <combo attributeName="boost" selection="0dB"/>
+      </attribs>
+   </obj>
+   <obj type="audio/inconfig r" uuid="8468fe7907553f335959a7f69cbc5a1f7b5d4d1d" name="inconfig_2" x="112" y="812">
+      <params/>
+      <attribs>
+         <combo attributeName="gain" selection="0dB"/>
+         <combo attributeName="boost" selection="0dB"/>
+      </attribs>
+   </obj>
+   <nets>
+      <net>
+         <source obj="i_3" outlet="out"/>
+         <dest obj="delayedpulse_1" inlet="trig"/>
+      </net>
+      <net>
+         <source obj="delayedpulse_1" outlet="pulse"/>
+         <dest obj="flipflop_1" inlet="set"/>
+      </net>
+      <net>
+         <source obj="flipflop_1" outlet="o"/>
+         <dest obj="inv_1" inlet="i"/>
+         <dest obj="and_1" inlet="i2"/>
+         <dest obj="and_2" inlet="i2"/>
+      </net>
+      <net>
+         <source obj="inv_1" outlet="o"/>
+         <dest obj="or_2" inlet="i1"/>
+      </net>
+      <net>
+         <source obj="or_2" outlet="o"/>
+         <dest obj="led2_2" inlet="in"/>
+      </net>
+      <net>
+         <source obj="play_1" outlet="outl"/>
+         <dest obj="mix_1" inlet="in1"/>
+      </net>
+      <net>
+         <source obj="play_1" outlet="outr"/>
+         <dest obj="mix_1" inlet="in2"/>
+      </net>
+      <net>
+         <source obj="%rand_1" outlet="o"/>
+         <dest obj="i_6" inlet="in"/>
+         <dest obj="indexed_1" inlet="index"/>
+      </net>
+      <net>
+         <source obj="indexed_1" outlet="out"/>
+         <dest obj="play_1" inlet="filename"/>
+      </net>
+      <net>
+         <source obj="mix_1" outlet="out"/>
+         <dest obj="out_1" inlet="wave"/>
+      </net>
+      <net>
+         <source obj="counter_1" outlet="o"/>
+         <dest obj="i_1" inlet="in"/>
+      </net>
+      <net>
+         <source obj="button_pulse_2" outlet="o"/>
+         <dest obj="cc_2" inlet="trig"/>
+      </net>
+      <net>
+         <source obj="TapTempo_1" outlet="trigger"/>
+         <dest obj="counter_1" inlet="trig"/>
+         <dest obj="%rand_1" inlet="trig"/>
+         <dest obj="play_1" inlet="start"/>
+      </net>
+      <net>
+         <source obj="and_1" outlet="o"/>
+         <dest obj="TapTempo_1" inlet="tap"/>
+      </net>
+      <net>
+         <source obj="cc_1" outlet="trig"/>
+         <dest obj="and_1" inlet="i1"/>
+      </net>
+      <net>
+         <source obj="cc_3" outlet="trig"/>
+         <dest obj="and_2" inlet="i1"/>
+      </net>
+      <net>
+         <source obj="button_pulse_3" outlet="o"/>
+         <dest obj="cc_4" inlet="trig"/>
+      </net>
+      <net>
+         <source obj="and_2" outlet="o"/>
+         <dest obj="flipflop_2" inlet="set"/>
+      </net>
+      <net>
+         <source obj="counter_1" outlet="c"/>
+         <dest obj="flipflop_2" inlet="reset"/>
+      </net>
+      <net>
+         <source obj="flipflop_2" outlet="o"/>
+         <dest obj="counter_1" inlet="r"/>
+         <dest obj="TapTempo_1" inlet="enable"/>
+      </net>
+   </nets>
+   <settings>
+      <subpatchmode>no</subpatchmode>
+      <MidiChannel>2</MidiChannel>
+      <NPresets>1</NPresets>
+      <NPresetEntries>1</NPresetEntries>
+      <NModulationSources>1</NModulationSources>
+      <NModulationTargetsPerSource>1</NModulationTargetsPerSource>
+   </settings>
+   <notes><![CDATA[]]></notes>
+   <windowPos>
+      <x>278</x>
+      <y>38</y>
+      <width>1188</width>
+      <height>918</height>
+   </windowPos>
+</patch-1.0>
