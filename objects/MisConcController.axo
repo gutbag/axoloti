@@ -5,11 +5,12 @@
       <license>GPL</license>
       <inlets>
          <bool32.rising name="trigger" description="the tap input"/>
-         <bool32 name="enable"/>
+         <bool32.rising name="enable"/>
       </inlets>
       <outlets>
          <bool32.pulse name="samples"/>
          <bool32.pulse name="looper"/>
+         <bool32.pulse name="reset"/>
       </outlets>
       <displays>
          <bool32 name="enabled" noLabel="true"/>
@@ -20,13 +21,24 @@
 uint8_t numTriggers = 0;]]></code.declaration>
       <code.krate><![CDATA[outlet_samples = 0;
 outlet_looper = 0;
+outlet_reset = 0;
 
-if (inlet_enable & not enabled)
+if (inlet_enable)
 {
-	enabled = true;
-	numTriggers = 0;
-	disp_enabled = 1;
-	LogTextMessage("enabled\n");
+	if (not enabled)
+	{
+		enabled = true;
+		numTriggers = 0;
+		disp_enabled = 1;
+		//LogTextMessage("enabled\n");
+	}
+	else // treat as reset
+	{
+		enabled = false;
+		outlet_reset = 1;
+		disp_enabled = 0;
+		//LogTextMessage("reset\n");
+	}
 }
 
 if (enabled)
@@ -34,12 +46,12 @@ if (enabled)
 	if (inlet_trigger)
 	{
 		numTriggers++;
-		LogTextMessage("trig numTriggers %u\n", numTriggers);
+		//LogTextMessage("trig numTriggers %u\n", numTriggers);
 
 		if (numTriggers <= 28)
 		{
 			outlet_samples = 1; // trigger sample every beat
-			LogTextMessage("sample trig\n");
+			//LogTextMessage("sample trig\n");
 		}
 		
 		if (numTriggers == 1)
@@ -53,7 +65,7 @@ if (enabled)
 		{
 			enabled = false;
 			disp_enabled = 0;
-			LogTextMessage("finished\n");
+			//LogTextMessage("finished\n");
 		}
 	}
 }]]></code.krate>

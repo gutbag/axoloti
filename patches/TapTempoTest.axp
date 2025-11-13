@@ -65,10 +65,6 @@
          <spinner attributeName="MaxTimeSecs" value="32"/>
       </attribs>
    </obj>
-   <obj type="disp/kscope 128 b trig" uuid="b24afecdaf757006c3a4bb578f0aea1d7441153e" name="kscope_1" x="1022" y="196">
-      <params/>
-      <attribs/>
-   </obj>
    <obj type="const/i" uuid="e202f44b2df17ae0b3e663b98ea6b14c8ff00408" name="i_4" x="630" y="266">
       <params/>
       <attribs>
@@ -97,16 +93,22 @@
       <params/>
       <attribs/>
    </obj>
-   <obj type="const/i" uuid="e202f44b2df17ae0b3e663b98ea6b14c8ff00408" name="i_7" x="224" y="434">
+   <obj type="disp/i" uuid="5e35fd0c62d81e70017289250cf28edd26e19e4a" name="i_6" x="728" y="378">
       <params/>
-      <attribs>
-         <spinner attributeName="value" value="1"/>
-      </attribs>
+      <attribs/>
+   </obj>
+   <obj type="MisConcController" uuid="0c54621f-7eee-4073-a116-7f8bca7218cc" name="MisConcController_1" x="420" y="434">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="logic/or 2" uuid="3805d3c84d30032a44fbdbe42d9a2988a1790a3e" name="or_1" x="588" y="434">
+      <params/>
+      <attribs/>
    </obj>
    <patchobj type="patch/object" uuid="32684f00-eca3-4f41-ba4e-f3b9f7478197" name="%rand_1" x="658" y="434">
       <params>
          <frac32.s.map name="prob" value="64.0"/>
-         <int32 name="value" value="1"/>
+         <int32 name="value" value="16"/>
       </params>
       <attribs/>
       <object id="patch/object" uuid="32684f00-eca3-4f41-ba4e-f3b9f7478197">
@@ -211,10 +213,6 @@ if (kCount >=3000)
       <params/>
       <attribs/>
    </obj>
-   <obj type="disp/i" uuid="5e35fd0c62d81e70017289250cf28edd26e19e4a" name="i_6" x="616" y="448">
-      <params/>
-      <attribs/>
-   </obj>
    <comment type="patch/comment" x="14" y="462" text="Enable"/>
    <obj type="midi/in/cc i" uuid="614eb76edef2b43632fa1fcda25aab54f821daf6" name="cc_3" x="14" y="476">
       <params/>
@@ -223,23 +221,11 @@ if (kCount >=3000)
          <spinner attributeName="default" value="0"/>
       </attribs>
    </obj>
-   <obj type="MisConcController" uuid="0c54621f-7eee-4073-a116-7f8bca7218cc" name="MisConcController_1" x="350" y="476">
-      <params/>
-      <attribs/>
-   </obj>
    <obj type="logic/and 2" uuid="c67031682f552aa0a80b23377495c51ea28a8c9c" name="and_2" x="126" y="490">
       <params/>
       <attribs/>
    </obj>
-   <obj type="logic/or 2" uuid="3805d3c84d30032a44fbdbe42d9a2988a1790a3e" name="or_1" x="546" y="490">
-      <params/>
-      <attribs/>
-   </obj>
    <comment type="patch/comment" x="658" y="560" text="Flash the green LED when sample triggered"/>
-   <obj type="disp/i" uuid="5e35fd0c62d81e70017289250cf28edd26e19e4a" name="i_1" x="1120" y="560">
-      <params/>
-      <attribs/>
-   </obj>
    <obj type="timer/pulselength" uuid="ca68725237d8ba8407773340801660a9fd9b0dba" name="pulselength_1" x="658" y="574">
       <params>
          <frac32.s.map name="delay" value="0.0"/>
@@ -262,23 +248,8 @@ if (kCount >=3000)
       <params/>
       <attribs/>
    </obj>
-   <obj type="logic/flipflop" uuid="f9b15363f5ee203152e062c08a8846f0074b0ea5" name="flipflop_2" x="1008" y="630">
-      <params/>
-      <attribs/>
-   </obj>
-   <obj type="logic/counter" uuid="7a141ba82230e54e5f5cd12da5dbe5a74ba854a5" name="counter_1" x="1092" y="630">
-      <params>
-         <int32 name="maximum" value="7"/>
-      </params>
-      <attribs/>
-   </obj>
-   <comment type="patch/comment" x="1092" y="700" text="Trigger samples for this number of beats"/>
    <comment type="patch/comment" x="14" y="714" text="Startup delay to lock out triggers on patch change. LED on until done."/>
    <comment type="patch/comment" x="392" y="714" text="Red LED on during startup and when looping or delay on"/>
-   <obj type="disp/i" uuid="5e35fd0c62d81e70017289250cf28edd26e19e4a" name="i_2" x="1022" y="714">
-      <params/>
-      <attribs/>
-   </obj>
    <obj type="const/i" uuid="e202f44b2df17ae0b3e663b98ea6b14c8ff00408" name="i_3" x="14" y="728">
       <params/>
       <attribs>
@@ -304,27 +275,6 @@ if (kCount >=3000)
       <attribs/>
    </obj>
    <obj type="gpio/out/led2" uuid="3d7a4c75d1f9901181a17ba5de752782de911803" name="led2_2" x="476" y="728">
-      <params/>
-      <attribs/>
-   </obj>
-   <comment type="patch/comment" x="938" y="770" text="Start chunker, count beats then stop recording"/>
-   <obj type="logic/counter" uuid="7a141ba82230e54e5f5cd12da5dbe5a74ba854a5" name="counter_2" x="938" y="784">
-      <params>
-         <int32 name="maximum" value="7"/>
-      </params>
-      <attribs/>
-   </obj>
-   <obj type="timer/pulselength" uuid="ca68725237d8ba8407773340801660a9fd9b0dba" name="pulselength_2" x="1022" y="784">
-      <params>
-         <frac32.s.map name="delay" value="2.0"/>
-      </params>
-      <attribs/>
-   </obj>
-   <obj type="logic/flipflop" uuid="f9b15363f5ee203152e062c08a8846f0074b0ea5" name="flipflop_3" x="1120" y="784">
-      <params/>
-      <attribs/>
-   </obj>
-   <obj type="logic/or 2" uuid="3805d3c84d30032a44fbdbe42d9a2988a1790a3e" name="or_3" x="1218" y="784">
       <params/>
       <attribs/>
    </obj>
@@ -400,18 +350,12 @@ if (kCount >=3000)
          <dest obj="out_1" inlet="wave"/>
       </net>
       <net>
-         <source obj="counter_1" outlet="o"/>
-         <dest obj="i_1" inlet="in"/>
-      </net>
-      <net>
          <source obj="button_pulse_2" outlet="o"/>
          <dest obj="cc_2" inlet="trig"/>
       </net>
       <net>
          <source obj="TapTempo_1" outlet="trigger"/>
-         <dest obj="counter_1" inlet="trig"/>
-         <dest obj="counter_2" inlet="trig"/>
-         <dest obj="pulselength_2" inlet="trig"/>
+         <dest obj="or_2" inlet="i2"/>
          <dest obj="MisConcController_1" inlet="trigger"/>
       </net>
       <net>
@@ -432,16 +376,7 @@ if (kCount >=3000)
       </net>
       <net>
          <source obj="and_2" outlet="o"/>
-         <dest obj="flipflop_2" inlet="set"/>
          <dest obj="MisConcController_1" inlet="enable"/>
-      </net>
-      <net>
-         <source obj="counter_1" outlet="c"/>
-         <dest obj="flipflop_2" inlet="reset"/>
-      </net>
-      <net>
-         <source obj="flipflop_2" outlet="o"/>
-         <dest obj="counter_1" inlet="r"/>
       </net>
       <net>
          <source obj="pulselength_1" outlet="pulse"/>
@@ -470,18 +405,6 @@ if (kCount >=3000)
          <dest obj="mix_1" inlet="bus_in"/>
       </net>
       <net>
-         <source obj="counter_2" outlet="c"/>
-         <dest obj="or_3" inlet="i2"/>
-      </net>
-      <net>
-         <source obj="counter_2" outlet="o"/>
-         <dest obj="i_2" inlet="in"/>
-      </net>
-      <net>
-         <source obj="pulselength_2" outlet="pulse"/>
-         <dest obj="flipflop_3" inlet="set"/>
-      </net>
-      <net>
          <source obj="i_4" outlet="out"/>
          <dest obj="FlexChunker_1" inlet="type"/>
       </net>
@@ -502,8 +425,8 @@ if (kCount >=3000)
          <dest obj="or_1" inlet="i1"/>
       </net>
       <net>
-         <source obj="i_7" outlet="out"/>
-         <dest obj="TapTempo_1" inlet="enable"/>
+         <source obj="MisConcController_1" outlet="reset"/>
+         <dest obj="FlexChunker_1" inlet="reset"/>
       </net>
    </nets>
    <settings>
@@ -516,9 +439,9 @@ if (kCount >=3000)
    </settings>
    <notes><![CDATA[]]></notes>
    <windowPos>
-      <x>193</x>
-      <y>38</y>
-      <width>1272</width>
+      <x>306</x>
+      <y>64</y>
+      <width>1204</width>
       <height>918</height>
    </windowPos>
 </patch-1.0>

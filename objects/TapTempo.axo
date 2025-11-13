@@ -1,11 +1,10 @@
 <objdefs appVersion="1.0.12">
    <obj.normal id="TapTempo" uuid="623eb61e-59ba-4b39-92cf-9165c1dd97ea">
-      <sDescription>Receives tap trigger inputs and adjusts the timing of an output trigger to match. An enable input controls whether any output triggers are delivered.</sDescription>
+      <sDescription>Receives tap trigger inputs and adjusts the timing of an output trigger to match.</sDescription>
       <author>Mark Lamb</author>
       <license>GPL</license>
       <inlets>
          <bool32.rising name="tap" description="the tap input"/>
-         <bool32 name="enable"/>
       </inlets>
       <outlets>
          <bool32.pulse name="trigger"/>
@@ -38,11 +37,8 @@ uint32_t calcAverage(const uint32_t values[], const uint8_t numValues)
 
 if (currentKCount == 0)
 {
-	if (inlet_enable)
-	{
-		outlet_trigger = 1;
-		//LogTextMessage("trig enabled TAP_DELAY_ADJUSTMENT_K %u kPerTrigger %u/%u\n", TAP_DELAY_ADJUSTMENT_K, kPerTrigger, kPerTrigger/3);
-	}
+	outlet_trigger = 1;
+
 	currentKCount = kPerTrigger; // restart count
 
 	if (kPerTriggerChanged) // first trigger after adjustment - allow for delay

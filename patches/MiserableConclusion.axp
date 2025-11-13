@@ -94,25 +94,19 @@
       </params>
       <attribs/>
    </obj>
-   <comment type="patch/comment" x="602" y="252" text="CC5 starts and stops the chunker"/>
-   <obj type="midi/in/cc i" uuid="614eb76edef2b43632fa1fcda25aab54f821daf6" name="cc_4" x="602" y="266">
-      <params/>
-      <attribs>
-         <spinner attributeName="cc" value="5"/>
-         <spinner attributeName="default" value="0"/>
-      </attribs>
-   </obj>
-   <obj type="logic/and 2" uuid="c67031682f552aa0a80b23377495c51ea28a8c9c" name="and_3" x="714" y="280">
-      <params/>
-      <attribs/>
-   </obj>
    <obj type="loopers/FlexChunker" uuid="d2c3bc98-d2c4-4b85-8134-97f2980117bf" name="FlexChunker_1" x="812" y="280">
       <params/>
       <attribs>
          <spinner attributeName="MaxTimeSecs" value="32"/>
       </attribs>
    </obj>
+   <comment type="patch/comment" x="1050" y="294" text="CC1: wet/dry mix"/>
+   <comment type="patch/comment" x="1050" y="308" text="CC2: delay on/off"/>
+   <comment type="patch/comment" x="1050" y="322" text="CC3: delay time"/>
+   <comment type="patch/comment" x="1050" y="336" text="CC4: delay feedback"/>
+   <comment type="patch/comment" x="1050" y="350" text="CC5 starts and stops the chunker"/>
    <comment type="patch/comment" x="602" y="364" text="CC6 sets chunk order and direction type"/>
+   <comment type="patch/comment" x="1050" y="364" text="CC6 sets chunk order and direction type"/>
    <obj type="ctrl/dial p" uuid="cc5d2846c3d50e425f450c4b9851371b54f4d674" name="delay time" x="364" y="378">
       <params>
          <frac32.u.map name="value" MidiCC="3" value="16.0"/>
@@ -130,18 +124,24 @@
       <params/>
       <attribs/>
    </obj>
-   <comment type="patch/comment" x="28" y="434" text="CC1: wet/dry mix"/>
-   <comment type="patch/comment" x="28" y="448" text="CC2: delay on/off"/>
-   <comment type="patch/comment" x="28" y="462" text="CC3: delay time"/>
+   <comment type="patch/comment" x="1050" y="378" text="CC7 sets the number of chunks"/>
+   <comment type="patch/comment" x="1050" y="392" text="CC8 looper mix"/>
+   <comment type="patch/comment" x="1050" y="406" text="CC9 trigger random sample"/>
    <obj type="ctrl/dial p" uuid="cc5d2846c3d50e425f450c4b9851371b54f4d674" name="delay feedback" x="364" y="462">
       <params>
          <frac32.u.map name="value" MidiCC="4" value="53.5"/>
       </params>
       <attribs/>
    </obj>
-   <comment type="patch/comment" x="28" y="476" text="CC4: delay feedback"/>
+   <comment type="patch/comment" x="14" y="476" text="CC9 trigger random sample manually"/>
    <comment type="patch/comment" x="602" y="476" text="CC7 sets the number of chunks"/>
-   <comment type="patch/comment" x="28" y="490" text="CC5 starts and stops the chunker"/>
+   <obj type="midi/in/cc i" uuid="614eb76edef2b43632fa1fcda25aab54f821daf6" name="cc_8" x="14" y="490">
+      <params/>
+      <attribs>
+         <spinner attributeName="cc" value="9"/>
+         <spinner attributeName="default" value="0"/>
+      </attribs>
+   </obj>
    <obj type="midi/in/cc i" uuid="614eb76edef2b43632fa1fcda25aab54f821daf6" name="cc_5" x="602" y="490">
       <params/>
       <attribs>
@@ -153,26 +153,56 @@
       <params/>
       <attribs/>
    </obj>
-   <comment type="patch/comment" x="28" y="504" text="CC6 sets chunk order and direction type"/>
-   <comment type="patch/comment" x="28" y="518" text="CC7 sets the number of chunks"/>
-   <comment type="patch/comment" x="28" y="532" text="CC8 looper mix"/>
-   <comment type="patch/comment" x="28" y="546" text="CC9 trigger random sample"/>
-   <comment type="patch/comment" x="14" y="658" text="CC9 trigger random sample"/>
-   <obj type="mix/mix 2 g" uuid="221f038da51943034a75e442c90624fcebfe6112" name="mix_1" x="742" y="658">
+   <comment type="patch/comment" x="1050" y="490" text="CC1: wet/dry mix"/>
+   <obj type="logic/and 2" uuid="c67031682f552aa0a80b23377495c51ea28a8c9c" name="and_1" x="98" y="504">
+      <params/>
+      <attribs/>
+   </obj>
+   <comment type="patch/comment" x="1050" y="504" text="CC2: delay on/off"/>
+   <comment type="patch/comment" x="1050" y="518" text="CC3: delay time"/>
+   <comment type="patch/comment" x="1050" y="532" text="CC4: delay feedback"/>
+   <comment type="patch/comment" x="1022" y="546" text="CC5 enables samples and looper"/>
+   <comment type="patch/comment" x="1050" y="560" text="CC6 sets chunk order and direction type"/>
+   <comment type="patch/comment" x="1050" y="574" text="CC7 sets the number of chunks"/>
+   <comment type="patch/comment" x="1050" y="588" text="CC8 looper mix"/>
+   <comment type="patch/comment" x="14" y="602" text="CC10 tap tempo"/>
+   <comment type="patch/comment" x="1022" y="602" text="CC9 trigger random sample manually"/>
+   <obj type="midi/in/cc i" uuid="614eb76edef2b43632fa1fcda25aab54f821daf6" name="cc_9" x="14" y="616">
+      <params/>
+      <attribs>
+         <spinner attributeName="cc" value="10"/>
+         <spinner attributeName="default" value="0"/>
+      </attribs>
+   </obj>
+   <obj type="disp/i" uuid="5e35fd0c62d81e70017289250cf28edd26e19e4a" name="i_6" x="560" y="616">
+      <params/>
+      <attribs/>
+   </obj>
+   <comment type="patch/comment" x="1022" y="616" text="CC10 tap tempo"/>
+   <obj type="logic/and 2" uuid="c67031682f552aa0a80b23377495c51ea28a8c9c" name="and_5" x="98" y="630">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="TapTempo" uuid="623eb61e-59ba-4b39-92cf-9165c1dd97ea" name="TapTempo_2" x="182" y="630">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="mix/mix 2 g" uuid="221f038da51943034a75e442c90624fcebfe6112" name="mix_1" x="868" y="658">
       <params>
          <frac32.u.map name="gain1" value="32.0"/>
          <frac32.u.map name="gain2" value="32.0"/>
       </params>
       <attribs/>
    </obj>
-   <obj type="midi/in/cc i" uuid="614eb76edef2b43632fa1fcda25aab54f821daf6" name="cc_8" x="14" y="672">
+   <obj type="MisConcController" uuid="0c54621f-7eee-4073-a116-7f8bca7218cc" name="MisConcController_1" x="266" y="672">
       <params/>
-      <attribs>
-         <spinner attributeName="cc" value="9"/>
-         <spinner attributeName="default" value="0"/>
-      </attribs>
+      <attribs/>
    </obj>
-   <patchobj type="patch/object" uuid="32684f00-eca3-4f41-ba4e-f3b9f7478197" name="%rand_1" x="280" y="672">
+   <obj type="logic/or 2" uuid="3805d3c84d30032a44fbdbe42d9a2988a1790a3e" name="or_1" x="406" y="672">
+      <params/>
+      <attribs/>
+   </obj>
+   <patchobj type="patch/object" uuid="32684f00-eca3-4f41-ba4e-f3b9f7478197" name="%rand_1" x="490" y="672">
       <params>
          <frac32.s.map name="prob" value="64.0"/>
          <int32 name="value" value="16"/>
@@ -225,11 +255,7 @@ val1 = 0;
    outlet_o = val1;]]></code.krate>
       </object>
    </patchobj>
-   <obj type="disp/i" uuid="5e35fd0c62d81e70017289250cf28edd26e19e4a" name="i_6" x="378" y="672">
-      <params/>
-      <attribs/>
-   </obj>
-   <patchobj type="patch/object" uuid="a02e42a0-16a7-47a2-9489-1c6f61f56cb8" name="indexed_1" x="434" y="672">
+   <patchobj type="patch/object" uuid="a02e42a0-16a7-47a2-9489-1c6f61f56cb8" name="indexed_1" x="560" y="672">
       <params/>
       <attribs>
          <table attributeName="prefix" table="sound"/>
@@ -280,45 +306,53 @@ if (kCount >=3000)
 }]]></code.krate>
       </object>
    </patchobj>
-   <obj type="wave/play stereo" uuid="843bbc92c4a45c5ba551de32538934e186dc4a41" name="play_1" x="616" y="672">
+   <obj type="wave/play stereo" uuid="843bbc92c4a45c5ba551de32538934e186dc4a41" name="play_1" x="742" y="672">
       <params/>
       <attribs/>
    </obj>
-   <obj type="logic/and 2" uuid="c67031682f552aa0a80b23377495c51ea28a8c9c" name="and_1" x="140" y="686">
+   <comment type="patch/comment" x="14" y="728" text="CC5 enables samples and looper"/>
+   <obj type="midi/in/cc i" uuid="614eb76edef2b43632fa1fcda25aab54f821daf6" name="cc_4" x="14" y="742">
+      <params/>
+      <attribs>
+         <spinner attributeName="cc" value="5"/>
+         <spinner attributeName="default" value="0"/>
+      </attribs>
+   </obj>
+   <obj type="logic/and 2" uuid="c67031682f552aa0a80b23377495c51ea28a8c9c" name="and_3" x="98" y="756">
       <params/>
       <attribs/>
    </obj>
-   <comment type="patch/comment" x="14" y="812" text="Startup delay to lock out triggers on patch change. LED on until done."/>
-   <comment type="patch/comment" x="392" y="812" text="Red LED on during startup and when looping or delay on"/>
-   <obj type="const/i" uuid="e202f44b2df17ae0b3e663b98ea6b14c8ff00408" name="i_3" x="14" y="826">
+   <comment type="patch/comment" x="14" y="882" text="Startup delay to lock out triggers on patch change. LED on until done."/>
+   <comment type="patch/comment" x="392" y="882" text="Red LED on during startup and when looping or delay on"/>
+   <obj type="const/i" uuid="e202f44b2df17ae0b3e663b98ea6b14c8ff00408" name="i_3" x="14" y="896">
       <params/>
       <attribs>
          <spinner attributeName="value" value="1"/>
       </attribs>
    </obj>
-   <obj type="timer/delayedpulse" uuid="3f05ee534ca67755fb20c7437f9e4de3d4c2f73d" name="delayedpulse_2" x="98" y="826">
+   <obj type="timer/delayedpulse" uuid="3f05ee534ca67755fb20c7437f9e4de3d4c2f73d" name="delayedpulse_2" x="98" y="896">
       <params>
          <frac32.s.map name="delay" value="54.0"/>
       </params>
       <attribs/>
    </obj>
-   <obj type="logic/flipflop" uuid="f9b15363f5ee203152e062c08a8846f0074b0ea5" name="flipflop_1" x="210" y="826">
+   <obj type="logic/flipflop" uuid="f9b15363f5ee203152e062c08a8846f0074b0ea5" name="flipflop_1" x="210" y="896">
       <params/>
       <attribs/>
    </obj>
-   <obj type="logic/inv" uuid="2bd44b865d3b63ff9b80862242bf5be779e3ad5" name="inv_1" x="294" y="826">
+   <obj type="logic/inv" uuid="2bd44b865d3b63ff9b80862242bf5be779e3ad5" name="inv_1" x="294" y="896">
       <params/>
       <attribs/>
    </obj>
-   <obj type="phi/logic/or 4" uuid="5dc5a7c1fb7809522171638f755fead71cbe14ea" name="or_2" x="392" y="826">
+   <obj type="phi/logic/or 4" uuid="5dc5a7c1fb7809522171638f755fead71cbe14ea" name="or_2" x="392" y="896">
       <params/>
       <attribs/>
    </obj>
-   <obj type="gpio/out/led2" uuid="3d7a4c75d1f9901181a17ba5de752782de911803" name="led2_2" x="476" y="826">
+   <obj type="gpio/out/led2" uuid="3d7a4c75d1f9901181a17ba5de752782de911803" name="led2_2" x="476" y="896">
       <params/>
       <attribs/>
    </obj>
-   <obj type="midi/in/monitor" uuid="b51863ca-6afa-4d29-acfd-c8c2fe06cb16" name="monitor_1" x="14" y="924">
+   <obj type="midi/in/monitor" uuid="b51863ca-6afa-4d29-acfd-c8c2fe06cb16" name="monitor_1" x="14" y="994">
       <params>
          <bool32.tgl name="ControlChange" value="0"/>
          <bool32.tgl name="Note" value="0"/>
@@ -328,16 +362,16 @@ if (kCount >=3000)
       </params>
       <attribs/>
    </obj>
-   <comment type="patch/comment" x="126" y="938" text="Enable monitors for debugging"/>
-   <comment type="patch/comment" x="126" y="952" text="Controller usually enables these"/>
-   <obj type="audio/inconfig l" uuid="7007d026acb7c3586f60a7f0898718d1ca7e0607" name="inconfig_1" x="14" y="1022">
+   <comment type="patch/comment" x="126" y="1008" text="Enable monitors for debugging"/>
+   <comment type="patch/comment" x="126" y="1022" text="Controller usually enables these"/>
+   <obj type="audio/inconfig l" uuid="7007d026acb7c3586f60a7f0898718d1ca7e0607" name="inconfig_1" x="14" y="1092">
       <params/>
       <attribs>
          <combo attributeName="gain" selection="0dB"/>
          <combo attributeName="boost" selection="0dB"/>
       </attribs>
    </obj>
-   <obj type="audio/inconfig r" uuid="8468fe7907553f335959a7f69cbc5a1f7b5d4d1d" name="inconfig_2" x="112" y="1022">
+   <obj type="audio/inconfig r" uuid="8468fe7907553f335959a7f69cbc5a1f7b5d4d1d" name="inconfig_2" x="112" y="1092">
       <params/>
       <attribs>
          <combo attributeName="gain" selection="0dB"/>
@@ -406,6 +440,7 @@ if (kCount >=3000)
          <dest obj="and_3" inlet="i2"/>
          <dest obj="and_4" inlet="i2"/>
          <dest obj="and_1" inlet="i2"/>
+         <dest obj="and_5" inlet="i2"/>
       </net>
       <net>
          <source obj="inv_1" outlet="o"/>
@@ -428,10 +463,6 @@ if (kCount >=3000)
          <source obj="cc_6" outlet="midiCC"/>
          <dest obj="i_5" inlet="in"/>
          <dest obj="FlexChunker_1" inlet="type"/>
-      </net>
-      <net>
-         <source obj="and_3" outlet="o"/>
-         <dest obj="FlexChunker_1" inlet="trigger"/>
       </net>
       <net>
          <source obj="SafeSwitch_3" outlet="o"/>
@@ -466,11 +497,6 @@ if (kCount >=3000)
          <dest obj="and_4" inlet="i1"/>
       </net>
       <net>
-         <source obj="and_1" outlet="o"/>
-         <dest obj="play_1" inlet="start"/>
-         <dest obj="%rand_1" inlet="trig"/>
-      </net>
-      <net>
          <source obj="cc_8" outlet="trig"/>
          <dest obj="and_1" inlet="i1"/>
       </net>
@@ -499,6 +525,43 @@ if (kCount >=3000)
          <source obj="indexed_1" outlet="out"/>
          <dest obj="play_1" inlet="filename"/>
       </net>
+      <net>
+         <source obj="MisConcController_1" outlet="samples"/>
+         <dest obj="or_1" inlet="i1"/>
+      </net>
+      <net>
+         <source obj="or_1" outlet="o"/>
+         <dest obj="%rand_1" inlet="trig"/>
+         <dest obj="play_1" inlet="start"/>
+      </net>
+      <net>
+         <source obj="and_3" outlet="o"/>
+         <dest obj="MisConcController_1" inlet="enable"/>
+      </net>
+      <net>
+         <source obj="cc_9" outlet="trig"/>
+         <dest obj="and_5" inlet="i1"/>
+      </net>
+      <net>
+         <source obj="and_5" outlet="o"/>
+         <dest obj="TapTempo_2" inlet="tap"/>
+      </net>
+      <net>
+         <source obj="TapTempo_2" outlet="trigger"/>
+         <dest obj="MisConcController_1" inlet="trigger"/>
+      </net>
+      <net>
+         <source obj="and_1" outlet="o"/>
+         <dest obj="or_1" inlet="i2"/>
+      </net>
+      <net>
+         <source obj="MisConcController_1" outlet="looper"/>
+         <dest obj="FlexChunker_1" inlet="trigger"/>
+      </net>
+      <net>
+         <source obj="MisConcController_1" outlet="reset"/>
+         <dest obj="FlexChunker_1" inlet="reset"/>
+      </net>
    </nets>
    <settings>
       <subpatchmode>no</subpatchmode>
@@ -510,9 +573,9 @@ if (kCount >=3000)
    </settings>
    <notes><![CDATA[]]></notes>
    <windowPos>
-      <x>208</x>
-      <y>45</y>
-      <width>1188</width>
-      <height>885</height>
+      <x>136</x>
+      <y>56</y>
+      <width>1330</width>
+      <height>902</height>
    </windowPos>
 </patch-1.0>
