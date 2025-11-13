@@ -24,7 +24,7 @@
          <frac32.u.map name="gain1" value="32.0"/>
          <frac32.u.map name="gain2" MidiCC="1" value="17.5"/>
          <frac32.u.map name="gain3" MidiCC="8" value="32.0"/>
-         <frac32.u.map name="gain4" value="32.0"/>
+         <frac32.u.map name="gain4" MidiCC="11" value="12.5"/>
       </params>
       <attribs/>
    </obj>
@@ -38,6 +38,7 @@
       </params>
       <attribs/>
    </obj>
+   <comment type="patch/comment" x="602" y="98" text="CC1: wet/dry mix"/>
    <obj type="mymath/gainx4" uuid="62b1c1a6337c7c8f6eac96408a432477b113cfa1" name="send gain" x="14" y="112">
       <params>
          <frac32.u.map name="amp" value="27.5"/>
@@ -58,8 +59,18 @@
       </params>
       <attribs/>
    </obj>
+   <comment type="patch/comment" x="602" y="112" text="CC2: delay on/off"/>
+   <comment type="patch/comment" x="602" y="126" text="CC3: delay time"/>
+   <comment type="patch/comment" x="602" y="140" text="CC4: delay feedback"/>
+   <comment type="patch/comment" x="602" y="154" text="CC5 enables samples and looper"/>
+   <comment type="patch/comment" x="602" y="168" text="CC6 sets chunk order and direction type"/>
    <comment type="patch/comment" x="140" y="182" text="Geiger Counter via loop"/>
+   <comment type="patch/comment" x="602" y="182" text="CC7 sets the number of chunks"/>
+   <comment type="patch/comment" x="602" y="196" text="CC8 looper mix"/>
+   <comment type="patch/comment" x="602" y="210" text="CC9 trigger random sample manually"/>
+   <comment type="patch/comment" x="602" y="224" text="CC10 tap tempo"/>
    <comment type="patch/comment" x="14" y="238" text="CC2: delay on/off"/>
+   <comment type="patch/comment" x="602" y="238" text="CC11 sampler gain"/>
    <obj type="midi/in/cc i" uuid="614eb76edef2b43632fa1fcda25aab54f821daf6" name="cc_7" x="14" y="252">
       <params/>
       <attribs>
@@ -100,13 +111,7 @@
          <spinner attributeName="MaxTimeSecs" value="32"/>
       </attribs>
    </obj>
-   <comment type="patch/comment" x="1050" y="294" text="CC1: wet/dry mix"/>
-   <comment type="patch/comment" x="1050" y="308" text="CC2: delay on/off"/>
-   <comment type="patch/comment" x="1050" y="322" text="CC3: delay time"/>
-   <comment type="patch/comment" x="1050" y="336" text="CC4: delay feedback"/>
-   <comment type="patch/comment" x="1050" y="350" text="CC5 starts and stops the chunker"/>
    <comment type="patch/comment" x="602" y="364" text="CC6 sets chunk order and direction type"/>
-   <comment type="patch/comment" x="1050" y="364" text="CC6 sets chunk order and direction type"/>
    <obj type="ctrl/dial p" uuid="cc5d2846c3d50e425f450c4b9851371b54f4d674" name="delay time" x="364" y="378">
       <params>
          <frac32.u.map name="value" MidiCC="3" value="16.0"/>
@@ -124,12 +129,9 @@
       <params/>
       <attribs/>
    </obj>
-   <comment type="patch/comment" x="1050" y="378" text="CC7 sets the number of chunks"/>
-   <comment type="patch/comment" x="1050" y="392" text="CC8 looper mix"/>
-   <comment type="patch/comment" x="1050" y="406" text="CC9 trigger random sample"/>
    <obj type="ctrl/dial p" uuid="cc5d2846c3d50e425f450c4b9851371b54f4d674" name="delay feedback" x="364" y="462">
       <params>
-         <frac32.u.map name="value" MidiCC="4" value="53.5"/>
+         <frac32.u.map name="value" MidiCC="4" value="0.0"/>
       </params>
       <attribs/>
    </obj>
@@ -153,20 +155,11 @@
       <params/>
       <attribs/>
    </obj>
-   <comment type="patch/comment" x="1050" y="490" text="CC1: wet/dry mix"/>
    <obj type="logic/and 2" uuid="c67031682f552aa0a80b23377495c51ea28a8c9c" name="and_1" x="98" y="504">
       <params/>
       <attribs/>
    </obj>
-   <comment type="patch/comment" x="1050" y="504" text="CC2: delay on/off"/>
-   <comment type="patch/comment" x="1050" y="518" text="CC3: delay time"/>
-   <comment type="patch/comment" x="1050" y="532" text="CC4: delay feedback"/>
-   <comment type="patch/comment" x="1022" y="546" text="CC5 enables samples and looper"/>
-   <comment type="patch/comment" x="1050" y="560" text="CC6 sets chunk order and direction type"/>
-   <comment type="patch/comment" x="1050" y="574" text="CC7 sets the number of chunks"/>
-   <comment type="patch/comment" x="1050" y="588" text="CC8 looper mix"/>
    <comment type="patch/comment" x="14" y="602" text="CC10 tap tempo"/>
-   <comment type="patch/comment" x="1022" y="602" text="CC9 trigger random sample manually"/>
    <obj type="midi/in/cc i" uuid="614eb76edef2b43632fa1fcda25aab54f821daf6" name="cc_9" x="14" y="616">
       <params/>
       <attribs>
@@ -178,7 +171,6 @@
       <params/>
       <attribs/>
    </obj>
-   <comment type="patch/comment" x="1022" y="616" text="CC10 tap tempo"/>
    <obj type="logic/and 2" uuid="c67031682f552aa0a80b23377495c51ea28a8c9c" name="and_5" x="98" y="630">
       <params/>
       <attribs/>
@@ -187,6 +179,7 @@
       <params/>
       <attribs/>
    </obj>
+   <comment type="patch/comment" x="406" y="658" text="Auto or manual trigger"/>
    <obj type="mix/mix 2 g" uuid="221f038da51943034a75e442c90624fcebfe6112" name="mix_1" x="868" y="658">
       <params>
          <frac32.u.map name="gain1" value="32.0"/>
