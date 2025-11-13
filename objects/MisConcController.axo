@@ -21,31 +21,41 @@ uint8_t numTriggers = 0;]]></code.declaration>
       <code.krate><![CDATA[outlet_samples = 0;
 outlet_looper = 0;
 
-if (inlet_enabled & not enabled)
+if (inlet_enable & not enabled)
 {
 	enabled = true;
 	numTriggers = 0;
-}
-
-if (inlet_trigger)
-{
-	numTriggers++;
+	disp_enabled = 1;
+	LogTextMessage("enabled\n");
 }
 
 if (enabled)
 {
-	if (numTriggers <= 28)
-		outlet_sample = 1; // trigger sample every beat
-	
-	if (numTriggers == 1)
-		outlet_looper = 1; // start recording
-	else if (numTriggers == 8)
-		outlet_looper == 1; // stop recording, start playing
-	else if (numTriggers == 29)
-		outlet_looper = 1; // stop playing
+	if (inlet_trigger)
+	{
+		numTriggers++;
+		LogTextMessage("trig numTriggers %u\n", numTriggers);
 
-	if (numTriggers > 28)
-		enabled = false;
+		if (numTriggers <= 28)
+		{
+			outlet_samples = 1; // trigger sample every beat
+			LogTextMessage("sample trig\n");
+		}
+		
+		if (numTriggers == 1)
+			outlet_looper = 1; // start recording
+		else if (numTriggers == 8)
+			outlet_looper = 1; // stop recording, start playing
+		else if (numTriggers == 29)
+			outlet_looper = 1; // stop playing
+			
+		if (numTriggers > 28) // finished
+		{
+			enabled = false;
+			disp_enabled = 0;
+			LogTextMessage("finished\n");
+		}
+	}
 }]]></code.krate>
    </obj.normal>
 </objdefs>
