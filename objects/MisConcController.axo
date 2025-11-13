@@ -1,0 +1,51 @@
+<objdefs appVersion="1.0.12">
+   <obj.normal id="MisConcController" uuid="0c54621f-7eee-4073-a116-7f8bca7218cc">
+      <sDescription>Delivers triggers for sample playing and looper triggering sync&apos;d to input triggers, with specific knowledge of Miserable Conclusion.</sDescription>
+      <author>Mark Lamb</author>
+      <license>GPL</license>
+      <inlets>
+         <bool32.rising name="trigger" description="the tap input"/>
+         <bool32 name="enable"/>
+      </inlets>
+      <outlets>
+         <bool32.pulse name="samples"/>
+         <bool32.pulse name="looper"/>
+      </outlets>
+      <displays>
+         <bool32 name="enabled" noLabel="true"/>
+      </displays>
+      <params/>
+      <attribs/>
+      <code.declaration><![CDATA[bool enabled = false;
+uint8_t numTriggers = 0;]]></code.declaration>
+      <code.krate><![CDATA[outlet_samples = 0;
+outlet_looper = 0;
+
+if (inlet_enabled & not enabled)
+{
+	enabled = true;
+	numTriggers = 0;
+}
+
+if (inlet_trigger)
+{
+	numTriggers++;
+}
+
+if (enabled)
+{
+	if (numTriggers <= 28)
+		outlet_sample = 1; // trigger sample every beat
+	
+	if (numTriggers == 1)
+		outlet_looper = 1; // start recording
+	else if (numTriggers == 8)
+		outlet_looper == 1; // stop recording, start playing
+	else if (numTriggers == 29)
+		outlet_looper = 1; // stop playing
+
+	if (numTriggers > 28)
+		enabled = false;
+}]]></code.krate>
+   </obj.normal>
+</objdefs>

@@ -13,13 +13,27 @@
       <displays/>
       <params/>
       <attribs/>
-      <code.declaration><![CDATA[static const uint32_t MAX_K_PER_TAP = 2 * 3000; // 2s tap timeout
+      <code.declaration><![CDATA[static const uint32_t MAX_K_PER_TAP = 1500 * 3; // 1.5s tap timeout
+static const uint32_t TAP_DELAY_ADJUSTMENT_MS = 0;
+static const uint32_t TAP_DELAY_ADJUSTMENT_K = TAP_DELAY_ADJUSTMENT_MS * 3; // 3 Ks/ms
+static const uint8_t MAX_TAPS = 10;
 
-uint32_t kPerTrigger = 3000; // default
+uint32_t kPerTrigger = 1 * 3000; // default 60BPM i.e. 1 trig/s
+bool kPerTriggerChanged = false;
 uint32_t currentKCount = kPerTrigger;
 
 bool tapping = false;
-uint32_t kCountSinceTap = 0;]]></code.declaration>
+uint32_t kCountSinceTap = 0;
+uint32_t kCounts[MAX_TAPS];
+uint8_t kCountsIndex = 0;
+
+uint32_t calcAverage(const uint32_t values[], const uint8_t numValues)
+{
+	uint32_t sum = 0;
+	for (uint8_t i=0; i<numValues; i++)
+		sum += values[i];
+	return sum/numValues;
+}]]></code.declaration>
       <code.krate><![CDATA[outlet_trigger = 0;
 
 if (currentKCount == 0)
@@ -27,9 +41,25 @@ if (currentKCount == 0)
 	if (inlet_enable)
 	{
 		outlet_trigger = 1;
-		//LogTextMessage("trig enabled\n");
+		//LogTextMessage("trig enabled TAP_DELAY_ADJUSTMENT_K %u kPerTrigger %u/%u\n", TAP_DELAY_ADJUSTMENT_K, kPerTrigger, kPerTrigger/3);
 	}
 	currentKCount = kPerTrigger; // restart count
+
+	if (kPerTriggerChanged) // first trigger after adjustment - allow for delay
+	{
+		kPerTriggerChanged = false;
+		
+		if (currentKCount > TAP_DELAY_ADJUSTMENT_K)
+		{
+			LogTextMessage("Adjusting currentKCount from %u to %u\n", currentKCount, currentKCount - TAP_DELAY_ADJUSTMENT_K);
+			// bring first trigger forward to allow for delay
+			currentKCount -= TAP_DELAY_ADJUSTMENT_K;
+		}
+		else
+		{
+			LogTextMessage("ERROR: could not adjust currentKCount %u by TAP_DELAY_ADJUSTMENT_K %u\n", currentKCount, TAP_DELAY_ADJUSTMENT_K);
+		}
+	}
 }
 
 currentKCount--;
@@ -41,6 +71,8 @@ if (tapping)
 	if (kCountSinceTap > MAX_K_PER_TAP) // timeout
 	{
 		tapping = false;
+		// apply delay adjustment now that we know tapping has finished
+		kPerTriggerChanged = true;
 	}
 }
 
@@ -49,12 +81,21 @@ if (inlet_tap > 0) // got a tap
 	if (tapping)
 	{
 		// store the k count as the new tap delay
-		kPerTrigger = kCountSinceTap;
-		//LogTextMessage("kPerTrigger %u/%ums\n", kPerTrigger, kPerTrigger/3);
+		//kPerTrigger = kCountSinceTap;
+		kCounts[kCountsIndex] = kCountSinceTap;
+		kCountsIndex++;
+		if (kCountsIndex >= MAX_TAPS)
+		{
+			tapping = false;
+		}
+		//LogTextMessage("kCountSinceTap %u/%ums\n", kCountSinceTap, kCountSinceTap/3);
+		kPerTrigger = calcAverage(kCounts, kCountsIndex);
+		LogTextMessage("kPerTrigger %u/%ums\n", kPerTrigger, kPerTrigger/3);
 	}
 	else // the first tap
 	{
 		tapping = true;
+		kCountsIndex = 0;
 	}
 
 	// restart the counter
