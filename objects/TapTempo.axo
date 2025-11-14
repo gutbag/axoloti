@@ -1,11 +1,11 @@
 <objdefs appVersion="1.0.12">
    <obj.normal id="TapTempo" uuid="623eb61e-59ba-4b39-92cf-9165c1dd97ea">
-      <sDescription>Receives tap trigger inputs and adjusts the timing of an output trigger to match. No output unless enabled and output sync&apos;d to enable edge.</sDescription>
+      <sDescription>Receives tap trigger inputs and adjusts the frequency of an output trigger to match. The sync input resyncs the trigger.</sDescription>
       <author>Mark Lamb</author>
       <license>GPL</license>
       <inlets>
          <bool32.rising name="tap" description="the tap input"/>
-         <bool32.rising name="enable"/>
+         <bool32.rising name="sync" description="Resyncs the output triggers"/>
       </inlets>
       <outlets>
          <bool32.pulse name="trigger"/>
@@ -14,7 +14,7 @@
       <params/>
       <attribs/>
       <code.declaration><![CDATA[static const uint32_t MAX_K_PER_TAP = 1500 * 3; // 1.5s tap timeout
-static const uint32_t TAP_DELAY_ADJUSTMENT_MS = 0;
+static const uint32_t TAP_DELAY_ADJUSTMENT_MS = 0; // doesn't seem to be needed
 static const uint32_t TAP_DELAY_ADJUSTMENT_K = TAP_DELAY_ADJUSTMENT_MS * 3; // 3 Ks/ms
 static const uint8_t MAX_TAPS = 10;
 
@@ -27,8 +27,6 @@ uint32_t kCountSinceTap = 0;
 uint32_t kCounts[MAX_TAPS];
 uint8_t kCountsIndex = 0;
 
-bool enabled = false;
-
 uint32_t calcAverage(const uint32_t values[], const uint8_t numValues)
 {
 	uint32_t sum = 0;
@@ -38,41 +36,39 @@ uint32_t calcAverage(const uint32_t values[], const uint8_t numValues)
 }]]></code.declaration>
       <code.krate><![CDATA[outlet_trigger = 0;
 
-if (inlet_enable)
+if (inlet_sync)
 {
-	enabled = true;
 	outlet_trigger = 1; // first trigger immediately
 	currentKCount = kPerTrigger; // restart count
-	LogTextMessage("tempo triggers enabled\n");
+	//LogTextMessage("tempo triggers sync'd\n");
 }
 
-if (enabled)
+
+if (currentKCount == 0)
 {
-	if (currentKCount == 0)
+	outlet_trigger = 1;
+
+	currentKCount = kPerTrigger; // restart count
+
+	if (kPerTriggerChanged) // first trigger after adjustment - allow for delay
 	{
-		outlet_trigger = 1;
-	
-		currentKCount = kPerTrigger; // restart count
-	
-		if (kPerTriggerChanged) // first trigger after adjustment - allow for delay
+		kPerTriggerChanged = false;
+		
+		if (currentKCount > TAP_DELAY_ADJUSTMENT_K)
 		{
-			kPerTriggerChanged = false;
-			
-			if (currentKCount > TAP_DELAY_ADJUSTMENT_K)
-			{
-				LogTextMessage("Adjusting currentKCount from %u to %u\n", currentKCount, currentKCount - TAP_DELAY_ADJUSTMENT_K);
-				// bring first trigger forward to allow for delay
-				currentKCount -= TAP_DELAY_ADJUSTMENT_K;
-			}
-			else
-			{
-				LogTextMessage("ERROR: could not adjust currentKCount %u by TAP_DELAY_ADJUSTMENT_K %u\n", currentKCount, TAP_DELAY_ADJUSTMENT_K);
-			}
+			//LogTextMessage("Adjusting currentKCount from %u to %u\n", currentKCount, currentKCount - TAP_DELAY_ADJUSTMENT_K);
+			// bring first trigger forward to allow for delay
+			currentKCount -= TAP_DELAY_ADJUSTMENT_K;
+		}
+		else
+		{
+			LogTextMessage("ERROR: could not adjust currentKCount %u by TAP_DELAY_ADJUSTMENT_K %u\n", currentKCount, TAP_DELAY_ADJUSTMENT_K);
 		}
 	}
-	
-	currentKCount--;
 }
+
+currentKCount--;
+
 
 if (tapping)
 {
@@ -100,7 +96,7 @@ if (inlet_tap > 0) // got a tap
 		}
 		//LogTextMessage("kCountSinceTap %u/%ums\n", kCountSinceTap, kCountSinceTap/3);
 		kPerTrigger = calcAverage(kCounts, kCountsIndex);
-		LogTextMessage("kPerTrigger %u/%ums\n", kPerTrigger, kPerTrigger/3);
+		//LogTextMessage("kPerTrigger %u/%ums\n", kPerTrigger, kPerTrigger/3);
 	}
 	else // the first tap
 	{

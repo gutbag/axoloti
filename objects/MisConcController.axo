@@ -23,7 +23,7 @@ uint8_t numTriggers = 0;]]></code.declaration>
 outlet_looper = 0;
 outlet_reset = 0;
 
-if (inlet_enable)
+if (inlet_sync)
 {
 	if (not enabled)
 	{
