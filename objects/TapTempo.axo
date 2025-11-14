@@ -1,10 +1,11 @@
 <objdefs appVersion="1.0.12">
    <obj.normal id="TapTempo" uuid="623eb61e-59ba-4b39-92cf-9165c1dd97ea">
-      <sDescription>Receives tap trigger inputs and adjusts the timing of an output trigger to match.</sDescription>
+      <sDescription>Receives tap trigger inputs and adjusts the timing of an output trigger to match. No output unless enabled and output sync&apos;d to enable edge.</sDescription>
       <author>Mark Lamb</author>
       <license>GPL</license>
       <inlets>
          <bool32.rising name="tap" description="the tap input"/>
+         <bool32.rising name="enable"/>
       </inlets>
       <outlets>
          <bool32.pulse name="trigger"/>
@@ -26,6 +27,8 @@ uint32_t kCountSinceTap = 0;
 uint32_t kCounts[MAX_TAPS];
 uint8_t kCountsIndex = 0;
 
+bool enabled = false;
+
 uint32_t calcAverage(const uint32_t values[], const uint8_t numValues)
 {
 	uint32_t sum = 0;
@@ -35,30 +38,41 @@ uint32_t calcAverage(const uint32_t values[], const uint8_t numValues)
 }]]></code.declaration>
       <code.krate><![CDATA[outlet_trigger = 0;
 
-if (currentKCount == 0)
+if (inlet_enable)
 {
-	outlet_trigger = 1;
-
+	enabled = true;
+	outlet_trigger = 1; // first trigger immediately
 	currentKCount = kPerTrigger; // restart count
-
-	if (kPerTriggerChanged) // first trigger after adjustment - allow for delay
-	{
-		kPerTriggerChanged = false;
-		
-		if (currentKCount > TAP_DELAY_ADJUSTMENT_K)
-		{
-			LogTextMessage("Adjusting currentKCount from %u to %u\n", currentKCount, currentKCount - TAP_DELAY_ADJUSTMENT_K);
-			// bring first trigger forward to allow for delay
-			currentKCount -= TAP_DELAY_ADJUSTMENT_K;
-		}
-		else
-		{
-			LogTextMessage("ERROR: could not adjust currentKCount %u by TAP_DELAY_ADJUSTMENT_K %u\n", currentKCount, TAP_DELAY_ADJUSTMENT_K);
-		}
-	}
+	LogTextMessage("tempo triggers enabled\n");
 }
 
-currentKCount--;
+if (enabled)
+{
+	if (currentKCount == 0)
+	{
+		outlet_trigger = 1;
+	
+		currentKCount = kPerTrigger; // restart count
+	
+		if (kPerTriggerChanged) // first trigger after adjustment - allow for delay
+		{
+			kPerTriggerChanged = false;
+			
+			if (currentKCount > TAP_DELAY_ADJUSTMENT_K)
+			{
+				LogTextMessage("Adjusting currentKCount from %u to %u\n", currentKCount, currentKCount - TAP_DELAY_ADJUSTMENT_K);
+				// bring first trigger forward to allow for delay
+				currentKCount -= TAP_DELAY_ADJUSTMENT_K;
+			}
+			else
+			{
+				LogTextMessage("ERROR: could not adjust currentKCount %u by TAP_DELAY_ADJUSTMENT_K %u\n", currentKCount, TAP_DELAY_ADJUSTMENT_K);
+			}
+		}
+	}
+	
+	currentKCount--;
+}
 
 if (tapping)
 {

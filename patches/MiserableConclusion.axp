@@ -175,7 +175,7 @@
       <params/>
       <attribs/>
    </obj>
-   <obj type="TapTempo" uuid="623eb61e-59ba-4b39-92cf-9165c1dd97ea" name="TapTempo_2" x="182" y="630">
+   <obj type="TapTempo" uuid="623eb61e-59ba-4b39-92cf-9165c1dd97ea" name="TapTempo_1" x="182" y="630">
       <params/>
       <attribs/>
    </obj>
@@ -530,6 +530,7 @@ if (kCount >=3000)
       <net>
          <source obj="and_3" outlet="o"/>
          <dest obj="MisConcController_1" inlet="enable"/>
+         <dest obj="TapTempo_1" inlet="enable"/>
       </net>
       <net>
          <source obj="cc_9" outlet="trig"/>
@@ -537,10 +538,10 @@ if (kCount >=3000)
       </net>
       <net>
          <source obj="and_5" outlet="o"/>
-         <dest obj="TapTempo_2" inlet="tap"/>
+         <dest obj="TapTempo_1" inlet="tap"/>
       </net>
       <net>
-         <source obj="TapTempo_2" outlet="trigger"/>
+         <source obj="TapTempo_1" outlet="trigger"/>
          <dest obj="MisConcController_1" inlet="trigger"/>
       </net>
       <net>
