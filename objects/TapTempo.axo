@@ -86,8 +86,7 @@ if (inlet_tap > 0) // got a tap
 {
 	if (tapping)
 	{
-		// store the k count as the new tap delay
-		//kPerTrigger = kCountSinceTap;
+		// store the k count and calculate the average as the new tap delay
 		kCounts[kCountsIndex] = kCountSinceTap;
 		kCountsIndex++;
 		if (kCountsIndex >= MAX_TAPS)
