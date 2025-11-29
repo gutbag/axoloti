@@ -529,13 +529,12 @@
       <NPresetEntries>32</NPresetEntries>
       <NModulationSources>8</NModulationSources>
       <NModulationTargetsPerSource>8</NModulationTargetsPerSource>
-      <Author></Author>
    </settings>
    <notes><![CDATA[]]></notes>
    <windowPos>
-      <x>130</x>
-      <y>50</y>
-      <width>1382</width>
-      <height>932</height>
+      <x>8</x>
+      <y>45</y>
+      <width>1496</width>
+      <height>929</height>
    </windowPos>
 </patch-1.0>
