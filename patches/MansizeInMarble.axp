@@ -23,7 +23,7 @@
       <params>
          <frac32.u.map name="gain1" value="32.0"/>
          <frac32.u.map name="gain2" MidiCC="1" value="0.0"/>
-         <frac32.u.map name="gain3" MidiCC="7" value="21.5"/>
+         <frac32.u.map name="gain3" MidiCC="7" value="15.0"/>
          <frac32.u.map name="gain4" value="12.5"/>
       </params>
       <attribs/>
@@ -96,7 +96,7 @@
    </obj>
    <obj type="ctrl/dial p" uuid="cc5d2846c3d50e425f450c4b9851371b54f4d674" name="delay time" x="364" y="378">
       <params>
-         <frac32.u.map name="value" MidiCC="3" value="15.0"/>
+         <frac32.u.map name="value" MidiCC="3" value="9.0"/>
       </params>
       <attribs/>
    </obj>
@@ -113,26 +113,9 @@
       <attribs/>
    </obj>
    <comment type="patch/comment" x="14" y="476" text="CC7 sample mix"/>
+   <comment type="patch/comment" x="14" y="490" text="CC8 trigger sample 3"/>
+   <comment type="patch/comment" x="14" y="504" text="CC9 trigger sample 4"/>
    <comment type="patch/comment" x="14" y="588" text="CC5 trigger sample 1"/>
-   <obj type="string/c" uuid="4aa90a90c435a742ddfa152d232883fc5b2f1b3" name="sample file_" x="308" y="588">
-      <params/>
-      <attribs>
-         <table attributeName="str" table="marblo_sample1.raw"/>
-      </attribs>
-   </obj>
-   <obj type="wave/play stereo" uuid="843bbc92c4a45c5ba551de32538934e186dc4a41" name="play_1" x="462" y="588">
-      <params/>
-      <attribs/>
-   </obj>
-   <obj type="mix/mix 4 g" uuid="36f472cd81da2e17bd4b4ee11b53b4c82527220c" name="mix_3" x="616" y="588">
-      <params>
-         <frac32.u.map name="gain1" value="32.0"/>
-         <frac32.u.map name="gain2" value="32.0"/>
-         <frac32.u.map name="gain3" value="32.0"/>
-         <frac32.u.map name="gain4" value="32.0"/>
-      </params>
-      <attribs/>
-   </obj>
    <obj type="midi/in/cc i" uuid="614eb76edef2b43632fa1fcda25aab54f821daf6" name="cc_8" x="14" y="602">
       <params/>
       <attribs>
@@ -144,17 +127,30 @@
       <params/>
       <attribs/>
    </obj>
-   <comment type="patch/comment" x="14" y="700" text="CC6 trigger sample 2"/>
-   <obj type="string/c" uuid="4aa90a90c435a742ddfa152d232883fc5b2f1b3" name="sample file__" x="308" y="700">
+   <obj type="string/c" uuid="4aa90a90c435a742ddfa152d232883fc5b2f1b3" name="sample file_" x="168" y="616">
       <params/>
       <attribs>
-         <table attributeName="str" table="marblo_sample2.raw"/>
+         <table attributeName="str" table="marblo_chord1.raw"/>
       </attribs>
    </obj>
-   <obj type="wave/play stereo" uuid="843bbc92c4a45c5ba551de32538934e186dc4a41" name="play_2" x="462" y="700">
+   <obj type="wave/play stereo" uuid="843bbc92c4a45c5ba551de32538934e186dc4a41" name="play_1" x="322" y="616">
       <params/>
       <attribs/>
    </obj>
+   <obj type="mix/mix 8 g" uuid="ca3c8ec626ad31e48d8374d5dd44962bf3bd7e6f" name="mix_1" x="518" y="616">
+      <params>
+         <frac32.u.map name="gain1" value="32.0"/>
+         <frac32.u.map name="gain2" value="32.0"/>
+         <frac32.u.map name="gain3" value="32.0"/>
+         <frac32.u.map name="gain4" value="32.0"/>
+         <frac32.u.map name="gain5" value="32.0"/>
+         <frac32.u.map name="gain6" value="32.0"/>
+         <frac32.u.map name="gain7" value="32.0"/>
+         <frac32.u.map name="gain8" value="32.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <comment type="patch/comment" x="14" y="700" text="CC6 trigger sample 2"/>
    <obj type="midi/in/cc i" uuid="614eb76edef2b43632fa1fcda25aab54f821daf6" name="cc_4" x="14" y="714">
       <params/>
       <attribs>
@@ -166,37 +162,91 @@
       <params/>
       <attribs/>
    </obj>
-   <comment type="patch/comment" x="14" y="882" text="Startup delay to lock out triggers on patch change. LED on until done."/>
-   <comment type="patch/comment" x="392" y="882" text="Red LED on during startup and when delay on"/>
-   <obj type="const/i" uuid="e202f44b2df17ae0b3e663b98ea6b14c8ff00408" name="i_3" x="14" y="896">
+   <obj type="string/c" uuid="4aa90a90c435a742ddfa152d232883fc5b2f1b3" name="sample file__" x="168" y="728">
+      <params/>
+      <attribs>
+         <table attributeName="str" table="marblo_chord2.raw"/>
+      </attribs>
+   </obj>
+   <obj type="wave/play stereo" uuid="843bbc92c4a45c5ba551de32538934e186dc4a41" name="play_2" x="322" y="728">
+      <params/>
+      <attribs/>
+   </obj>
+   <comment type="patch/comment" x="14" y="812" text="CC8 trigger sample 3"/>
+   <obj type="midi/in/cc i" uuid="614eb76edef2b43632fa1fcda25aab54f821daf6" name="cc_9" x="14" y="826">
+      <params/>
+      <attribs>
+         <spinner attributeName="cc" value="8"/>
+         <spinner attributeName="default" value="0"/>
+      </attribs>
+   </obj>
+   <obj type="logic/and 2" uuid="c67031682f552aa0a80b23377495c51ea28a8c9c" name="and_2" x="98" y="840">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="string/c" uuid="4aa90a90c435a742ddfa152d232883fc5b2f1b3" name="sample file___" x="168" y="840">
+      <params/>
+      <attribs>
+         <table attributeName="str" table="marblo_chord3.raw"/>
+      </attribs>
+   </obj>
+   <obj type="wave/play stereo" uuid="843bbc92c4a45c5ba551de32538934e186dc4a41" name="play_3" x="322" y="840">
+      <params/>
+      <attribs/>
+   </obj>
+   <comment type="patch/comment" x="14" y="924" text="CC9 trigger sample 4"/>
+   <obj type="midi/in/cc i" uuid="614eb76edef2b43632fa1fcda25aab54f821daf6" name="cc_5" x="14" y="938">
+      <params/>
+      <attribs>
+         <spinner attributeName="cc" value="9"/>
+         <spinner attributeName="default" value="0"/>
+      </attribs>
+   </obj>
+   <obj type="logic/and 2" uuid="c67031682f552aa0a80b23377495c51ea28a8c9c" name="and_5" x="98" y="952">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="string/c" uuid="4aa90a90c435a742ddfa152d232883fc5b2f1b3" name="sample file____" x="168" y="952">
+      <params/>
+      <attribs>
+         <table attributeName="str" table="marblo_chord4.raw"/>
+      </attribs>
+   </obj>
+   <obj type="wave/play stereo" uuid="843bbc92c4a45c5ba551de32538934e186dc4a41" name="play_4" x="322" y="952">
+      <params/>
+      <attribs/>
+   </obj>
+   <comment type="patch/comment" x="14" y="1120" text="Startup delay to lock out triggers on patch change. LED on until done."/>
+   <comment type="patch/comment" x="392" y="1120" text="Red LED on during startup and when delay on"/>
+   <obj type="const/i" uuid="e202f44b2df17ae0b3e663b98ea6b14c8ff00408" name="i_3" x="14" y="1134">
       <params/>
       <attribs>
          <spinner attributeName="value" value="1"/>
       </attribs>
    </obj>
-   <obj type="timer/delayedpulse" uuid="3f05ee534ca67755fb20c7437f9e4de3d4c2f73d" name="delayedpulse_2" x="98" y="896">
+   <obj type="timer/delayedpulse" uuid="3f05ee534ca67755fb20c7437f9e4de3d4c2f73d" name="delayedpulse_2" x="98" y="1134">
       <params>
          <frac32.s.map name="delay" value="54.0"/>
       </params>
       <attribs/>
    </obj>
-   <obj type="logic/flipflop" uuid="f9b15363f5ee203152e062c08a8846f0074b0ea5" name="flipflop_1" x="210" y="896">
+   <obj type="logic/flipflop" uuid="f9b15363f5ee203152e062c08a8846f0074b0ea5" name="flipflop_1" x="210" y="1134">
       <params/>
       <attribs/>
    </obj>
-   <obj type="logic/inv" uuid="2bd44b865d3b63ff9b80862242bf5be779e3ad5" name="inv_1" x="294" y="896">
+   <obj type="logic/inv" uuid="2bd44b865d3b63ff9b80862242bf5be779e3ad5" name="inv_1" x="294" y="1134">
       <params/>
       <attribs/>
    </obj>
-   <obj type="phi/logic/or 4" uuid="5dc5a7c1fb7809522171638f755fead71cbe14ea" name="or_2" x="392" y="896">
+   <obj type="phi/logic/or 4" uuid="5dc5a7c1fb7809522171638f755fead71cbe14ea" name="or_2" x="392" y="1134">
       <params/>
       <attribs/>
    </obj>
-   <obj type="gpio/out/led2" uuid="3d7a4c75d1f9901181a17ba5de752782de911803" name="led2_2" x="476" y="896">
+   <obj type="gpio/out/led2" uuid="3d7a4c75d1f9901181a17ba5de752782de911803" name="led2_2" x="476" y="1134">
       <params/>
       <attribs/>
    </obj>
-   <obj type="midi/in/monitor" uuid="b51863ca-6afa-4d29-acfd-c8c2fe06cb16" name="monitor_1" x="14" y="994">
+   <obj type="midi/in/monitor" uuid="b51863ca-6afa-4d29-acfd-c8c2fe06cb16" name="monitor_1" x="14" y="1232">
       <params>
          <bool32.tgl name="ControlChange" value="0"/>
          <bool32.tgl name="Note" value="0"/>
@@ -206,16 +256,16 @@
       </params>
       <attribs/>
    </obj>
-   <comment type="patch/comment" x="126" y="1008" text="Enable monitors for debugging"/>
-   <comment type="patch/comment" x="126" y="1022" text="Controller usually enables these"/>
-   <obj type="audio/inconfig l" uuid="7007d026acb7c3586f60a7f0898718d1ca7e0607" name="inconfig_1" x="14" y="1092">
+   <comment type="patch/comment" x="126" y="1246" text="Enable monitors for debugging"/>
+   <comment type="patch/comment" x="126" y="1260" text="Controller usually enables these"/>
+   <obj type="audio/inconfig l" uuid="7007d026acb7c3586f60a7f0898718d1ca7e0607" name="inconfig_1" x="14" y="1330">
       <params/>
       <attribs>
          <combo attributeName="gain" selection="0dB"/>
          <combo attributeName="boost" selection="0dB"/>
       </attribs>
    </obj>
-   <obj type="audio/inconfig r" uuid="8468fe7907553f335959a7f69cbc5a1f7b5d4d1d" name="inconfig_2" x="112" y="1092">
+   <obj type="audio/inconfig r" uuid="8468fe7907553f335959a7f69cbc5a1f7b5d4d1d" name="inconfig_2" x="112" y="1330">
       <params/>
       <attribs>
          <combo attributeName="gain" selection="0dB"/>
@@ -283,6 +333,8 @@
          <dest obj="and_3" inlet="i2"/>
          <dest obj="and_4" inlet="i2"/>
          <dest obj="and_1" inlet="i2"/>
+         <dest obj="and_2" inlet="i2"/>
+         <dest obj="and_5" inlet="i2"/>
       </net>
       <net>
          <source obj="inv_1" outlet="o"/>
@@ -341,23 +393,63 @@
          <dest obj="play_2" inlet="start"/>
       </net>
       <net>
-         <source obj="play_1" outlet="outl"/>
-         <dest obj="mix_3" inlet="in1"/>
+         <source obj="cc_5" outlet="trig"/>
+         <dest obj="and_5" inlet="i1"/>
       </net>
       <net>
-         <source obj="play_1" outlet="outr"/>
-         <dest obj="mix_3" inlet="in2"/>
+         <source obj="cc_9" outlet="trig"/>
+         <dest obj="and_2" inlet="i1"/>
       </net>
       <net>
-         <source obj="play_2" outlet="outl"/>
-         <dest obj="mix_3" inlet="in3"/>
+         <source obj="sample file___" outlet="out"/>
+         <dest obj="play_3" inlet="filename"/>
+      </net>
+      <net>
+         <source obj="and_2" outlet="o"/>
+         <dest obj="play_3" inlet="start"/>
+      </net>
+      <net>
+         <source obj="sample file____" outlet="out"/>
+         <dest obj="play_4" inlet="filename"/>
+      </net>
+      <net>
+         <source obj="and_5" outlet="o"/>
+         <dest obj="play_4" inlet="start"/>
+      </net>
+      <net>
+         <source obj="play_4" outlet="outr"/>
+         <dest obj="mix_1" inlet="in8"/>
+      </net>
+      <net>
+         <source obj="play_4" outlet="outl"/>
+         <dest obj="mix_1" inlet="in7"/>
+      </net>
+      <net>
+         <source obj="play_3" outlet="outr"/>
+         <dest obj="mix_1" inlet="in6"/>
+      </net>
+      <net>
+         <source obj="play_3" outlet="outl"/>
+         <dest obj="mix_1" inlet="in5"/>
       </net>
       <net>
          <source obj="play_2" outlet="outr"/>
-         <dest obj="mix_3" inlet="in4"/>
+         <dest obj="mix_1" inlet="in4"/>
       </net>
       <net>
-         <source obj="mix_3" outlet="out"/>
+         <source obj="play_2" outlet="outl"/>
+         <dest obj="mix_1" inlet="in3"/>
+      </net>
+      <net>
+         <source obj="play_1" outlet="outr"/>
+         <dest obj="mix_1" inlet="in2"/>
+      </net>
+      <net>
+         <source obj="play_1" outlet="outl"/>
+         <dest obj="mix_1" inlet="in1"/>
+      </net>
+      <net>
+         <source obj="mix_1" outlet="out"/>
          <dest obj="mix_2" inlet="in3"/>
       </net>
    </nets>
