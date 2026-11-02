@@ -1,0 +1,90 @@
+<objdefs appVersion="1.0.12">
+   <obj.normal id="NorthByOscController" uuid="5506331a-60c9-4422-aecb-b3e08dece00f">
+      <sDescription></sDescription>
+      <author>Mark Lamb</author>
+      <license>GPL</license>
+      <inlets>
+         <bool32.rising name="trig1"/>
+         <bool32.rising name="trig2"/>
+      </inlets>
+      <outlets>
+         <bool32 name="on"/>
+      </outlets>
+      <displays>
+         <bool32 name="on" noLabel="true"/>
+      </displays>
+      <params/>
+      <attribs/>
+      <code.declaration><![CDATA[typedef enum {IGNORE_TRIG1, AWAIT_TRIG1, OUTPUT_ON} State;
+State state;
+
+typedef enum {NO_EVENT, TRIG1_EVENT, TRIG2_EVENT} Event;
+Event event;
+
+bool on = false;]]></code.declaration>
+      <code.init><![CDATA[state = IGNORE_TRIG1;
+event = NO_EVENT;
+on = false;]]></code.init>
+      <code.krate><![CDATA[if (inlet_trig1)
+{
+	LogTextMessage("TRIG1_EVENT in state %u\n", state);
+	event = TRIG1_EVENT;
+}
+else if (inlet_trig2)
+{
+	LogTextMessage("TRIG2_EVENT in state %u\n", state);
+	event = TRIG2_EVENT;
+}
+
+switch (state)
+{
+	case IGNORE_TRIG1:
+		switch (event)
+		{
+			case NO_EVENT:
+			break;
+			case TRIG1_EVENT: // output unchanged, move to AWAIT_TRIG1
+				state  = AWAIT_TRIG1;
+			break;
+			case TRIG2_EVENT: // toggle output
+				on = !on;
+			break;
+		}
+	break;
+	case AWAIT_TRIG1:
+		switch (event)
+		{
+			case NO_EVENT:
+			break;
+			case TRIG1_EVENT: // output on, move to OUTPUT_ON
+				on = true;
+				state = OUTPUT_ON;
+			break;
+			case TRIG2_EVENT: // toggle output
+				on = !on;
+			break;
+		}
+	break;
+	case OUTPUT_ON:
+		switch (event)
+		{
+			case NO_EVENT:
+			break;
+			case TRIG1_EVENT: // ignore
+			break;
+			case TRIG2_EVENT: // toggle output and return to first state
+				on = !on;
+				state = IGNORE_TRIG1;
+			break;
+		}
+	break;
+}
+
+// consume the event
+event = NO_EVENT;
+
+// update the outlet and display
+disp_on = on;
+outlet_on = on;]]></code.krate>
+   </obj.normal>
+</objdefs>

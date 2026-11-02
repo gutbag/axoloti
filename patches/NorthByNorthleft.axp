@@ -3,188 +3,299 @@
       <params/>
       <attribs/>
    </obj>
-   <obj type="switches/2To1Safe" uuid="8cfbb7b5-4fc0-4d92-bd3f-506080e3b408" name="2To1Safe_1" x="798" y="14">
+   <obj type="mix/mix 2 g" uuid="221f038da51943034a75e442c90624fcebfe6112" name="mix_2" x="826" y="28">
       <params>
-         <bool32.tgl name="i2" MidiCC="2" value="0"/>
+         <frac32.u.map name="gain1" MidiCC="7" value="35.5"/>
+         <frac32.u.map name="gain2" MidiCC="1" value="38.0"/>
       </params>
-      <attribs>
-         <combo attributeName="use" selection="Manual/MIDI"/>
-      </attribs>
+      <attribs/>
    </obj>
-   <obj type="audio/out left" uuid="b11a3c09b2fdd575ea8212f2ce7743d5269253b1" name="out_1" x="1064" y="14">
+   <obj type="audio/out left" uuid="b11a3c09b2fdd575ea8212f2ce7743d5269253b1" name="out_1" x="1050" y="28">
       <params/>
       <attribs/>
    </obj>
-   <obj type="mymath/gainx4" uuid="62b1c1a6337c7c8f6eac96408a432477b113cfa1" name="dry gain___" x="938" y="28">
+   <obj type="mix/mix 2 g" uuid="221f038da51943034a75e442c90624fcebfe6112" name="mix_3" x="168" y="56">
       <params>
-         <frac32.u.map name="amp" value="24.0"/>
+         <frac32.u.map name="gain1" MidiCC="6" value="22.0"/>
+         <frac32.u.map name="gain2" value="32.0"/>
       </params>
       <attribs/>
    </obj>
-   <obj type="sss/dist/crusher" uuid="db6298ef-5a92-4390-a0f8-67791e4bb8c9" name="crusher_1" x="140" y="84">
+   <obj type="osc/brds/saw" uuid="ed06f020-7e68-4db6-836a-95a85e200cfb" name="saw_3" x="28" y="84">
       <params>
-         <frac32.s.map name="max" value="15.0"/>
-         <frac32.s.map name="bias" value="-8.0"/>
-         <frac32.s.map name="min" value="-32.0"/>
-         <frac32.u.map name="diffmax" value="28.5"/>
-         <frac32.s.map name="LP" value="-13.0"/>
-         <frac32.s.map name="HP" value="-42.0"/>
-         <frac32.u.map name="feedback" value="15.5"/>
+         <frac32.s.map name="pitch" value="-7.0"/>
       </params>
       <attribs/>
    </obj>
-   <obj type="fx/flanger" uuid="b9a09fbe-225d-41a6-a76a-a896cc9903ff" name="obj_1" x="490" y="98">
+   <obj type="filter/bp m" uuid="f26437572c3a1f6be883bb219c773a9906ff8296" name="bp_2" x="364" y="140">
       <params>
-         <frac32.u.map name="depth" value="8.0"/>
-         <frac32.u.map name="fdbk" value="35.5"/>
-         <frac32.s.map name="speed" value="-1.0">
-            <modulators>
-               <modulation sourceName="modsource_1" modName="" value="1.0"/>
-            </modulators>
-         </frac32.s.map>
+         <frac32.s.map name="pitch" value="14.0"/>
+         <frac32.u.map name="reso" value="21.0"/>
       </params>
       <attribs/>
    </obj>
-   <obj type="mymath/gainx4" uuid="62b1c1a6337c7c8f6eac96408a432477b113cfa1" name="dry gain__" x="266" y="112">
+   <obj type="osc/brds/saw" uuid="ed06f020-7e68-4db6-836a-95a85e200cfb" name="saw_1" x="28" y="168">
       <params>
-         <frac32.u.map name="amp" value="5.0"/>
+         <frac32.s.map name="pitch" value="5.0"/>
       </params>
       <attribs/>
    </obj>
-   <obj type="filter/bp m" uuid="f26437572c3a1f6be883bb219c773a9906ff8296" name="bp_1" x="658" y="140">
+   <obj type="mix/mix 2 g" uuid="221f038da51943034a75e442c90624fcebfe6112" name="mix_1" x="490" y="196">
       <params>
-         <frac32.s.map name="pitch" value="8.0"/>
-         <frac32.u.map name="reso" value="0.0"/>
+         <frac32.u.map name="gain1" MidiCC="4" value="2.5"/>
+         <frac32.u.map name="gain2" MidiCC="5" value="2.5"/>
       </params>
       <attribs/>
    </obj>
-   <obj type="mymath/gainx4" uuid="62b1c1a6337c7c8f6eac96408a432477b113cfa1" name="dry gain" x="770" y="140">
+   <obj type="filter/hp" uuid="7829b56456e975f1d89bda2ad1c7ad678080a73b" name="hp_1" x="602" y="196">
       <params>
-         <frac32.u.map name="amp" value="28.5"/>
+         <frac32.s.map name="pitch" value="-19.0"/>
+         <frac32.u.map name="reso" value="15.0"/>
       </params>
       <attribs/>
    </obj>
-   <obj type="audio/inconfig l" uuid="7007d026acb7c3586f60a7f0898718d1ca7e0607" name="inconfig_1" x="28" y="252">
-      <params/>
+   <obj type="switches/SafeSwitch" uuid="9ecd8939-7299-438c-b3e5-e19d98fdc50d" name="SafeSwitch_1" x="714" y="196">
+      <params>
+         <bool32.tgl name="on" value="0"/>
+      </params>
       <attribs>
-         <combo attributeName="gain" selection="0dB"/>
-         <combo attributeName="boost" selection="0dB"/>
+         <combo attributeName="use" selection="on inlet"/>
       </attribs>
    </obj>
-   <obj type="midi/in/cc i" uuid="614eb76edef2b43632fa1fcda25aab54f821daf6" name="cc_1" x="280" y="280">
+   <obj type="lfo/sine" uuid="75f7330c26a13953215dccc3b7b9008545c9daa9" name="sine_4" x="154" y="210">
+      <params>
+         <frac32.s.map name="pitch" value="-61.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="math/*c" uuid="7d5ef61c3bcd571ee6bbd8437ef3612125dfb225" name="*c_1" x="252" y="210">
+      <params>
+         <frac32.u.map name="amp" value="9.5"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="osc/brds/saw" uuid="ed06f020-7e68-4db6-836a-95a85e200cfb" name="saw_2" x="28" y="252">
+      <params>
+         <frac32.s.map name="pitch" value="-2.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="lfo/sine" uuid="75f7330c26a13953215dccc3b7b9008545c9daa9" name="sine_5" x="154" y="294">
+      <params>
+         <frac32.s.map name="pitch" value="-50.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="math/*c" uuid="7d5ef61c3bcd571ee6bbd8437ef3612125dfb225" name="*c_2" x="252" y="294">
+      <params>
+         <frac32.u.map name="amp" value="7.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="filter/bp m" uuid="f26437572c3a1f6be883bb219c773a9906ff8296" name="bp_3" x="364" y="294">
+      <params>
+         <frac32.s.map name="pitch" value="16.0"/>
+         <frac32.u.map name="reso" value="21.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <comment type="patch/comment" x="14" y="448" text="CC2: oscillator on/off toggle"/>
+   <comment type="patch/comment" x="196" y="448" text="CC3: oscillator on if 2nd trigger"/>
+   <obj type="midi/in/cc i" uuid="614eb76edef2b43632fa1fcda25aab54f821daf6" name="cc_7" x="14" y="462">
       <params/>
       <attribs>
          <spinner attributeName="cc" value="2"/>
          <spinner attributeName="default" value="0"/>
       </attribs>
    </obj>
-   <obj type="timer/pulselength" uuid="ca68725237d8ba8407773340801660a9fd9b0dba" name="pulselength_1" x="406" y="294">
-      <params>
-         <frac32.s.map name="delay" value="-49.0"/>
-      </params>
-      <attribs/>
-   </obj>
-   <obj type="env/adsr" uuid="d1dbcc5fa6f87b98a6a91c87fd44acee5e690bac" name="adsr_2" x="532" y="294">
-      <params>
-         <frac32.s.map name="a" value="-44.0"/>
-         <frac32.s.map name="d" value="-24.0"/>
-         <frac32.u.map name="s" value="55.5"/>
-         <frac32.s.map name="r" value="26.0"/>
-      </params>
-      <attribs/>
-   </obj>
-   <obj type="disp/chart p" uuid="58f42040a894006a5f73ed8cb8d0bd45481b28cd" name="chart_3" x="658" y="294">
-      <params/>
-      <attribs/>
-   </obj>
-   <obj type="audio/inconfig r" uuid="8468fe7907553f335959a7f69cbc5a1f7b5d4d1d" name="inconfig_2" x="28" y="322">
+   <obj type="midi/in/cc i" uuid="614eb76edef2b43632fa1fcda25aab54f821daf6" name="cc_8" x="196" y="462">
       <params/>
       <attribs>
-         <combo attributeName="gain" selection="0dB"/>
+         <spinner attributeName="cc" value="3"/>
+         <spinner attributeName="default" value="0"/>
+      </attribs>
+   </obj>
+   <obj type="logic/and 2" uuid="c67031682f552aa0a80b23377495c51ea28a8c9c" name="and_4" x="112" y="476">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="logic/and 2" uuid="c67031682f552aa0a80b23377495c51ea28a8c9c" name="and_5" x="294" y="476">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="controllers/NorthByOscController" uuid="5506331a-60c9-4422-aecb-b3e08dece00f" name="NorthByOscController_1" x="378" y="476">
+      <params/>
+      <attribs/>
+   </obj>
+   <comment type="patch/comment" x="14" y="574" text="Startup delay to lock out triggers on patch change. LED on until done."/>
+   <comment type="patch/comment" x="392" y="574" text="Red LED on during startup"/>
+   <obj type="const/i" uuid="e202f44b2df17ae0b3e663b98ea6b14c8ff00408" name="i_3" x="14" y="588">
+      <params/>
+      <attribs>
+         <spinner attributeName="value" value="1"/>
+      </attribs>
+   </obj>
+   <obj type="timer/delayedpulse" uuid="3f05ee534ca67755fb20c7437f9e4de3d4c2f73d" name="delayedpulse_2" x="98" y="588">
+      <params>
+         <frac32.s.map name="delay" value="54.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="logic/flipflop" uuid="f9b15363f5ee203152e062c08a8846f0074b0ea5" name="flipflop_1" x="210" y="588">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="logic/inv" uuid="2bd44b865d3b63ff9b80862242bf5be779e3ad5" name="inv_1" x="294" y="588">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="phi/logic/or 4" uuid="5dc5a7c1fb7809522171638f755fead71cbe14ea" name="or_2" x="392" y="588">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="gpio/out/led2" uuid="3d7a4c75d1f9901181a17ba5de752782de911803" name="led2_3" x="476" y="588">
+      <params/>
+      <attribs/>
+   </obj>
+   <comment type="patch/comment" x="658" y="588" text="CC1: main oscillator level"/>
+   <comment type="patch/comment" x="658" y="602" text="CC2: oscillator on/off toggle"/>
+   <comment type="patch/comment" x="658" y="616" text="CC3: oscillator on if 2nd trigger"/>
+   <comment type="patch/comment" x="658" y="630" text="CC4: osc 1 level"/>
+   <comment type="patch/comment" x="658" y="644" text="CC5: osc2 level"/>
+   <comment type="patch/comment" x="658" y="658" text="CC6: 220Hz level"/>
+   <comment type="patch/comment" x="658" y="672" text="CC7: clean level"/>
+   <obj type="audio/inconfig l" uuid="7007d026acb7c3586f60a7f0898718d1ca7e0607" name="inconfig_1" x="14" y="686">
+      <params/>
+      <attribs>
+         <combo attributeName="gain" selection="6dB"/>
          <combo attributeName="boost" selection="0dB"/>
       </attribs>
    </obj>
-   <obj type="mix/mix 2 g" uuid="221f038da51943034a75e442c90624fcebfe6112" name="mix_1" x="896" y="518">
+   <obj type="midi/in/monitor" uuid="b51863ca-6afa-4d29-acfd-c8c2fe06cb16" name="monitor_1" x="140" y="686">
       <params>
-         <frac32.u.map name="gain1" value="64.0"/>
-         <frac32.u.map name="gain2" value="32.0"/>
+         <bool32.tgl name="ControlChange" value="0"/>
+         <bool32.tgl name="Note" value="0"/>
+         <bool32.tgl name="ProgramChange" value="0"/>
+         <bool32.tgl name="Bend" value="0"/>
+         <bool32.tgl name="PolyPressure" value="0"/>
       </params>
       <attribs/>
    </obj>
-   <obj type="lfo/sine" uuid="75f7330c26a13953215dccc3b7b9008545c9daa9" name="sine_1" x="28" y="532">
-      <params>
-         <frac32.s.map name="pitch" value="-55.0"/>
-      </params>
-      <attribs/>
-   </obj>
-   <obj type="patch/modsource" uuid="c98f018a8d204ef6df1bf7008af6fd7d20f12fe4" name="modsource_1" x="140" y="532">
+   <comment type="patch/comment" x="252" y="700" text="Enable monitors for debugging"/>
+   <comment type="patch/comment" x="252" y="714" text="Controller usually enables these"/>
+   <obj type="audio/inconfig r" uuid="8468fe7907553f335959a7f69cbc5a1f7b5d4d1d" name="inconfig_2" x="14" y="742">
       <params/>
-      <attribs/>
-   </obj>
-   <obj type="disp/chart p" uuid="58f42040a894006a5f73ed8cb8d0bd45481b28cd" name="chart_4" x="238" y="532">
-      <params/>
-      <attribs/>
-   </obj>
-   <obj type="logic/change" uuid="42071f8cb4cfe1f35956c0bd5a313a57e049bec4" name="change_1" x="140" y="588">
-      <params/>
-      <attribs/>
+      <attribs>
+         <combo attributeName="gain" selection="6dB"/>
+         <combo attributeName="boost" selection="0dB"/>
+      </attribs>
    </obj>
    <nets>
       <net>
-         <source obj="sine_1" outlet="wave"/>
-         <dest obj="modsource_1" inlet="v"/>
-         <dest obj="change_1" inlet="in"/>
-         <dest obj="chart_4" inlet="in"/>
-      </net>
-      <net>
          <source obj="in_1" outlet="wave"/>
-         <dest obj="crusher_1" inlet="in"/>
-         <dest obj="2To1Safe_1" inlet="i1"/>
+         <dest obj="mix_2" inlet="in1"/>
       </net>
       <net>
-         <source obj="dry gain" outlet="out"/>
-         <dest obj="2To1Safe_1" inlet="i2"/>
+         <source obj="saw_1" outlet="wave"/>
+         <dest obj="mix_3" inlet="in2"/>
       </net>
       <net>
-         <source obj="obj_1" outlet="out"/>
-         <dest obj="bp_1" inlet="in"/>
+         <source obj="bp_2" outlet="out"/>
+         <dest obj="mix_1" inlet="in1"/>
       </net>
       <net>
-         <source obj="bp_1" outlet="out"/>
-         <dest obj="dry gain" inlet="in"/>
+         <source obj="saw_2" outlet="wave"/>
+         <dest obj="bp_3" inlet="in"/>
       </net>
       <net>
-         <source obj="pulselength_1" outlet="pulse"/>
-         <dest obj="adsr_2" inlet="gate"/>
+         <source obj="bp_3" outlet="out"/>
+         <dest obj="mix_1" inlet="in2"/>
       </net>
       <net>
-         <source obj="adsr_2" outlet="env"/>
-         <dest obj="chart_3" inlet="in"/>
-         <dest obj="bp_1" inlet="pitch"/>
+         <source obj="SafeSwitch_1" outlet="o"/>
+         <dest obj="mix_2" inlet="in2"/>
       </net>
       <net>
-         <source obj="cc_1" outlet="trig"/>
-         <dest obj="pulselength_1" inlet="trig"/>
+         <source obj="*c_1" outlet="out"/>
+         <dest obj="bp_2" inlet="pitch"/>
       </net>
       <net>
-         <source obj="crusher_1" outlet="out"/>
-         <dest obj="dry gain__" inlet="in"/>
+         <source obj="*c_2" outlet="out"/>
+         <dest obj="bp_3" inlet="pitch"/>
       </net>
       <net>
-         <source obj="dry gain__" outlet="out"/>
-         <dest obj="obj_1" inlet="in"/>
+         <source obj="sine_5" outlet="wave"/>
+         <dest obj="*c_2" inlet="in"/>
       </net>
       <net>
-         <source obj="dry gain___" outlet="out"/>
+         <source obj="sine_4" outlet="wave"/>
+         <dest obj="*c_1" inlet="in"/>
+      </net>
+      <net>
+         <source obj="mix_1" outlet="out"/>
+         <dest obj="hp_1" inlet="in"/>
+      </net>
+      <net>
+         <source obj="hp_1" outlet="out"/>
+         <dest obj="SafeSwitch_1" inlet="in"/>
+      </net>
+      <net>
+         <source obj="mix_3" outlet="out"/>
+         <dest obj="bp_2" inlet="in"/>
+      </net>
+      <net>
+         <source obj="saw_3" outlet="wave"/>
+         <dest obj="mix_3" inlet="in1"/>
+      </net>
+      <net>
+         <source obj="i_3" outlet="out"/>
+         <dest obj="delayedpulse_2" inlet="trig"/>
+      </net>
+      <net>
+         <source obj="delayedpulse_2" outlet="pulse"/>
+         <dest obj="flipflop_1" inlet="set"/>
+      </net>
+      <net>
+         <source obj="flipflop_1" outlet="o"/>
+         <dest obj="inv_1" inlet="i"/>
+         <dest obj="and_4" inlet="i2"/>
+         <dest obj="and_5" inlet="i2"/>
+      </net>
+      <net>
+         <source obj="inv_1" outlet="o"/>
+         <dest obj="or_2" inlet="i1"/>
+      </net>
+      <net>
+         <source obj="or_2" outlet="o"/>
+         <dest obj="led2_3" inlet="in"/>
+      </net>
+      <net>
+         <source obj="SafeSwitch_1" outlet="isOn"/>
+         <dest obj="or_2" inlet="i2"/>
+      </net>
+      <net>
+         <source obj="cc_7" outlet="trig"/>
+         <dest obj="and_4" inlet="i1"/>
+      </net>
+      <net>
+         <source obj="mix_2" outlet="out"/>
          <dest obj="out_1" inlet="wave"/>
       </net>
       <net>
-         <source obj="2To1Safe_1" outlet="o"/>
-         <dest obj="dry gain___" inlet="in"/>
+         <source obj="cc_8" outlet="trig"/>
+         <dest obj="and_5" inlet="i1"/>
       </net>
       <net>
-         <source obj="change_1" outlet="trig"/>
-         <dest obj="modsource_1" inlet="trig"/>
+         <source obj="NorthByOscController_1" outlet="on"/>
+         <dest obj="SafeSwitch_1" inlet="on"/>
+      </net>
+      <net>
+         <source obj="and_5" outlet="o"/>
+         <dest obj="NorthByOscController_1" inlet="trig1"/>
+      </net>
+      <net>
+         <source obj="and_4" outlet="o"/>
+         <dest obj="NorthByOscController_1" inlet="trig2"/>
       </net>
    </nets>
    <settings>
@@ -197,7 +308,7 @@
    </settings>
    <notes><![CDATA[]]></notes>
    <windowPos>
-      <x>163</x>
+      <x>127</x>
       <y>68</y>
       <width>1276</width>
       <height>853</height>
