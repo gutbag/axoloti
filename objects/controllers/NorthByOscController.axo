@@ -1,6 +1,6 @@
 <objdefs appVersion="1.0.12">
    <obj.normal id="NorthByOscController" uuid="5506331a-60c9-4422-aecb-b3e08dece00f">
-      <sDescription></sDescription>
+      <sDescription>Controls the oscillators used in North By Northleft. Trig1 is the FSW used for the Freeze. When it is pressed for a second time the oscs are started. A separate trigger, trig2, toggles the oscs on/off at any time.</sDescription>
       <author>Mark Lamb</author>
       <license>GPL</license>
       <inlets>
