@@ -6,19 +6,12 @@
    <obj type="mix/mix 2 g" uuid="221f038da51943034a75e442c90624fcebfe6112" name="mix_2" x="826" y="28">
       <params>
          <frac32.u.map name="gain1" MidiCC="7" value="35.5"/>
-         <frac32.u.map name="gain2" MidiCC="1" value="38.0"/>
+         <frac32.u.map name="gain2" MidiCC="1" value="18.0"/>
       </params>
       <attribs/>
    </obj>
    <obj type="audio/out left" uuid="b11a3c09b2fdd575ea8212f2ce7743d5269253b1" name="out_1" x="1050" y="28">
       <params/>
-      <attribs/>
-   </obj>
-   <obj type="mix/mix 2 g" uuid="221f038da51943034a75e442c90624fcebfe6112" name="mix_3" x="168" y="56">
-      <params>
-         <frac32.u.map name="gain1" MidiCC="6" value="22.0"/>
-         <frac32.u.map name="gain2" value="32.0"/>
-      </params>
       <attribs/>
    </obj>
    <obj type="osc/brds/saw" uuid="ed06f020-7e68-4db6-836a-95a85e200cfb" name="saw_3" x="28" y="84">
@@ -27,34 +20,84 @@
       </params>
       <attribs/>
    </obj>
-   <obj type="filter/bp m" uuid="f26437572c3a1f6be883bb219c773a9906ff8296" name="bp_2" x="364" y="140">
+   <obj type="mix/mix 2 g" uuid="221f038da51943034a75e442c90624fcebfe6112" name="mix_3" x="126" y="112">
       <params>
-         <frac32.s.map name="pitch" value="14.0"/>
-         <frac32.u.map name="reso" value="21.0"/>
+         <frac32.u.map name="gain1" MidiCC="6" value="18.0"/>
+         <frac32.u.map name="gain2" value="32.0"/>
       </params>
       <attribs/>
    </obj>
+   <comment type="patch/comment" x="406" y="126" text="CC1: main oscillator level"/>
+   <comment type="patch/comment" x="406" y="140" text="CC2: oscillator on/off toggle"/>
+   <comment type="patch/comment" x="406" y="154" text="CC3: oscillator on if 2nd trigger"/>
    <obj type="osc/brds/saw" uuid="ed06f020-7e68-4db6-836a-95a85e200cfb" name="saw_1" x="28" y="168">
       <params>
          <frac32.s.map name="pitch" value="5.0"/>
       </params>
       <attribs/>
    </obj>
-   <obj type="mix/mix 2 g" uuid="221f038da51943034a75e442c90624fcebfe6112" name="mix_1" x="490" y="196">
+   <comment type="patch/comment" x="406" y="168" text="CC4: osc 1 level"/>
+   <comment type="patch/comment" x="406" y="182" text="CC5: osc2 level"/>
+   <comment type="patch/comment" x="406" y="196" text="CC6: 220Hz level"/>
+   <comment type="patch/comment" x="406" y="210" text="CC7: clean level"/>
+   <comment type="patch/comment" x="406" y="224" text="CC8: saw/triangle switch"/>
+   <comment type="patch/comment" x="406" y="238" text="CC9: osc attenuator on/off"/>
+   <obj type="osc/brds/saw" uuid="ed06f020-7e68-4db6-836a-95a85e200cfb" name="saw_2" x="28" y="252">
+      <params>
+         <frac32.s.map name="pitch" value="-2.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="switches/2To1Safe" uuid="8cfbb7b5-4fc0-4d92-bd3f-506080e3b408" name="2To1Safe_1" x="252" y="252">
+      <params>
+         <bool32.tgl name="i2" MidiCC="8" value="1"/>
+      </params>
+      <attribs>
+         <combo attributeName="use" selection="Manual/MIDI"/>
+      </attribs>
+   </obj>
+   <comment type="patch/comment" x="406" y="252" text="CC10: osc attenuation"/>
+   <obj type="filter/bp m" uuid="f26437572c3a1f6be883bb219c773a9906ff8296" name="bp_2" x="560" y="252">
+      <params>
+         <frac32.s.map name="pitch" value="14.0"/>
+         <frac32.u.map name="reso" value="21.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="mix/mix 2 g" uuid="221f038da51943034a75e442c90624fcebfe6112" name="mix_4" x="140" y="266">
+      <params>
+         <frac32.u.map name="gain1" MidiCC="6" value="18.0"/>
+         <frac32.u.map name="gain2" value="32.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="lfo/sine" uuid="75f7330c26a13953215dccc3b7b9008545c9daa9" name="sine_4" x="364" y="308">
+      <params>
+         <frac32.s.map name="pitch" value="-61.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="math/*c" uuid="7d5ef61c3bcd571ee6bbd8437ef3612125dfb225" name="*c_1" x="462" y="308">
+      <params>
+         <frac32.u.map name="amp" value="9.5"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="mix/mix 2 g" uuid="221f038da51943034a75e442c90624fcebfe6112" name="mix_1" x="686" y="308">
       <params>
          <frac32.u.map name="gain1" MidiCC="4" value="2.5"/>
          <frac32.u.map name="gain2" MidiCC="5" value="2.5"/>
       </params>
       <attribs/>
    </obj>
-   <obj type="filter/hp" uuid="7829b56456e975f1d89bda2ad1c7ad678080a73b" name="hp_1" x="602" y="196">
+   <obj type="filter/hp" uuid="7829b56456e975f1d89bda2ad1c7ad678080a73b" name="hp_1" x="798" y="308">
       <params>
          <frac32.s.map name="pitch" value="-19.0"/>
          <frac32.u.map name="reso" value="15.0"/>
       </params>
       <attribs/>
    </obj>
-   <obj type="switches/SafeSwitch" uuid="9ecd8939-7299-438c-b3e5-e19d98fdc50d" name="SafeSwitch_1" x="714" y="196">
+   <obj type="switches/SafeSwitch" uuid="9ecd8939-7299-438c-b3e5-e19d98fdc50d" name="SafeSwitch_1" x="1036" y="308">
       <params>
          <bool32.tgl name="on" value="0"/>
       </params>
@@ -62,116 +105,180 @@
          <combo attributeName="use" selection="on inlet"/>
       </attribs>
    </obj>
-   <obj type="lfo/sine" uuid="75f7330c26a13953215dccc3b7b9008545c9daa9" name="sine_4" x="154" y="210">
+   <obj type="switches/2To1Safe" uuid="8cfbb7b5-4fc0-4d92-bd3f-506080e3b408" name="2To1Safe_2" x="252" y="378">
       <params>
-         <frac32.s.map name="pitch" value="-61.0"/>
+         <bool32.tgl name="i2" MidiCC="8" value="1"/>
+      </params>
+      <attribs>
+         <combo attributeName="use" selection="Manual/MIDI"/>
+      </attribs>
+   </obj>
+   <obj type="osc/tri" uuid="905879afa8256b0ca207557d656949e476ca6f16" name="tri_1" x="28" y="406">
+      <params>
+         <frac32.s.map name="pitch" value="5.0"/>
       </params>
       <attribs/>
    </obj>
-   <obj type="math/*c" uuid="7d5ef61c3bcd571ee6bbd8437ef3612125dfb225" name="*c_1" x="252" y="210">
+   <obj type="math/gain" uuid="62b1c1a6337c7c8f6aec96408a432477b113cfa0" name="gain_1" x="126" y="406">
       <params>
-         <frac32.u.map name="amp" value="9.5"/>
+         <frac32.u.map name="amp" value="18.0"/>
       </params>
       <attribs/>
    </obj>
-   <obj type="osc/brds/saw" uuid="ed06f020-7e68-4db6-836a-95a85e200cfb" name="saw_2" x="28" y="252">
-      <params>
-         <frac32.s.map name="pitch" value="-2.0"/>
-      </params>
-      <attribs/>
-   </obj>
-   <obj type="lfo/sine" uuid="75f7330c26a13953215dccc3b7b9008545c9daa9" name="sine_5" x="154" y="294">
-      <params>
-         <frac32.s.map name="pitch" value="-50.0"/>
-      </params>
-      <attribs/>
-   </obj>
-   <obj type="math/*c" uuid="7d5ef61c3bcd571ee6bbd8437ef3612125dfb225" name="*c_2" x="252" y="294">
-      <params>
-         <frac32.u.map name="amp" value="7.0"/>
-      </params>
-      <attribs/>
-   </obj>
-   <obj type="filter/bp m" uuid="f26437572c3a1f6be883bb219c773a9906ff8296" name="bp_3" x="364" y="294">
+   <obj type="filter/bp m" uuid="f26437572c3a1f6be883bb219c773a9906ff8296" name="bp_3" x="560" y="406">
       <params>
          <frac32.s.map name="pitch" value="16.0"/>
          <frac32.u.map name="reso" value="21.0"/>
       </params>
       <attribs/>
    </obj>
-   <comment type="patch/comment" x="14" y="448" text="CC2: oscillator on/off toggle"/>
-   <comment type="patch/comment" x="196" y="448" text="CC3: oscillator on if 2nd trigger"/>
-   <obj type="midi/in/cc i" uuid="614eb76edef2b43632fa1fcda25aab54f821daf6" name="cc_7" x="14" y="462">
+   <obj type="mix/mix 2 g" uuid="221f038da51943034a75e442c90624fcebfe6112" name="mix_6" x="1148" y="434">
+      <params>
+         <frac32.u.map name="gain1" value="32.0"/>
+         <frac32.u.map name="gain2" value="32.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="fx/rngs/reverb" uuid="bb0fb9e0-aafe-4501-ba83-897f2530751d" name="reverb_1" x="1036" y="448">
+      <params>
+         <frac32.u.map name="amount" value="22.5"/>
+         <frac32.u.map name="time" value="46.5"/>
+         <frac32.u.map name="diffusion" value="39.5"/>
+         <frac32.u.map name="gain" value="34.5"/>
+         <frac32.u.map name="lowpass" value="64.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="lfo/sine" uuid="75f7330c26a13953215dccc3b7b9008545c9daa9" name="sine_5" x="364" y="462">
+      <params>
+         <frac32.s.map name="pitch" value="-50.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="math/*c" uuid="7d5ef61c3bcd571ee6bbd8437ef3612125dfb225" name="*c_2" x="462" y="462">
+      <params>
+         <frac32.u.map name="amp" value="7.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <comment type="patch/comment" x="742" y="476" text="CC9: osc attenuator"/>
+   <obj type="osc/tri" uuid="905879afa8256b0ca207557d656949e476ca6f16" name="tri_2" x="28" y="490">
+      <params>
+         <frac32.s.map name="pitch" value="-2.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="math/gain" uuid="62b1c1a6337c7c8f6aec96408a432477b113cfa0" name="gain_2" x="126" y="490">
+      <params>
+         <frac32.u.map name="amp" value="18.5"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="mix/mix 2 g" uuid="221f038da51943034a75e442c90624fcebfe6112" name="mix_5" x="742" y="490">
+      <params>
+         <frac32.u.map name="gain1" MidiCC="10" value="32.0"/>
+         <frac32.u.map name="gain2" value="0.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="switches/2To1Safe" uuid="8cfbb7b5-4fc0-4d92-bd3f-506080e3b408" name="2To1Safe_3" x="882" y="490">
+      <params>
+         <bool32.tgl name="i2" MidiCC="9" value="0"/>
+      </params>
+      <attribs>
+         <combo attributeName="use" selection="Manual/MIDI"/>
+      </attribs>
+   </obj>
+   <comment type="patch/comment" x="14" y="602" text="CC2: oscillator on/off toggle"/>
+   <comment type="patch/comment" x="196" y="602" text="CC3: oscillator on if 2nd trigger"/>
+   <obj type="midi/in/cc i" uuid="614eb76edef2b43632fa1fcda25aab54f821daf6" name="cc_7" x="14" y="616">
       <params/>
       <attribs>
          <spinner attributeName="cc" value="2"/>
          <spinner attributeName="default" value="0"/>
       </attribs>
    </obj>
-   <obj type="midi/in/cc i" uuid="614eb76edef2b43632fa1fcda25aab54f821daf6" name="cc_8" x="196" y="462">
+   <obj type="midi/in/cc i" uuid="614eb76edef2b43632fa1fcda25aab54f821daf6" name="cc_8" x="196" y="616">
       <params/>
       <attribs>
          <spinner attributeName="cc" value="3"/>
          <spinner attributeName="default" value="0"/>
       </attribs>
    </obj>
-   <obj type="logic/and 2" uuid="c67031682f552aa0a80b23377495c51ea28a8c9c" name="and_4" x="112" y="476">
+   <obj type="logic/and 2" uuid="c67031682f552aa0a80b23377495c51ea28a8c9c" name="and_4" x="112" y="630">
       <params/>
       <attribs/>
    </obj>
-   <obj type="logic/and 2" uuid="c67031682f552aa0a80b23377495c51ea28a8c9c" name="and_5" x="294" y="476">
+   <obj type="logic/and 2" uuid="c67031682f552aa0a80b23377495c51ea28a8c9c" name="and_5" x="294" y="630">
       <params/>
       <attribs/>
    </obj>
-   <obj type="controllers/NorthByOscController" uuid="5506331a-60c9-4422-aecb-b3e08dece00f" name="NorthByOscController_1" x="378" y="476">
+   <obj type="controllers/NorthByOscController" uuid="5506331a-60c9-4422-aecb-b3e08dece00f" name="NorthByOscController_1" x="378" y="630">
       <params/>
       <attribs/>
    </obj>
-   <comment type="patch/comment" x="14" y="574" text="Startup delay to lock out triggers on patch change. LED on until done."/>
-   <comment type="patch/comment" x="392" y="574" text="Red LED on during startup"/>
-   <obj type="const/i" uuid="e202f44b2df17ae0b3e663b98ea6b14c8ff00408" name="i_3" x="14" y="588">
+   <comment type="patch/comment" x="658" y="686" text="flash red LED if attenuation is on"/>
+   <obj type="lfo/square" uuid="de6909eb64db13af5b43f979a4c130024b3a4793" name="square_1" x="658" y="714">
+      <params>
+         <frac32.s.map name="pitch" value="-21.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="logic/and 2" uuid="c67031682f552aa0a80b23377495c51ea28a8c9c" name="and_2" x="770" y="714">
+      <params/>
+      <attribs/>
+   </obj>
+   <comment type="patch/comment" x="938" y="714" text="solid LED on if osc on and atten off"/>
+   <comment type="patch/comment" x="14" y="728" text="Startup delay to lock out triggers on patch change. LED on until done."/>
+   <comment type="patch/comment" x="392" y="728" text="Red LED on during startup"/>
+   <obj type="logic/and 2" uuid="c67031682f552aa0a80b23377495c51ea28a8c9c" name="and_1" x="994" y="728">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="const/i" uuid="e202f44b2df17ae0b3e663b98ea6b14c8ff00408" name="i_3" x="14" y="742">
       <params/>
       <attribs>
          <spinner attributeName="value" value="1"/>
       </attribs>
    </obj>
-   <obj type="timer/delayedpulse" uuid="3f05ee534ca67755fb20c7437f9e4de3d4c2f73d" name="delayedpulse_2" x="98" y="588">
+   <obj type="timer/delayedpulse" uuid="3f05ee534ca67755fb20c7437f9e4de3d4c2f73d" name="delayedpulse_2" x="98" y="742">
       <params>
          <frac32.s.map name="delay" value="54.0"/>
       </params>
       <attribs/>
    </obj>
-   <obj type="logic/flipflop" uuid="f9b15363f5ee203152e062c08a8846f0074b0ea5" name="flipflop_1" x="210" y="588">
+   <obj type="logic/flipflop" uuid="f9b15363f5ee203152e062c08a8846f0074b0ea5" name="flipflop_1" x="210" y="742">
       <params/>
       <attribs/>
    </obj>
-   <obj type="logic/inv" uuid="2bd44b865d3b63ff9b80862242bf5be779e3ad5" name="inv_1" x="294" y="588">
+   <obj type="logic/inv" uuid="2bd44b865d3b63ff9b80862242bf5be779e3ad5" name="inv_1" x="294" y="742">
       <params/>
       <attribs/>
    </obj>
-   <obj type="phi/logic/or 4" uuid="5dc5a7c1fb7809522171638f755fead71cbe14ea" name="or_2" x="392" y="588">
+   <obj type="phi/logic/or 4" uuid="5dc5a7c1fb7809522171638f755fead71cbe14ea" name="or_2" x="392" y="742">
       <params/>
       <attribs/>
    </obj>
-   <obj type="gpio/out/led2" uuid="3d7a4c75d1f9901181a17ba5de752782de911803" name="led2_3" x="476" y="588">
+   <obj type="gpio/out/led2" uuid="3d7a4c75d1f9901181a17ba5de752782de911803" name="led2_3" x="476" y="742">
       <params/>
       <attribs/>
    </obj>
-   <comment type="patch/comment" x="658" y="588" text="CC1: main oscillator level"/>
-   <comment type="patch/comment" x="658" y="602" text="CC2: oscillator on/off toggle"/>
-   <comment type="patch/comment" x="658" y="616" text="CC3: oscillator on if 2nd trigger"/>
-   <comment type="patch/comment" x="658" y="630" text="CC4: osc 1 level"/>
-   <comment type="patch/comment" x="658" y="644" text="CC5: osc2 level"/>
-   <comment type="patch/comment" x="658" y="658" text="CC6: 220Hz level"/>
-   <comment type="patch/comment" x="658" y="672" text="CC7: clean level"/>
-   <obj type="audio/inconfig l" uuid="7007d026acb7c3586f60a7f0898718d1ca7e0607" name="inconfig_1" x="14" y="686">
+   <obj type="logic/inv" uuid="2bd44b865d3b63ff9b80862242bf5be779e3ad5" name="inv_2" x="938" y="742">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="logic/or 2" uuid="3805d3c84d30032a44fbdbe42d9a2988a1790a3e" name="or_1" x="938" y="784">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="audio/inconfig l" uuid="7007d026acb7c3586f60a7f0898718d1ca7e0607" name="inconfig_1" x="14" y="840">
       <params/>
       <attribs>
-         <combo attributeName="gain" selection="6dB"/>
+         <combo attributeName="gain" selection="9dB"/>
          <combo attributeName="boost" selection="0dB"/>
       </attribs>
    </obj>
-   <obj type="midi/in/monitor" uuid="b51863ca-6afa-4d29-acfd-c8c2fe06cb16" name="monitor_1" x="140" y="686">
+   <obj type="midi/in/monitor" uuid="b51863ca-6afa-4d29-acfd-c8c2fe06cb16" name="monitor_1" x="140" y="840">
       <params>
          <bool32.tgl name="ControlChange" value="0"/>
          <bool32.tgl name="Note" value="0"/>
@@ -181,12 +288,35 @@
       </params>
       <attribs/>
    </obj>
-   <comment type="patch/comment" x="252" y="700" text="Enable monitors for debugging"/>
-   <comment type="patch/comment" x="252" y="714" text="Controller usually enables these"/>
-   <obj type="audio/inconfig r" uuid="8468fe7907553f335959a7f69cbc5a1f7b5d4d1d" name="inconfig_2" x="14" y="742">
+   <comment type="patch/comment" x="658" y="840" text="flash green LED if triangle oscs on, otherwise LED on"/>
+   <comment type="patch/comment" x="252" y="854" text="Enable monitors for debugging"/>
+   <obj type="lfo/square" uuid="de6909eb64db13af5b43f979a4c130024b3a4793" name="square_2" x="658" y="854">
+      <params>
+         <frac32.s.map name="pitch" value="-12.0"/>
+      </params>
+      <attribs/>
+   </obj>
+   <obj type="logic/inv" uuid="2bd44b865d3b63ff9b80862242bf5be779e3ad5" name="inv_3" x="784" y="854">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="logic/and 2" uuid="c67031682f552aa0a80b23377495c51ea28a8c9c" name="and_3" x="840" y="854">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="logic/inv" uuid="2bd44b865d3b63ff9b80862242bf5be779e3ad5" name="inv_4" x="910" y="854">
+      <params/>
+      <attribs/>
+   </obj>
+   <obj type="gpio/out/led1" uuid="c6679540460d64e2e71760e61cb82fac227e2764" name="led1_1" x="966" y="854">
+      <params/>
+      <attribs/>
+   </obj>
+   <comment type="patch/comment" x="252" y="868" text="Controller usually enables these"/>
+   <obj type="audio/inconfig r" uuid="8468fe7907553f335959a7f69cbc5a1f7b5d4d1d" name="inconfig_2" x="14" y="896">
       <params/>
       <attribs>
-         <combo attributeName="gain" selection="6dB"/>
+         <combo attributeName="gain" selection="9dB"/>
          <combo attributeName="boost" selection="0dB"/>
       </attribs>
    </obj>
@@ -204,16 +334,13 @@
          <dest obj="mix_1" inlet="in1"/>
       </net>
       <net>
-         <source obj="saw_2" outlet="wave"/>
-         <dest obj="bp_3" inlet="in"/>
-      </net>
-      <net>
          <source obj="bp_3" outlet="out"/>
          <dest obj="mix_1" inlet="in2"/>
       </net>
       <net>
          <source obj="SafeSwitch_1" outlet="o"/>
-         <dest obj="mix_2" inlet="in2"/>
+         <dest obj="reverb_1" inlet="l"/>
+         <dest obj="reverb_1" inlet="r"/>
       </net>
       <net>
          <source obj="*c_1" outlet="out"/>
@@ -236,16 +363,9 @@
          <dest obj="hp_1" inlet="in"/>
       </net>
       <net>
-         <source obj="hp_1" outlet="out"/>
-         <dest obj="SafeSwitch_1" inlet="in"/>
-      </net>
-      <net>
-         <source obj="mix_3" outlet="out"/>
-         <dest obj="bp_2" inlet="in"/>
-      </net>
-      <net>
          <source obj="saw_3" outlet="wave"/>
          <dest obj="mix_3" inlet="in1"/>
+         <dest obj="mix_4" inlet="in1"/>
       </net>
       <net>
          <source obj="i_3" outlet="out"/>
@@ -268,10 +388,6 @@
       <net>
          <source obj="or_2" outlet="o"/>
          <dest obj="led2_3" inlet="in"/>
-      </net>
-      <net>
-         <source obj="SafeSwitch_1" outlet="isOn"/>
-         <dest obj="or_2" inlet="i2"/>
       </net>
       <net>
          <source obj="cc_7" outlet="trig"/>
@@ -297,6 +413,112 @@
          <source obj="and_4" outlet="o"/>
          <dest obj="NorthByOscController_1" inlet="trig2"/>
       </net>
+      <net>
+         <source obj="2To1Safe_1" outlet="o"/>
+         <dest obj="bp_2" inlet="in"/>
+      </net>
+      <net>
+         <source obj="2To1Safe_2" outlet="o"/>
+         <dest obj="bp_3" inlet="in"/>
+      </net>
+      <net>
+         <source obj="mix_4" outlet="out"/>
+         <dest obj="2To1Safe_1" inlet="i1"/>
+      </net>
+      <net>
+         <source obj="tri_1" outlet="wave"/>
+         <dest obj="gain_1" inlet="in"/>
+      </net>
+      <net>
+         <source obj="gain_1" outlet="out"/>
+         <dest obj="mix_4" inlet="in2"/>
+      </net>
+      <net>
+         <source obj="tri_2" outlet="wave"/>
+         <dest obj="gain_2" inlet="in"/>
+      </net>
+      <net>
+         <source obj="mix_3" outlet="out"/>
+         <dest obj="2To1Safe_1" inlet="i2"/>
+      </net>
+      <net>
+         <source obj="gain_2" outlet="out"/>
+         <dest obj="2To1Safe_2" inlet="i1"/>
+      </net>
+      <net>
+         <source obj="saw_2" outlet="wave"/>
+         <dest obj="2To1Safe_2" inlet="i2"/>
+      </net>
+      <net>
+         <source obj="hp_1" outlet="out"/>
+         <dest obj="mix_5" inlet="in1"/>
+         <dest obj="2To1Safe_3" inlet="i1"/>
+      </net>
+      <net>
+         <source obj="mix_5" outlet="out"/>
+         <dest obj="2To1Safe_3" inlet="i2"/>
+      </net>
+      <net>
+         <source obj="and_1" outlet="o"/>
+         <dest obj="or_2" inlet="i3"/>
+      </net>
+      <net>
+         <source obj="SafeSwitch_1" outlet="isOn"/>
+         <dest obj="and_1" inlet="i1"/>
+      </net>
+      <net>
+         <source obj="and_2" outlet="o"/>
+         <dest obj="or_2" inlet="i2"/>
+      </net>
+      <net>
+         <source obj="2To1Safe_3" outlet="i2"/>
+         <dest obj="and_2" inlet="i2"/>
+         <dest obj="inv_2" inlet="i"/>
+      </net>
+      <net>
+         <source obj="square_1" outlet="wave"/>
+         <dest obj="and_2" inlet="i1"/>
+      </net>
+      <net>
+         <source obj="inv_2" outlet="o"/>
+         <dest obj="and_1" inlet="i2"/>
+      </net>
+      <net>
+         <source obj="reverb_1" outlet="l"/>
+         <dest obj="mix_6" inlet="in1"/>
+      </net>
+      <net>
+         <source obj="reverb_1" outlet="r"/>
+         <dest obj="mix_6" inlet="in2"/>
+      </net>
+      <net>
+         <source obj="2To1Safe_3" outlet="o"/>
+         <dest obj="SafeSwitch_1" inlet="in"/>
+      </net>
+      <net>
+         <source obj="mix_6" outlet="out"/>
+         <dest obj="mix_2" inlet="in2"/>
+      </net>
+      <net>
+         <source obj="inv_3" outlet="o"/>
+         <dest obj="and_3" inlet="i1"/>
+      </net>
+      <net>
+         <source obj="square_2" outlet="wave"/>
+         <dest obj="and_3" inlet="i2"/>
+      </net>
+      <net>
+         <source obj="2To1Safe_2" outlet="i2"/>
+         <dest obj="inv_3" inlet="i"/>
+      </net>
+      <net>
+         <source obj="and_3" outlet="o"/>
+         <dest obj="inv_4" inlet="i"/>
+      </net>
+      <net>
+         <source obj="inv_4" outlet="o"/>
+         <dest obj="led1_1" inlet="in"/>
+      </net>
    </nets>
    <settings>
       <subpatchmode>no</subpatchmode>
@@ -308,9 +530,9 @@
    </settings>
    <notes><![CDATA[]]></notes>
    <windowPos>
-      <x>127</x>
-      <y>68</y>
+      <x>194</x>
+      <y>33</y>
       <width>1276</width>
-      <height>853</height>
+      <height>930</height>
    </windowPos>
 </patch-1.0>
