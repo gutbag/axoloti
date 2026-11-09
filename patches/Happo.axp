@@ -32,7 +32,7 @@
    </obj>
    <obj type="ctrl/dial p" uuid="cc5d2846c3d50e425f450c4b9851371b54f4d674" name="dial_1" x="448" y="84">
       <params>
-         <frac32.u.map name="value" value="42.0"/>
+         <frac32.u.map name="value" MidiCC="5" value="28.5"/>
       </params>
       <attribs/>
    </obj>
@@ -108,6 +108,7 @@
       <attribs/>
    </obj>
    <comment type="patch/comment" x="14" y="476" text="CC4: delay feedback"/>
+   <comment type="patch/comment" x="14" y="490" text="CC5: dry/GC loop mix"/>
    <comment type="patch/comment" x="14" y="588" text="Startup delay to lock out triggers on patch change. LED on until done."/>
    <comment type="patch/comment" x="392" y="588" text="Red LED on during startup"/>
    <obj type="const/i" uuid="e202f44b2df17ae0b3e663b98ea6b14c8ff00408" name="i_3" x="14" y="602">
@@ -183,10 +184,6 @@
          <dest obj="ret gain" inlet="in"/>
       </net>
       <net>
-         <source obj="ret gain" outlet="out"/>
-         <dest obj="xfade_1" inlet="i2"/>
-      </net>
-      <net>
          <source obj="echo_1" outlet="out"/>
          <dest obj="dry gain" inlet="in"/>
       </net>
@@ -255,6 +252,10 @@
       <net>
          <source obj="mix_1" outlet="out"/>
          <dest obj="out_1" inlet="wave"/>
+      </net>
+      <net>
+         <source obj="ret gain" outlet="out"/>
+         <dest obj="xfade_1" inlet="i2"/>
       </net>
    </nets>
    <settings>
